@@ -1,0 +1,34 @@
+import styled, { createGlobalStyle } from 'styled-components'
+
+export default createGlobalStyle`
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  font-family: "calluna", serif, -apple-system;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  width: 100vw;
+  min-height: 100vh;
+}
+`
+
+export const MainWrapper = styled.div`
+width: 100vw;
+height: 100vh;
+padding: 0;
+margin: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+`
