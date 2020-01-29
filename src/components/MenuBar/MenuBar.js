@@ -1,20 +1,31 @@
 import React from 'react'
-// import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import Media from 'react-media'
+import { MainWrapper, MenuCont } from '../CommonComps/CommonComps'
+import MobileMenu from '../MobileMenu/MobileMenu'
+import metrics from '../../theme/metrics'
+
+const { mq } = metrics
+// import PropTypes from 'prop-types' 
+
 const MenuBar = (props) => {
   return (
-    <div>
-      MenuBar
-    </div>
+    <MenuCont>
+      <Media query={`(max-width: ${mq.small}px)`} render={() =>
+        (
+          <MobileMenu />
+        )}
+      />
+      <MainWrapper>
+        PKT Explorer (beta)
+      </MainWrapper>
+    </MenuCont>
   )
 }
 
-MenuBar.propTypes = {
-  
-}
+// MenuBar.propTypes = {
+// }
 
-MenuBar.defaultProps = {
-  
-}
+// MenuBar.defaultProps = {
+// }
 
 export default MenuBar

@@ -9,7 +9,7 @@ html {
 }
 body {
   margin: 0;
-  font-family: "calluna", serif, -apple-system;
+  font-family: "roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0;

@@ -4,7 +4,7 @@ import { linkTo } from '@storybook/addon-links'
 import MenuBar from '../components/MenuBar/MenuBar'
 
 export default {
-  title: 'Top Menu',
+  title: 'Top bar',
   component: MenuBar
 }
 
