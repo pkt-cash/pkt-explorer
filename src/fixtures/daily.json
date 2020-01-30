@@ -1,0 +1,124 @@
+{
+	"results": [
+		{
+			"date": "2019-12-31T00:00:00.000Z",
+			"transactionCount": 4062
+		},
+		{
+			"date": "2020-01-01T00:00:00.000Z",
+			"transactionCount": 2756
+		},
+		{
+			"date": "2020-01-02T00:00:00.000Z",
+			"transactionCount": 2412
+		},
+		{
+			"date": "2020-01-03T00:00:00.000Z",
+			"transactionCount": 2369
+		},
+		{
+			"date": "2020-01-04T00:00:00.000Z",
+			"transactionCount": 2205
+		},
+		{
+			"date": "2020-01-05T00:00:00.000Z",
+			"transactionCount": 2188
+		},
+		{
+			"date": "2020-01-06T00:00:00.000Z",
+			"transactionCount": 2177
+		},
+		{
+			"date": "2020-01-07T00:00:00.000Z",
+			"transactionCount": 2210
+		},
+		{
+			"date": "2020-01-08T00:00:00.000Z",
+			"transactionCount": 2283
+		},
+		{
+			"date": "2020-01-09T00:00:00.000Z",
+			"transactionCount": 2270
+		},
+		{
+			"date": "2020-01-10T00:00:00.000Z",
+			"transactionCount": 4986
+		},
+		{
+			"date": "2020-01-11T00:00:00.000Z",
+			"transactionCount": 7437
+		},
+		{
+			"date": "2020-01-12T00:00:00.000Z",
+			"transactionCount": 6639
+		},
+		{
+			"date": "2020-01-13T00:00:00.000Z",
+			"transactionCount": 4934
+		},
+		{
+			"date": "2020-01-14T00:00:00.000Z",
+			"transactionCount": 3774
+		},
+		{
+			"date": "2020-01-15T00:00:00.000Z",
+			"transactionCount": 2505
+		},
+		{
+			"date": "2020-01-16T00:00:00.000Z",
+			"transactionCount": 2174
+		},
+		{
+			"date": "2020-01-17T00:00:00.000Z",
+			"transactionCount": 1703
+		},
+		{
+			"date": "2020-01-18T00:00:00.000Z",
+			"transactionCount": 2165
+		},
+		{
+			"date": "2020-01-19T00:00:00.000Z",
+			"transactionCount": 1411
+		},
+		{
+			"date": "2020-01-20T00:00:00.000Z",
+			"transactionCount": 1516
+		},
+		{
+			"date": "2020-01-21T00:00:00.000Z",
+			"transactionCount": 1645
+		},
+		{
+			"date": "2020-01-22T00:00:00.000Z",
+			"transactionCount": 1498
+		},
+		{
+			"date": "2020-01-23T00:00:00.000Z",
+			"transactionCount": 1374
+		},
+		{
+			"date": "2020-01-24T00:00:00.000Z",
+			"transactionCount": 1326
+		},
+		{
+			"date": "2020-01-25T00:00:00.000Z",
+			"transactionCount": 1390
+		},
+		{
+			"date": "2020-01-26T00:00:00.000Z",
+			"transactionCount": 1506
+		},
+		{
+			"date": "2020-01-27T00:00:00.000Z",
+			"transactionCount": 1568
+		},
+		{
+			"date": "2020-01-28T00:00:00.000Z",
+			"transactionCount": 1584
+		},
+		{
+			"date": "2020-01-29T00:00:00.000Z",
+			"transactionCount": 1519
+		}
+	]
+}

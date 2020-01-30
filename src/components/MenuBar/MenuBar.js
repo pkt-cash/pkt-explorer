@@ -21,7 +21,7 @@ const TopMenu = styled.div`
   display: flex;
 `
 const MenuItem = styled.div`
-  margin-right: 10px
+  margin-left: 10px
 
 `
 
