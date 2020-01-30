@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { MdMenu } from 'react-icons/md'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 // import PropTypes from 'prop-types'
 
 export const MenuBt = styled(MdMenu)`
@@ -19,7 +20,10 @@ export const MenuBt = styled(MdMenu)`
 
 const MenuContainer = styled(motion.div)`
   width: 200px;
-  padding-left: 10px
+  padding-left: 10px;
+  background-color: #ccc;
+  position: relative;
+  top: -5px
 `
 
 const MenuCont = styled.div`
@@ -47,10 +51,9 @@ const MobileMenu = (props) => {
         animate={isOpen ? 'open' : 'closed'}
         transition={{ duration: 0.2, ease: 'linear' }}
       >
-        <MenuItem>Blocks</MenuItem>
-        <MenuItem>Txs per day</MenuItem>
-        <MenuItem>Rich list</MenuItem>
-        <MenuItem>test</MenuItem>
+        <MenuItem><Link to='/blocks' onClick={() => toggle(false)}>Blocks</Link></MenuItem>
+        <MenuItem><Link to='/txd' onClick={() => toggle(false)}>Txs per day</Link></MenuItem>
+        <MenuItem><Link to='/rich' onClick={() => toggle(false)}>Rich list</Link></MenuItem>
       </MenuContainer>
     </MenuCont>
   )

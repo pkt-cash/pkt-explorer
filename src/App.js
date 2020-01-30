@@ -1,26 +1,71 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import MenuBar from './components/MenuBar/MenuBar'
+import GlobalStyles from './App.css'
+import styled, { ThemeProvider } from 'styled-components'
+import theme from './theme/theme'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import Media from 'react-media'
+import metrics from './theme/metrics'
 
-function App() {
+const { mq } = metrics
+
+const MainContainer = styled.div`
+  display: flex;
+`
+
+const MenuCol = styled.div`
+  width: 200px;
+`
+
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <GlobalStyles />
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <MenuBar />
+          <MainContainer>
+            <Media query={`(min-width: ${mq.small}px)`} render={() =>
+              (
+                <MenuCol>
+                  a menu there will be
+                </MenuCol>
+              )}
+            />
+            <div>
+              <Switch>
+                <Route
+                  exact
+                  path='/'
+                  component={Home}
+                  key='home' />
+                <Route
+                  exact
+                  path='/blocks'
+                  component={Blocks}
+                  key='blocks' />
+                <Route
+                  exact
+                  path='/rich'
+                  component={Rich}
+                  key='rich' />
+                <Route
+                  exact
+                  path='/txd'
+                  component={TxResume}
+                  key='resume' />
+              </Switch>
+            </div>
+          </MainContainer>
+        </ThemeProvider>
+      </BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+const Home = () => <div>Home</div>
+const Blocks = () => <div>Blocks</div>
+const Rich = () => <div>Rich</div>
+const TxResume = () => <div>TxResume</div>
+
+export default App

@@ -1,7 +1,7 @@
 import React from 'react'
 import { linkTo } from '@storybook/addon-links'
 
-import MenuBar from '../components/MenuBar/MenuBar'
+import MenuBar from './MenuBar'
 
 export default {
   title: 'Top bar',
@@ -13,3 +13,4 @@ export const MenuBarSt = () => <MenuBar showApp={linkTo('Button')} />
 MenuBarSt.story = {
   name: 'full MenuBar'
 }
+  
