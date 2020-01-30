@@ -10,7 +10,7 @@ const BlockList = ({ listData }) => {
   return (
     listData
       ? <BlockListCont>
-          {listData.results.map((blk) => <div key={blk.hash}>{blk.height}</div>)}
+        {listData.results.map((blk) => <div key={blk.hash}>{blk.height}</div>)}
       </BlockListCont>
       : <div>loading</div>
   )
