@@ -63,7 +63,7 @@ const BlockListRow = styled.div`
   width: 100%;
   
   :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight };
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
 
@@ -74,7 +74,7 @@ const BlockList = ({ listData }) => {
     transactions: 'transactionCount',
     size: 'size'
   }
-
+  
   const BlockListLabels = <BlockListLabelsCont>{
     Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
   }</BlockListLabelsCont>
@@ -83,8 +83,6 @@ const BlockList = ({ listData }) => {
     listData
       ? <BlockListCont>
         {BlockListLabels}
-        {listData.results.map((blk) => <BlockListRow key={blk.hash}>
-
         {/* Mapping over blocks */}
         {listData.map((blk) => <BlockListRow key={blk.hash}>
 
