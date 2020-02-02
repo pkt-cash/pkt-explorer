@@ -21,8 +21,9 @@ const RichListCont = styled.div`
 
 const RichListLabel = styled.div`
   display: flex;
-  font-weight: ${metrics.font};
   justify-content: flex-end;
+  font-size: ${metrics.headerFontSize}rem;
+  font-weight: ${metrics.fontWeight};
   width: 100%;
   
   :first-child {
