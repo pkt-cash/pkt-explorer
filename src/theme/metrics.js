@@ -6,7 +6,8 @@ const metrics = {
   },
   padding: 1, // rem
   margin: 1, // rem
-  headerFontSize: 1.2, // rem
+  cellFontSize: 1.5, // rem
+  headerFontSize: 2, // rem
   fontWeight: 600,
   rowHeight: 3 // rem
 }

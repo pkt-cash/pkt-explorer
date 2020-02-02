@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 const BlockListCell = styled.div`
   display: flex;
+  font-size: ${metrics.cellFontSize}rem;
   justify-content: flex-end;
   width: 100%;
 `
