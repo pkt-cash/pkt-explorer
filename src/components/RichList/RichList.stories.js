@@ -8,7 +8,7 @@ export default {
 }
 
 export const RichListStLoad = () => <RichList />
-export const RichListSt = () => <RichList listData={dummyData}/>
+export const RichListSt = () => <RichList listData={dummyData.results}/>
 
 RichListStLoad.story = {
   name: 'Richlist loading'

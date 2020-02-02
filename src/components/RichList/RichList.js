@@ -74,7 +74,7 @@ const RichList = ({ listData }) => {
         {RichListLabels}
 
         {/* Mapping over addresses */}
-        {listData.results.map((address) => <RichListRow key={address.address}>
+        {listData.map((address) => <RichListRow key={address.address}>
 
           {/* Mapping over cells for each address  */}
           {Object.values(cells).map((cellName) => {
