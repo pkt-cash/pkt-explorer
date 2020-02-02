@@ -4,9 +4,11 @@ const metrics = {
   mq: {
     small: 590
   },
-  margin: 8, // px
+  padding: 1, // rem
+  margin: 1, // rem
   headerFontSize: 1.2, // rem
-  fontWeight: 600
+  fontWeight: 600,
+  rowHeight: 3 // rem
 }
 
 export default metrics

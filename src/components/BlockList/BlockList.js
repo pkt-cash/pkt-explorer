@@ -10,19 +10,24 @@ const BlockListCell = styled.div`
 `
 
 const BlockListHeightCell = styled(BlockListCell)`
-  justify-content: flex-start;    
-  color: ${({ theme }) => theme.colors.pktBlueLight} 
+  cursor: pointer;
+  justify-content: flex-start;
+  color: ${({ theme }) => theme.colors.pktBlueLight};
+  text-decoration: underline;
 `
 
 const BlockListCont = styled.div`
-  margin: ${metrics.margin}px;
+  border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
+  border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
+  box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
+  margin: ${metrics.margin}rem;
 `
 
 const BlockListLabel = styled.div`
   display: flex;
-  font-weight: ${metrics.fontWeight};
-  font-size: ${metrics.headerFontSize}rem;
   justify-content: flex-end;
+  font-size: ${metrics.headerFontSize}rem;
+  font-weight: ${metrics.fontWeight};
   width: 100%;
   
   :first-child {
@@ -32,19 +37,23 @@ const BlockListLabel = styled.div`
 
 const BlockListLabelsCont = styled.div`
   display: flex;
+  border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   justify-content: space-between;
-  margin-bottom: ${metrics.margin}px;
+  padding: ${metrics.padding}rem;
   text-transform: capitalize;
   width: 100%;
 `
 const BlockListRow = styled.div`
-  display: flex;
   align-items: flex-end;
+  align-items: center;
+  display: flex;
+  height: ${metrics.rowHeight}rem;
   justify-content: space-between;
+  padding: 0 ${metrics.padding}rem;
   width: 100%;
   
   :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight};
+    background-color: ${({ theme }) => theme.colors.pktGreyLight };
   }
 `
 
