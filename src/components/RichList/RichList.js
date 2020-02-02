@@ -5,14 +5,15 @@ import PropTypes from 'prop-types'
 
 const RichListCell = styled.div`
   display: flex;
+  font-size: ${metrics.cellFontSize}rem;
   justify-content: flex-end;
   width: 100%;
 `
 
 const RichListAddressCell = styled(RichListCell)`
   cursor: pointer;
-  justify-content: flex-start;
   color: ${({ theme }) => theme.colors.pktBlueLight};
+  justify-content: flex-start;
   text-decoration: underline;
 `
 
@@ -23,7 +24,7 @@ const RichListCont = styled.div`
   margin: ${metrics.margin}rem;
 `
 
-const RichListLabel = styled.div`
+const RichListColumnName = styled.div`
   display: flex;
   justify-content: flex-end;
   font-size: ${metrics.headerFontSize}rem;
@@ -64,7 +65,7 @@ const RichList = ({ listData }) => {
   }
 
   const RichListLabels = <RichListLabelsCont>{
-    Object.keys(cells).map((header) => <RichListLabel key={header}>{header}</RichListLabel>)
+    Object.keys(cells).map((header) => <RichListColumnName key={header}>{header}</RichListColumnName>)
   }</RichListLabelsCont>
 
   return (
