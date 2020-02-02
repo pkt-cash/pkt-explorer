@@ -67,21 +67,23 @@ const BlockListRow = styled.div`
   }
 `
 
+const cells = {
+  height: 'height',
+  age: 'time',
+  transactions: 'transactionCount',
+  size: 'size'
+}
+
+const BlockListLabels = ({ cells }) => <BlockListLabelsCont>{
+  Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
+}</BlockListLabelsCont>
+
 const BlockList = ({ listData }) => {
-  const cells = {
-    height: 'height',
-    age: 'time',
-    transactions: 'transactionCount',
-    size: 'size'
-  }
-  
-  const BlockListLabels = <BlockListLabelsCont>{
-    Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
-  }</BlockListLabelsCont>
 
   return (
     listData
       ? <BlockListCont>
+        <BlockListLabels cells={cells} />
         {BlockListLabels}
         {/* Mapping over blocks */}
         {listData.map((blk) => <BlockListRow key={blk.hash}>
