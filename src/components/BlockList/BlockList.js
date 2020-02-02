@@ -43,6 +43,10 @@ const BlockListColumnName = styled.div`
   :nth-child(2) {
     justify-content: center;
   }
+  
+  :nth-child(2) {
+    justify-content: center;    
+  }
 `
 
 const BlockListLabelsCont = styled.div`
