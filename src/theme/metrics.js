@@ -5,6 +5,7 @@ const metrics = {
     small: 590
   },
   margin: 8, // px
+  headerFontSize: 1.2, // rem
   fontWeight: 600
 }
 

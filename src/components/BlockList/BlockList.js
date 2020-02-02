@@ -21,6 +21,7 @@ const BlockListCont = styled.div`
 const BlockListLabel = styled.div`
   display: flex;
   font-weight: ${metrics.fontWeight};
+  font-size: ${metrics.headerFontSize}rem;
   justify-content: flex-end;
   width: 100%;
   
