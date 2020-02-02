@@ -80,7 +80,11 @@ const RichList = ({ listData }) => {
           {Object.values(cells).map((cellName) => {
             if (cellName === 'address') {
               return <RichListAddressCell key={`${address.address}-${cellName}`}>
-                {address[cellName]}
+                <span title={address[cellName]}>
+                  {address[cellName].substr(0,12)}
+                  …
+                  {address[cellName].substr(-12, 12)}
+                </span>
               </RichListAddressCell>
             }
 
