@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
 
 const BlockListCell = styled.div`
@@ -10,16 +11,16 @@ const BlockListCell = styled.div`
 
 const BlockListHeightCell = styled(BlockListCell)`
   justify-content: flex-start;    
-  color: ${({ theme }) => theme.colors.pktBlueDark} 
+  color: ${({ theme }) => theme.colors.pktBlueLight} 
 `
 
 const BlockListCont = styled.div`
-  margin: 8px;
+  margin: ${metrics.margin}px;
 `
 
 const BlockListLabel = styled.div`
   display: flex;
-  font-weight: 600;
+  font-weight: ${metrics.fontWeight};
   justify-content: flex-end;
   width: 100%;
   
@@ -31,7 +32,7 @@ const BlockListLabel = styled.div`
 const BlockListLabelsCont = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: ${metrics.margin}px;
   text-transform: capitalize;
   width: 100%;
 `
@@ -42,7 +43,7 @@ const BlockListRow = styled.div`
   width: 100%;
   
   :nth-child(2n + 1) {
-    background-color: #f1f1f1;
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
 
