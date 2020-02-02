@@ -1,8 +1,18 @@
 import React from 'react'
+import TimeAgo from 'javascript-time-ago'
 import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+
+// Load locale-specific relative date/time formatting rules.
+import en from 'javascript-time-ago/locale/en'
+
+// Add locale-specific relative date/time formatting rules.
+TimeAgo.addLocale(en)
+
+// Create relative date/time formatter.
+const timeAgo = new TimeAgo('en-US')
 
 const BlockListTimeCell = styled(ListCell)`
   cursor: pointer;
@@ -16,12 +26,22 @@ const BlockListLabel = styled(ListLabel)`
   }
 `
 
-const BlockRow = ({ blk }) => <ListRow key={blk.hash}>
+export const AgeCell = ({ time }) => {
+  const dt = (new Date(time)).getTime()
+  const cDate = (new Date()).getTime()
+  const diff = cDate - dt
+
+  const humanInterval = timeAgo.format(cDate - diff)
+
+  return (<div>
+    {humanInterval.toString()}
+  </div>)
+}
+
+export const BlockRow = ({ blk }) => <ListRow key={blk.hash}>
   <FirstListCell key={`${blk.hash}-height`}>{blk.height}</FirstListCell>
   <BlockListTimeCell key={`${blk.hash}-time`}>
-    {/* Shorten formatted age by removing its end part */}
-    {new Date(blk.time).toString()
-      .replace(/[A-Z]{3,3}.*$/, '')}
+    <AgeCell time={blk.time} />
   </BlockListTimeCell>
   <ListCell key={`${blk.hash}-transactionCount`}>
     {blk.transactionCount}
@@ -43,7 +63,6 @@ export const BlockListLabels = ({ cells }) => <ListLabelCont>{
 }</ListLabelCont>
 
 const BlockList = ({ listData }) => {
-  console.log('diffTime', Math.round((new Date().getTime() - 1580395058553) / 1000))
   return (
     listData
       ? <ListCont>
@@ -67,6 +86,10 @@ BlockRow.propTypes = {
     time: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired
   }).isRequired
+}
+
+AgeCell.propTypes = {
+  time: PropTypes.string.isRequired
 }
 
 BlockListLabels.propTypes = {
