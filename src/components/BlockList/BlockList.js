@@ -77,13 +77,13 @@ const BlockList = ({ listData }) => {
         {listData.results.map((blk) => <BlockListRow key={blk.hash}>
           {Object.values(cells).map((cellName) => {
             let cell = null
-            switch (true) {
-              case cellName === 'height':
+            switch (cellName) {
+              case 'height':
                 cell = <BlockListHeightCell key={`${blk.hash}-${cellName}`}>
                   {blk[cellName]}
                 </BlockListHeightCell>
                 break
-              case cellName === 'time':
+              case 'time':
                 cell = <BlockListCell key={`${blk.hash}-${cellName}`}>
                   {/* Shorten formatted age by removing its end part */}
                   {new Date(blk[cellName]).toString()
