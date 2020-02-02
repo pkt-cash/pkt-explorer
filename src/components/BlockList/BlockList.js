@@ -16,6 +16,11 @@ const BlockListHeightCell = styled(BlockListCell)`
   color: ${({ theme }) => theme.colors.pktBlueLight};
   text-decoration: underline;
 `
+const BlockListTimeCell = styled(BlockListCell)`
+  cursor: pointer;
+  font-size: ${metrics.dateTimeFontSize}rem;
+  justify-content: flex-start;
+`
 
 const BlockListCont = styled.div`
   border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
@@ -33,6 +38,10 @@ const BlockListLabel = styled.div`
   
   :first-child {
     justify-content: flex-start;    
+  }
+  
+  :nth-child(2) {
+    justify-content: center;    
   }
 `
 
@@ -75,6 +84,11 @@ const BlockList = ({ listData }) => {
       ? <BlockListCont>
         {BlockListLabels}
         {listData.results.map((blk) => <BlockListRow key={blk.hash}>
+
+        {/* Mapping over blocks */}
+        {listData.map((blk) => <BlockListRow key={blk.hash}>
+
+          {/* Mapping over cells for each block */}
           {Object.values(cells).map((cellName) => {
             let cell = null
             switch (cellName) {
@@ -84,11 +98,11 @@ const BlockList = ({ listData }) => {
                 </BlockListHeightCell>
                 break
               case 'time':
-                cell = <BlockListCell key={`${blk.hash}-${cellName}`}>
+                cell = <BlockListTimeCell key={`${blk.hash}-${cellName}`}>
                   {/* Shorten formatted age by removing its end part */}
                   {new Date(blk[cellName]).toString()
                     .replace(/[A-Z]{3,3}.*$/, '')}
-                </BlockListCell>
+                </BlockListTimeCell>
                 break
               default:
                 cell = <BlockListCell key={`${blk.hash}-${cellName}`}>

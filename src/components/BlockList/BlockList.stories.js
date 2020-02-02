@@ -8,7 +8,7 @@ export default {
 }
 
 export const BlockListStLoad = () => <BlockList />
-export const BlockListSt = () => <BlockList listData={dummyData}/>
+export const BlockListSt = () => <BlockList listData={dummyData.results}/>
 
 BlockListStLoad.story = {
   name: 'Blocklist loading'
