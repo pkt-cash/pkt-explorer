@@ -5,8 +5,9 @@ import { ThemeProvider } from 'styled-components'
 import theme from './theme/theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import BlocksScreen from './screens/BlockListScreen'
 import { MainWrapper } from './components/CommonComps/CommonComps'
+import BlocksScreen from './screens/BlockListScreen'
+import RichListScreen from './screens/RichListScreen'
 
 function App () {
   return (
@@ -30,7 +31,7 @@ function App () {
               <Route
                 exact
                 path='/rich'
-                component={Rich}
+                component={RichListScreen}
                 key='rich' />
               <Route
                 exact
@@ -46,7 +47,6 @@ function App () {
 }
 
 const Home = () => <div>Home</div>
-const Rich = () => <div>Rich</div>
 const TxResume = () => <div>TxResume</div>
 
 export default App

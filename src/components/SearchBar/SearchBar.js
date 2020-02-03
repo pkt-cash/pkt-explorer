@@ -19,19 +19,9 @@ export const MenuBt = styled(MdSearch)`
 const SearchComp = (props) => {
   const [isOpen, toggle] = useState(false)
   return (
-    <MenuCont>
+    <div>
       <MenuBt isOpen={isOpen} onClick={() => toggle(!isOpen)} />
-      <MenuContainer
-        variants={mVar}
-        initial='closed'
-        animate={isOpen ? 'open' : 'closed'}
-        transition={{ duration: 0.2, ease: 'linear' }}
-      >
-        <MenuItem><Link to='/blocks' onClick={() => toggle(false)}>Blocks</Link></MenuItem>
-        <MenuItem><Link to='/txd' onClick={() => toggle(false)}>Txs per day</Link></MenuItem>
-        <MenuItem><Link to='/rich' onClick={() => toggle(false)}>Rich list</Link></MenuItem>
-      </MenuContainer>
-    </MenuCont>
+    </div>
   )
 }
 
