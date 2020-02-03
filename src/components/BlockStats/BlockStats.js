@@ -19,6 +19,7 @@ const BlockStatCell = styled.span`
 
 const DecoratedBlockStatCell = styled(BlockStatCell)`
   font-weight: ${metrics.fontWeight};
+  margin-right: ${metrics.margin}rem;
 `
 
 const BlockStatsColumn = styled.section`
