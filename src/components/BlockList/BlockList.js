@@ -29,7 +29,7 @@ const BlockListCont = styled.div`
   margin: ${metrics.margin}rem;
 `
 
-const BlockListColumnName = styled.div`
+const BlockListLabel = styled.div`
   display: flex;
   justify-content: flex-end;
   font-size: ${metrics.headerFontSize}rem;
