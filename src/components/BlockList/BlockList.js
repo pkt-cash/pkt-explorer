@@ -35,9 +35,13 @@ const BlockListLabel = styled.div`
   font-size: ${metrics.headerFontSize}rem;
   font-weight: ${metrics.fontWeight};
   width: 100%;
-  
+
   :first-child {
-    justify-content: flex-start;    
+    justify-content: flex-start;
+  }
+
+  :nth-child(2) {
+    justify-content: center;
   }
   
   :nth-child(2) {
@@ -61,7 +65,7 @@ const BlockListRow = styled.div`
   justify-content: space-between;
   padding: 0 ${metrics.padding}rem;
   width: 100%;
-  
+
   :nth-child(2n + 1) {
     background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
