@@ -24,7 +24,7 @@ function App () {
                 component={Home}
                 key='home' />
               <Route
-                exact 
+                exact
                 path='/blocks'
                 component={BlocksScreen}
                 key='blocks' />

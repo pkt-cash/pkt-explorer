@@ -43,7 +43,7 @@ export const ListRow = styled.div`
   width: 100%;
   
   :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight };
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
 export const ListLabel = styled.div`

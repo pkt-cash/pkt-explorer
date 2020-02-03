@@ -1,3 +1,3 @@
 export function treatDTx (data) {
-  return data.map((data, i) => [i + 1, data.transactionCount])
+  return data.map((data, i) => [new Date(data.date), data.transactionCount])
 }

@@ -5,14 +5,17 @@ import PropTypes from 'prop-types'
 const TxChart = ({ txData }) => {
   const data = React.useMemo(
     () => [
-      txData
+      {
+        label: 'tx/day',
+        data: txData
+      }
     ],
-    []
+    [txData]
   )
 
   const axes = React.useMemo(
     () => [
-      { primary: true, type: 'linear', position: 'bottom' },
+      { primary: true, type: 'time', position: 'bottom' },
       { type: 'linear', position: 'left' }
     ],
     []
@@ -29,7 +32,7 @@ const TxChart = ({ txData }) => {
     <div
       style={{
         width: '400px',
-        height: '120px'
+        height: '150px'
       }}
     >
       <Chart data={data} axes={axes} series={series} tooltip/>

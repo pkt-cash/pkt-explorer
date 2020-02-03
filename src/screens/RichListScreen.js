@@ -2,7 +2,7 @@ import React from 'react'
 import RichList from '../components/RichList/RichList'
 import endpoints from '../utils/endpoints'
 
-import useFetch from '../fixtures/hooks/useFetch'
+import useFetch from '../hooks/useFetch'
 
 const { richLApi } = endpoints
 
