@@ -4,7 +4,8 @@ const theme = {
     pktBlueDark: '#0084B0',
     pktBlueDarker: '#006485',
     pktBlueLight: '#08C1FF',
-    pktBlueLighter: '#31C9FC'
+    pktBlueLighter: '#31C9FC',
+    pktGreyLight: '#f1f1f1'
   }
 }
 

@@ -13,4 +13,3 @@ export const MenuBarSt = () => <MenuBar showApp={linkTo('Button')} />
 MenuBarSt.story = {
   name: 'full MenuBar'
 }
-  
