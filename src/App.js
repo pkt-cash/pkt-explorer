@@ -1,15 +1,12 @@
 import React from 'react'
 import MenuBar from './components/MenuBar/MenuBar'
 import GlobalStyles from './App.css'
-import styled, { ThemeProvider } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
 import theme from './theme/theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import BlocksScreen from './screens/BlockListScreen'
-
-const MainContainer = styled.div`
-  /* display: flex; */
-`
+import { MainWrapper } from './components/CommonComps/CommonComps'
 
 function App () {
   return (
@@ -18,7 +15,7 @@ function App () {
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <MenuBar />
-          <MainContainer>
+          <MainWrapper>
             <Switch>
               <Route
                 exact
@@ -41,7 +38,7 @@ function App () {
                 component={TxResume}
                 key='resume' />
             </Switch>
-          </MainContainer>
+          </MainWrapper>
         </ThemeProvider>
       </BrowserRouter>
     </>
