@@ -1,92 +1,37 @@
 import React from 'react'
-import styled from 'styled-components'
-import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
+import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 
-const RichListCell = styled.div`
-  display: flex;
-  font-size: ${metrics.cellFontSize}rem;
-  justify-content: flex-end;
-  width: 100%;
-`
-
-const RichListAddressCell = styled(RichListCell)`
-  cursor: pointer;
-  color: ${({ theme }) => theme.colors.pktBlueLight};
-  justify-content: flex-start;
-  text-decoration: underline;
-`
-
-const RichListCont = styled.div`
-  border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
-  margin: ${metrics.margin}rem;
-`
-
-const RichListLabel = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-size: ${metrics.headerFontSize}rem;
-  font-weight: ${metrics.fontWeight};
-  width: 100%;
-  
-  :first-child {
-    justify-content: flex-start;    
-  }
-`
-
-const RichListLabelsCont = styled.div`
-  display: flex;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  justify-content: space-between;
-  padding: ${metrics.padding}rem;
-  text-transform: capitalize;
-  width: 100%;
-`
-const RichListRow = styled.div`
-  align-items: flex-end;
-  align-items: center;
-  display: flex;
-  height: ${metrics.rowHeight}rem;
-  justify-content: space-between;
-  padding: 0 ${metrics.padding}rem;
-  width: 100%;
-  
-  :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight };
-  }
-`
 const cells = {
   address: 'address',
   balance: 'balance'
 }
 
-export const RichListLabels = ({ cells }) => <RichListLabelsCont>{
-  Object.keys(cells).map((header) => <RichListLabel key={header}>{header}</RichListLabel>)
-}</RichListLabelsCont>
+export const RichListLabels = ({ cells }) => <ListLabelCont>{
+  Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
+}</ListLabelCont>
 
-export const RichListRowCont = ({ row }) => <RichListRow key={row.address}>
-  <RichListAddressCell key={`${row.address}-address`}>
+export const RichListRowCont = ({ row }) => <ListRow key={row.address}>
+  <FirstListCell key={`${row.address}-address`}>
     <span title={row.address}>
       {row.address.substr(0, 12)}
       …
       {row.address.substr(-12, 12)}
     </span>
-  </RichListAddressCell>
-  <RichListCell key={`${row.address}-balance`}>
+  </FirstListCell>
+  <ListCell key={`${row.address}-balance`}>
     {row.balance}
-  </RichListCell>
-</RichListRow>
+  </ListCell>
+</ListRow>
 
 const RichList = ({ listData }) => {
   return (
     listData
-      ? <RichListCont>
+      ? <ListCont>
         <RichListLabels cells={cells} />
         {/* Mapping over rich list addresses */}
         {listData.map((row) => <RichListRowCont row={row} key={row.address} />)}
-      </RichListCont>
+      </ListCont>
       : <div>loading</div>
   )
 }

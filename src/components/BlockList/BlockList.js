@@ -2,89 +2,34 @@ import React from 'react'
 import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
+import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 
-const BlockListCell = styled.div`
-  display: flex;
-  font-size: ${metrics.cellFontSize}rem;
-  justify-content: flex-end;
-  width: 100%;
-`
-
-const BlockListHeightCell = styled(BlockListCell)`
-  cursor: pointer;
-  justify-content: flex-start;
-  color: ${({ theme }) => theme.colors.pktBlueLight};
-  text-decoration: underline;
-`
-const BlockListTimeCell = styled(BlockListCell)`
+const BlockListTimeCell = styled(ListCell)`
   cursor: pointer;
   font-size: ${metrics.dateTimeFontSize}rem;
   justify-content: flex-start;
 `
 
-const BlockListCont = styled.div`
-  border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
-  margin: ${metrics.margin}rem;
-`
-
-const BlockListLabel = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  font-size: ${metrics.headerFontSize}rem;
-  font-weight: ${metrics.fontWeight};
-  width: 100%;
-
-  :first-child {
-    justify-content: flex-start;
-  }
-
+const BlockListLabel = styled(ListLabel)`
   :nth-child(2) {
     justify-content: center;
   }
-  
-  :nth-child(2) {
-    justify-content: center;    
-  }
 `
 
-const BlockListLabelsCont = styled.div`
-  display: flex;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  justify-content: space-between;
-  padding: ${metrics.padding}rem;
-  text-transform: capitalize;
-  width: 100%;
-`
-const BlockListRow = styled.div`
-  align-items: flex-end;
-  align-items: center;
-  display: flex;
-  height: ${metrics.rowHeight}rem;
-  justify-content: space-between;
-  padding: 0 ${metrics.padding}rem;
-  width: 100%;
-
-  :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight};
-  }
-`
-
-const BlockRow = ({ blk }) => <BlockListRow key={blk.hash}>
-  <BlockListHeightCell key={`${blk.hash}-height`}>{blk.height}</BlockListHeightCell>
+const BlockRow = ({ blk }) => <ListRow key={blk.hash}>
+  <FirstListCell key={`${blk.hash}-height`}>{blk.height}</FirstListCell>
   <BlockListTimeCell key={`${blk.hash}-time`}>
     {/* Shorten formatted age by removing its end part */}
     {new Date(blk.time).toString()
       .replace(/[A-Z]{3,3}.*$/, '')}
   </BlockListTimeCell>
-  <BlockListCell key={`${blk.hash}-transactionCount`}>
+  <ListCell key={`${blk.hash}-transactionCount`}>
     {blk.transactionCount}
-  </BlockListCell>
-  <BlockListCell key={`${blk.hash}-size`}>
+  </ListCell>
+  <ListCell key={`${blk.hash}-size`}>
     {blk.size}
-  </BlockListCell>
-</BlockListRow>
+  </ListCell>
+</ListRow>
 
 const cells = {
   height: 'height',
@@ -93,19 +38,19 @@ const cells = {
   size: 'size'
 }
 
-export const BlockListLabels = ({ cells }) => <BlockListLabelsCont>{
+export const BlockListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
-}</BlockListLabelsCont>
+}</ListLabelCont>
 
 const BlockList = ({ listData }) => {
   console.log('diffTime', Math.round((new Date().getTime() - 1580395058553) / 1000))
   return (
     listData
-      ? <BlockListCont>
+      ? <ListCont>
         <BlockListLabels cells={cells} />
         {/* Mapping over blocks */}
         {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)}
-      </BlockListCont>
+      </ListCont>
       : <div>loading</div>
   )
 }
