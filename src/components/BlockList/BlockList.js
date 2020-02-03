@@ -33,7 +33,7 @@ export const AgeCell = ({ time }) => {
 
   const humanInterval = timeAgo.format(cDate - diff)
 
-  return (<div>
+  return (<div title={(new Date(time)).toString()}>
     {humanInterval.toString()}
   </div>)
 }
