@@ -2,7 +2,7 @@ import React from 'react'
 import TxChart from './TxChart'
 import dummyTxData from '../../fixtures/daily.json'
 import { treatDTx } from '../../utils'
-const dData = treatDTx(dummyTxData.results)
+export const dData = treatDTx(dummyTxData.results)
 
 export default {
   title: 'TxChart',
