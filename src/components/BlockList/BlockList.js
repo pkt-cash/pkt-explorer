@@ -67,6 +67,21 @@ const BlockListRow = styled.div`
   }
 `
 
+const BlockRow = ({ blk }) => <BlockListRow key={blk.hash}>
+  <BlockListHeightCell key={`${blk.hash}-height`}>{blk.height}</BlockListHeightCell>
+  <BlockListTimeCell key={`${blk.hash}-time`}>
+    {/* Shorten formatted age by removing its end part */}
+    {new Date(blk.time).toString()
+      .replace(/[A-Z]{3,3}.*$/, '')}
+  </BlockListTimeCell>
+  <BlockListCell key={`${blk.hash}-transactionCount`}>
+    {blk.transactionCount}
+  </BlockListCell>
+  <BlockListCell key={`${blk.hash}-size`}>
+    {blk.size}
+  </BlockListCell>
+</BlockListRow>
+
 const cells = {
   height: 'height',
   age: 'time',
@@ -74,45 +89,18 @@ const cells = {
   size: 'size'
 }
 
-const BlockListLabels = ({ cells }) => <BlockListLabelsCont>{
+export const BlockListLabels = ({ cells }) => <BlockListLabelsCont>{
   Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
 }</BlockListLabelsCont>
 
 const BlockList = ({ listData }) => {
-
+  console.log('diffTime', Math.round((new Date().getTime() - 1580395058553) / 1000))
   return (
     listData
       ? <BlockListCont>
         <BlockListLabels cells={cells} />
-        {BlockListLabels}
         {/* Mapping over blocks */}
-        {listData.map((blk) => <BlockListRow key={blk.hash}>
-
-          {/* Mapping over cells for each block */}
-          {Object.values(cells).map((cellName) => {
-            let cell = null
-            switch (cellName) {
-              case 'height':
-                cell = <BlockListHeightCell key={`${blk.hash}-${cellName}`}>
-                  {blk[cellName]}
-                </BlockListHeightCell>
-                break
-              case 'time':
-                cell = <BlockListTimeCell key={`${blk.hash}-${cellName}`}>
-                  {/* Shorten formatted age by removing its end part */}
-                  {new Date(blk[cellName]).toString()
-                    .replace(/[A-Z]{3,3}.*$/, '')}
-                </BlockListTimeCell>
-                break
-              default:
-                cell = <BlockListCell key={`${blk.hash}-${cellName}`}>
-                  {blk[cellName]}
-                </BlockListCell>
-            }
-
-            return cell
-          })}
-        </BlockListRow>)}
+        {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)}
       </BlockListCont>
       : <div>loading</div>
   )
@@ -120,6 +108,25 @@ const BlockList = ({ listData }) => {
 
 BlockList.propTypes = {
   listData: PropTypes.array
+}
+
+BlockRow.propTypes = {
+  blk: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    transactionCount: PropTypes.number.isRequired,
+    time: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired
+  }).isRequired
+}
+
+BlockListLabels.propTypes = {
+  cells: PropTypes.PropTypes.shape({
+    height: PropTypes.string.isRequired,
+    age: PropTypes.string.isRequired,
+    transactions: PropTypes.string.isRequired,
+    size: PropTypes.string.isRequired
+  }).isRequired
 }
 
 BlockList.defaultProps = {}
