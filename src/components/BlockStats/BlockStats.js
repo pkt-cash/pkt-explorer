@@ -4,16 +4,27 @@ import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
 
 const BlockStatsCont = styled.div`
-  margin: ${metrics.margin}rem
+  display: flex;
+  margin: ${metrics.margin}rem ${metrics.margin}rem ${metrics.margin}rem 0;
+  flex-direction: row;
+  
+  @media (max-width: ${metrics.mq.small}px) {
+    flex-direction: column;
+  }
 `
 
 const BlockStatCell = styled.span`
   align-self: center; 
 `
 
+const DecoratedBlockStatCell = styled(BlockStatCell)`
+  font-weight: ${metrics.fontWeight};
+`
+
 const BlockStatsColumn = styled.section`
   display: flex;
   flex-direction: column;
+  margin-left: ${metrics.margin}rem;
 `
 
 const StatField = styled.div`
@@ -24,7 +35,7 @@ const StatField = styled.div`
   justify-content: space-between;
 `
 
-export const FieldName = ({ name }) => <BlockStatCell>{name}</BlockStatCell>
+export const FieldName = ({ name }) => <DecoratedBlockStatCell>{name}</DecoratedBlockStatCell>
 
 export const FieldValue = ({ value }) => <BlockStatCell>{value}</BlockStatCell>
 
@@ -32,51 +43,59 @@ export const Hash = ({ hash }) => <BlockStatCell title={hash}>
   {`${hash.substr(0, 12)}…${hash.substr(-12, 12)}`}
 </BlockStatCell>
 
+export const DateTimeComp = ({ time }) => <BlockStatCell title={new Date(time).toString()}>
+  {new Date(time).toDateString()}
+</BlockStatCell>
+
+export const BlockReward = ({ reward }) => <BlockStatCell>
+  {reward} PKT
+</BlockStatCell>
+
 const BlockStats = ({ stats }) => {
   return (
     stats
       ? <BlockStatsCont>
-        <BlockStatsColumn>
+        <BlockStatsColumn key="first-column">
           <StatField>
-            <FieldName name="Merkle Root" /><Hash hash={stats.hash} />
+            <FieldName name="Merkle Root" /><Hash key={stats.hash} hash={stats.hash} />
           </StatField>
           <StatField>
-            <FieldName name="Bits" /><FieldValue value={stats.bits} />
+            <FieldName name="Bits" /><FieldValue key={stats.bits} value={stats.bits} />
           </StatField>
           <StatField>
-            <FieldName name="Version" /><FieldValue value={stats.version} />
+            <FieldName name="Version" /><FieldValue key={stats.version} value={stats.version} />
           </StatField>
           <StatField>
-            <FieldName name="Number of Transactions" /><FieldValue value={stats.transactionCount} />
+            <FieldName name="Number of Transactions" /><FieldValue key={stats.transactionCount} value={stats.transactionCount} />
           </StatField>
           <StatField>
-            <FieldName name="Height" /><FieldValue value={stats.height} />
+            <FieldName name="Height" /><FieldValue key={stats.height} value={stats.height} />
           </StatField>
           <StatField>
-            <FieldName name="Block Reward" /><FieldValue value={stats.blockReward + 'PKT'} />
+            <FieldName name="Block Reward" /><BlockReward key={stats.blockReward} reward={stats.blockReward} />
           </StatField>
           <StatField>
-            <FieldName name="Timestamp" /><FieldValue value={new Date(stats.time).toString()} />
+            <FieldName name="Timestamp" /><DateTimeComp key={stats.time} time={stats.time} />
           </StatField>
         </BlockStatsColumn>
-        <BlockStatsColumn>
+        <BlockStatsColumn key="second-column">
           <StatField>
-            <FieldName name="Difficulty" /><FieldValue value={stats.difficulty} />
+            <FieldName name="Difficulty" /><FieldValue key={stats.difficulty} value={stats.difficulty} />
           </StatField>
           <StatField>
-            <FieldName name="Size (Bytes)" /><FieldValue value={stats.size} />
+            <FieldName name="Size (Bytes)" /><FieldValue key={stats.size} value={stats.size} />
           </StatField>
           <StatField>
-            <FieldName name="Nonce" /><FieldValue value={stats.nonce} />
+            <FieldName name="Nonce" /><FieldValue key={stats.nonce} value={stats.nonce} />
           </StatField>
           <StatField>
-            <FieldName name="Previous Block" /><Hash hash={stats.previousBlockHash} />
+            <FieldName name="Previous Block" /><Hash key={stats.previousBlockHash} hash={stats.previousBlockHash} />
           </StatField>
           <StatField>
-            <FieldName name="Next Block" /><Hash hash={stats.nextBlockHash} />
+            <FieldName name="Next Block" /><Hash key={stats.nextBlockHash} hash={stats.nextBlockHash} />
           </StatField>
           <StatField>
-            <FieldName name="Confirmations" /><FieldValue value={stats.confirmations} />
+            <FieldName name="Confirmations" /><FieldValue key={stats.confirmations} value={stats.confirmations} />
           </StatField>
         </BlockStatsColumn>
       </BlockStatsCont>
@@ -87,7 +106,7 @@ const BlockStats = ({ stats }) => {
 BlockStats.propTypes = {
   stats: PropTypes.shape({
     hash: PropTypes.string.isRequired,
-    bits: PropTypes.string.isRequired,
+    bits: PropTypes.number.isRequired,
     version: PropTypes.number.isRequired,
     transactionCount: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
@@ -96,10 +115,14 @@ BlockStats.propTypes = {
     difficulty: PropTypes.number.isRequired,
     size: PropTypes.number.isRequired,
     nonce: PropTypes.number.isRequired,
-    previousBlockHash: PropTypes.number.isRequired,
-    nextBlockHash: PropTypes.number.isRequired,
+    previousBlockHash: PropTypes.string.isRequired,
+    nextBlockHash: PropTypes.string.isRequired,
     confirmations: PropTypes.number.isRequired
   }).isRequired
+}
+
+DateTimeComp.propTypes = {
+  time: PropTypes.string.isRequired
 }
 
 FieldName.propTypes = {
@@ -107,7 +130,11 @@ FieldName.propTypes = {
 }
 
 FieldValue.propTypes = {
-  value: PropTypes.string.isRequired
+  value: PropTypes.string
+}
+
+BlockReward.propTypes = {
+  reward: PropTypes.number.isRequired
 }
 
 Hash.propTypes = {
