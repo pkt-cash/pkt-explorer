@@ -24,7 +24,7 @@ const RichListCont = styled.div`
   margin: ${metrics.margin}rem;
 `
 
-const RichListColumnName = styled.div`
+const RichListLabel = styled.div`
   display: flex;
   justify-content: flex-end;
   font-size: ${metrics.headerFontSize}rem;
@@ -57,44 +57,35 @@ const RichListRow = styled.div`
     background-color: ${({ theme }) => theme.colors.pktGreyLight };
   }
 `
+const cells = {
+  address: 'address',
+  balance: 'balance'
+}
+
+export const RichListLabels = ({ cells }) => <RichListLabelsCont>{
+  Object.keys(cells).map((header) => <RichListLabel key={header}>{header}</RichListLabel>)
+}</RichListLabelsCont>
+
+export const RichListRowCont = ({ row }) => <RichListRow key={row.address}>
+  <RichListAddressCell key={`${row.address}-address`}>
+    <span title={row.address}>
+      {row.address.substr(0, 12)}
+      …
+      {row.address.substr(-12, 12)}
+    </span>
+  </RichListAddressCell>
+  <RichListCell key={`${row.address}-balance`}>
+    {row.balance}
+  </RichListCell>
+</RichListRow>
 
 const RichList = ({ listData }) => {
-  const cells = {
-    address: 'address',
-    balance: 'balance'
-  }
-
-  const RichListLabels = <RichListLabelsCont>{
-    Object.keys(cells).map((header) => <RichListColumnName key={header}>{header}</RichListColumnName>)
-  }</RichListLabelsCont>
-
   return (
     listData
       ? <RichListCont>
-        {RichListLabels}
-
-        {/* Mapping over addresses */}
-        {listData.map((address) => <RichListRow key={address.address}>
-
-          {/* Mapping over cells for each address  */}
-          {Object.values(cells).map((cellName) => {
-            if (cellName === 'address') {
-              return <RichListAddressCell key={`${address.address}-${cellName}`}>
-                <span title={address[cellName]}>
-                  {address[cellName].substr(0,12)}
-                  …
-                  {address[cellName].substr(-12, 12)}
-                </span>
-              </RichListAddressCell>
-            }
-
-            return <RichListCell key={`${address.address}-${cellName}`}>
-              {address[cellName]}
-            </RichListCell>
-          })}
-
-        </RichListRow>)}
-
+        <RichListLabels cells={cells} />
+        {/* Mapping over rich list addresses */}
+        {listData.map((row) => <RichListRowCont row={row} key={row.address} />)}
       </RichListCont>
       : <div>loading</div>
   )
@@ -102,6 +93,20 @@ const RichList = ({ listData }) => {
 
 RichList.propTypes = {
   listData: PropTypes.array
+}
+
+RichListRowCont.propTypes = {
+  row: PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    balance: PropTypes.string.isRequired
+  }).isRequired
+}
+
+RichListLabels.propTypes = {
+  cells: PropTypes.PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    balance: PropTypes.string.isRequired
+  }).isRequired
 }
 
 RichList.defaultProps = {}
