@@ -1,0 +1,21 @@
+{
+  "hash": "f2fcfb4bd866d220134261bdebc942c528c610f55848e28b3345d7e5dd9a7c59",
+  "blockReward": 3749.4,
+  "height": 231333,
+  "version": 536870912,
+  "size": 10122,
+  "merkleRoot": "6832302357a5aa4b92ec0dc4203d0a185a1ac79b64056cf67f441ffa4c9ed293",
+  "time": "2020-01-20T13:31:43.000Z",
+  "nonce": 161946130,
+  "bits": 494228651,
+  "difficulty": 8936.91671391,
+  "previousBlockHash": "574f74e638f20e30e49a13f9d7513f556cd5ba8202e4ab561c723fbe8fa07b70",
+  "nextBlockHash": "fa07b70574f74e638f20e30e49a13f9d7513f556cd5ba8202e4ab561c723fbe8",
+  "confirmations": 2,
+  "transactionCount": 1,
+  "pcAnnCount": "30350",
+  "pcAnnDifficulty": 781.253053,
+  "pcBlkDifficulty": 16646654.00006056,
+  "pcVersion": 2,
+  "dateMs": "1579527153453"
+}
