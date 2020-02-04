@@ -41,10 +41,7 @@ const TxChart = ({ txData }) => {
 }
 
 TxChart.propTypes = {
-  txData: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.string.isRequired,
-    transactionCount: PropTypes.number.isRequired
-  }))
+  txData: PropTypes.array
 }
 
 // TxChart.defaultProps = {

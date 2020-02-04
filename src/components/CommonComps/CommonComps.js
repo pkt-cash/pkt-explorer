@@ -34,7 +34,6 @@ export const FirstListCell = styled(ListCell)`
 `
 
 export const ListRow = styled.div`
-  align-items: flex-end;
   align-items: center;
   display: flex;
   height: ${metrics.rowHeight}rem;

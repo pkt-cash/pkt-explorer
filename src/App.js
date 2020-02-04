@@ -9,7 +9,9 @@ import { MainWrapper } from './components/CommonComps/CommonComps'
 import BlocksScreen from './screens/BlockListScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeStats from './components/HomeStats/HomeStats'
-import { dData } from './components/TxChart/TxChart.stories'
+import dummyTxData from './fixtures/daily.json'
+import { treatDTx } from './utils'
+const dData = treatDTx(dummyTxData.results)
 function App () {
   return (
     <>
