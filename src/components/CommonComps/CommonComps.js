@@ -34,7 +34,6 @@ export const FirstListCell = styled(ListCell)`
 `
 
 export const ListRow = styled.div`
-  align-items: flex-end;
   align-items: center;
   display: flex;
   height: ${metrics.rowHeight}rem;
@@ -43,7 +42,7 @@ export const ListRow = styled.div`
   width: 100%;
   
   :nth-child(2n + 1) {
-    background-color: ${({ theme }) => theme.colors.pktGreyLight };
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
 export const ListLabel = styled.div`

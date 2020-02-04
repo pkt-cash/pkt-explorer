@@ -1,3 +1,5 @@
 export function treatDTx (data) {
-  return data.map((data, i) => [i + 1, data.transactionCount])
+  return data.map((data, i) => [new Date(data.date), data.transactionCount])
 }
+
+export const displayPKT = (amount) => Number(amount) / 0x40000000

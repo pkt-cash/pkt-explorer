@@ -2,7 +2,7 @@ import React from 'react'
 import BlockList from '../components/BlockList/BlockList'
 import endpoints from '../utils/endpoints'
 
-import useFetch from '../fixtures/hooks/useFetch'
+import useFetch from '../hooks/useFetch'
 
 const { blkLApi } = endpoints
 
