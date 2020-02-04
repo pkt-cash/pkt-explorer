@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { displayPKT } from '../../utils'
 
 const cells = {
   address: 'address',
@@ -11,17 +12,17 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
-export const RichListRowCont = ({ row }) => <ListRow key={row.address}>
-  <FirstListCell key={`${row.address}-address`}>
+export const RichListRowCont = ({ row }) => <ListRow>
+  <FirstListCell>
     <span title={row.address}>
       {row.address.substr(0, 12)}
       …
       {row.address.substr(-12, 12)}
     </span>
   </FirstListCell>
-  <ListCell key={`${row.address}-balance`}>
-    {row.balance}
-  </ListCell>
+  <div>
+    {Math.floor(displayPKT(row.balance))}
+  </div>
 </ListRow>
 
 const RichList = ({ listData }) => {
