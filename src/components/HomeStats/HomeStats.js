@@ -61,7 +61,7 @@ const StatCellValue = styled.div`
   font-style: italic;
 `
 
-const HomeStats = ({ txData, lastBlock }) => {
+const HomeStats = ({ txData }) => {
   return (
     <ListCont>
       <ListLabelCont>
@@ -99,7 +99,7 @@ const HomeStats = ({ txData, lastBlock }) => {
 }
 
 HomeStats.propTypes = {
-  txData: PropTypes.array.isRequired,
+  txData: PropTypes.array.isRequired
   // lastBlock: PropTypes.number.isRequired
 }
 

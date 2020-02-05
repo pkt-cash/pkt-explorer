@@ -8,10 +8,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { MainWrapper } from './components/CommonComps/CommonComps'
 import BlocksScreen from './screens/BlockListScreen'
 import RichListScreen from './screens/RichListScreen'
-import HomeStats from './components/HomeStats/HomeStats'
-import dummyTxData from './fixtures/daily.json'
-import { treatDTx } from './utils'
-const dData = treatDTx(dummyTxData.results)
+import HomeScreen from './screens/HomeScreen'
+
 function App () {
   return (
     <>
@@ -24,7 +22,7 @@ function App () {
               <Route
                 exact
                 path='/'
-                component={Home}
+                component={HomeScreen}
                 key='home' />
               <Route
                 exact
@@ -49,7 +47,6 @@ function App () {
   )
 }
 
-const Home = () => <div><HomeStats txData={ dData }/></div>
 const TxResume = () => <div>TxResume</div>
 
 export default App
