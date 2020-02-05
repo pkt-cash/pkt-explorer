@@ -1,6 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import {
+  FirstListCell,
+  // ListCell,
+  ListRow,
+  ListLabel,
+  ListLabelCont,
+  ListCont
+} from '../CommonComps/CommonComps'
 import { displayPKT } from '../../utils'
 
 const cells = {

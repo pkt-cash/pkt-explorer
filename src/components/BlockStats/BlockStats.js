@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
+import { ListCont, ListLabelCont } from '../CommonComps/CommonComps'
 
 const BlockStatsCont = styled.div`
   display: flex;
@@ -26,6 +27,7 @@ const BlockStatsColumn = styled.section`
   display: flex;
   flex-direction: column;
   margin-left: ${metrics.margin}rem;
+  flex: 1;
 `
 
 const StatField = styled.div`
@@ -55,51 +57,56 @@ export const BlockReward = ({ reward }) => <BlockStatCell>
 const BlockStats = ({ stats }) => {
   return (
     stats
-      ? <BlockStatsCont>
-        <BlockStatsColumn>
-          <StatField>
-            <FieldName name="Merkle Root" /><Hash hash={stats.hash} />
-          </StatField>
-          <StatField>
-            <FieldName name="Bits" /><FieldValue value={stats.bits} />
-          </StatField>
-          <StatField>
-            <FieldName name="Version" /><FieldValue value={stats.version} />
-          </StatField>
-          <StatField>
-            <FieldName name="Number of Transactions" /><FieldValue value={stats.transactionCount} />
-          </StatField>
-          <StatField>
-            <FieldName name="Height" /><FieldValue value={stats.height} />
-          </StatField>
-          <StatField>
-            <FieldName name="Block Reward" /><BlockReward reward={stats.blockReward} />
-          </StatField>
-          <StatField>
-            <FieldName name="Timestamp" /><DateTimeComp time={stats.time} />
-          </StatField>
-        </BlockStatsColumn>
-        <BlockStatsColumn key="second-column">
-          <StatField>
-            <FieldName name="Difficulty" /><FieldValue value={stats.difficulty} />
-          </StatField>
-          <StatField>
-            <FieldName name="Size (Bytes)" /><FieldValue value={stats.size} />
-          </StatField>
-          <StatField>
-            <FieldName name="Nonce" /><FieldValue value={stats.nonce} />
-          </StatField>
-          <StatField>
-            <FieldName name="Previous Block" /><Hash hash={stats.previousBlockHash} />
-          </StatField>
-          <StatField>
-            <FieldName name="Next Block" /><Hash hash={stats.nextBlockHash} />
-          </StatField>
-          <StatField>
-            <FieldName name="Confirmations" /><FieldValue value={stats.confirmations} />
-          </StatField>
-        </BlockStatsColumn>
-      </BlockStatsCont>
+      ? <ListCont>
+        <ListLabelCont>
+            Last Block
+        </ListLabelCont>
+        <BlockStatsCont>
+          <BlockStatsColumn>
+            <StatField>
+              <FieldName name="Merkle Root" /><Hash hash={stats.hash} />
+            </StatField>
+            <StatField>
+              <FieldName name="Bits" /><FieldValue value={stats.bits} />
+            </StatField>
+            <StatField>
+              <FieldName name="Version" /><FieldValue value={stats.version} />
+            </StatField>
+            <StatField>
+              <FieldName name="Number of Transactions" /><FieldValue value={stats.transactionCount} />
+            </StatField>
+            <StatField>
+              <FieldName name="Height" /><FieldValue value={stats.height} />
+            </StatField>
+            <StatField>
+              <FieldName name="Block Reward" /><BlockReward reward={stats.blockReward} />
+            </StatField>
+            <StatField>
+              <FieldName name="Timestamp" /><DateTimeComp time={stats.time} />
+            </StatField>
+          </BlockStatsColumn>
+          <BlockStatsColumn key="second-column">
+            <StatField>
+              <FieldName name="Difficulty" /><FieldValue value={stats.difficulty} />
+            </StatField>
+            <StatField>
+              <FieldName name="Size (Bytes)" /><FieldValue value={stats.size} />
+            </StatField>
+            <StatField>
+              <FieldName name="Nonce" /><FieldValue value={stats.nonce} />
+            </StatField>
+            <StatField>
+              <FieldName name="Previous Block" /><Hash hash={stats.previousBlockHash} />
+            </StatField>
+            <StatField>
+              <FieldName name="Next Block" /><Hash hash={stats.nextBlockHash} />
+            </StatField>
+            <StatField>
+              <FieldName name="Confirmations" /><FieldValue value={stats.confirmations} />
+            </StatField>
+          </BlockStatsColumn>
+        </BlockStatsCont>
+      </ListCont>
       : <div>loading</div>
   )
 }
