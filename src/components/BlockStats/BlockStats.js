@@ -16,11 +16,13 @@ const BlockStatsCont = styled.div`
 
 const BlockStatCell = styled.span`
   align-self: center; 
+  text-align: right;
 `
 
 const DecoratedBlockStatCell = styled(BlockStatCell)`
   font-weight: ${metrics.fontWeight};
   margin-right: ${metrics.margin}rem;
+  text-align: left;
 `
 
 const BlockStatsColumn = styled.section`
