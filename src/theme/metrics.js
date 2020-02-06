@@ -8,12 +8,16 @@ const metrics = {
     large: 1024,
     xLarge: 1440
   },
-  padding: 1, // rem
-  margin: 1, // rem
-  dateTimeFontSize: 0.8, // rem
   cellFontSize: 0.9, // rem
-  headerFontSize: 1.1, // rem
+  dateTimeFontSize: 0.8, // rem
   fontWeight: 600,
+  headerFontSize: 1.1, // rem
+  margin: 1, // rem
+  omniboxPadding: 0.4, // rem
+  ommiboxFontSize: 1.20, // rem
+  omniboxHeight: 2.5, // rem
+  omniboxBoxShadow: 1, // px
+  padding: 1, // rem
   rowHeight: 3 // rem
 }
 
