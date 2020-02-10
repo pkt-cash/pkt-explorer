@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import metrics from '../theme/metrics'
+import metrics from '../../theme/metrics'
 import { MdSearch } from 'react-icons/md'
+import useBox from '../../hooks/useBox'
 
 const OmniboxCont = styled.div`
   display: flex;
@@ -30,18 +31,12 @@ const InputHavingPlacholder = styled.input`
   width: 80vw;
 `
 
-const OmniboxInput = ({ placeholder }) => <InputHavingPlacholder placeholder={placeholder}>
-</InputHavingPlacholder>
-
 const Omnibox = ({ placeholder }) => {
+  const { inputs, handleInputChange, handleSubmit } = useBox(() => console.log(inputs))
   return (<OmniboxCont>
-    <SearchIcon />
-    <OmniboxInput placeholder={placeholder} />
+    <SearchIcon onClick={handleSubmit}/>
+    <InputHavingPlacholder placeholder={placeholder} onChange={ handleInputChange } value={inputs.omni}/>
   </OmniboxCont>)
-}
-
-OmniboxInput.propTypes = {
-  placeholder: PropTypes.string.isRequired
 }
 
 Omnibox.propTypes = {
