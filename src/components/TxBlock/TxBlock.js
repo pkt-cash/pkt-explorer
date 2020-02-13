@@ -1,66 +1,105 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
 import { mqs } from '../../theme/metrics'
 import { displayPKT } from '../../utils'
+import { TxItem } from '../TxItem/Txitem'
+import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import TxTogBt from '../TxTogBt/TxTogBt'
 
-const TxCont = styled.div`
+const TxBlockCont = styled(motion.div)``
+
+const TxLabel = styled.div`
 
 `
-const TxIdCont = styled.div`
 
+const TxlistCont = styled(motion.div)`
+  overflow: hidden
 `
+
+const listVars = {
+  open: {
+    height: 'auto'
+  },
+  closed: {
+    height: 65
+  }
+}
+
+const TxCol = styled.div`
+  width:47%;
+  /* background: #eee; */
+  @media ${mqs.small} {
+    width:100%;
+  }
+`
+
 const TxColsCont = styled.div`
   display: flex;
+  justify-content: space-around;
   @media ${mqs.small} {
     flex-direction: column;
   }
 `
-const TxCol = styled.div`
-  flex: 1
-`
+
 const TxColSep = styled.div`
   width: 20px;
+  height: 45px;
+  display: flex;
+  margin: 10px 0;
+  align-items: center;
+  text-align: center;
   @media ${mqs.small} {
     display: none;
   }
 `
 
-const Tx = styled.div`
-  height: 30px;
-  @media ${mqs.small} {
-    height: auto;
-  }
-`
-
-
+// import styled from 'styled-components'
 const TxBlock = ({ txData }) => {
-  const { txid, input, output } = txData
+  const [isOpen, togOpen] = useState(false)
+  const { txid, input, output, blockTime } = txData
   return (
-    <TxCont>
-      <TxIdCont>
-        {txid}
-      </TxIdCont>
-      <TxColsCont>
-        <TxCol>
-          {input.length > 0
-            ? input.map((data, i) => <Tx key={`txIn-${i}`}>{data.address} | {parseFloat(displayPKT(data.value).toFixed(2))}</Tx>)
-            : <Tx>No Inputs (Newly Generated Coins)  </Tx>
-          }
-        </TxCol>
-        <TxColSep>=&gt;</TxColSep>
-        <TxCol>
-          {output.map((data, i) => <Tx key={`txIn-${i}`}>{data.address} | {parseFloat(displayPKT(data.value).toFixed(2))}</Tx>)}
-        </TxCol>
-      </TxColsCont>
-
-    </TxCont>
+    <TxBlockCont>
+      <ListCont>
+        <ListLabelCont>
+          <TxLabel>
+            <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
+            Transaction: {txid}
+          </TxLabel>
+          <TxLabel>
+            mined: {blockTime}
+          </TxLabel>
+        </ListLabelCont>
+        <TxlistCont
+          variants={listVars}
+          animate={isOpen ? 'open' : 'closed'}
+          initial='closed'
+        >
+          <TxColsCont>
+            <TxCol>
+              {input.length
+                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`}>
+                  {data.address} | {parseFloat(displayPKT(data.value).toFixed(2))} PKT
+                </TxItem>)
+                : <TxItem txt='No Inputs (Newly Generated Coins) ' />
+              }
+            </TxCol>
+            <TxColSep>=&gt;</TxColSep>
+            <TxCol>
+              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} />)}
+            </TxCol>
+          </TxColsCont>
+        </TxlistCont>
+      </ListCont>
+    </TxBlockCont>
   )
 }
 
 TxBlock.propTypes = {
   txData: PropTypes.shape({
     txid: PropTypes.string.isRequired,
+    blockTime: PropTypes.string.isRequired,
     input: PropTypes.array.isRequired,
     output: PropTypes.array.isRequired
   }).isRequired
