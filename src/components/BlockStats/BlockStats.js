@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { ListCont, ListLabelCont } from '../CommonComps/CommonComps'
+import RespHash from '../RespHash/RespHash'
 
 const BlockStatsCont = styled.div`
   display: flex;
@@ -14,9 +15,10 @@ const BlockStatsCont = styled.div`
   }
 `
 
-const BlockStatCell = styled.span`
+const BlockStatCell = styled.div`
   align-self: center; 
   text-align: right;
+  flex: ${({ isHash }) => isHash ? 10 : 1};
 `
 
 const DecoratedBlockStatCell = styled(BlockStatCell)`
@@ -29,7 +31,7 @@ const BlockStatsColumn = styled.section`
   display: flex;
   flex-direction: column;
   margin-left: ${metrics.margin}rem;
-  flex: 1;
+  flex:1
 `
 
 const StatField = styled.div`
@@ -44,8 +46,9 @@ export const FieldName = ({ name }) => <DecoratedBlockStatCell>{name}</Decorated
 
 export const FieldValue = ({ value }) => <BlockStatCell>{value}</BlockStatCell>
 
-export const Hash = ({ hash }) => <BlockStatCell title={hash}>
-  {`${hash.substr(0, 12)}…${hash.substr(-12, 12)}`}
+export const Hash = ({ hash }) => <BlockStatCell title={hash} isHash>
+  {/* {`${hash.substr(0, 12)}…${hash.substr(-12, 12)}`} */}
+  <RespHash hash='0ae86e38250ca831b632ed998cc9384414561b6b4b3c9355388234fa95990a58' />
 </BlockStatCell>
 
 export const DateTimeComp = ({ time }) => <BlockStatCell title={new Date(time).toString()}>
