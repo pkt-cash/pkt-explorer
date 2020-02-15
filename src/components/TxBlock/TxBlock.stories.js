@@ -1,7 +1,6 @@
 import React from 'react'
 import TxBlock from './TxBlock'
 import dummyTxData from '../../fixtures/blockCoins.json'
-// import { treatDTx } from '../../utils'
 
 const dData = dummyTxData.results[0]
 

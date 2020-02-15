@@ -45,7 +45,7 @@ const TxColsCont = styled.div`
 
 const TxColSep = styled.div`
   width: 20px;
-  height: 45px;
+  height: ${({ small }) => small ? 'auto' : '45px'};
   display: flex;
   margin: 10px 0;
   align-items: center;
@@ -75,6 +75,7 @@ const TxBlock = ({ txData }) => {
           variants={listVars}
           animate={isOpen ? 'open' : 'closed'}
           initial='closed'
+          transition={{ duration: 0.5, type: 'tween' }}
         >
           <TxColsCont>
             <TxCol>
@@ -91,6 +92,15 @@ const TxBlock = ({ txData }) => {
             </TxCol>
           </TxColsCont>
         </TxlistCont>
+        <TxColsCont>
+          <TxCol>
+            Total Inputs = {input.length}
+          </TxCol>
+          <TxColSep small/>
+          <TxCol>
+            Total Outputs = {output.length}
+          </TxCol>
+        </TxColsCont>
       </ListCont>
     </TxBlockCont>
   )
