@@ -1,5 +1,6 @@
 // import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import metrics from '../../theme/metrics'
 
 export const MainWrapper = styled.div`
@@ -71,4 +72,21 @@ export const ListCont = styled.div`
   border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
   margin: ${metrics.margin}rem;
+`
+
+export const BaseBt = styled(motion.div)`
+width: 20px;
+height: 20px;
+border-radius: 3px;
+margin-right: 10px;
+background-color: ${({ theme }) => theme.colors.pktGrey};
+display: inline-block;
+position: relative;
+top: 4px;
+svg{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  bottom: 1px;
+}
 `
