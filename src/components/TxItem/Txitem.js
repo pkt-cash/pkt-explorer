@@ -3,18 +3,25 @@ import * as React from 'react'
 import { displayPKT } from '../../utils'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import RespHash from '../RespHash/RespHash'
 
 const ItemCont = styled.div`
   height: 45px;
   display: flex;
+  flex: 1;
   padding: 10px;
   align-items: center;
+  justify-content: space-around;
   background: #eee;
   border-radius: 4px;
   margin: 10px 0;
 `
 
-export const TxItem = ({ address, value, txt }) => {
+const Amount = styled.div`
+  min-width: 66px
+`
+
+export const TxItem = ({ address, value, txt, size }) => {
   return (
     <ItemCont
       // variants={variants}
@@ -22,7 +29,10 @@ export const TxItem = ({ address, value, txt }) => {
       // animate='open'
     >
       {txt || <>
-        {address} | {parseFloat(displayPKT(value).toFixed(2))} PKT
+        <RespHash hash={address} size={size} />
+        <Amount>
+          {parseFloat(displayPKT(value).toFixed(2))} PKT
+        </Amount>
       </>
       }
     </ItemCont>

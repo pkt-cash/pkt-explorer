@@ -32,6 +32,7 @@ export const FirstListCell = styled(ListCell)`
   color: ${({ theme }) => theme.colors.pktBlueLight};
   justify-content: flex-start;
   text-decoration: underline;
+  flex:1
 `
 
 export const ListRow = styled.div`

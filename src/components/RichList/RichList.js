@@ -9,6 +9,7 @@ import {
   ListCont
 } from '../CommonComps/CommonComps'
 import { displayPKT } from '../../utils'
+import RespHash from '../RespHash/RespHash'
 
 const cells = {
   address: 'address',
@@ -19,40 +20,40 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
-export const RichListRowCont = ({ row }) => <ListRow>
-  <FirstListCell>
-    <span title={row.address}>
-      {row.address.substr(0, 12)}
-      …
-      {row.address.substr(-12, 12)}
-    </span>
-  </FirstListCell>
-  <div>
-    {Math.floor(displayPKT(row.balance))}
-  </div>
-</ListRow>
+export const RichListRowCont = ({ row, hashW }) => {
+  return <ListRow>
+    <FirstListCell>
+      <RespHash hash={row.address} title={row.address} size={hashW}/>
+    </FirstListCell>
+    <div>
+      {Math.floor(displayPKT(row.balance))}
+    </div>
+  </ListRow>
+}
 
-const RichList = ({ listData }) => {
+const RichList = ({ listData, hashW }) => {
   return (
     listData
       ? <ListCont>
         <RichListLabels cells={cells} />
         {/* Mapping over rich list addresses */}
-        {listData.map((row) => <RichListRowCont row={row} key={row.address} />)}
+        {listData.map((row) => <RichListRowCont row={row} key={row.address} hashW={ hashW || 400}/>)}
       </ListCont>
       : <div>loading</div>
   )
 }
 
 RichList.propTypes = {
-  listData: PropTypes.array
+  listData: PropTypes.array,
+  hashW: PropTypes.number
 }
 
 RichListRowCont.propTypes = {
   row: PropTypes.shape({
     address: PropTypes.string.isRequired,
     balance: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  hashW: PropTypes.number
 }
 
 RichListLabels.propTypes = {

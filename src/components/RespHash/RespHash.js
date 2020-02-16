@@ -1,5 +1,5 @@
 import React from 'react'
-import useResizeAware from 'react-resize-aware'
+
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { trHash } from '../../utils'
@@ -9,16 +9,19 @@ const TxtHash = styled.span`
   font-size: 15px; /*w:9px*/
 `
 
+const HashCont = styled.div`
+width: 100%;
+`
+
 const RespHash = ({ hash, size }) => {
-  const [resizeListener, sizes] = useResizeAware()
+  // const [resizeListener, sizes] = useResizeAware()
 
   return (
-    <div style={{ position: 'relative' }}>
-      {resizeListener}
+    <HashCont style={{ position: 'relative' }}>
       <TxtHash>
-        {trHash(hash, sizes.width)}
+        {trHash(hash, size || 400)}
       </TxtHash>
-    </div>
+    </HashCont>
   )
 }
 

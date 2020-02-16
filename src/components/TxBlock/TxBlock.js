@@ -6,7 +6,9 @@ import { mqs } from '../../theme/metrics'
 import { displayPKT } from '../../utils'
 import { TxItem } from '../TxItem/Txitem'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import useResizeAware from 'react-resize-aware'
 import TxTogBt from '../TxTogBt/TxTogBt'
+import RespHash from '../RespHash/RespHash'
 
 const TxBlockCont = styled(motion.div)``
 
@@ -34,6 +36,11 @@ const TxCol = styled.div`
     width:100%;
   }
 `
+const ResizeCont = styled.div`
+  position:relative;
+  width: 100%;
+  max-height:0;
+`
 
 const TxColsCont = styled.div`
   display: flex;
@@ -59,6 +66,8 @@ const TxColSep = styled.div`
 const TxBlock = ({ txData }) => {
   const [isOpen, togOpen] = useState(false)
   const { txid, input, output, blockTime } = txData
+  const [resizeListener, sizes] = useResizeAware()
+  console.log('da size', sizes)
   return (
     <TxBlockCont>
       <ListCont>
@@ -79,16 +88,17 @@ const TxBlock = ({ txData }) => {
         >
           <TxColsCont>
             <TxCol>
+              <ResizeCont>
+                {resizeListener}
+              </ResizeCont>
               {input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`}>
-                  {data.address} | {parseFloat(displayPKT(data.value).toFixed(2))} PKT
-                </TxItem>)
+                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
             <TxColSep>=&gt;</TxColSep>
             <TxCol>
-              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} />)}
+              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
