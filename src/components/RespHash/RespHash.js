@@ -10,7 +10,9 @@ const TxtHash = styled.span`
 `
 
 const HashCont = styled.div`
-width: 100%;
+  display: flex;
+  margin-left: 2rem;
+  width: 100%;
 `
 
 const RespHash = ({ hash, size }) => {

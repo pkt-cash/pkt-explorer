@@ -14,7 +14,8 @@ const metrics = {
   cellFontSize: 0.9, // rem
   headerFontSize: 1.1, // rem
   fontWeight: 600,
-  rowHeight: 3 // rem
+  rowHeight: 3, // rem,
+  sep: 0.5 // rem
 }
 
 export const mqs = {
