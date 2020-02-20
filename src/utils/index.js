@@ -23,3 +23,13 @@ export function trHash (hash, w, letW = 9) {
     return `${hash.substr(0, bitL)}…${hash.substr(-1 * (bitL), bitL)}`
   }
 }
+
+/**
+ * helper to convert a js date obj to a formatted string (dd-mm-yyyy)
+ *
+ * @param {{}} dt a date object
+ * @returns {string} the formated date string dd-mm-yyyy
+ */
+export function dtToStr (dt) {
+  return `${dt.getDate()}-${dt.getMonth() + 1}-${dt.getYear() + 1900}`
+}
