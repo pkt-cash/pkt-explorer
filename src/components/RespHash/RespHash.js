@@ -10,14 +10,16 @@ const TxtHash = styled.span`
 `
 
 const HashCont = styled.div`
-width: 100%;
+  display: flex;
+  margin-left: 2rem;
+  width: 100%;
 `
 
 const RespHash = ({ hash, size }) => {
   // const [resizeListener, sizes] = useResizeAware()
 
   return (
-    <HashCont style={{ position: 'relative' }}>
+    <HashCont title={hash}>
       <TxtHash>
         {trHash(hash, size || 400)}
       </TxtHash>

@@ -2,6 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { IoIosArrowDown } from 'react-icons/io'
 import { BaseBt } from '../CommonComps/CommonComps'
+import styled from 'styled-components'
+
+const StyledBaseBtn = styled(BaseBt)`
+  cursor: pointer;
+`
 
 const btVar = {
   open: {
@@ -14,7 +19,7 @@ const btVar = {
 
 const TxTogBt = ({ isOpen, action }) => {
   return (
-    <BaseBt
+    <StyledBaseBtn
       variants={btVar}
       animate={isOpen ? 'open' : 'closed'}
       whileHover={{ scale: 1.2 }}
@@ -22,7 +27,7 @@ const TxTogBt = ({ isOpen, action }) => {
       onClick={action}
     >
       <IoIosArrowDown />
-    </BaseBt>
+    </StyledBaseBtn>
   )
 }
 

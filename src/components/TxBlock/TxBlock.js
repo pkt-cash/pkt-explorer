@@ -2,18 +2,18 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
-import { mqs } from '../../theme/metrics'
-import { displayPKT } from '../../utils'
+import metrics from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 import useResizeAware from 'react-resize-aware'
 import TxTogBt from '../TxTogBt/TxTogBt'
+import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 
 const TxBlockCont = styled(motion.div)``
 
 const TxLabel = styled.div`
-
+  justify-content: items;
 `
 
 const TxlistCont = styled(motion.div)`
@@ -31,11 +31,14 @@ const listVars = {
 
 const TxCol = styled.div`
   width:47%;
-  /* background: #eee; */
-  @media ${mqs.small} {
+  @media ${metrics.mq.small} {
     width:100%;
   }
 `
+const LastTxCol = styled(TxCol)`
+  text-align: right;
+`
+
 const ResizeCont = styled.div`
   position:relative;
   width: 100%;
@@ -45,7 +48,7 @@ const ResizeCont = styled.div`
 const TxColsCont = styled.div`
   display: flex;
   justify-content: space-around;
-  @media ${mqs.small} {
+  @media ${metrics.mq.small} {
     flex-direction: column;
   }
 `
@@ -57,9 +60,41 @@ const TxColSep = styled.div`
   margin: 10px 0;
   align-items: center;
   text-align: center;
-  @media ${mqs.small} {
+  @media ${metrics.mq.small} {
     display: none;
   }
+`
+
+const LeftLabel = styled.span`
+  display: flex;
+  display: inline;
+  width: calc(100% - 30px);
+  font-weight: ${metrics.fontWeight};
+`
+
+const TxInteractive = styled.span`
+  display: block;
+  margin-bottom: ${metrics.sep}rem;
+`
+
+const MinedAtLabel = styled(TxLabel)`
+  margin-left: ${metrics.sep}rem;
+`
+
+const RightLabel = styled.span`
+  display: flex;
+  font-weight: ${metrics.fontWeight};
+  margin-top: ${metrics.sep}rem;
+  margin-bottom: ${metrics.sep}rem;
+`
+
+const BlockTime = styled.span`
+  display: block;
+  font-size: 0.95rem;
+`
+
+const TotalLabel = styled.span`
+  font-weight: ${metrics.fontWeight};
 `
 
 // import styled from 'styled-components'
@@ -67,18 +102,21 @@ const TxBlock = ({ txData }) => {
   const [isOpen, togOpen] = useState(false)
   const { txid, input, output, blockTime } = txData
   const [resizeListener, sizes] = useResizeAware()
-  console.log('da size', sizes)
   return (
     <TxBlockCont>
       <ListCont>
         <ListLabelCont>
           <TxLabel>
-            <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
-            Transaction: {txid}
+            <TxInteractive>
+              <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
+              <LeftLabel>Transaction:</LeftLabel>
+            </TxInteractive>
+            <RespHash hash={txid} size={sizes.width} />
           </TxLabel>
-          <TxLabel>
-            mined: {blockTime}
-          </TxLabel>
+          <MinedAtLabel>
+            <RightLabel>mined:</RightLabel>
+            <BlockTime>{blockTime}</BlockTime>
+          </MinedAtLabel>
         </ListLabelCont>
         <TxlistCont
           variants={listVars}
@@ -92,24 +130,24 @@ const TxBlock = ({ txData }) => {
                 {resizeListener}
               </ResizeCont>
               {input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)
+                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
-            <TxColSep>=&gt;</TxColSep>
+            <TxColSep><IoMdArrowForward size={30} /></TxColSep>
             <TxCol>
-              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)}
+              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
         <TxColsCont>
-          <TxCol>
-            Total Inputs = {input.length}
-          </TxCol>
+          <LastTxCol>
+            <TotalLabel>Total Inputs</TotalLabel> = {input.length}
+          </LastTxCol>
           <TxColSep small/>
-          <TxCol>
-            Total Outputs = {output.length}
-          </TxCol>
+          <LastTxCol>
+            <TotalLabel>Total Outputs</TotalLabel> = {output.length}
+          </LastTxCol>
         </TxColsCont>
       </ListCont>
     </TxBlockCont>
