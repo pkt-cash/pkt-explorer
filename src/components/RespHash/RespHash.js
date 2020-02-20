@@ -19,7 +19,7 @@ const RespHash = ({ hash, size }) => {
   // const [resizeListener, sizes] = useResizeAware()
 
   return (
-    <HashCont style={{ position: 'relative' }}>
+    <HashCont title={hash}>
       <TxtHash>
         {trHash(hash, size || 400)}
       </TxtHash>

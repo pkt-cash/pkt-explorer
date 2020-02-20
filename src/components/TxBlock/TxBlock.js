@@ -102,7 +102,6 @@ const TxBlock = ({ txData }) => {
   const [isOpen, togOpen] = useState(false)
   const { txid, input, output, blockTime } = txData
   const [resizeListener, sizes] = useResizeAware()
-  console.log('da size', sizes)
   return (
     <TxBlockCont>
       <ListCont>
@@ -131,13 +130,13 @@ const TxBlock = ({ txData }) => {
                 {resizeListener}
               </ResizeCont>
               {input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)
+                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
             <TxCol>
-              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 80} />)}
+              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
