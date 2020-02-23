@@ -3,7 +3,7 @@ import React from 'react'
 // import styled from 'styled-components'
 import { Chart } from 'react-charts'
 import PropTypes from 'prop-types'
-const TxChart = ({ txData }) => {
+const EaringChart = ({ txData }) => {
   const data = React.useMemo(
     () => [
       {
@@ -50,7 +50,7 @@ const TxChart = ({ txData }) => {
   )
 }
 
-TxChart.propTypes = {
+EaringChart.propTypes = {
   txData: PropTypes.array
 }
 
@@ -58,9 +58,9 @@ TxChart.propTypes = {
 
 // }
 
-export default TxChart
+export default EaringChart
 
-const CustomTooltip = ({datum}) => {
+const CustomTooltip = ({ datum }) => {
   let date = ''
   if (datum) {
     const dt = datum.primary

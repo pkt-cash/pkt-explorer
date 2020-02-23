@@ -9,6 +9,7 @@ import { MainWrapper } from './components/CommonComps/CommonComps'
 import BlocksScreen from './screens/BlockListScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeScreen from './screens/HomeScreen'
+import AddressScreen from './screens/AddressScreen'
 
 function App () {
   return (
@@ -34,11 +35,16 @@ function App () {
                 path='/rich'
                 component={RichListScreen}
                 key='rich' />
-              <Route
+              {/* <Route
                 exact
                 path='/txd'
                 component={TxResume}
-                key='resume' />
+                key='resume' /> */}
+              <Route
+                exact
+                path='/address/:addr'
+                component={AddressScreen}
+                key='address' />
             </Switch>
           </MainWrapper>
         </ThemeProvider>
@@ -47,6 +53,6 @@ function App () {
   )
 }
 
-const TxResume = () => <div>TxResume</div>
+// const TxResume = () => <div>TxResume</div>
 
 export default App

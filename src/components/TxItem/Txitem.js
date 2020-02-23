@@ -46,5 +46,6 @@ export const TxItem = ({ address, value, txt, size }) => {
 TxItem.propTypes = {
   address: PropTypes.string,
   value: PropTypes.string,
-  txt: PropTypes.string
+  txt: PropTypes.string,
+  size: PropTypes.number
 }

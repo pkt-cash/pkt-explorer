@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 import {
   FirstListCell,
   // ListCell,
@@ -16,6 +18,10 @@ const cells = {
   balance: 'balance'
 }
 
+const AddrLink = styled(Link)`
+  color: ${({ theme }) => theme.colors.pktBlueLight};
+`
+
 export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
@@ -23,7 +29,7 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
 export const RichListRowCont = ({ row, hashW }) => {
   return <ListRow>
     <FirstListCell>
-      <RespHash hash={row.address} title={row.address} size={hashW}/>
+      <AddrLink to={`/address/${row.address}`}><RespHash hash={row.address} title={row.address} size={hashW}/></AddrLink>
     </FirstListCell>
     <div>
       {Math.floor(displayPKT(row.balance))}
