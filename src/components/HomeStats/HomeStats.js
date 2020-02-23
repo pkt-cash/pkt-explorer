@@ -5,8 +5,6 @@ import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import TxChart from '../TxChart/TxChart'
 
-console.log(mqs)
-
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
   display: flex;

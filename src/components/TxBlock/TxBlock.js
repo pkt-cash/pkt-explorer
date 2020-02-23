@@ -9,7 +9,7 @@ import useResizeAware from 'react-resize-aware'
 import TxTogBt from '../TxTogBt/TxTogBt'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
-
+import { DateTime } from 'luxon'
 const TxBlockCont = styled(motion.div)``
 
 const TxLabel = styled.div`
@@ -102,6 +102,7 @@ const TxBlock = ({ txData }) => {
   const [isOpen, togOpen] = useState(false)
   const { txid, input, output, blockTime } = txData
   const [resizeListener, sizes] = useResizeAware()
+  const dt = DateTime.fromISO(blockTime)
   return (
     <TxBlockCont>
       <ListCont>
@@ -115,7 +116,7 @@ const TxBlock = ({ txData }) => {
           </TxLabel>
           <MinedAtLabel>
             <RightLabel>mined:</RightLabel>
-            <BlockTime>{blockTime}</BlockTime>
+            <BlockTime>{dt.toLocaleString(DateTime.DATETIME_MED)}</BlockTime>
           </MinedAtLabel>
         </ListLabelCont>
         <TxlistCont

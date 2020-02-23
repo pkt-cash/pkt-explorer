@@ -1,10 +1,9 @@
-import React, { useState, useEffect }from 'react'
-import RichList from '../components/RichList/RichList'
+import React, { useState, useEffect } from 'react'
 import endpoints from '../utils/endpoints'
-import useFetch from '../hooks/useFetch'
 import { useParams } from 'react-router-dom'
 import AddrStats from '../components/AddressStats/AddressStats'
 import { treatIncome } from '../utils'
+import TxBlock from '../components/TxBlock/TxBlock'
 const { addrMetaApi } = endpoints
 
 const fetchJson = async (url) => {
@@ -21,8 +20,9 @@ const AddressScreen = (props) => {
   const [meta, setMeta] = useState(false)
   const [dailyTr, setDailyTr] = useState(false)
   const [metaErr, setMetaErr] = useState(false)
+  const [txList, setTxList] = useState(false)
   const [metaLoad, setMetaLoad] = useState(true)
-  let { addr } = useParams()
+  const { addr } = useParams()
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {addr}</div>
   // if (loading) return <div>fetching addr data</div>
@@ -33,21 +33,29 @@ const AddressScreen = (props) => {
         if (json.error) {
           setMetaErr(true)
         }
-        console.log('meta', json)
         setMeta(json)
         setMetaLoad(false)
       })
+    // fetch last 30 day incomes
     fetchJson(`${addrMetaApi}/${addr}/income/30`)
       .then((json) => {
         setDailyTr(treatIncome(json.result))
       })
-  }, [])
+    // fetch txList
+    console.log(`${addrMetaApi}/${addr}/coins?nomine=1`)
+    fetchJson(`${addrMetaApi}/${addr}/coins?nomine=1`)
+      .then((json) => {
+        console.log(json)
+        setTxList(json)
+      })
+  }, [addr])
   if (metaErr) return <div>ARRRRR errror fetching address {addr}</div>
   return <div>
     {metaLoad
       ? <div>loading metadata</div>
       : <AddrStats meta={meta} addr={addr} dailyTr={dailyTr}/>
     }
+    {txList.results && txList.results.map((item, k) => <TxBlock txData={item} key={`tx-${k}`} />)}
   </div>
 }
 
