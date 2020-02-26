@@ -1,19 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import metrics from '../../theme/metrics'
+import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { ListCont, ListLabelCont } from '../CommonComps/CommonComps'
 import RespHash from '../RespHash/RespHash'
-
-const BlockStatsCont = styled.div`
-  display: flex;
-  margin: ${metrics.margin}rem ${metrics.margin}rem ${metrics.margin}rem 0;
-  flex-direction: row;
-  
-  @media (max-width: ${metrics.mq.small}px) {
-    flex-direction: column;
-  }
-`
 
 const BlockStatCell = styled.div`
   align-self: center; 
@@ -25,21 +15,6 @@ const DecoratedBlockStatCell = styled(BlockStatCell)`
   font-weight: ${metrics.fontWeight};
   margin-right: ${metrics.margin}rem;
   text-align: left;
-`
-
-const BlockStatsColumn = styled.section`
-  display: flex;
-  flex-direction: column;
-  margin-left: ${metrics.margin}rem;
-  flex:1
-`
-
-const StatField = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.colors.pktBlueDarker};
-  display: flex;
-  height: ${metrics.rowHeight}rem;
-  flex-direction: row;
-  justify-content: space-between;
 `
 
 export const FieldName = ({ name }) => <DecoratedBlockStatCell>{name}</DecoratedBlockStatCell>
@@ -59,61 +34,159 @@ export const BlockReward = ({ reward }) => <BlockStatCell>
   {reward} PKT
 </BlockStatCell>
 
+const Row = styled.div`
+  /* margin: ${metrics.margin}rem ${metrics.margin}rem ${metrics.margin}rem 0; */
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
+const Column = styled.div`
+  min-width: 0;
+  flex-basis: 50%;
+  @media ${mqs.small} {
+    flex-basis: 100%;
+    order: ${({ swap }) => swap ? 2 : 1}
+  }
+  p{
+    /* margin: 1rem ; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    flex-flow: row nowrap;
+    display: flex;
+    justify-content: space-between;
+  }
+`
+const ItemCont = styled.div`
+  padding: 0 0.5rem;
+`
+const BrdCont = styled.div`
+  border-top: 1px solid ${({ theme }) => theme.colors.pktBlueDarker};
+`
+const Label = styled.span`
+  display: inline-block;
+  min-width : 100px;
+  margin-right: 20px;
+  font-weight: ${metrics.fontWeight};
+`
+const Content = styled.span`
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
+const TableCont = styled.div`
+  padding-top: 1rem;
+`
+
 const BlockStats = ({ stats }) => {
-  return (
-    stats
-      ? <ListCont>
-        <ListLabelCont>
-            Last Block
-        </ListLabelCont>
-        <BlockStatsCont>
-          <BlockStatsColumn>
-            <StatField>
-              <FieldName name="Merkle Root" /><Hash hash={stats.hash} />
-            </StatField>
-            <StatField>
-              <FieldName name="Bits" /><FieldValue value={stats.bits} />
-            </StatField>
-            <StatField>
-              <FieldName name="Version" /><FieldValue value={stats.version} />
-            </StatField>
-            <StatField>
-              <FieldName name="Number of Transactions" /><FieldValue value={stats.transactionCount} />
-            </StatField>
-            <StatField>
-              <FieldName name="Height" /><FieldValue value={stats.height} />
-            </StatField>
-            <StatField>
-              <FieldName name="Block Reward" /><BlockReward reward={stats.blockReward} />
-            </StatField>
-            <StatField>
-              <FieldName name="Timestamp" /><DateTimeComp time={stats.time} />
-            </StatField>
-          </BlockStatsColumn>
-          <BlockStatsColumn key="second-column">
-            <StatField>
-              <FieldName name="Difficulty" /><FieldValue value={stats.difficulty} />
-            </StatField>
-            <StatField>
-              <FieldName name="Size (Bytes)" /><FieldValue value={stats.size} />
-            </StatField>
-            <StatField>
-              <FieldName name="Nonce" /><FieldValue value={stats.nonce} />
-            </StatField>
-            <StatField>
-              <FieldName name="Previous Block" /><Hash hash={stats.previousBlockHash} />
-            </StatField>
-            <StatField>
-              <FieldName name="Next Block" /><Hash hash={stats.nextBlockHash} />
-            </StatField>
-            <StatField>
-              <FieldName name="Confirmations" /><FieldValue value={stats.confirmations} />
-            </StatField>
-          </BlockStatsColumn>
-        </BlockStatsCont>
-      </ListCont>
-      : <div>loading</div>
-  )
+  return (stats
+    ? <ListCont>
+      <ListLabelCont>
+        Last Block
+      </ListLabelCont>
+      <TableCont>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Merkle Root</Label> <Content title={stats.hash}>{stats.hash}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Difficulty</Label> <Content>{parseFloat(stats.difficulty).toFixed(2)}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Bits</Label> <Content>{stats.bits}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Size (Bytes)</Label> <Content>{stats.size}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Version</Label> <Content>{stats.version}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Nonce</Label> <Content>{stats.nonce}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Number of Transactions</Label> <Content>{stats.transactionCount}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Previous Block</Label> <Content title={stats.previousBlockHash}>{stats.previousBlockHash}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column swap>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Height</Label> <Content>{stats.height}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Next Block</Label> <Content title={stats.nextBlockHash}>{stats.nextBlockHash}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Timestamp</Label> <Content>{new Date(stats.time).toDateString()}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Confirmations</Label> <Content>{stats.confirmations}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+      </TableCont>
+    </ListCont>
+    : <div>loading</div>)
 }
 
 BlockStats.propTypes = {
