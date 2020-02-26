@@ -10,6 +10,7 @@ import {
   ListLabelCont,
   ListCont
 } from '../CommonComps/CommonComps'
+import metrics from '../../theme/metrics'
 import { displayPKT } from '../../utils'
 import RespHash from '../RespHash/RespHash'
 
@@ -20,22 +21,13 @@ const cells = {
 
 const AddrLink = styled(Link)`
   color: ${({ theme }) => theme.colors.pktBlueLight};
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
-
-export const RichListRowCont = ({ row, hashW }) => {
-  return <ListRow>
-    <FirstListCell>
-      <AddrLink to={`/address/${row.address}`}><RespHash hash={row.address} title={row.address} size={hashW}/></AddrLink>
-    </FirstListCell>
-    <div>
-      {Math.floor(displayPKT(row.balance))}
-    </div>
-  </ListRow>
-}
 
 const RichList = ({ listData, hashW }) => {
   return (
@@ -43,10 +35,38 @@ const RichList = ({ listData, hashW }) => {
       ? <ListCont>
         <RichListLabels cells={cells} />
         {/* Mapping over rich list addresses */}
-        {listData.map((row) => <RichListRowCont row={row} key={row.address} hashW={ hashW || 400}/>)}
+        {listData.map((row) => <RichRow row={row} key={row.address}/>)}
       </ListCont>
       : <div>loading</div>
   )
+}
+
+const RowCont = styled.div`
+  display: flex;
+  height: ${metrics.rowHeight}rem;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 ${metrics.padding}rem;
+  :nth-child(2n + 1) {
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
+  }
+`
+const BalanceCont = styled.div`
+  white-space: nowrap;
+  span{
+    font-weight: 700;
+  }
+`
+
+const RichRow = ({ row }) => {
+  return <RowCont>
+    <AddrLink to={`/address/${row.address}`}>
+      {row.address}
+    </AddrLink>
+    <BalanceCont>
+      {parseFloat(displayPKT(row.balance)).toFixed(2)} <span>PKT</span>
+    </BalanceCont>
+  </RowCont>
 }
 
 RichList.propTypes = {
@@ -54,12 +74,11 @@ RichList.propTypes = {
   hashW: PropTypes.number
 }
 
-RichListRowCont.propTypes = {
+RichRow.propTypes = {
   row: PropTypes.shape({
     address: PropTypes.string.isRequired,
     balance: PropTypes.string.isRequired
-  }).isRequired,
-  hashW: PropTypes.number
+  }).isRequired
 }
 
 RichListLabels.propTypes = {
