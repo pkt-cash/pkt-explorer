@@ -81,13 +81,16 @@ height: 20px;
 border-radius: 3px;
 margin-right: 10px;
 background-color: ${({ theme }) => theme.colors.pktGrey};
-display: inline-block;
+display: flex;
+justify-content: center;
+align-items: center;
 position: relative;
-top: 4px;
+top: 0px;
+cursor: pointer;
 svg{
   width: 100%;
   height: 100%;
   position: relative;
-  bottom: 1px;
+  /* bottom: 1px; */
 }
 `

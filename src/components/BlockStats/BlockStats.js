@@ -34,7 +34,7 @@ export const BlockReward = ({ reward }) => <BlockStatCell>
   {reward} PKT
 </BlockStatCell>
 
-const Row = styled.div`
+export const Row = styled.div`
   /* margin: ${metrics.margin}rem ${metrics.margin}rem ${metrics.margin}rem 0; */
   padding: 0 0.5rem;
   display: flex;
@@ -42,9 +42,10 @@ const Row = styled.div`
   flex-wrap: wrap;
 `
 
-const Column = styled.div`
+export const Column = styled.div`
   min-width: 0;
-  flex-basis: 50%;
+  flex-basis: ${({ full }) => full ? '100%' : '50%'};
+  
   @media ${mqs.small} {
     flex-basis: 100%;
     order: ${({ swap }) => swap ? 2 : 1}
@@ -59,19 +60,19 @@ const Column = styled.div`
     justify-content: space-between;
   }
 `
-const ItemCont = styled.div`
+export const ItemCont = styled.div`
   padding: 0 0.5rem;
 `
-const BrdCont = styled.div`
+export const BrdCont = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.pktBlueDarker};
 `
-const Label = styled.span`
+export const Label = styled.span`
   display: inline-block;
   min-width : 100px;
   margin-right: 20px;
   font-weight: ${metrics.fontWeight};
 `
-const Content = styled.span`
+export const Content = styled.span`
   display: inline-block;
   overflow: hidden;
   text-overflow: ellipsis;

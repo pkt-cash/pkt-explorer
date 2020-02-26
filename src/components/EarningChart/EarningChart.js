@@ -1,8 +1,16 @@
 /* eslint-disable react/display-name */
 import React from 'react'
-// import styled from 'styled-components'
+import styled from 'styled-components'
 import { Chart } from 'react-charts'
 import PropTypes from 'prop-types'
+
+const Chartcont = styled.div`
+width: 100%;
+min-width: 450px;
+min-height: 200px;
+height: 100%
+`
+
 const EaringChart = ({ txData }) => {
   const data = React.useMemo(
     () => [
@@ -39,14 +47,9 @@ const EaringChart = ({ txData }) => {
   )
 
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '150px'
-      }}
-    >
+    <Chartcont>
       <Chart data={data} axes={axes} series={series} tooltip={tooltip}/>
-    </div>
+    </Chartcont>
   )
 }
 
