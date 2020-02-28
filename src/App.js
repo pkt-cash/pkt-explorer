@@ -6,7 +6,8 @@ import theme from './theme/theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { MainWrapper } from './components/CommonComps/CommonComps'
-import BlocksScreen from './screens/BlockListScreen'
+import BlockListScreen from './screens/BlockListScreen'
+import BlockScreen from './screens/BlockScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeScreen from './screens/HomeScreen'
 import AddressScreen from './screens/AddressScreen'
@@ -28,7 +29,7 @@ function App () {
               <Route
                 exact
                 path='/blocks'
-                component={BlocksScreen}
+                component={BlockListScreen}
                 key='blocks' />
               <Route
                 exact
@@ -44,6 +45,11 @@ function App () {
                 exact
                 path='/address/:addr'
                 component={AddressScreen}
+                key='address' />
+              <Route
+                exact
+                path='/block/:id'
+                component={BlockScreen}
                 key='address' />
             </Switch>
           </MainWrapper>

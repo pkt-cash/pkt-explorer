@@ -1,7 +1,9 @@
-// import React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import metrics from '../../theme/metrics'
+import PropTypes from 'prop-types'
+import { displayPKT } from '../../utils'
 
 export const MainWrapper = styled.div`
   max-width: ${metrics.fullW}px;
@@ -94,3 +96,14 @@ svg{
   /* bottom: 1px; */
 }
 `
+const Unit = styled.span`
+  font-weight: ${metrics.fontWeight};
+`
+
+export const Pkt = ({ amt }) => <>
+  {parseFloat(displayPKT(amt)).toFixed(2)} <Unit>PKT</Unit>
+</>
+
+Pkt.propTypes = {
+  amt: PropTypes.string.isRequired
+}

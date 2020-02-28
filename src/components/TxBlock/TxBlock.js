@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
-import metrics from '../../theme/metrics'
+import metrics, { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
-import useResizeAware from 'react-resize-aware'
 import TxTogBt from '../TxTogBt/TxTogBt'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
@@ -17,7 +16,8 @@ const TxLabel = styled.div`
 `
 
 const TxlistCont = styled(motion.div)`
-  overflow: hidden
+  overflow: hidden;
+  padding: 0.5rem;
 `
 
 const listVars = {
@@ -25,30 +25,25 @@ const listVars = {
     height: 'auto'
   },
   closed: {
-    height: 65
+    height: 0
   }
 }
 
 const TxCol = styled.div`
   width:47%;
-  @media ${metrics.mq.small} {
+  @media ${mqs.small} {
     width:100%;
   }
 `
+
 const LastTxCol = styled(TxCol)`
   text-align: right;
-`
-
-const ResizeCont = styled.div`
-  position:relative;
-  width: 100%;
-  max-height:0;
 `
 
 const TxColsCont = styled.div`
   display: flex;
   justify-content: space-around;
-  @media ${metrics.mq.small} {
+  @media ${mqs.small} {
     flex-direction: column;
   }
 `
@@ -60,7 +55,7 @@ const TxColSep = styled.div`
   margin: 10px 0;
   align-items: center;
   text-align: center;
-  @media ${metrics.mq.small} {
+  @media ${mqs.small} {
     display: none;
   }
 `
@@ -99,9 +94,8 @@ const TotalLabel = styled.span`
 
 // import styled from 'styled-components'
 const TxBlock = ({ txData }) => {
-  const [isOpen, togOpen] = useState(false)
+  const [isOpen, togOpen] = useState(true)
   const { txid, input, output, blockTime } = txData
-  const [resizeListener, sizes] = useResizeAware()
   const dt = DateTime.fromISO(blockTime)
   return (
     <TxBlockCont>
@@ -109,10 +103,9 @@ const TxBlock = ({ txData }) => {
         <ListLabelCont>
           <TxLabel>
             <TxInteractive>
-              <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
               <LeftLabel>Transaction:</LeftLabel>
             </TxInteractive>
-            <RespHash hash={txid} size={sizes.width} />
+            <RespHash hash={txid} />
           </TxLabel>
           <MinedAtLabel>
             <RightLabel>mined:</RightLabel>
@@ -127,21 +120,19 @@ const TxBlock = ({ txData }) => {
         >
           <TxColsCont>
             <TxCol>
-              <ResizeCont>
-                {resizeListener}
-              </ResizeCont>
               {input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)
+                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
             <TxCol>
-              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={sizes.width - 120} />)}
+              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
         <TxColsCont>
+          <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
           <LastTxCol>
             <TotalLabel>Total Inputs</TotalLabel> = {input.length}
           </LastTxCol>

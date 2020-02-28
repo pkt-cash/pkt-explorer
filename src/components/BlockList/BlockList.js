@@ -4,9 +4,11 @@ import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { Link } from 'react-router-dom'
 
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en'
+import endpoints from '../../utils/endpoints'
 
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.addLocale(en)
@@ -39,7 +41,7 @@ export const AgeCell = ({ time }) => {
 }
 
 export const BlockRow = ({ blk }) => <ListRow key={blk.hash}>
-  <FirstListCell key={`${blk.hash}-height`}>{blk.height}</FirstListCell>
+  <FirstListCell key={`${blk.hash}-height`}><Link to={`/block/${blk.hash}`}>{blk.height}</Link></FirstListCell>
   <BlockListTimeCell key={`${blk.hash}-time`}>
     <AgeCell time={blk.time} />
   </BlockListTimeCell>
@@ -63,6 +65,7 @@ export const BlockListLabels = ({ cells }) => <ListLabelCont>{
 }</ListLabelCont>
 
 const BlockList = ({ listData }) => {
+  console.log(listData)
   return (
     listData
       ? <ListCont>

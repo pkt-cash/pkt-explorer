@@ -25,6 +25,17 @@ const MenuItem = styled.div`
 
 `
 
+const TopLink = styled(Link)`
+  color: #283649;
+  text-decoration: none;
+  &:visited {
+    color: #283649;
+  }
+  &:hover {
+    color: black;
+  }
+`
+
 const MenuBar = (props) => {
   return (
     <MenuCont>
@@ -34,15 +45,15 @@ const MenuBar = (props) => {
         )}
       />
       <TopBarWrapper>
-        <Link to='/'>
+        <TopLink to='/'>
           PKT Explorer (beta)
-        </Link>
+        </TopLink>
         <Media query={`(min-width: ${mq.small}px)`} render={() =>
           (
             <TopMenu>
-              <MenuItem><Link to='/blocks'>Blocks</Link></MenuItem>
-              <MenuItem><Link to='/txd'>Txs per day</Link></MenuItem>
-              <MenuItem><Link to='/rich'>Rich list</Link></MenuItem>
+              <MenuItem><TopLink to='/blocks'>Blocks</TopLink></MenuItem>
+              <MenuItem><TopLink to='/txd'>Txs per day</TopLink></MenuItem>
+              <MenuItem><TopLink to='/rich'>Rich list</TopLink></MenuItem>
             </TopMenu>
           )}
         />

@@ -2,34 +2,32 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { trHash } from '../../utils'
 
-const TxtHash = styled.span`
-  font-family: 'courier';
-  font-size: 15px; /*w:9px*/
+const HashCont = styled.span`
+  /* font-family: 'courier'; */
+  /* font-size: 15px; */
+  /* display: flex; */
+  /* white-space: nowrap; */
+  word-break: break-all;
+  display: inline-block;
+  /* overflow: hidden; */
+  /* text-overflow: ; */
+  /* margin-left: 2rem; */
+  /* width: 100%; */
 `
 
-const HashCont = styled.div`
-  display: flex;
-  margin-left: 2rem;
-  width: 100%;
-`
-
-const RespHash = ({ hash, size }) => {
+const RespHash = ({ hash }) => {
   // const [resizeListener, sizes] = useResizeAware()
 
   return (
     <HashCont title={hash}>
-      <TxtHash>
-        {trHash(hash, size || 400)}
-      </TxtHash>
+      {hash}
     </HashCont>
   )
 }
 
 RespHash.propTypes = {
-  hash: PropTypes.string.isRequired,
-  size: PropTypes.number
+  hash: PropTypes.string.isRequired
 }
 
 export default RespHash

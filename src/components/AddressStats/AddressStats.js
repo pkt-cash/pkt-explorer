@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { ListLabelCont, ListCont, Pkt } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import { IoIosCopy } from 'react-icons/io'
 // import TxChart from '../TxChart/TxChart'
-import RespHash from '../RespHash/RespHash'
+// import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
 import { displayPKT } from '../../utils'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -102,13 +102,6 @@ margin-right: 10px;
 const AddrLabel = styled.div`
   margin-right: 10px;
 `
-const PktS = styled.span`
-  font-weight: 700;
-`
-
-export const Pkt = ({ amt }) => <>
-  {parseFloat(displayPKT(amt)).toFixed(2)} <PktS>PKT</PktS>
-</>
 
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
@@ -199,7 +192,6 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           </Row>
         </MetaCont>
         {/* <MetaCont>
-
 
           <MetaLine>
             <span>transaction recived / spent:</span>{meta.recvCount} / {meta.spentCount}

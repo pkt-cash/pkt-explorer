@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {
-  FirstListCell,
+  // FirstListCell,
   // ListCell,
-  ListRow,
+  // ListRow,
   ListLabel,
   ListLabelCont,
   ListCont
 } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
 import { displayPKT } from '../../utils'
-import RespHash from '../RespHash/RespHash'
+// import RespHash from '../RespHash/RespHash'
 
 const cells = {
   address: 'address',
@@ -60,7 +60,7 @@ const BalanceCont = styled.div`
 
 const RichRow = ({ row }) => {
   return <RowCont>
-    <AddrLink to={`/address/${row.address}`}>
+    <AddrLink to={`/address/${row.address}`} title={row.address}>
       {row.address}
     </AddrLink>
     <BalanceCont>

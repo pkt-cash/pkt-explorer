@@ -12,6 +12,7 @@
     "luxon": "^1.22.0",
     "react": "^16.12.0",
     "react-charts": "^2.0.0-beta.6",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
     "react-media": "^1.10.0",

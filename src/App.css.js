@@ -16,6 +16,12 @@ body {
   margin: 0;
 }
 
+a {
+  cursor: pointer;
+  color: #08C1FF;
+  text-decoration: none;
+}
+
 #root {
   width: 100vw;
   min-height: 100vh;
