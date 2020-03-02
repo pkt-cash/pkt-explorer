@@ -115,8 +115,8 @@ const TxBlock = ({ txData }) => {
         <TxlistCont
           variants={listVars}
           animate={isOpen ? 'open' : 'closed'}
-          initial='closed'
-          transition={{ duration: 0.5, type: 'tween' }}
+          initial='open'
+          transition={{ duration: 0 }}
         >
           <TxColsCont>
             <TxCol>

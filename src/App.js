@@ -36,11 +36,11 @@ function App () {
                 path='/rich'
                 component={RichListScreen}
                 key='rich' />
-              {/* <Route
+              <Route
                 exact
                 path='/txd'
                 component={TxResume}
-                key='resume' /> */}
+                key='resume' />
               <Route
                 exact
                 path='/address/:addr'
@@ -59,6 +59,6 @@ function App () {
   )
 }
 
-// const TxResume = () => <div>TxResume</div>
+const TxResume = () => <div>TODO</div>
 
 export default App

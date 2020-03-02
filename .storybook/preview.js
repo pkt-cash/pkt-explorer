@@ -4,7 +4,8 @@ import GlobalStyles from '../src/App.css.js'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import theme from '../src/theme/theme'
-addDecorator(storyFn => <><GlobalStyles />
+addDecorator(storyFn => <>
+  <GlobalStyles />
   <Router>
     <ThemeProvider theme={theme}>
       {storyFn()}

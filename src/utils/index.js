@@ -2,12 +2,17 @@
 export function treatDTx (data) {
   return data.map((data, i) => [new Date(data.date), data.transactionCount])
 }
+export function treatStats (data) {
+  return data.map((data, i) => [new Date(data.date), (data.bitsPerSecond / data.encryptionsPerSecond) * 10])
+}
 
 export function treatIncome (data) {
   return data.map((data, i) => [new Date(data.date), displayPKT(data.received)])
 }
 
-export const displayPKT = (amount) => Number(amount) / 0x40000000
+export const displayPKT = (amount) => {
+  return Number(amount) / 0x40000000
+}
 
 /**
  * truncate the hash depending on the container width
@@ -19,12 +24,10 @@ export const displayPKT = (amount) => Number(amount) / 0x40000000
  */
 export function trHash (hash, w, letW = 9) {
   const l = hash.length
-  // console.log('hash L', l)
   if (l * letW < w) return hash
   else {
     const maxl = w / letW
     const bitL = Math.floor((maxl - 3) / 2)
-    console.log('max letter for this hash is', maxl, 'bitL', bitL)
     return `${hash.substr(0, bitL)}…${hash.substr(-1 * (bitL), bitL)}`
   }
 }
@@ -37,4 +40,20 @@ export function trHash (hash, w, letW = 9) {
  */
 export function dtToStr (dt) {
   return `${dt.getDate()}-${dt.getMonth() + 1}-${dt.getYear() + 1900}`
+}
+
+/**
+ * fetch a json at a given url and return it, or an error if any
+ *
+ * @param {string} url
+ * @returns {Array | {}}
+ */
+export const fetchJson = async (url) => {
+  try {
+    const response = await fetch(url)
+    return response.json()
+  } catch (error) {
+    console.log('error fetching ressource')
+    return { error }
+  }
 }

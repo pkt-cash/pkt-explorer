@@ -4,6 +4,7 @@ import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { ListCont, ListLabelCont } from '../CommonComps/CommonComps'
 import RespHash from '../RespHash/RespHash'
+import Loader from '../Loader/Loader'
 
 const BlockStatCell = styled.div`
   align-self: center; 
@@ -51,12 +52,8 @@ export const Column = styled.div`
     order: ${({ swap }) => swap ? 2 : 1}
   }
   p{
-    /* margin: 1rem ; */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    flex-flow: row nowrap;
     display: flex;
+    flex-flow: row nowrap;
     justify-content: space-between;
   }
 `
@@ -68,14 +65,14 @@ export const BrdCont = styled.div`
 `
 export const Label = styled.span`
   display: inline-block;
+  white-space: nowrap;
   min-width : 100px;
   margin-right: 20px;
   font-weight: ${metrics.fontWeight};
 `
 export const Content = styled.span`
   display: inline-block;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-all;
 `
 
 const TableCont = styled.div`
@@ -161,13 +158,13 @@ const BlockStats = ({ stats }) => {
               </BrdCont>
             </ItemCont>
           </Column>
-          <Column>
+          {stats.nextBlockHash && <Column>
             <ItemCont>
               <BrdCont>
                 <p><Label>Next Block</Label> <Content title={stats.nextBlockHash}>{stats.nextBlockHash}</Content></p>
               </BrdCont>
             </ItemCont>
-          </Column>
+          </Column>}
         </Row>
         <Row>
           <Column>
@@ -187,7 +184,7 @@ const BlockStats = ({ stats }) => {
         </Row>
       </TableCont>
     </ListCont>
-    : <div>loading</div>)
+    : <Loader text='Loading block statistics' />)
 }
 
 BlockStats.propTypes = {
@@ -197,7 +194,7 @@ BlockStats.propTypes = {
     version: PropTypes.number.isRequired,
     transactionCount: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    blockReward: PropTypes.number.isRequired,
+    blockReward: PropTypes.number,
     time: PropTypes.string.isRequired,
     difficulty: PropTypes.number.isRequired,
     size: PropTypes.number.isRequired,

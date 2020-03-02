@@ -3,12 +3,16 @@ import React from 'react'
 import styled from 'styled-components'
 import { Chart } from 'react-charts'
 import PropTypes from 'prop-types'
-
-const Chartcont = styled.div`
+import { mqs } from '../../theme/metrics'
+export const Chartcont = styled.div`
 width: 100%;
-min-width: 450px;
+min-width: 400px;
 min-height: 200px;
-height: 100%
+/* height: 100%; */
+@media ${mqs.small} {
+  min-width: auto;
+  width: 100%;
+}
 `
 
 const EaringChart = ({ txData }) => {

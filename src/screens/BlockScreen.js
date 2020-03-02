@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import endpoints from '../utils/endpoints'
 import { useParams } from 'react-router-dom'
 import TxBlock from '../components/TxBlock/TxBlock'
 
+import endpoints from '../utils/endpoints'
+import Loader from '../components/Loader/Loader'
+import { fetchJson } from '../utils'
 const { blockApi } = endpoints
-
-const fetchJson = async (url) => {
-  try {
-    const response = await fetch(url)
-    return response.json()
-  } catch (error) {
-    console.log('error fetching ressource')
-    return { error }
-  }
-}
 
 const AddressScreen = (props) => {
   const [blkCoins, setBlkCoins] = useState(false)
   const [blkData, setBlkData] = useState(false)
   const [blkErr, setBlkErr] = useState(false)
-  const [txList, setTxList] = useState(false)
+  // const [txList, setTxList] = useState(false)
   const [metaLoad, setMetaLoad] = useState(true)
   const [coinLoad, setCoinLoad] = useState(true)
-  const { id } = useParams() || '13505f30ddfab5994fdd7b2f81e6d68aaf753ca99f1aa173c46c8772ad1f6cce'
+  const { id } = useParams()
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {id}</div>
   // if (loading) return <div>fetching id data</div>
@@ -33,7 +25,6 @@ const AddressScreen = (props) => {
         if (json.error) {
           return setBlkErr(true)
         }
-        console.log(json)
         setBlkData(json)
         setMetaLoad(false)
       })
@@ -43,7 +34,6 @@ const AddressScreen = (props) => {
         if (json.error) {
           return setBlkErr(true)
         }
-        // console.log(json.results)
         setCoinLoad(false)
         setBlkCoins(json)
       })
@@ -51,7 +41,7 @@ const AddressScreen = (props) => {
   if (blkErr) return <div>ARRRRR errror fetching address {id}</div>
   return <>
     {metaLoad
-      ? <div>loading metadata</div>
+      ? <Loader text='loading metadata' />
       : <div>
         got the block metadata for {id}
         {/* {JSON.stringify(blkData)} */}

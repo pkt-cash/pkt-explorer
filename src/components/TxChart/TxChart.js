@@ -2,11 +2,13 @@ import React from 'react'
 // import styled from 'styled-components'
 import { Chart } from 'react-charts'
 import PropTypes from 'prop-types'
-const TxChart = ({ txData }) => {
+import { Chartcont } from '../EarningChart/EarningChart'
+
+const TxChart = ({ txData, labelY }) => {
   const data = React.useMemo(
     () => [
       {
-        label: 'tx/day',
+        label: labelY || 'tx/day',
         data: txData
       }
     ],
@@ -29,19 +31,15 @@ const TxChart = ({ txData }) => {
   )
 
   return (
-    <div
-      style={{
-        width: '400px',
-        height: '150px'
-      }}
-    >
+    <Chartcont>
       <Chart data={data} axes={axes} series={series} tooltip/>
-    </div>
+    </Chartcont>
   )
 }
 
 TxChart.propTypes = {
-  txData: PropTypes.array
+  txData: PropTypes.array,
+  labelY: PropTypes.string
 }
 
 // TxChart.defaultProps = {

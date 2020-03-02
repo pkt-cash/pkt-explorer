@@ -19,19 +19,25 @@ export const TopBarWrapper = styled.div`
 `
 const TopMenu = styled.div`
   display: flex;
-`
-const MenuItem = styled.div`
-  margin-left: 10px
-
+  height: 100%;
 `
 
 const TopLink = styled(Link)`
+  margin-left: 10px;
+  height: 100%;
   color: #283649;
+  transition: color 0.5s ease,
+              background-color 0.5s ease;
+  padding: 0 1rem ;
   text-decoration: none;
+  display: flex;
+  height: 100%;
+  align-items: center;
   &:visited {
     color: #283649;
   }
   &:hover {
+    background: #a4e9ff;
     color: black;
   }
 `
@@ -51,9 +57,9 @@ const MenuBar = (props) => {
         <Media query={`(min-width: ${mq.small}px)`} render={() =>
           (
             <TopMenu>
-              <MenuItem><TopLink to='/blocks'>Blocks</TopLink></MenuItem>
-              <MenuItem><TopLink to='/txd'>Txs per day</TopLink></MenuItem>
-              <MenuItem><TopLink to='/rich'>Rich list</TopLink></MenuItem>
+              <TopLink to='/blocks'>Blocks</TopLink>
+              <TopLink to='/txd'>Txs per day</TopLink>
+              <TopLink to='/rich'>Rich list</TopLink>
             </TopMenu>
           )}
         />

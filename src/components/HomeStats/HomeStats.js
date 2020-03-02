@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import TxChart from '../TxChart/TxChart'
+import Loader from '../Loader/Loader'
+import DataBlock from '../DataBlock/DataBlock'
 
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
@@ -36,30 +38,31 @@ const ChartCont = styled.div`
     text-align: center;
     width: 100%;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
   }
 `
 
-const StatRow = styled.div`
-  display: flex;
-  flex:1;
-  align-items: center;
-`
-const StatCell = styled.div`
-  display: flex;
-  padding: 1rem;
-  flex:1;
-`
+// const StatRow = styled.div`
+//   display: flex;
+//   flex:1;
+//   align-items: center;
+// `
+// const StatCell = styled.div`
+//   display: flex;
+//   padding: 1rem;
+//   flex:1;
+// `
 
-const StatCellLabel = styled.div`
-  font-weight: 700;
-  padding-right: 1rem;
-`
-const StatCellValue = styled.div`
-  font-style: italic;
-`
+// const StatCellLabel = styled.div`
+//   font-weight: 700;
+//   padding-right: 1rem;
+// `
+// const StatCellValue = styled.div`
+//   font-style: italic;
+// `
 
-const HomeStats = ({ txData }) => {
+const HomeStats = ({ txData, labelY }) => {
   return (
     <ListCont>
       <ListLabelCont>
@@ -67,7 +70,8 @@ const HomeStats = ({ txData }) => {
       </ListLabelCont>
       <ListDataCont>
         <StatsCont>
-          <StatRow>
+          <DataBlock />
+          {/* <StatRow>
             <StatCell>
               <StatCellLabel>Last block</StatCellLabel>
               <StatCellValue>6589</StatCellValue>
@@ -86,10 +90,11 @@ const HomeStats = ({ txData }) => {
               <StatCellLabel>Last block</StatCellLabel>
               <StatCellValue>6589</StatCellValue>
             </StatCell>
-          </StatRow>
+          </StatRow> */}
         </StatsCont>
         <ChartCont>
-          {txData ? <TxChart txData={txData} /> : 'Loading'}
+          <div>Difficulty</div>
+          {txData ? <TxChart txData={txData} labelY={labelY} /> : <Loader text='Loading...' small />}
         </ChartCont>
       </ListDataCont>
     </ListCont>
@@ -97,7 +102,8 @@ const HomeStats = ({ txData }) => {
 }
 
 HomeStats.propTypes = {
-  txData: PropTypes.array.isRequired
+  txData: PropTypes.array.isRequired,
+  labelY: PropTypes.string
   // lastBlock: PropTypes.number.isRequired
 }
 

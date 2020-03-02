@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import Loader, { LoaderWrapper } from '../Loader/Loader'
 import {
   // FirstListCell,
   // ListCell,
@@ -37,7 +38,7 @@ const RichList = ({ listData, hashW }) => {
         {/* Mapping over rich list addresses */}
         {listData.map((row) => <RichRow row={row} key={row.address}/>)}
       </ListCont>
-      : <div>loading</div>
+      : <LoaderWrapper><Loader text='Rich list, loading'/></LoaderWrapper>
   )
 }
 

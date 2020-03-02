@@ -7,7 +7,6 @@ import { IoIosCopy } from 'react-icons/io'
 // import TxChart from '../TxChart/TxChart'
 // import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
-import { displayPKT } from '../../utils'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import { motion } from 'framer-motion'
@@ -102,7 +101,6 @@ margin-right: 10px;
 const AddrLabel = styled.div`
   margin-right: 10px;
 `
-
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
   return (

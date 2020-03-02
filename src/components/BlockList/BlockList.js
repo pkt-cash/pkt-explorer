@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 // Load locale-specific relative date/time formatting rules.
 import en from 'javascript-time-ago/locale/en'
-import endpoints from '../../utils/endpoints'
+import Loader, { LoaderWrapper } from '../Loader/Loader'
 
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.addLocale(en)
@@ -65,7 +65,6 @@ export const BlockListLabels = ({ cells }) => <ListLabelCont>{
 }</ListLabelCont>
 
 const BlockList = ({ listData }) => {
-  console.log(listData)
   return (
     listData
       ? <ListCont>
@@ -73,7 +72,7 @@ const BlockList = ({ listData }) => {
         {/* Mapping over blocks */}
         {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)}
       </ListCont>
-      : <div>loading</div>
+      : <LoaderWrapper><Loader /></LoaderWrapper>
   )
 }
 
