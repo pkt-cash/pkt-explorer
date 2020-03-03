@@ -51,14 +51,14 @@ export const ListRow = styled.div`
 `
 export const ListLabel = styled.div`
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   font-size: ${metrics.headerFontSize}rem;
   font-weight: ${metrics.fontWeight};
   /* width: 100%; */
   
-  :first-child {
+  /* :first-child {
     justify-content: flex-start;
-  }
+  } */
 `
 
 export const ListLabelCont = styled.div`

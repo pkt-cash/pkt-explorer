@@ -183,22 +183,12 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>mined in the last 24h</Label> <Content><Pkt amt={meta.mined24}/></Content></p>
+                  <p><Label>Mined in the last 24h</Label> <Content><Pkt amt={meta.mined24}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
           </Row>
         </MetaCont>
-        {/* <MetaCont>
-
-          <MetaLine>
-            <span>transaction recived / spent:</span>{meta.recvCount} / {meta.spentCount}
-          </MetaLine>
-          <Sep />
-          <MetaLine>
-            <span>mined in the last 24h:</span>{meta.mined24}
-          </MetaLine>
-        </MetaCont> */}
         <ChartCont>
           {dailyTr ? <EaringChart txData={dailyTr} /> : 'Loading'}
         </ChartCont>

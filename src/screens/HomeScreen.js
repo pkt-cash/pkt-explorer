@@ -5,6 +5,7 @@ import HomeStats from '../components/HomeStats/HomeStats'
 import BlockStats from '../components/BlockStats/BlockStats.js'
 import dummyBlockData from '../fixtures/blockStats.json'
 import endpoints from '../utils/endpoints'
+import BlockList from '../components/BlockList/BlockList.js'
 const { pkApi, blkLApi } = endpoints
 // const { richLApi } = endpoints
 // const dData = treatDTx(dummyTxData.results)
@@ -62,6 +63,7 @@ const HomeScreen = (props) => {
   return <div>
     <HomeStats txData={ pkData } lastBlockData={{}}labelY='diffculty' />
     <BlockStats stats={lastData} />
+    <BlockList listData={blockList} />
   </div>
 }
 

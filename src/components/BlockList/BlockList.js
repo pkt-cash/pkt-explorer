@@ -113,15 +113,15 @@ BlockList.propTypes = {
   listData: PropTypes.array
 }
 
-// BlockRow.propTypes = {
-//   blk: PropTypes.shape({
-//     hash: PropTypes.string.isRequired,
-//     height: PropTypes.number.isRequired,
-//     transactionCount: PropTypes.number.isRequired,
-//     time: PropTypes.string.isRequired,
-//     size: PropTypes.number.isRequired
-//   }).isRequired
-// }
+NewRow.propTypes = {
+  blk: PropTypes.shape({
+    hash: PropTypes.string.isRequired,
+    height: PropTypes.number.isRequired,
+    transactionCount: PropTypes.number.isRequired,
+    time: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired
+  }).isRequired
+}
 
 AgeCell.propTypes = {
   time: PropTypes.string.isRequired

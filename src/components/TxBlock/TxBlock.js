@@ -9,6 +9,7 @@ import TxTogBt from '../TxTogBt/TxTogBt'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
+import { TiArrowLeftThick, TiArrowRightThick } from 'react-icons/ti'
 const TxBlockCont = styled(motion.div)``
 
 const TxLabel = styled.div`
@@ -36,13 +37,19 @@ const TxCol = styled.div`
   }
 `
 
-const LastTxCol = styled(TxCol)`
-  text-align: right;
-`
-
 const TxColsCont = styled.div`
   display: flex;
   justify-content: space-around;
+  @media ${mqs.small} {
+    flex-direction: column;
+  }
+`
+
+const InfoCont = styled.div`
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  background-color: #f8f8f8;
   @media ${mqs.small} {
     flex-direction: column;
   }
@@ -62,7 +69,6 @@ const TxColSep = styled.div`
 
 const LeftLabel = styled.span`
   display: flex;
-  display: inline;
   width: calc(100% - 30px);
   font-weight: ${metrics.fontWeight};
 `
@@ -70,6 +76,10 @@ const LeftLabel = styled.span`
 const TxInteractive = styled.span`
   display: block;
   margin-bottom: ${metrics.sep}rem;
+`
+
+const TxLastCont = styled.div`
+  margin-right: 10px
 `
 
 const MinedAtLabel = styled(TxLabel)`
@@ -90,6 +100,9 @@ const BlockTime = styled.span`
 
 const TotalLabel = styled.span`
   font-weight: ${metrics.fontWeight};
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center
 `
 
 // import styled from 'styled-components'
@@ -116,7 +129,7 @@ const TxBlock = ({ txData }) => {
           variants={listVars}
           animate={isOpen ? 'open' : 'closed'}
           initial='open'
-          transition={{ duration: 0 }}
+          transition={{ duration: 0.1 }}
         >
           <TxColsCont>
             <TxCol>
@@ -131,16 +144,15 @@ const TxBlock = ({ txData }) => {
             </TxCol>
           </TxColsCont>
         </TxlistCont>
-        <TxColsCont>
+        <InfoCont>
           <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
-          <LastTxCol>
-            <TotalLabel>Total Inputs</TotalLabel> = {input.length}
-          </LastTxCol>
-          <TxColSep small/>
-          <LastTxCol>
-            <TotalLabel>Total Outputs</TotalLabel> = {output.length}
-          </LastTxCol>
-        </TxColsCont>
+          <TxLastCont>
+            <TotalLabel><TiArrowLeftThick />Total Inputs: {input.length}</TotalLabel>
+          </TxLastCont>
+          <TxLastCont>
+            <TotalLabel><TiArrowRightThick />Total Outputs: {output.length}</TotalLabel>
+          </TxLastCont>
+        </InfoCont>
       </ListCont>
     </TxBlockCont>
   )
