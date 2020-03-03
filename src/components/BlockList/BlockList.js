@@ -89,11 +89,11 @@ const TrTh = styled.th`
     }
   }
 `
-const BlockList = ({ listData }) => {
+const BlockList = ({ listData, home }) => {
   return (
     listData
       ? <ListCont>
-        <ListLabelCont>Last Blocs</ListLabelCont>
+        {home && <ListLabelCont>Last Blocs</ListLabelCont>}
         <BlockTable>
           <tr>
             <th scope="col">height</th>
@@ -149,7 +149,8 @@ NewRow.propTypes = {
     transactionCount: PropTypes.number.isRequired,
     time: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired
-  }).isRequired
+  }).isRequired,
+  home: PropTypes.bool
 }
 
 AgeCell.propTypes = {

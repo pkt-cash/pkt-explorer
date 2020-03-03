@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import dummyTxData from '../fixtures/daily.json'
-import { treatDTx, fetchJson, treatStats } from '../utils'
+import { fetchJson, treatStats } from '../utils'
 import HomeStats from '../components/HomeStats/HomeStats'
 import BlockStats from '../components/BlockStats/BlockStats.js'
-import dummyBlockData from '../fixtures/blockStats.json'
 import endpoints from '../utils/endpoints'
 import BlockList from '../components/BlockList/BlockList.js'
 const { pkApi, blkLApi } = endpoints
@@ -63,7 +61,7 @@ const HomeScreen = (props) => {
   return <div>
     <HomeStats txData={ pkData } lastBlockData={{}}labelY='diffculty' />
     <BlockStats stats={lastData} />
-    <BlockList listData={blockList} />
+    <BlockList listData={blockList} home/>
   </div>
 }
 

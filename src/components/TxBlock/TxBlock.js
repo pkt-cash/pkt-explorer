@@ -105,6 +105,13 @@ const TotalLabel = styled.span`
   align-items: center
 `
 
+const TxSmallLabel = styled.div`
+  display: none;
+  @media ${mqs.small} {
+    display: block;
+  }
+`
+
 // import styled from 'styled-components'
 const TxBlock = ({ txData }) => {
   const [isOpen, togOpen] = useState(true)
@@ -132,6 +139,7 @@ const TxBlock = ({ txData }) => {
           transition={{ duration: 0.1 }}
         >
           <TxColsCont>
+            <TxSmallLabel>input</TxSmallLabel>
             <TxCol>
               {input.length
                 ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
@@ -139,6 +147,7 @@ const TxBlock = ({ txData }) => {
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
+            <TxSmallLabel>output</TxSmallLabel>
             <TxCol>
               {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
             </TxCol>

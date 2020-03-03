@@ -17,8 +17,10 @@ const ItemCont = styled.div`
 `
 
 const Amount = styled.div`
-  min-width: 66px;
+  min-width: 120px;
   margin-left: 10px;
+  white-space: nowrap;
+  text-align: right;
 `
 
 export const TxItem = ({ address, value, txt, size }) => {
