@@ -1,11 +1,11 @@
 import React from 'react'
 import TimeAgo from 'javascript-time-ago'
 import styled from 'styled-components'
-import metrics from '../../theme/metrics'
+import { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
-import { 
+import {
   // FirstListCell,
-  ListCell,
+  // ListCell,
   // ListRow,
   ListLabel,
   ListLabelCont,
@@ -22,12 +22,6 @@ TimeAgo.addLocale(en)
 
 // Create relative date/time formatter.
 const timeAgo = new TimeAgo('en-US')
-
-const BlockListTimeCell = styled(ListCell)`
-  cursor: pointer;
-  font-size: ${metrics.dateTimeFontSize}rem;
-  /* justify-content: flex-start; */
-`
 
 const BlockListLabel = styled(ListLabel)`
   :nth-child(2) {
@@ -47,38 +41,75 @@ export const AgeCell = ({ time }) => {
   </span>)
 }
 
-// export const BlockRow = ({ blk }) => <ListRow>
-//   <FirstListCell key={`${blk.hash}-height`}><Link to={`/block/${blk.hash}`}>{blk.height}</Link></FirstListCell>
-//   <BlockListTimeCell>
-//     <AgeCell time={blk.time} />
-//   </BlockListTimeCell>
-//   <ListCell>
-//     {blk.transactionCount}
-//   </ListCell>
-//   <ListCell key={`${blk.hash}-size`}>
-//     {blk.size}
-//   </ListCell>
-// </ListRow>
-
-const cells = {
-  height: 'height',
-  age: 'time',
-  transactions: 'transactionCount',
-  size: 'size'
-}
-
 export const BlockListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <BlockListLabel key={header}>{header}</BlockListLabel>)
 }</ListLabelCont>
 
+const BlockTable = styled.table`
+  width: 100%;
+  padding:0;
+  margin:0;
+  tr {
+    padding: 0 1rem;
+  }
+  tr:nth-child(2n) {
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
+  }
+  th {
+    text-transform: capitalize;
+    padding: 1rem;
+  }
+  td {
+    padding:.5rem 1rem;
+  }
+
+
+  border: none;
+  border-collapse: inherit;
+  border-spacing: 0;
+  border-color: inherit;
+  vertical-align: inherit;
+  /* text-align: left; */
+  font-weight: inherit;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 0;
+
+  td:last-child,
+  th:last-child{
+    text-align: right
+  }
+
+`
+
+const TrTh = styled.th`
+  &:after {
+    content: "Transactions";
+    @media ${mqs.small} {
+      content: "Tx";
+    }
+  }
+`
 const BlockList = ({ listData }) => {
   return (
     listData
       ? <ListCont>
-        <BlockListLabels cells={cells} />
-        {/* Mapping over blocks */}
-        {listData.map((blk) => <NewRow blk={blk} key={blk.hash}/>)}
-        {/* {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)} */}
+        <ListLabelCont>Last Blocs</ListLabelCont>
+        <BlockTable>
+          <tr>
+            <th scope="col">height</th>
+            <th scope="col">age</th>
+            <TrTh scope="col"/>
+            <th scope="col">size</th>
+          </tr>
+          {listData.map((blk) => <tr key={`tr-${blk.height}`}>
+            <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
+            <td><AgeCell time={blk.time} /></td>
+            <td>{blk.transactionCount}</td>
+            <td>{blk.size}</td>
+          </tr>)}
+          <tr>
+          </tr>
+        </BlockTable>
       </ListCont>
       : <LoaderWrapper><Loader /></LoaderWrapper>
   )
@@ -87,8 +118,6 @@ const BlockList = ({ listData }) => {
 const RowCell = styled.div`
 
 `
-
-
 
 const Row = styled.div`
   display: flex;

@@ -63,6 +63,7 @@ export const ListLabel = styled.div`
 
 export const ListLabelCont = styled.div`
   display: flex;
+  font-weight: 700;
   border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   justify-content: space-between;
   padding: ${metrics.padding}rem;
