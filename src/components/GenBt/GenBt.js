@@ -25,7 +25,6 @@ const StyledBaseBtn = styled(BaseBt)`
 // }
 
 const Icn = ({ icn }) => {
-  console.log('icn:', icn)
   switch (icn) {
     case 'copy':
       return <IoIosCopy />

@@ -22,8 +22,8 @@ const cells = {
 
 const AddrLink = styled(Link)`
   color: ${({ theme }) => theme.colors.pktBlueLight};
-  overflow: hidden;
-  text-overflow: ellipsis;
+  display: inline-block;
+  word-break: break-all;
 `
 
 export const RichListLabels = ({ cells }) => <ListLabelCont>{
@@ -44,16 +44,17 @@ const RichList = ({ listData, hashW }) => {
 
 const RowCont = styled.div`
   display: flex;
-  height: ${metrics.rowHeight}rem;
+  min-height: ${metrics.rowHeight}rem;
   justify-content: space-between;
   align-items: center;
-  padding: 0 ${metrics.padding}rem;
+  padding: ${metrics.padding}rem;
   :nth-child(2n + 1) {
     background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
 const BalanceCont = styled.div`
   white-space: nowrap;
+  margin-left: 10px;
   span{
     font-weight: 700;
   }

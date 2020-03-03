@@ -3,7 +3,14 @@ import TimeAgo from 'javascript-time-ago'
 import styled from 'styled-components'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
-import { FirstListCell, ListCell, ListRow, ListLabel, ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { 
+  // FirstListCell,
+  ListCell,
+  // ListRow,
+  ListLabel,
+  ListLabelCont,
+  ListCont
+} from '../CommonComps/CommonComps'
 import { Link } from 'react-router-dom'
 
 // Load locale-specific relative date/time formatting rules.
@@ -19,12 +26,12 @@ const timeAgo = new TimeAgo('en-US')
 const BlockListTimeCell = styled(ListCell)`
   cursor: pointer;
   font-size: ${metrics.dateTimeFontSize}rem;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
 `
 
 const BlockListLabel = styled(ListLabel)`
   :nth-child(2) {
-    justify-content: center;
+    /* justify-content: center; */
   }
 `
 
@@ -35,23 +42,23 @@ export const AgeCell = ({ time }) => {
 
   const humanInterval = timeAgo.format(cDate - diff)
 
-  return (<div title={(new Date(time)).toString()}>
+  return (<span title={(new Date(time)).toString()}>
     {humanInterval.toString()}
-  </div>)
+  </span>)
 }
 
-export const BlockRow = ({ blk }) => <ListRow key={blk.hash}>
-  <FirstListCell key={`${blk.hash}-height`}><Link to={`/block/${blk.hash}`}>{blk.height}</Link></FirstListCell>
-  <BlockListTimeCell key={`${blk.hash}-time`}>
-    <AgeCell time={blk.time} />
-  </BlockListTimeCell>
-  <ListCell key={`${blk.hash}-transactionCount`}>
-    {blk.transactionCount}
-  </ListCell>
-  <ListCell key={`${blk.hash}-size`}>
-    {blk.size}
-  </ListCell>
-</ListRow>
+// export const BlockRow = ({ blk }) => <ListRow>
+//   <FirstListCell key={`${blk.hash}-height`}><Link to={`/block/${blk.hash}`}>{blk.height}</Link></FirstListCell>
+//   <BlockListTimeCell>
+//     <AgeCell time={blk.time} />
+//   </BlockListTimeCell>
+//   <ListCell>
+//     {blk.transactionCount}
+//   </ListCell>
+//   <ListCell key={`${blk.hash}-size`}>
+//     {blk.size}
+//   </ListCell>
+// </ListRow>
 
 const cells = {
   height: 'height',
@@ -70,25 +77,51 @@ const BlockList = ({ listData }) => {
       ? <ListCont>
         <BlockListLabels cells={cells} />
         {/* Mapping over blocks */}
-        {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)}
+        {listData.map((blk) => <NewRow blk={blk} key={blk.hash}/>)}
+        {/* {listData.map((blk) => <BlockRow blk={blk} key={blk.hash}/>)} */}
       </ListCont>
       : <LoaderWrapper><Loader /></LoaderWrapper>
   )
 }
 
+const RowCell = styled.div`
+
+`
+
+
+
+const Row = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  /* align-content: space-between;  */
+  justify-content: space-between;
+  padding: 0.5rem 1rem ;
+  :nth-child(2n + 1) {
+    background-color: ${({ theme }) => theme.colors.pktGreyLight};
+  }
+
+`
+
+const NewRow = ({ blk }) => <Row>
+  <Link to={`/block/${blk.hash}`}>{blk.height}</Link>
+  <AgeCell time={blk.time} />
+  <RowCell>{blk.transactionCount}</RowCell>
+  <RowCell>{blk.size}</RowCell>
+</Row>
+
 BlockList.propTypes = {
   listData: PropTypes.array
 }
 
-BlockRow.propTypes = {
-  blk: PropTypes.shape({
-    hash: PropTypes.string.isRequired,
-    height: PropTypes.number.isRequired,
-    transactionCount: PropTypes.number.isRequired,
-    time: PropTypes.string.isRequired,
-    size: PropTypes.number.isRequired
-  }).isRequired
-}
+// BlockRow.propTypes = {
+//   blk: PropTypes.shape({
+//     hash: PropTypes.string.isRequired,
+//     height: PropTypes.number.isRequired,
+//     transactionCount: PropTypes.number.isRequired,
+//     time: PropTypes.string.isRequired,
+//     size: PropTypes.number.isRequired
+//   }).isRequired
+// }
 
 AgeCell.propTypes = {
   time: PropTypes.string.isRequired

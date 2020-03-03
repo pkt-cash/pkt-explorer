@@ -54,7 +54,7 @@ export const ListLabel = styled.div`
   justify-content: flex-end;
   font-size: ${metrics.headerFontSize}rem;
   font-weight: ${metrics.fontWeight};
-  width: 100%;
+  /* width: 100%; */
   
   :first-child {
     justify-content: flex-start;

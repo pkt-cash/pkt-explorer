@@ -29,7 +29,6 @@ const HomeScreen = (props) => {
         }
         const last = json.results[0]
         console.log('da last', last)
-        
         fetchJson(`${blkLApi}/20`)
           .then((json) => {
             if (json.error) {

@@ -9,8 +9,6 @@ const addr = 'pkt1qkpuqg30wm0ju40yd4hyk7ehc48cy7mgj64xl7vxwt7mxxwqrt9qqetwlau'
 const dailyData = treatIncome(rawDailyData.result)
 const dailyDataStw = treatIncome(rawDailyDataStw.result)
 // const dailyDataSt = treatIncome(dummyStwAddrData.result)
-console.log('rawDailyData')
-console.log(dailyData)
 
 export default {
   title: 'AddressStats',
