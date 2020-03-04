@@ -41,11 +41,11 @@ const Loader = ({ text, small }) => {
       {text && <LoaderTxt small={small}>{text}</LoaderTxt>}
       <LoaderBox
         small={small}
-        animate={{ scale: 0.5, rotate: 180, opacity: 0.5 }}
+        animate={{ opacity: 0.0 }}
         transition={{
           yoyo: Infinity,
           duration: 2,
-          ease: 'easeInOut'
+          ease: 'easeOut'
         }}
       >
         PKT

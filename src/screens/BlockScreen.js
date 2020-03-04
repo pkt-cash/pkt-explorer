@@ -43,7 +43,7 @@ const AddressScreen = (props) => {
     {metaLoad
       ? <Loader text='loading metadata' />
       : <div>
-        got the block metadata for {id}
+        got the block metadata for the current block
         {/* {JSON.stringify(blkData)} */}
       </div>
     }

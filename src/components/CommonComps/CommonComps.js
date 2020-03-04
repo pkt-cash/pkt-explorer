@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import metrics from '../../theme/metrics'
 import PropTypes from 'prop-types'
@@ -67,7 +67,7 @@ export const ListLabelCont = styled.div`
   border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   justify-content: space-between;
   padding: ${metrics.padding}rem;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   width: 100%;
 `
 
@@ -76,6 +76,7 @@ export const ListCont = styled.div`
   border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
   margin: ${metrics.margin}rem;
+  ${({ rich }) => rich && css`max-width: 760px; margin: ${metrics.margin}rem auto`} 
 `
 
 export const BaseBt = styled(motion.div)`

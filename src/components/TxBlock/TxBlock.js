@@ -18,7 +18,7 @@ const TxLabel = styled.div`
 
 const TxlistCont = styled(motion.div)`
   overflow: hidden;
-  padding: 0.5rem;
+  padding: 0  0.5rem;
 `
 
 const listVars = {
@@ -128,7 +128,7 @@ const TxBlock = ({ txData }) => {
             <RespHash hash={txid} />
           </TxLabel>
           <MinedAtLabel>
-            <RightLabel>mined:</RightLabel>
+            <RightLabel>Mined:</RightLabel>
             <BlockTime>{dt.toLocaleString(DateTime.DATETIME_MED)}</BlockTime>
           </MinedAtLabel>
         </ListLabelCont>
@@ -139,7 +139,7 @@ const TxBlock = ({ txData }) => {
           transition={{ duration: 0.1 }}
         >
           <TxColsCont>
-            <TxSmallLabel>input</TxSmallLabel>
+            {isOpen && <TxSmallLabel>input</TxSmallLabel>}
             <TxCol>
               {input.length
                 ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
@@ -147,7 +147,7 @@ const TxBlock = ({ txData }) => {
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
-            <TxSmallLabel>output</TxSmallLabel>
+            {isOpen && <TxSmallLabel>output</TxSmallLabel>}
             <TxCol>
               {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
             </TxCol>
@@ -156,10 +156,10 @@ const TxBlock = ({ txData }) => {
         <InfoCont>
           <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
           <TxLastCont>
-            <TotalLabel><TiArrowLeftThick />Total Inputs: {input.length}</TotalLabel>
+            <TotalLabel>Total Inputs: {input.length}</TotalLabel>
           </TxLastCont>
           <TxLastCont>
-            <TotalLabel><TiArrowRightThick />Total Outputs: {output.length}</TotalLabel>
+            <TotalLabel>Total Outputs: {output.length}</TotalLabel>
           </TxLastCont>
         </InfoCont>
       </ListCont>

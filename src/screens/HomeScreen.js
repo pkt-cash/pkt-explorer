@@ -43,7 +43,7 @@ const HomeScreen = (props) => {
         setPKLoading(false)
       })
     // fetch packet stats
-    fetchJson(`${pkApi}/15`)
+    fetchJson(`${pkApi}/30`)
       .then((json) => {
         if (json.error) {
           console.log('error while fetching pkData')
@@ -59,7 +59,7 @@ const HomeScreen = (props) => {
   }, [])
 
   return <div>
-    <HomeStats txData={ pkData } lastBlockData={{}}labelY='diffculty' />
+    <HomeStats txData={ pkData } lastBlockData={{}} labelY='diffculty' />
     <BlockStats stats={lastData} />
     <BlockList listData={blockList} home/>
   </div>

@@ -33,7 +33,7 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
 const RichList = ({ listData, hashW }) => {
   return (
     listData
-      ? <ListCont>
+      ? <ListCont rich>
         <RichListLabels cells={cells} />
         {/* Mapping over rich list addresses */}
         {listData.map((row) => <RichRow row={row} key={row.address}/>)}
@@ -44,10 +44,10 @@ const RichList = ({ listData, hashW }) => {
 
 const RowCont = styled.div`
   display: flex;
-  min-height: ${metrics.rowHeight}rem;
+  /* min-height: ${metrics.rowHeight}rem; */
   justify-content: space-between;
   align-items: center;
-  padding: ${metrics.padding}rem;
+  padding: 0.75rem ${metrics.padding}rem;
   :nth-child(2n + 1) {
     background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
