@@ -8,7 +8,6 @@ import Loader from '../components/Loader/Loader'
 import styled from 'styled-components'
 const { addrMetaApi } = endpoints
 
-
 const ScreenCont = styled.div`
  min-height: 90vh;
  display: flex;
@@ -36,7 +35,7 @@ const AddressScreen = (props) => {
         setMetaLoad(false)
       })
     // fetch last 30 day incomes
-    fetchJson(`${addrMetaApi}/${addr}/income/30`) 
+    fetchJson(`${addrMetaApi}/${addr}/income/30`)
       .then((json) => {
         setDailyTr(treatIncome(json.result))
       })

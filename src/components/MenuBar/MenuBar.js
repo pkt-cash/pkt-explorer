@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { MenuCont } from '../CommonComps/CommonComps'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import metrics from '../../theme/metrics'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const { mq } = metrics
 // import PropTypes from 'prop-types'
@@ -22,7 +22,7 @@ const TopMenu = styled.div`
   height: 100%;
 `
 
-const TopLink = styled(Link)`
+const TopLink = styled(NavLink)`
   margin-left: 10px;
   height: 100%;
   color: #283649;
@@ -36,7 +36,8 @@ const TopLink = styled(Link)`
   &:visited {
     color: #283649;
   }
-  &:hover {
+  &:hover,
+  &.active{
     background: #a4e9ff;
     color: black;
   }
@@ -51,7 +52,7 @@ const MenuBar = (props) => {
         )}
       />
       <TopBarWrapper>
-        <TopLink to='/'>
+        <TopLink exact to='/'>
           PKT Explorer (beta)
         </TopLink>
         <Media query={`(min-width: ${mq.small}px)`} render={() =>

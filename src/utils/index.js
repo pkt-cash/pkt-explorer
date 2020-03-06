@@ -33,7 +33,6 @@ export const displayPKT = (amount) => {
 }
 
 export const byteStr = (bytes) => {
-  console.log(bytes)
   if (bytes > 1073741824) return `${parseFloat(bytes / 1073741824).toFixed(2)} GB/s`
   if (bytes > 1048576) return `${parseFloat(bytes / 1048576).toFixed(2)} MB/s`
   return `${bytes} B/s`
@@ -78,7 +77,7 @@ export const fetchJson = async (url) => {
     const response = await fetch(url)
     return response.json()
   } catch (error) {
-    console.log('error fetching ressource')
+    console.error('error fetching ressource')
     return { error }
   }
 }

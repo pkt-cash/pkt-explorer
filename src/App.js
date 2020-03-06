@@ -11,6 +11,7 @@ import BlockScreen from './screens/BlockScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeScreen from './screens/HomeScreen'
 import AddressScreen from './screens/AddressScreen'
+import TxScreen from './screens/TxScreen'
 
 function App () {
   return (
@@ -39,7 +40,7 @@ function App () {
               <Route
                 exact
                 path='/txd'
-                component={TxResume}
+                component={TxScreen}
                 key='resume' />
               <Route
                 exact
@@ -58,7 +59,5 @@ function App () {
     </>
   )
 }
-
-const TxResume = () => <div>TODO</div>
 
 export default App

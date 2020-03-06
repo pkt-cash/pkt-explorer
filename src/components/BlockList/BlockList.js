@@ -1,12 +1,12 @@
 import React from 'react'
 import TimeAgo from 'javascript-time-ago'
+import {
+  canonical
+} from 'javascript-time-ago/gradation'
 import styled from 'styled-components'
 import { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import {
-  // FirstListCell,
-  // ListCell,
-  // ListRow,
   ListLabel,
   ListLabelCont,
   ListCont
@@ -19,9 +19,10 @@ import Loader, { LoaderWrapper } from '../Loader/Loader'
 
 // Add locale-specific relative date/time formatting rules.
 TimeAgo.addLocale(en)
-
 // Create relative date/time formatter.
 const timeAgo = new TimeAgo('en-US')
+
+const agoOpts = { gradation: canonical }
 
 const BlockListLabel = styled(ListLabel)`
   :nth-child(2) {
@@ -34,7 +35,7 @@ export const AgeCell = ({ time }) => {
   const cDate = (new Date()).getTime()
   const diff = cDate - dt
 
-  const humanInterval = timeAgo.format(cDate - diff)
+  const humanInterval = timeAgo.format(cDate - diff, agoOpts)
 
   return (<span title={(new Date(time)).toString()}>
     {humanInterval.toString()}
@@ -60,16 +61,14 @@ const BlockTable = styled.table`
     padding: 1rem;
   }
   td {
-    padding:.5rem 1rem;
+    padding: .5rem 1rem;
   }
-
 
   border: none;
   border-collapse: inherit;
   border-spacing: 0;
   border-color: inherit;
   vertical-align: inherit;
-  /* text-align: left; */
   font-weight: inherit;
   -webkit-border-horizontal-spacing: 0;
   -webkit-border-vertical-spacing: 0;
@@ -102,7 +101,8 @@ const BlockList = ({ listData, home }) => {
               <TrTh scope="col"/>
               <th scope="col">size</th>
             </tr>
-          </thead><tbody>
+          </thead>
+          <tbody>
             {listData.map((blk) => <tr key={`tr-${blk.height}`}>
               <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
               <td><AgeCell time={blk.time} /></td>
@@ -110,17 +110,11 @@ const BlockList = ({ listData, home }) => {
               <td>{blk.size}</td>
             </tr>)}
           </tbody>
-          <tr>
-          </tr>
         </BlockTable>
       </ListCont>
       : <LoaderWrapper><Loader /></LoaderWrapper>
   )
 }
-
-const RowCell = styled.div`
-
-`
 
 const Row = styled.div`
   display: flex;
@@ -131,14 +125,13 @@ const Row = styled.div`
   :nth-child(2n + 1) {
     background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
-
 `
 
 const NewRow = ({ blk }) => <Row>
   <Link to={`/block/${blk.hash}`}>{blk.height}</Link>
   <AgeCell time={blk.time} />
-  <RowCell>{blk.transactionCount}</RowCell>
-  <RowCell>{blk.size}</RowCell>
+  <div>{blk.transactionCount}</div>
+  <div>{blk.size}</div>
 </Row>
 
 BlockList.propTypes = {

@@ -18,6 +18,7 @@ const AddressScreen = (props) => {
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {id}</div>
   // if (loading) return <div>fetching id data</div>
+  console.log(blkData)
   useEffect(() => {
     // fetch block data
     fetchJson(`${blockApi}/${id}`)

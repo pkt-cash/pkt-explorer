@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
@@ -48,13 +48,13 @@ const LabelCont = styled.div`
 `
 
 const HomeStats = ({ txData, labelY }) => {
-  console.log(txData)
-  const dailyD = txData
+  const dailyD = useMemo(() => txData
     ? [
-      { label: 'bps', value: byteStr(txData[0].data[0][1]), type: 'bytes' },
+      { label: 'bps', value: byteStr(txData[0].data[0][1]) },
       { label: 'eps', value: byteStr(txData[1].data[0][1]) }
     ]
     : false
+  )
   return (
     <ListCont>
       <ListLabelCont>

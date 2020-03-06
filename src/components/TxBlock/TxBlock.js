@@ -9,7 +9,6 @@ import TxTogBt from '../TxTogBt/TxTogBt'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
-import { TiArrowLeftThick, TiArrowRightThick } from 'react-icons/ti'
 const TxBlockCont = styled(motion.div)``
 
 const TxLabel = styled.div`
