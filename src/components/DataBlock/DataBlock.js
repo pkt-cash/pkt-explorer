@@ -71,7 +71,7 @@ const DataBlock = ({ data }) =>
           </LabelCont>
         </Item>
       </ItemCont>)
-      : <Loader text={'Loading Data'} small />
+      : <Loader text={'Loading'} small />
     }
   </TableCont>
 

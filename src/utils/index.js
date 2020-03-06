@@ -2,8 +2,26 @@
 export function treatDTx (data) {
   return data.map((data, i) => [new Date(data.date), data.transactionCount])
 }
+
 export function treatStats (data) {
-  return data.map((data, i) => [new Date(data.date), (data.bitsPerSecond / data.encryptionsPerSecond) * 10])
+  const datum = [
+    {
+      label: 'bps',
+      data: []
+    },
+    {
+      label: 'eps',
+      data: []
+    }
+  ]
+
+  const makeEntry = (data) => {
+    const dt = new Date(data.date)
+    datum[0].data.push([dt, data.bitsPerSecond])
+    datum[1].data.push([dt, data.encryptionsPerSecond])
+  }
+  data.forEach(makeEntry)
+  return datum
 }
 
 export function treatIncome (data) {
@@ -12,6 +30,13 @@ export function treatIncome (data) {
 
 export const displayPKT = (amount) => {
   return Number(amount) / 0x40000000
+}
+
+export const byteStr = (bytes) => {
+  console.log(bytes)
+  if (bytes > 1073741824) return `${parseFloat(bytes / 1073741824).toFixed(2)} GB/s`
+  if (bytes > 1048576) return `${parseFloat(bytes / 1048576).toFixed(2)} MB/s`
+  return `${bytes} B/s`
 }
 
 /**

@@ -12,7 +12,6 @@ const HomeScreen = (props) => {
   // if (error) return <div>ARRRRR errror</div>
   // if (loading) return <RichList />
   const [pkData, setPkData] = useState(false)
-  const [lastData, setLastData] = useState(false)
   const [blockList, setBlockList] = useState(false)
   const [isPkLoading, setPKLoading] = useState(true)
   const [hasErr, setErr] = useState(false)
@@ -28,17 +27,6 @@ const HomeScreen = (props) => {
         }
         const last = json.results[0]
         console.log('da last', last)
-        fetchJson(`${blkLApi}/20`)
-          .then((json) => {
-            if (json.error) {
-              console.log('error while last block data')
-              setPKLoading(false)
-              return setErr(json.error)
-            }
-            setBlockList(json.results)
-            setPKLoading(false)
-          })
-        setLastData(last)
         setBlockList(json.results)
         setPKLoading(false)
       })
@@ -60,7 +48,7 @@ const HomeScreen = (props) => {
 
   return <div>
     <HomeStats txData={ pkData } lastBlockData={{}} labelY='diffculty' />
-    <BlockStats stats={lastData} />
+    {/* <BlockStats stats={lastData} /> */}
     <BlockList listData={blockList} home/>
   </div>
 }

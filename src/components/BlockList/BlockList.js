@@ -95,18 +95,21 @@ const BlockList = ({ listData, home }) => {
       ? <ListCont>
         {home && <ListLabelCont>Last Blocs</ListLabelCont>}
         <BlockTable>
-          <tr>
-            <th scope="col">height</th>
-            <th scope="col">age</th>
-            <TrTh scope="col"/>
-            <th scope="col">size</th>
-          </tr>
-          {listData.map((blk) => <tr key={`tr-${blk.height}`}>
-            <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
-            <td><AgeCell time={blk.time} /></td>
-            <td>{blk.transactionCount}</td>
-            <td>{blk.size}</td>
-          </tr>)}
+          <thead>
+            <tr>
+              <th scope="col">height</th>
+              <th scope="col">age</th>
+              <TrTh scope="col"/>
+              <th scope="col">size</th>
+            </tr>
+          </thead><tbody>
+            {listData.map((blk) => <tr key={`tr-${blk.height}`}>
+              <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
+              <td><AgeCell time={blk.time} /></td>
+              <td>{blk.transactionCount}</td>
+              <td>{blk.size}</td>
+            </tr>)}
+          </tbody>
           <tr>
           </tr>
         </BlockTable>
@@ -139,7 +142,8 @@ const NewRow = ({ blk }) => <Row>
 </Row>
 
 BlockList.propTypes = {
-  listData: PropTypes.array
+  listData: PropTypes.array,
+  home: PropTypes.bool
 }
 
 NewRow.propTypes = {
@@ -149,8 +153,7 @@ NewRow.propTypes = {
     transactionCount: PropTypes.number.isRequired,
     time: PropTypes.string.isRequired,
     size: PropTypes.number.isRequired
-  }).isRequired,
-  home: PropTypes.bool
+  }).isRequired
 }
 
 AgeCell.propTypes = {

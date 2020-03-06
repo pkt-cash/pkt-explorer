@@ -3,23 +3,24 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
-import TxChart from '../TxChart/TxChart'
+import DiffChart from '../DiffChart/DiffChart'
 import Loader from '../Loader/Loader'
 import DataBlock from '../DataBlock/DataBlock'
+import { byteStr } from '../../utils'
 
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
-  display: flex;
+  /* display: flex;
   @media ${mqs.small} {
     flex-direction: column;
-  }
+  } */
   /* @media all and (max-width: 500px) {
     flex-direction: column;
   } */
 `
 const StatsCont = styled.div`
   flex:2;
-  border-right: 1px solid ${({ theme }) => theme.colors.pktGreyLight};
+  /* border-right: 1px solid ${({ theme }) => theme.colors.pktGreyLight}; */
   padding-right: ${metrics.padding}rem;
   margin-right: ${metrics.padding}rem;
   display: flex;
@@ -33,7 +34,6 @@ const StatsCont = styled.div`
 `
 
 const ChartCont = styled.div`
-  width: 400px;
   @media ${mqs.small} {
     text-align: center;
     width: 100%;
@@ -43,60 +43,34 @@ const ChartCont = styled.div`
   }
 `
 
-// const StatRow = styled.div`
-//   display: flex;
-//   flex:1;
-//   align-items: center;
-// `
-// const StatCell = styled.div`
-//   display: flex;
-//   padding: 1rem;
-//   flex:1;
-// `
-
-// const StatCellLabel = styled.div`
-//   font-weight: 700;
-//   padding-right: 1rem;
-// `
-// const StatCellValue = styled.div`
-//   font-style: italic;
-// `
+const LabelCont = styled.div`
+  margin: 1rem 0.5rem;
+`
 
 const HomeStats = ({ txData, labelY }) => {
+  console.log(txData)
+  const dailyD = txData
+    ? [
+      { label: 'bps', value: byteStr(txData[0].data[0][1]), type: 'bytes' },
+      { label: 'eps', value: byteStr(txData[1].data[0][1]) }
+    ]
+    : false
   return (
     <ListCont>
       <ListLabelCont>
-        HomeStats
+      PacketCrypt stats
       </ListLabelCont>
-      <ListDataCont>
-        <StatsCont>
-          <DataBlock />
-          {/* <StatRow>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-            <StatCell>
-              <StatCellLabel>Last block height</StatCellLabel>
-              <StatCellValue>123123</StatCellValue>
-            </StatCell>
-          </StatRow>
-          <StatRow>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-          </StatRow> */}
-        </StatsCont>
-        <ChartCont>
-          <div>Difficulty</div>
-          {txData ? <TxChart txData={txData} labelY={labelY} /> : <Loader text='Loading...' small />}
-        </ChartCont>
-      </ListDataCont>
+      {txData
+        ? <ListDataCont>
+          <ChartCont>
+            <DiffChart txData={txData} />
+          </ChartCont>
+          <LabelCont>Daily stats</LabelCont>
+          <DataBlock data={dailyD} />
+        </ListDataCont>
+        : <Loader text='Loading...' small />}
+      <StatsCont>
+      </StatsCont>
     </ListCont>
   )
 }
