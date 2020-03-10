@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
-import metrics from '../../theme/metrics'
+import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { displayPKT } from '../../utils'
 
@@ -69,6 +69,10 @@ export const ListLabelCont = styled.div`
   padding: ${metrics.padding}rem;
   /* text-transform: capitalize; */
   width: 100%;
+  @media ${mqs.small} {
+    flex-direction: column;
+  }
+
 `
 
 export const ListCont = styled.div`

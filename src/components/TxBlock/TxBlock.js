@@ -9,7 +9,9 @@ import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
 
-const TxBlockCont = styled.div``
+const TxBlockCont = styled.div`
+  border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};
+`
 
 const TxLabel = styled.div`
   justify-content: items;
@@ -76,15 +78,14 @@ const MinedAtLabel = styled(TxLabel)`
   margin-left: ${metrics.sep}rem;
   display: flex;
   align-items: flex-start;
+  @media ${mqs.small} {
+    margin: 1rem 0 0 0;
+    justify-content: end;
+  }
 `
 
 const RightLabel = styled.span`
   font-weight: ${metrics.fontWeight};
-`
-
-const BlockTime = styled.span`
-  display: block;
-  font-size: 0.95rem;
 `
 
 const TotalLabel = styled.span`
@@ -151,14 +152,14 @@ const TxBlock = ({ txData }) => {
             </TxCol>
           </TxColsCont>
         </TxlistCont>
-        <InfoCont>
+        {(input.length > 2 || output.length > 2) && <InfoCont>
           <TxLastCont>
             <TotalLabel>Total Inputs: {input.length}</TotalLabel>
           </TxLastCont>
           <TxLastCont>
             <TotalLabel>Total Outputs: {output.length}</TotalLabel>
           </TxLastCont>
-        </InfoCont>
+        </InfoCont>}
       </ListCont>
     </TxBlockCont>
   )
