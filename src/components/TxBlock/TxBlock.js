@@ -1,33 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { motion } from 'framer-motion'
 import PropTypes from 'prop-types'
+import { FaClock, FaCheckCircle } from 'react-icons/fa'
 import metrics, { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
 import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
-import TxTogBt from '../TxTogBt/TxTogBt'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
-const TxBlockCont = styled(motion.div)``
+
+const TxBlockCont = styled.div``
 
 const TxLabel = styled.div`
   justify-content: items;
 `
 
-const TxlistCont = styled(motion.div)`
+const TxlistCont = styled.div`
   overflow: hidden;
   padding: 0  0.5rem;
 `
-
-const listVars = {
-  open: {
-    height: 'auto'
-  },
-  closed: {
-    height: 0
-  }
-}
 
 const TxCol = styled.div`
   width:47%;
@@ -83,13 +74,12 @@ const TxLastCont = styled.div`
 
 const MinedAtLabel = styled(TxLabel)`
   margin-left: ${metrics.sep}rem;
+  display: flex;
+  align-items: flex-start;
 `
 
 const RightLabel = styled.span`
-  display: flex;
   font-weight: ${metrics.fontWeight};
-  margin-top: ${metrics.sep}rem;
-  margin-bottom: ${metrics.sep}rem;
 `
 
 const BlockTime = styled.span`
@@ -111,11 +101,23 @@ const TxSmallLabel = styled.div`
   }
 `
 
+const IcnCont = styled.span`
+  margin-left: 5px;
+  padding-top:2px;
+`
+
+const ConfIcn = ({ isConf }) => {
+  return <IcnCont>{isConf
+    ? <FaCheckCircle style={{ color: 'green' }} />
+    : <FaClock style={{ color: '#dd8335' }} />}
+  </IcnCont>
+}
+
 // import styled from 'styled-components'
 const TxBlock = ({ txData }) => {
-  const [isOpen, togOpen] = useState(true)
   const { txid, input, output, blockTime } = txData
   const dt = DateTime.fromISO(blockTime)
+  console.log(txData)
   return (
     <TxBlockCont>
       <ListCont>
@@ -127,33 +129,29 @@ const TxBlock = ({ txData }) => {
             <RespHash hash={txid} />
           </TxLabel>
           <MinedAtLabel>
-            <RightLabel>Mined:</RightLabel>
-            <BlockTime>{dt.toLocaleString(DateTime.DATETIME_MED)}</BlockTime>
+            {blockTime
+              ? <><RightLabel>Mined: {dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
+              : <><RightLabel>Unconfirmed transaction </RightLabel><ConfIcn /></>
+            }
           </MinedAtLabel>
         </ListLabelCont>
-        <TxlistCont
-          variants={listVars}
-          animate={isOpen ? 'open' : 'closed'}
-          initial='open'
-          transition={{ duration: 0.1 }}
-        >
+        <TxlistCont>
           <TxColsCont>
-            {isOpen && <TxSmallLabel>input</TxSmallLabel>}
+            <TxSmallLabel>input</TxSmallLabel>
             <TxCol>
-              {input.length
+              {input && input.length
                 ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
-            {isOpen && <TxSmallLabel>output</TxSmallLabel>}
+            <TxSmallLabel>output</TxSmallLabel>
             <TxCol>
-              {output.map((data, i) => <TxItem key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
+              {output && output.map((data, i) => <TxItem unconfirmed={blockTime === undefined} key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
         <InfoCont>
-          <TxTogBt isOpen={isOpen} action={() => togOpen(!isOpen)}/>
           <TxLastCont>
             <TotalLabel>Total Inputs: {input.length}</TotalLabel>
           </TxLastCont>

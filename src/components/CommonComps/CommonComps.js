@@ -107,5 +107,8 @@ export const Pkt = ({ amt }) => <>
 </>
 
 Pkt.propTypes = {
-  amt: PropTypes.string.isRequired
+  amt: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired
 }

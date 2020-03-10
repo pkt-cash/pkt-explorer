@@ -1,9 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import RespHash from '../RespHash/RespHash'
+// import RespHash from '../RespHash/RespHash'
 import { Pkt } from '../CommonComps/CommonComps'
-
+import { Link } from 'react-router-dom'
 const ItemCont = styled.div`
   min-height: 45px;
   display: flex;
@@ -11,7 +11,7 @@ const ItemCont = styled.div`
   padding: 10px;
   align-items: center;
   justify-content: space-between;
-  background: ${({ theme }) => theme.colors.pktGreyLight};
+  background: ${({ theme, unconfirmed }) => unconfirmed ? theme.colors.pktGrey : theme.colors.pktGreyLight};
   border-radius: 4px;
   margin: 10px 0;
 `
@@ -23,15 +23,31 @@ const Amount = styled.div`
   text-align: right;
 `
 
-export const TxItem = ({ address, value, txt, size }) => {
+const HashCont = styled(Link)`
+  /* font-family: 'courier'; */
+  /* font-size: 15px; */
+  /* display: flex; */
+  /* white-space: nowrap; */
+  word-break: break-all;
+  display: inline-block;
+  /* overflow: hidden; */
+  /* text-overflow: ; */
+  /* margin-left: 2rem; */
+  /* width: 100%; */
+`
+
+export const TxItem = ({ address, value, txt, size, unconfirmed }) => {
   return (
     <ItemCont
+      unconfirmed={unconfirmed}
       // variants={variants}
       // initial='closed'
       // animate='open'
     >
       {txt || <>
-        <RespHash hash={address} size={size} />
+        <HashCont to={`/address/${address}`}>
+          {address}
+        </HashCont>
         <Amount>
           <Pkt amt={value} />
         </Amount>
@@ -45,5 +61,6 @@ TxItem.propTypes = {
   address: PropTypes.string,
   value: PropTypes.string,
   txt: PropTypes.string,
-  size: PropTypes.number
+  size: PropTypes.number,
+  unconfirmed: PropTypes.bool
 }

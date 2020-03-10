@@ -48,7 +48,10 @@ const DailyTx = ({ txData }) => {
 }
 
 DailyTx.propTypes = {
-  txData: PropTypes.array
+  txData: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.bool
+  ]).isRequired
 }
 
 DailyTx.defaultProps = {
