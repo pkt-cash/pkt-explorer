@@ -1,5 +1,8 @@
 # PKT explorer 
 
+## use 
+clone the project and save `src/utils/endpoints.example.js` as `src/utils/endpoints.js` edit if needed, and run either a build or the dev server
+
 ## available npm cmds
 
 ### `npm start`
@@ -23,3 +26,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run storybook`
 
 start the storybook server
+
