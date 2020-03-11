@@ -20,6 +20,8 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+To change the backend URL, set the environment variable REACT_APP_BACKEND_URL=https://path.to.your.server/
+
 ### `npm run storybook`
 
 start the storybook server
