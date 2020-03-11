@@ -35,7 +35,7 @@ const AddressScreen = (props) => {
         setMetaLoad(false)
       })
     // fetch last 30 day incomes
-    fetchJson(`${addrMetaApi}/${addr}/income/30`)
+    fetchJson(`${addrMetaApi}/${addr}/income/90`)
       .then((json) => {
         setDailyTr(treatIncome(json.result))
       })

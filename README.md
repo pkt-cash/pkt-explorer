@@ -1,8 +1,5 @@
 # PKT explorer 
 
-## use 
-clone the project and save `src/utils/endpoints.example.js` as `src/utils/endpoints.js` edit if needed, and run either a build or the dev server
-
 ## available npm cmds
 
 ### `npm start`
