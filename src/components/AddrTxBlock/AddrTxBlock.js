@@ -26,7 +26,7 @@ const TxLabel = styled.div`
 
 const AmountLabel = styled(TxLabel)`
   padding-right: 1em;
-  color: ${props => (props.direction === '+') ? 'green' : 'red'};
+  ${props => (props.direction === '+') ? 'color: green;': ''}
 `  
 
 // TODO(cjd): expand on click?
