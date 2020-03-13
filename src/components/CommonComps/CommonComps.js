@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
-import { displayPKT } from '../../utils'
+import { displayPKT, commafy } from '../../utils'
 
 export const MainWrapper = styled.div`
   max-width: ${metrics.fullW}px;
@@ -128,7 +128,7 @@ const Decimal = styled.span`
 `
 
 export const Pkt = ({ amt }) => {
-  const str = parseFloat(displayPKT(amt)).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const str = commafy(parseFloat(displayPKT(amt)).toFixed(2));
   const intDec = str.split('.');
   return <>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>PKT</Unit></>;
 }

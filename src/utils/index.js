@@ -1,3 +1,6 @@
+export function commafy (number) {
+  return ('' + number).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 export function treatDTx (data) {
   return data.map((data, i) => [new Date(data.date), data.transactionCount])

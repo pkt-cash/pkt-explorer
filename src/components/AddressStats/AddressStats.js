@@ -8,6 +8,7 @@ import { IoIosCopy } from 'react-icons/io'
 // import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { commafy } from '../../utils'
 
 import { motion } from 'framer-motion'
 import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
@@ -170,7 +171,16 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Transactions</Label> <Content>{meta.recvCount + meta.spentCount}</Content></p>
+                  <p><Label>Transactions</Label> <Content>{commafy(meta.recvCount + meta.spentCount)}</Content></p>
+                </BrdCont>
+              </ItemCont>
+            </Column>
+          </Row>
+          <Row>
+            <Column full>
+              <ItemCont>
+                <BrdCont>
+                  <p><Label>Mining payouts</Label> <Content>{commafy(meta.mineCount)}</Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
