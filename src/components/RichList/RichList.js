@@ -21,7 +21,6 @@ const cells = {
 }
 
 const AddrLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.pktBlueLight};
   display: inline-block;
   word-break: break-all;
 `

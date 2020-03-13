@@ -6,7 +6,10 @@ const theme = {
     pktBlueLight: '#08C1FF',
     pktBlueLighter: '#31C9FC',
     pktGreyLight: '#f1f1f1',
-    pktGrey: '#e1e1e1'
+    pktGrey: '#e1e1e1',
+
+    pktLinkDark: '#2fa4d7',
+    pktUnimportantText: '#888',
   }
 }
 

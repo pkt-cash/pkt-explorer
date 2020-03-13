@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ListLabelCont, ListCont, Pkt } from '../CommonComps/CommonComps'
+import { ListLabelCont, ListCont, Pkt, LeftCont, RightCont } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import { IoIosCopy } from 'react-icons/io'
 // import TxChart from '../TxChart/TxChart'
@@ -100,62 +100,67 @@ margin-right: 10px;
 
 const AddrLabel = styled.div`
   margin-right: 10px;
+  font-size: 1.8em;
+  margin-bottom: -2px; /* TODO(cjd): This is a mess */
+`
+
+const BalanceLabel = styled.div`
+  margin-right: 10px;
+  font-size: 1.3em;
 `
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
   return (
     <ListCont>
       <ListLabelCont>
-        <AddrLabel>
-          Address:
-        </AddrLabel>
-        <HashCont>
-          <Hash>{addr}</Hash>
-          <CopyToClipboard text={addr}
-            onCopy={() => console.log('copy !!!', addr)}>
-            {/* <GenBt icn='copy' /> */}
-            <CopyBt
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
-            ><IoIosCopy /></CopyBt>
-          </CopyToClipboard>
-        </HashCont>
+        <LeftCont>
+          <AddrLabel>
+            Address
+          </AddrLabel>
+          <BalanceLabel>
+            <Pkt amt={meta.balance}/>
+          </BalanceLabel>
+        </LeftCont>
+        <RightCont>
+          <HashCont>
+              <Hash>{addr}</Hash>
+              <CopyToClipboard text={addr}
+                onCopy={() => console.log('copy !!!', addr)}>
+                {/* <GenBt icn='copy' /> */}
+                <CopyBt
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.8 }}
+                ><IoIosCopy /></CopyBt>
+              </CopyToClipboard>
+            </HashCont>
+        </RightCont>
       </ListLabelCont>
       <ListDataCont>
         <MetaCont>
           <Row>
             <Column full>
               <ItemCont>
-                <BrdCont>
-                  <p><Label>Balance</Label> <Content><Pkt amt={meta.balance}/></Content></p>
-                </BrdCont>
+                  <p><Label>Confirmed Balance</Label> <Content><Pkt amt={meta.balance}/></Content></p>
               </ItemCont>
             </Column>
           </Row>
+          {meta.unconfirmedReceived && parseFloat(meta.unconfirmedReceived) > 0 &&
           <Row>
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Confirmed</Label> <Content><Pkt amt={meta.confirmedReceived}/></Content></p>
+                  <p><Label>Unconfirmed</Label> <Content><Pkt amt={meta.unconfirmedReceived}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
           </Row>
-          <Row>
-            <Column full>
-              <ItemCont>
-                <BrdCont>
-                  <p><Label>Spent</Label> <Content><Pkt amt={meta.spent}/></Content></p>
-                </BrdCont>
-              </ItemCont>
-            </Column>
-          </Row>
+          }
           {meta.burned && parseFloat(meta.burned) > 0 &&
           <Row>
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>burned</Label> <Content><Pkt amt={meta.burned}/></Content></p>
+                  <p><Label>Burned</Label> <Content><Pkt amt={meta.burned}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -165,16 +170,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Recived</Label> <Content><Pkt amt={meta.recvCount}/></Content></p>
-                </BrdCont>
-              </ItemCont>
-            </Column>
-          </Row>
-          <Row>
-            <Column full>
-              <ItemCont>
-                <BrdCont>
-                  <p><Label>Spent</Label> <Content><Pkt amt={meta.spentCount}/></Content></p>
+                  <p><Label>Transactions</Label> <Content>{meta.recvCount + meta.spentCount}</Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
