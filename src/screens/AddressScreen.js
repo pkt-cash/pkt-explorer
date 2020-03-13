@@ -35,12 +35,12 @@ const AddressScreen = (props) => {
         setMetaLoad(false)
       })
     // fetch last 30 day incomes
-    fetchJson(`${addrMetaApi}/${addr}/income/90`)
+    fetchJson(`${addrMetaApi}/${addr}/income/90?mining=only`)
       .then((json) => {
         setDailyTr(treatIncome(json.result))
       })
     // fetch txList
-    fetchJson(`${addrMetaApi}/${addr}/coins?nomine=1`)
+    fetchJson(`${addrMetaApi}/${addr}/coins?mining=excluded`)
       .then((json) => {
         setTxList(json)
       })
