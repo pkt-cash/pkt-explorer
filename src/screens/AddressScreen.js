@@ -3,7 +3,7 @@ import endpoints from '../utils/endpoints'
 import { useParams } from 'react-router-dom'
 import AddrStats from '../components/AddressStats/AddressStats'
 import { treatIncome, fetchJson } from '../utils'
-import TxBlock from '../components/TxBlock/TxBlock'
+import AddrTxBlock from '../components/AddrTxBlock/AddrTxBlock'
 import Loader from '../components/Loader/Loader'
 import styled from 'styled-components'
 const { addrMetaApi } = endpoints
@@ -52,7 +52,7 @@ const AddressScreen = (props) => {
       : <AddrStats meta={meta} addr={addr} dailyTr={dailyTr}/>
     }
     {txList.results
-      ? txList.results.map((item, k) => <TxBlock txData={item} key={`tx-${k}`} />)
+      ? txList.results.map((item, k) => <AddrTxBlock txData={item} myAddr={addr} key={`tx-${k}`} />)
       : <Loader text='Loading address data'/>
     }
   </ScreenCont>

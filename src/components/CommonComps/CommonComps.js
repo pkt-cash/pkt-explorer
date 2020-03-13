@@ -72,7 +72,24 @@ export const ListLabelCont = styled.div`
   @media ${mqs.small} {
     flex-direction: column;
   }
+`
 
+export const LeftCont = styled.div`
+  align-items: end;
+  justify-content: start;
+  display: flex;
+`
+
+export const RightCont = styled.div`
+  align-items: end;
+  justify-content: end;
+  display: flex;
+`
+
+export const ClickableListLabelCont = styled(ListLabelCont)`
+  /* &:hover {
+    background: ${({ theme }) => theme.colors.pktGreyLight};
+  } */
 `
 
 export const ListCont = styled.div`
@@ -106,9 +123,15 @@ const Unit = styled.span`
   font-weight: ${metrics.fontWeight};
 `
 
-export const Pkt = ({ amt }) => <>
-  {parseFloat(displayPKT(amt)).toFixed(2)} <Unit>PKT</Unit>
-</>
+const Decimal = styled.span`
+  opacity: 0.5;
+`
+
+export const Pkt = ({ amt }) => {
+  const str = parseFloat(displayPKT(amt)).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const intDec = str.split('.');
+  return <>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>PKT</Unit></>;
+}
 
 Pkt.propTypes = {
   amt: PropTypes.oneOfType([

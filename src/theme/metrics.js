@@ -1,5 +1,5 @@
 const metrics = {
-  fullW: 960,
+  fullW: 1024,
   menuHeight: 50,
   mq: {
     vSmall: 320,
