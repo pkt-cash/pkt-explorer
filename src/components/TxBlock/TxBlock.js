@@ -42,7 +42,6 @@ const InfoCont = styled.div`
   padding: 1rem;
   display: flex;
   justify-content: flex-start;
-  background-color: #f8f8f8;
   @media ${mqs.small} {
     flex-direction: column;
   }
