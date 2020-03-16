@@ -1,22 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FaClock, FaCheckCircle } from 'react-icons/fa'
-import metrics, { mqs } from '../../theme/metrics'
+import { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
-import { ClickableListLabelCont, ListCont, LeftCont, RightCont, Pkt } from '../CommonComps/CommonComps'
+import { ListLabelCont, Pkt } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
 import { DateTime } from 'luxon'
+import TxTogBt from '../TxTogBt/TxTogBt'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+const listVars = {
+  open: {
+    height: 'auto'
+  },
+  closed: {
+    height: 0
+  }
+}
+
+const RightCont = styled.div`
+  align-items: initial;
+  display: flex;
+  @media ${mqs.small} {
+    flex-direction: column;
+  }
+`
 
 const AddrTxBlockCont = styled.div`
   border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};
 `
 
 // TODO(cjd): No idea why line-height: 2em; is needed to center the text
-const BlockHeaderCont = styled(ClickableListLabelCont)`
-    line-height: 2em;
+const BlockHeaderCont = styled(ListLabelCont)`
+    /* line-height: 2em; */
     padding: 0.5rem;
+    ${mqs.small} {
+      flex-direction: column;
+    }
+`
+
+const PktCont = styled.div`
+  padding: 0.5rem;
+  display: flex;
+  flex-flow: row no-wrap;
+  text-align: right;
+  *{
+    white-space: nowrap;
+  }
 `
 
 const TxLabel = styled.div`
@@ -24,12 +56,12 @@ const TxLabel = styled.div`
 `
 
 const AmountLabel = styled(TxLabel)`
-  padding-right: 1em;
+  padding-right: 0.5em;
   ${props => (props.direction === '+') ? 'color: green;' : ''}
 `
 
 // TODO(cjd): expand on click?
-const TxlistCont = styled.div`
+const TxlistCont = styled(motion.div)`
   overflow: hidden;
   padding: 0  0.5rem;
 `
@@ -49,62 +81,34 @@ const TxColsCont = styled.div`
   }
 `
 
-const InfoCont = styled.div`
-  padding: 1rem;
-  display: flex;
-  justify-content: flex-start;
-  background-color: #f8f8f8;
-  @media ${mqs.small} {
-    flex-direction: column;
-  }
-`
-
 const TxColSep = styled.div`
   width: 20px;
   height: ${({ small }) => small ? 'auto' : '45px'};
   display: flex;
   margin: 10px 0;
-  align-items: center;
+  align-items: baseline;
   text-align: center;
   @media ${mqs.small} {
     display: none;
   }
 `
-
-const LeftLabel = styled.span`
-  display: flex;
-  width: calc(100% - 30px);
-  font-weight: ${metrics.fontWeight};
-`
-
-const TxInteractive = styled.span`
-  display: block;
-  margin-bottom: ${metrics.sep}rem;
-`
-
-const TxLastCont = styled.div`
-  margin-right: 10px
-`
-
-const MinedAtLabel = styled.a/* TODO(cjd): (Link) */`
-  margin-left: ${metrics.sep}rem;
-  display: flex;
-  align-items: flex-start;
+/* TODO(cjd): (Link) */
+const MinedAtLabel = styled.a`
+  /* display: flex; */
+  /* align-items: flex-start; */
+  padding: 0.5rem;
+  margin-right: 1rem;
+  border-radius: 3px;
+  background: #eee;
+  white-space: nowrap;
   @media ${mqs.small} {
-    margin: 1rem 0 0 0;
-    justify-content: end;
+    /* margin: 1rem 0 0 0; */
+    /* justify-content: end; */
   }
 `
 
 const RightLabel = styled.span`
   font-weight: normal;
-`
-
-const TotalLabel = styled.span`
-  font-weight: ${metrics.fontWeight};
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center
 `
 
 const TxSmallLabel = styled.div`
@@ -115,12 +119,15 @@ const TxSmallLabel = styled.div`
 `
 
 const IcnCont = styled.span`
-  margin-left: 5px;
+  margin-right: 5px;
   padding-top:2px;
+  position: relative;
+  top:2px;
 `
 
 const AddrLink = styled(Link)`
   word-break: break-all;
+  padding: 0.5rem;
   display: inline-block;
   font-weight: normal;
 `
@@ -132,8 +139,8 @@ const ConfIcn = ({ isConf }) => {
   </IcnCont>
 }
 
-// import styled from 'styled-components'
 const AddrTxBlock = ({ txData, myAddr }) => {
+  const [isOpen, setOpen] = useState(false)
   const { txid, input, output, blockTime, firstSeen } = txData
   const dt = DateTime.fromISO(blockTime)
   const fs = DateTime.fromISO(firstSeen)
@@ -177,59 +184,60 @@ const AddrTxBlock = ({ txData, myAddr }) => {
 
   return (
     <AddrTxBlockCont>
-      <ListCont>
-        <BlockHeaderCont>
-          <LeftCont>
-            <AmountLabel direction={direction}>
-              {direction}<Pkt amt={value}/>
-            </AmountLabel>
-          </LeftCont>
-          <LeftCont>
-            <AddrLink to={`/address/${counterparty}`}>
-              {counterparty}
-            </AddrLink>
-            {/* {(others > -1) ? /// TODO(cjd): Need to get this to look pretty
-                <TxLabel>And {others} others...</TxLabel> : ""
-            } */}
-          </LeftCont>
-          <RightCont>
-            <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
-              {blockTime
-                ? <><RightLabel>{dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
-                : <><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn /></>
+
+      <BlockHeaderCont>
+        <RightCont>
+          <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
+            {blockTime
+              ? <><ConfIcn isConf /><RightLabel>{dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel></>
+              : <><ConfIcn /><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel></>
+            }
+          </MinedAtLabel>
+          <AddrLink to={`/address/${counterparty}`}>
+            {counterparty}
+          </AddrLink>
+        </RightCont>
+        <PktCont>
+          <AmountLabel direction={direction}>
+            {direction}<Pkt amt={value}/> 
+          </AmountLabel>
+          <TxTogBt isOpen={isOpen} action={() => setOpen(!isOpen)}/>
+        </PktCont>
+      </BlockHeaderCont>
+      <TxlistCont
+        variants={listVars}
+        animate={isOpen ? 'open' : 'closed'}
+        initial='open'
+        transition={{ duration: 0.1 }}
+      >
+        <TxColsCont>
+          <TxSmallLabel>input</TxSmallLabel>
+          <TxCol>
+            {(() => {
+              if (input && input.length) {
+                return input.map((data, i) => (
+                  <TxItem
+                    key={`inputItem-${i}}`}
+                    address={data.address}
+                    value={data.value}
+                    size={120}
+                  />
+                ))
+              } else if (!blockTime) {
+                return <TxItem txt='Unconfirmed - Inputs Unavailable' />
+              } else {
+                return <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
-            </MinedAtLabel>
-          </RightCont>
-        </BlockHeaderCont>
-        <TxlistCont>
-          <TxColsCont>
-            <TxSmallLabel>input</TxSmallLabel>
-            <TxCol>
-              {(() => {
-                if (input && input.length) {
-                  return input.map((data, i) => (
-                    <TxItem
-                      key={`inputItem-${i}}`}
-                      address={data.address}
-                      value={data.value}
-                      size={120}
-                    />
-                  ))
-                } else if (!blockTime) {
-                  return <TxItem txt='Unconfirmed - Inputs Unavailable' />
-                } else {
-                  return <TxItem txt='No Inputs (Newly Generated Coins) ' />
-                }
-              })()}
-            </TxCol>
-            <TxColSep><IoMdArrowForward size={30} /></TxColSep>
-            <TxSmallLabel>output</TxSmallLabel>
-            <TxCol>
-              {output && output.map((data, i) => <TxItem unconfirmed={blockTime === undefined} key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
-            </TxCol>
-          </TxColsCont>
-        </TxlistCont>
-      </ListCont>
+            })()}
+          </TxCol>
+          <TxColSep><IoMdArrowForward size={30} /></TxColSep>
+          <TxSmallLabel>output</TxSmallLabel>
+          <TxCol>
+            {output && output.map((data, i) => <TxItem unconfirmed={blockTime === undefined} key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
+          </TxCol>
+        </TxColsCont>
+      </TxlistCont>
+
     </AddrTxBlockCont>
   )
 }
