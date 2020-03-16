@@ -2,9 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 import { DateTime } from 'luxon'
+import { displayPKT } from '../../utils'
 
 const ListCont = styled.div`
-padding: 0.5rem;
+padding: 1rem;
 `
 
 const Row = styled.div`
@@ -23,7 +24,7 @@ const DailyItem = ({ data }) => {
   console.log(dt)
   return <Row>
     <div>{dt.toLocaleString(DateTime.DATE_MED)}</div>
-    <div>{data[1]}</div>
+    <div>{data[1]} / {displayPKT(data[1])}</div>
   </Row>
   // return <div>{data[0]} {data[1]}</div>
 }
