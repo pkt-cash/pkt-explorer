@@ -11,7 +11,7 @@ import {
   TitleCont,
   ListLabel,
   HashCont,
-  Hash,
+  Hash
 } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 
@@ -19,7 +19,7 @@ import metrics, { mqs } from '../../theme/metrics'
 // import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
- 
+
 import { commafy } from '../../utils'
 
 import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
@@ -79,8 +79,6 @@ const ChartCont = styled.div`
 //   font-style: italic;
 // `
 
-
-
 const BalanceLabel = styled.div`
   margin-right: 10px;
   font-size: 1.3em;
@@ -99,9 +97,9 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
       </LeftCont>
       <RightCont>
         <HashCont>
-            <Hash>{addr}</Hash>
-            <Copy value={addr}/>
-          </HashCont>
+          <Hash>{addr}</Hash>
+          <Copy value={addr}/>
+        </HashCont>
       </RightCont>
     </TitleCont>
     <ListCont>
@@ -113,7 +111,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           <Row>
             <Column full>
               <ItemCont>
-                  <p><Label>Confirmed Balance</Label> <Content><Pkt amt={meta.balance}/></Content></p>
+                <p><Label>Confirmed Balance</Label> <Content><Pkt amt={meta.balance}/></Content></p>
               </ItemCont>
             </Column>
           </Row>

@@ -4,11 +4,10 @@ import PropTypes from 'prop-types'
 import { FaClock, FaCheckCircle } from 'react-icons/fa'
 import metrics, { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
-import { ClickableListLabelCont, ListCont, LeftCont, RightCont } from '../CommonComps/CommonComps'
+import { ClickableListLabelCont, ListCont, LeftCont, RightCont, Pkt } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
 import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
-import { Pkt } from '../CommonComps/CommonComps'
 
 const AddrTxBlockCont = styled.div`
   border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};
@@ -26,8 +25,8 @@ const TxLabel = styled.div`
 
 const AmountLabel = styled(TxLabel)`
   padding-right: 1em;
-  ${props => (props.direction === '+') ? 'color: green;': ''}
-`  
+  ${props => (props.direction === '+') ? 'color: green;' : ''}
+`
 
 // TODO(cjd): expand on click?
 const TxlistCont = styled.div`
@@ -87,7 +86,7 @@ const TxLastCont = styled.div`
   margin-right: 10px
 `
 
-const MinedAtLabel = styled.a/*TODO(cjd): (Link)*/`
+const MinedAtLabel = styled.a/* TODO(cjd): (Link) */`
   margin-left: ${metrics.sep}rem;
   display: flex;
   align-items: flex-start;
@@ -139,39 +138,39 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   const dt = DateTime.fromISO(blockTime)
   const fs = DateTime.fromISO(firstSeen)
 
-  let value = '0';
-  let direction = '';
-  let maxValue = 0;
-  let counterparty = '';
-  let others = 0;
+  let value = '0'
+  let direction = ''
+  let maxValue = 0
+  let counterparty = ''
+  let others = 0
   for (const inp of input) {
-    console.log(Number(inp.value), inp.address);
+    console.log(Number(inp.value), inp.address)
     if (inp.address === myAddr) {
-      value = inp.value;
-      direction = '-';
+      value = inp.value
+      direction = '-'
     } else if (Number(inp.value) > maxValue) {
-      others += (counterparty !== '');
-      counterparty = inp.address;
-      maxValue = Number(inp.value);
+      others += (counterparty !== '')
+      counterparty = inp.address
+      maxValue = Number(inp.value)
     }
   }
-  if (direction === "") {
+  if (direction === '') {
     for (const out of output) {
-      console.log(Number(out.value), out.address);
+      console.log(Number(out.value), out.address)
       if (out.address === myAddr) {
-        value = out.value;
-        direction = '+';
+        value = out.value
+        direction = '+'
       }
     }
   } else {
-    maxValue = 0;
-    counterparty = '';
-    others = 0;
+    maxValue = 0
+    counterparty = ''
+    others = 0
     for (const out of output) {
       if (Number(out.value) > maxValue) {
-        others += (counterparty !== '');
-        counterparty = out.address;
-        maxValue = Number(out.value);
+        others += (counterparty !== '')
+        counterparty = out.address
+        maxValue = Number(out.value)
       }
     }
   }
@@ -195,10 +194,10 @@ const AddrTxBlock = ({ txData, myAddr }) => {
           </LeftCont>
           <RightCont>
             <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
-                {blockTime
+              {blockTime
                 ? <><RightLabel>{dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
                 : <><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn /></>
-                }
+              }
             </MinedAtLabel>
           </RightCont>
         </BlockHeaderCont>
@@ -206,7 +205,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
           <TxColsCont>
             <TxSmallLabel>input</TxSmallLabel>
             <TxCol>
-              {(()=> {
+              {(() => {
                 if (input && input.length) {
                   return input.map((data, i) => (
                     <TxItem
@@ -215,11 +214,11 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                       value={data.value}
                       size={120}
                     />
-                  ));
+                  ))
                 } else if (!blockTime) {
-                    return <TxItem txt='Unconfirmed - Inputs Unavailable' />
+                  return <TxItem txt='Unconfirmed - Inputs Unavailable' />
                 } else {
-                    return <TxItem txt='No Inputs (Newly Generated Coins) ' />
+                  return <TxItem txt='No Inputs (Newly Generated Coins) ' />
                 }
               })()}
             </TxCol>

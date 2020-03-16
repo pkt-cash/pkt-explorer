@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 
 export function formatDate (d) {
-  return d.toString().replace(/ GMT[+-][0-9]+ .*$/, '');
+  return d.toString().replace(/ GMT[+-][0-9]+ .*$/, '')
 }
 
 export function commafy (number) {
-  return ('' + number).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return ('' + number).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 }
 
 export function treatDTx (data) {
@@ -42,9 +42,9 @@ export const displayPKT = (amount) => {
 }
 
 export const bpsStr = (bits) => {
-  if (bits > (1<<30)) return `${parseFloat(bits / 1073741824).toFixed(2)} Gb/s`
-  if (bits > (1<<20)) return `${parseFloat(bits / 1048576).toFixed(2)} Mb/s`
-  if (bits > (1<<10)) return `${parseFloat(bits / 1048576).toFixed(2)} Kb/s`
+  if (bits > (1 << 30)) return `${parseFloat(bits / 1073741824).toFixed(2)} Gb/s`
+  if (bits > (1 << 20)) return `${parseFloat(bits / 1048576).toFixed(2)} Mb/s`
+  if (bits > (1 << 10)) return `${parseFloat(bits / 1048576).toFixed(2)} Kb/s`
   return `${bits} bits/s`
 }
 
@@ -93,21 +93,21 @@ export const fetchJson = async (url) => {
 }
 
 export const useInterval = (callback, delay) => {
-  const savedCallback = useRef();
+  const savedCallback = useRef()
 
   // Remember the latest callback.
   useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
+    savedCallback.current = callback
+  }, [callback])
 
   // Set up the interval.
   useEffect(() => {
-    function tick() {
-      savedCallback.current();
+    function tick () {
+      savedCallback.current()
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
+      const id = setInterval(tick, delay)
+      return () => clearInterval(id)
     }
-  }, [delay]);
+  }, [delay])
 }

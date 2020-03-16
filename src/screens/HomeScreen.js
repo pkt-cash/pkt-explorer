@@ -19,10 +19,10 @@ const HomeScreen = (props) => {
         if (json.error) setErr(json.error)
         setBlockList(json.results)
       })
-  };
+  }
 
   useEffect(() => {
-    loadBlocks();
+    loadBlocks()
 
     // fetch packet stats
     fetchJson(`${pkApi}/30`)
@@ -37,7 +37,7 @@ const HomeScreen = (props) => {
       })
   }, [])
   useInterval(() => {
-    loadBlocks();
+    loadBlocks()
   }, 30000)
 
   return <>

@@ -150,7 +150,6 @@ text-overflow: ellipsis;
 margin-right: 10px;
 `
 
-
 const Unit = styled.span`
   font-weight: ${metrics.fontWeight};
 `
@@ -160,9 +159,9 @@ const Decimal = styled.span`
 `
 
 export const Pkt = ({ amt }) => {
-  const str = commafy(parseFloat(displayPKT(amt)).toFixed(2));
-  const intDec = str.split('.');
-  return <>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>PKT</Unit></>;
+  const str = commafy(parseFloat(displayPKT(amt)).toFixed(2))
+  const intDec = str.split('.')
+  return <>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>PKT</Unit></>
 }
 
 Pkt.propTypes = {

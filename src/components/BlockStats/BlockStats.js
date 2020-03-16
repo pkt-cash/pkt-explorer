@@ -11,7 +11,7 @@ import {
   RightCont,
   TitleCont,
   HashCont,
-  Hash,
+  Hash
 } from '../CommonComps/CommonComps'
 import Loader from '../Loader/Loader'
 import { Link } from 'react-router-dom'
@@ -90,35 +90,35 @@ const TableCont = styled.div`
 
 const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
   if (!stats) {
-    return (<Loader text='Loading block statistics' />);
+    return (<Loader text='Loading block statistics' />)
   }
-  let nextHash;
-  let isOrphan = false;
+  let nextHash
+  let isOrphan = false
   if (nextBlk && nextBlk.results && nextBlk.results.length) {
-    const nb = nextBlk.results[0];
+    const nb = nextBlk.results[0]
     console.log(nb.previousBlockHash, stats.hash)
     if (nb.previousBlockHash !== stats.hash) {
-      isOrphan = true;
+      isOrphan = true
     } else {
-      nextHash = nb.hash;
+      nextHash = nb.hash
     }
   }
-  //console.log(blkPc);
+  // console.log(blkPc);
   return (<>
     <TitleCont>
       <LeftCont>
         <TitleHeader>
-          {(isOrphan) ?
-            `Orphan block ${stats.hash} #${stats.height}` :
-            `Block #${stats.height}`}
+          {(isOrphan)
+            ? `Orphan block ${stats.hash} #${stats.height}`
+            : `Block #${stats.height}`}
         </TitleHeader>
       </LeftCont>
       {(!isOrphan) &&
         <RightCont>
           <HashCont>
-              <Hash>{stats.hash}</Hash>
-              <Copy value={stats.hash}/>
-            </HashCont>
+            <Hash>{stats.hash}</Hash>
+            <Copy value={stats.hash}/>
+          </HashCont>
         </RightCont>
       }
     </TitleCont>
@@ -130,12 +130,12 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
         <Row>
           <Column>
             <ItemCont>
-                <p><Label>Size (bytes)</Label> <Content>{commafy(stats.size)}</Content></p>
+              <p><Label>Size (bytes)</Label> <Content>{commafy(stats.size)}</Content></p>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
-                <p><Label>Difficulty</Label> <Content>{commafy(parseFloat(stats.difficulty).toFixed())}</Content></p>
+              <p><Label>Difficulty</Label> <Content>{commafy(parseFloat(stats.difficulty).toFixed())}</Content></p>
             </ItemCont>
           </Column>
         </Row>
@@ -152,15 +152,15 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
               <BrdCont>
                 <p>
                   <Label>Next Block</Label>
-                  {(()=> {
-                      if (isOrphan) {
-                        return <Content>Not in main chain</Content>
-                      } else if (nextHash) {
-                        return <Content title={nextHash}>
-                          <Link to={`/block/${nextHash}`}>{stats.height + 1}</Link>
-                        </Content>
-                      }
-                    })()}
+                  {(() => {
+                    if (isOrphan) {
+                      return <Content>Not in main chain</Content>
+                    } else if (nextHash) {
+                      return <Content title={nextHash}>
+                        <Link to={`/block/${nextHash}`}>{stats.height + 1}</Link>
+                      </Content>
+                    }
+                  })()}
                 </p>
               </BrdCont>
             </ItemCont>
@@ -181,7 +181,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
                   <Label>Previous Block</Label>
                   <Content title={stats.previousBlockHash}>
                     <Link to={`/block/${stats.previousBlockHash}`}>
-                      {(()=> {
+                      {(() => {
                         if (isOrphan) {
                           return stats.previousBlockHash
                         }
@@ -203,7 +203,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
                 <p>
                   <Label>Timestamp</Label>
                   {(() => {
-                    const d = new Date(stats.time);
+                    const d = new Date(stats.time)
                     return <Content title={d.toUTCString()}>{formatDate(d)}</Content>
                   })()}
                 </p>
@@ -216,13 +216,13 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
                 <p>
                   <Label>Confirmations</Label>
                   <Content>
-                    {(()=> {
+                    {(() => {
                       if (!mainChain) {
                         return <Loader tiny/>
                       }
                     })()}
                   </Content>
-                  </p>
+                </p>
               </BrdCont>
             </ItemCont>
           </Column>
@@ -237,12 +237,12 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
         <Row>
           <Column>
             <ItemCont>
-                <p><Label>Announcements</Label> <Content>{commafy(stats.pcAnnCount)}</Content></p>
+              <p><Label>Announcements</Label> <Content>{commafy(stats.pcAnnCount)}</Content></p>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
-                <p><Label>Announcement Difficulty</Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>
+              <p><Label>Announcement Difficulty</Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>
             </ItemCont>
           </Column>
         </Row>
@@ -264,7 +264,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
         </Row>
       </TableCont>
     </ListCont>
-    </>);
+  </>)
 }
 
 BlockStats.propTypes = {

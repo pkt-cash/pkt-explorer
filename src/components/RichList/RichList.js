@@ -10,10 +10,9 @@ import {
   ListLabel,
   ListLabelCont,
   ListCont,
-  Pkt,
+  Pkt
 } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
-import { displayPKT } from '../../utils'
 // import RespHash from '../RespHash/RespHash'
 
 const cells = {
@@ -30,7 +29,9 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
-const RichList = ({ listData, hashW }) => {
+const RichList = ({ listData }) => {
+  console.log('lista')
+  console.log(listData)
   return (
     listData
       ? <ListCont rich>
@@ -72,8 +73,7 @@ const RichRow = ({ row }) => {
 }
 
 RichList.propTypes = {
-  listData: PropTypes.array,
-  hashW: PropTypes.number
+  listData: PropTypes.array
 }
 
 RichRow.propTypes = {

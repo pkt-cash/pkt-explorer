@@ -22,7 +22,7 @@ export default (props) => {
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {id}</div>
   // if (loading) return <div>fetching id data</div>
-  //console.log(blkData)
+  // console.log(blkData)
   useEffect(() => {
     // fetch block data
     fetchJson(`${blockApi}/${id}`)
@@ -35,16 +35,16 @@ export default (props) => {
 
         // Next block data (to verify the block is in the main chain)
         setNextBlk(false)
-        fetchJson(`${blkUpApi}/1/${json.height+2}}`)
+        fetchJson(`${blkUpApi}/1/${json.height + 2}}`)
           .then((json) => {
             if (json.error) {
-              console.log(json.error);
+              console.log(json.error)
             }
-            //console.log('xxx', json);
+            // console.log('xxx', json);
             setNextBlk(json)
           })
       })
-    
+
     // fetch blk coins
     fetchJson(`${blockApi}/${id}/coins`)
       .then((json) => {
@@ -59,20 +59,20 @@ export default (props) => {
     fetchJson(`${pcBlockApi}/${id}`)
       .then((json) => {
         if (json.error) {
-          console.log(json.error);
+          console.log(json.error)
           return setBlkErr(true)
         }
         setBlkPc(json)
       })
   }, [id])
   if (blkErr) return <div>Error fetching block {id}</div>
-  //console.log(blkData)
+  // console.log(blkData)
   return <>
     {(() => {
       if (metaLoad) {
         return <Loader text='Loading Block' />
       } else {
-        const out = [ <BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} /> ]
+        const out = [<BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} />]
         if (coinLoad || !blkCoins.results) {
           out.push(<Loader text='Loading Transactions' />)
         } else {
@@ -81,9 +81,9 @@ export default (props) => {
               <ListLabel>Transactions</ListLabel>
             </ListLabelCont>
             {blkCoins.results.map((coinD, i) => <TxBlock txData={coinD} key={`coin-${i}`} view="block"/>)}
-          </ListCont>);
+          </ListCont>)
         }
-        return out;
+        return out
       }
     })()}
   </>
