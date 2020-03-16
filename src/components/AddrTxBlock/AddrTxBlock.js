@@ -44,8 +44,8 @@ const BlockHeaderCont = styled(ListLabelCont)`
 const PktCont = styled.div`
   padding: 0.5rem;
   display: flex;
-  flex-flow: row no-wrap;
-  text-align: right;
+  flex-flow: row nowrap;
+  justify-content: right;
   *{
     white-space: nowrap;
   }

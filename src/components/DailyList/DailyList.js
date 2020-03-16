@@ -10,7 +10,7 @@ padding: 1rem;
 
 const Row = styled.div`
   display: flex;
-  flex-flow: row no-wreap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   padding: 0.5rem;
   ${({ head }) => head && css`font-weight: 700;`}
