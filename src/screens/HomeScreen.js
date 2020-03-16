@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { fetchJson, treatStats } from '../utils'
+import { fetchJson, treatStats, useInterval } from '../utils'
 import HomeStats from '../components/HomeStats/HomeStats'
 import endpoints from '../utils/endpoints'
 import BlockList from '../components/BlockList/BlockList.js'
@@ -12,13 +12,18 @@ const HomeScreen = (props) => {
 
   if (hasErr) console.error(hasErr)
 
-  useEffect(() => {
+  const loadBlocks = () => {
     // fetch blockList (first 20)
     fetchJson(`${blkLApi}/20`)
       .then((json) => {
         if (json.error) setErr(json.error)
         setBlockList(json.results)
       })
+  };
+
+  useEffect(() => {
+    loadBlocks();
+
     // fetch packet stats
     fetchJson(`${pkApi}/30`)
       .then((json) => {
@@ -31,6 +36,9 @@ const HomeScreen = (props) => {
         setPkData(res)
       })
   }, [])
+  useInterval(() => {
+    loadBlocks();
+  }, 30000)
 
   return <>
     <HomeStats txData={ pkData } lastBlockData={{}} labelY='diffculty' />

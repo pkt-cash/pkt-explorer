@@ -1,3 +1,9 @@
+import { useEffect, useRef } from 'react'
+
+export function formatDate (d) {
+  return d.toString().replace(/ GMT[+-][0-9]+ .*$/, '');
+}
+
 export function commafy (number) {
   return ('' + number).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -9,11 +15,11 @@ export function treatDTx (data) {
 export function treatStats (data) {
   const datum = [
     {
-      label: 'bps',
+      label: 'Bandwidth',
       data: []
     },
     {
-      label: 'eps',
+      label: 'Encryptions',
       data: []
     }
   ]
@@ -35,10 +41,11 @@ export const displayPKT = (amount) => {
   return Number(amount) / 0x40000000
 }
 
-export const byteStr = (bytes) => {
-  if (bytes > 1073741824) return `${parseFloat(bytes / 1073741824).toFixed(2)} GB/s`
-  if (bytes > 1048576) return `${parseFloat(bytes / 1048576).toFixed(2)} MB/s`
-  return `${bytes} B/s`
+export const bpsStr = (bits) => {
+  if (bits > (1<<30)) return `${parseFloat(bits / 1073741824).toFixed(2)} Gb/s`
+  if (bits > (1<<20)) return `${parseFloat(bits / 1048576).toFixed(2)} Mb/s`
+  if (bits > (1<<10)) return `${parseFloat(bits / 1048576).toFixed(2)} Kb/s`
+  return `${bits} bits/s`
 }
 
 /**
@@ -83,4 +90,24 @@ export const fetchJson = async (url) => {
     console.error('error fetching ressource')
     return { error }
   }
+}
+
+export const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }

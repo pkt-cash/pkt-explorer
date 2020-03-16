@@ -135,9 +135,9 @@ const ConfIcn = ({ isConf }) => {
 
 // import styled from 'styled-components'
 const AddrTxBlock = ({ txData, myAddr }) => {
-  const { txid, input, output, blockTime, seenTime } = txData
+  const { txid, input, output, blockTime, firstSeen } = txData
   const dt = DateTime.fromISO(blockTime)
-  const st = DateTime.fromISO(seenTime)
+  const fs = DateTime.fromISO(firstSeen)
 
   let value = '0';
   let direction = '';
@@ -197,7 +197,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
             <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
                 {blockTime
                 ? <><RightLabel>{dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
-                : <><RightLabel>{st.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn /></>
+                : <><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn /></>
                 }
             </MinedAtLabel>
           </RightCont>
@@ -206,10 +206,22 @@ const AddrTxBlock = ({ txData, myAddr }) => {
           <TxColsCont>
             <TxSmallLabel>input</TxSmallLabel>
             <TxCol>
-              {input && input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
-                : <TxItem txt='No Inputs (Newly Generated Coins) ' />
-              }
+              {(()=> {
+                if (input && input.length) {
+                  return input.map((data, i) => (
+                    <TxItem
+                      key={`inputItem-${i}}`}
+                      address={data.address}
+                      value={data.value}
+                      size={120}
+                    />
+                  ));
+                } else if (!blockTime) {
+                    return <TxItem txt='Unconfirmed - Inputs Unavailable' />
+                } else {
+                    return <TxItem txt='No Inputs (Newly Generated Coins) ' />
+                }
+              })()}
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
             <TxSmallLabel>output</TxSmallLabel>

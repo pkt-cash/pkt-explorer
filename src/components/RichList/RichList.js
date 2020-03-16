@@ -9,7 +9,8 @@ import {
   // ListRow,
   ListLabel,
   ListLabelCont,
-  ListCont
+  ListCont,
+  Pkt,
 } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
 import { displayPKT } from '../../utils'
@@ -65,7 +66,7 @@ const RichRow = ({ row }) => {
       {row.address}
     </AddrLink>
     <BalanceCont>
-      {parseFloat(displayPKT(row.balance)).toFixed(2)} <span>PKT</span>
+      <Pkt amt={row.balance}/>
     </BalanceCont>
   </RowCont>
 }

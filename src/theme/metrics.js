@@ -9,10 +9,11 @@ const metrics = {
     xLarge: 1440
   },
   padding: 1, // rem
+  paddingHeader: 0, // rem
   margin: 1, // rem
   dateTimeFontSize: 0.8, // rem
   cellFontSize: 0.9, // rem
-  headerFontSize: 1.1, // rem
+  headerFontSize: 1.5, // rem
   fontWeight: 600,
   rowHeight: 3, // rem,
   sep: 0.5 // rem

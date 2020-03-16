@@ -61,10 +61,29 @@ export const ListLabel = styled.div`
   } */
 `
 
+export const TitleHeader = styled.div`
+  margin-right: 10px;
+  font-size: 1.8em;
+  margin-bottom: -2px; /* TODO(cjd): This is a mess */
+`
+
 export const ListLabelCont = styled.div`
   display: flex;
   font-weight: 700;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
+  /*border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};*/
+  justify-content: space-between;
+  padding: ${metrics.paddingHeader}rem;
+  /* text-transform: capitalize; */
+  width: 100%;
+  @media ${mqs.small} {
+    flex-direction: column;
+  }
+`
+
+export const TitleCont = styled.div`
+  display: flex;
+  font-weight: 700;
+  /*border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};*/
   justify-content: space-between;
   padding: ${metrics.padding}rem;
   /* text-transform: capitalize; */
@@ -93,9 +112,9 @@ export const ClickableListLabelCont = styled(ListLabelCont)`
 `
 
 export const ListCont = styled.div`
-  border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
+  /*border-top: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
   border-right: solid 1px ${({ theme }) => theme.colors.pktGreyLight};
-  box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};
+  box-shadow: -2px 2px 2px ${({ theme }) => theme.colors.pktGreyLight};*/
   margin: ${metrics.margin}rem;
   ${({ rich }) => rich && css`max-width: 760px; margin: ${metrics.margin}rem auto`} 
 `
@@ -119,6 +138,19 @@ svg{
   /* bottom: 1px; */
 }
 `
+
+export const HashCont = styled.div`
+  white-space: nowrap;
+  min-width:0;
+  display: flex; 
+`
+export const Hash = styled.div`
+overflow: hidden;
+text-overflow: ellipsis;
+margin-right: 10px;
+`
+
+
 const Unit = styled.span`
   font-weight: ${metrics.fontWeight};
 `

@@ -1,8 +1,8 @@
 import React from 'react'
 import HomeStats from './HomeStats'
-import dummyTxData from '../../fixtures/daily.json'
-import { treatDTx } from '../../utils'
-const dData = treatDTx(dummyTxData.results)
+import dummyTxData from '../../fixtures/packetcrypt_stats.json'
+import { treatStats } from '../../utils'
+const dData = treatStats(dummyTxData.results)
 export default {
   title: 'HomeStats',
   component: HomeStats

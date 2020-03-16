@@ -26,7 +26,7 @@ const LabelCont = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  border-top: 1px solid ${({ theme }) => theme.colors.pktBlueDarker};
+  border-top: 1px solid ${({ theme }) => theme.colors.pktTableBorder};
   padding: 1rem 0;
 `
 

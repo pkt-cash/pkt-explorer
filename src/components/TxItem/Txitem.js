@@ -11,7 +11,7 @@ const ItemCont = styled.div`
   padding: 10px;
   align-items: center;
   justify-content: space-between;
-  background: ${({ theme, unconfirmed }) => unconfirmed ? theme.colors.pktGrey : theme.colors.pktGreyLight};
+  background: ${({ theme }) => theme.colors.pktPageBackground};
   border-radius: 4px;
   margin: 10px 0;
 `
@@ -62,5 +62,5 @@ TxItem.propTypes = {
   value: PropTypes.string,
   txt: PropTypes.string,
   size: PropTypes.number,
-  unconfirmed: PropTypes.bool
+  unspent: PropTypes.bool
 }

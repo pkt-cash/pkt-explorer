@@ -6,7 +6,7 @@ import metrics, { mqs } from '../../theme/metrics'
 import DiffChart from '../DiffChart/DiffChart'
 import Loader from '../Loader/Loader'
 import DataBlock from '../DataBlock/DataBlock'
-import { byteStr } from '../../utils'
+import { bpsStr, commafy } from '../../utils'
 
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
@@ -50,8 +50,8 @@ const LabelCont = styled.div`
 const HomeStats = ({ txData, labelY }) => {
   const dailyD = useMemo(() => txData
     ? [
-      { label: 'bps', value: byteStr(txData[0].data[0][1]) },
-      { label: 'eps', value: byteStr(txData[1].data[0][1]) }
+      { label: 'Network Bandwidth', value: bpsStr(txData[0].data[0][1]) },
+      { label: 'Encryptions per second', value: commafy(txData[1].data[0][1]) }
     ]
     : false
   )
@@ -60,7 +60,7 @@ const HomeStats = ({ txData, labelY }) => {
       <ListLabelCont>
       PacketCrypt stats
       </ListLabelCont>
-      {txData
+      {txData && txData.length
         ? <ListDataCont>
           <ChartCont>
             <DiffChart txData={txData} />

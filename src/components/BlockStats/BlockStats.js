@@ -2,9 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
-import { ListCont, ListLabelCont } from '../CommonComps/CommonComps'
-import RespHash from '../RespHash/RespHash'
+import {
+  ListCont,
+  ListLabelCont,
+  ListLabel,
+  TitleHeader,
+  LeftCont,
+  RightCont,
+  TitleCont,
+  HashCont,
+  Hash,
+} from '../CommonComps/CommonComps'
 import Loader from '../Loader/Loader'
+import { Link } from 'react-router-dom'
+import Copy from '../Copy/Copy'
+
+import { commafy, bpsStr, formatDate } from '../../utils'
 
 const BlockStatCell = styled.div`
   align-self: center; 
@@ -21,11 +34,6 @@ const DecoratedBlockStatCell = styled(BlockStatCell)`
 export const FieldName = ({ name }) => <DecoratedBlockStatCell>{name}</DecoratedBlockStatCell>
 
 export const FieldValue = ({ value }) => <BlockStatCell>{value}</BlockStatCell>
-
-export const Hash = ({ hash }) => <BlockStatCell title={hash} isHash>
-  {/* {`${hash.substr(0, 12)}…${hash.substr(-12, 12)}`} */}
-  <RespHash hash='0ae86e38250ca831b632ed998cc9384414561b6b4b3c9355388234fa95990a58' />
-</BlockStatCell>
 
 export const DateTimeComp = ({ time }) => <BlockStatCell title={new Date(time).toString()}>
   {new Date(time).toDateString()}
@@ -61,7 +69,7 @@ export const ItemCont = styled.div`
   padding: 0 0.5rem;
 `
 export const BrdCont = styled.div`
-  border-top: 1px solid ${({ theme }) => theme.colors.pktBlueDarker};
+  border-top: 1px solid ${({ theme }) => theme.colors.pktTableBorder};
 `
 export const Label = styled.span`
   display: inline-block;
@@ -72,33 +80,62 @@ export const Label = styled.span`
 `
 export const Content = styled.span`
   display: inline-block;
-  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const TableCont = styled.div`
-  padding-top: 1rem;
+  /*padding-top: 1rem;*/
 `
 
-const BlockStats = ({ stats }) => {
-  return (stats
-    ? <ListCont>
+const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
+  if (!stats) {
+    return (<Loader text='Loading block statistics' />);
+  }
+  let nextHash;
+  let isOrphan = false;
+  if (nextBlk && nextBlk.results && nextBlk.results.length) {
+    const nb = nextBlk.results[0];
+    console.log(nb.previousBlockHash, stats.hash)
+    if (nb.previousBlockHash !== stats.hash) {
+      isOrphan = true;
+    } else {
+      nextHash = nb.hash;
+    }
+  }
+  //console.log(blkPc);
+  return (<>
+    <TitleCont>
+      <LeftCont>
+        <TitleHeader>
+          {(isOrphan) ?
+            `Orphan block ${stats.hash} #${stats.height}` :
+            `Block #${stats.height}`}
+        </TitleHeader>
+      </LeftCont>
+      {(!isOrphan) &&
+        <RightCont>
+          <HashCont>
+              <Hash>{stats.hash}</Hash>
+              <Copy value={stats.hash}/>
+            </HashCont>
+        </RightCont>
+      }
+    </TitleCont>
+    <ListCont>
       <ListLabelCont>
-        Last Block
+        <ListLabel>Summary</ListLabel>
       </ListLabelCont>
       <TableCont>
         <Row>
           <Column>
             <ItemCont>
-              <BrdCont>
-                <p><Label>Merkle Root</Label> <Content title={stats.hash}>{stats.hash}</Content></p>
-              </BrdCont>
+                <p><Label>Size (bytes)</Label> <Content>{commafy(stats.size)}</Content></p>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
-              <BrdCont>
-                <p><Label>Difficulty</Label> <Content>{parseFloat(stats.difficulty).toFixed(2)}</Content></p>
-              </BrdCont>
+                <p><Label>Difficulty</Label> <Content>{commafy(parseFloat(stats.difficulty).toFixed())}</Content></p>
             </ItemCont>
           </Column>
         </Row>
@@ -106,46 +143,25 @@ const BlockStats = ({ stats }) => {
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Bits</Label> <Content>{stats.bits}</Content></p>
+                <p><Label>Transactions</Label> <Content>{stats.transactionCount}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Size (Bytes)</Label> <Content>{stats.size}</Content></p>
-              </BrdCont>
-            </ItemCont>
-          </Column>
-        </Row>
-        <Row>
-          <Column>
-            <ItemCont>
-              <BrdCont>
-                <p><Label>Version</Label> <Content>{stats.version}</Content></p>
-              </BrdCont>
-            </ItemCont>
-          </Column>
-          <Column>
-            <ItemCont>
-              <BrdCont>
-                <p><Label>Nonce</Label> <Content>{stats.nonce}</Content></p>
-              </BrdCont>
-            </ItemCont>
-          </Column>
-        </Row>
-        <Row>
-          <Column>
-            <ItemCont>
-              <BrdCont>
-                <p><Label>Number of Transactions</Label> <Content>{stats.transactionCount}</Content></p>
-              </BrdCont>
-            </ItemCont>
-          </Column>
-          <Column>
-            <ItemCont>
-              <BrdCont>
-                <p><Label>Previous Block</Label> <Content title={stats.previousBlockHash}>{stats.previousBlockHash}</Content></p>
+                <p>
+                  <Label>Next Block</Label>
+                  {(()=> {
+                      if (isOrphan) {
+                        return <Content>Not in main chain</Content>
+                      } else if (nextHash) {
+                        return <Content title={nextHash}>
+                          <Link to={`/block/${nextHash}`}>{stats.height + 1}</Link>
+                        </Content>
+                      }
+                    })()}
+                </p>
               </BrdCont>
             </ItemCont>
           </Column>
@@ -154,37 +170,101 @@ const BlockStats = ({ stats }) => {
           <Column swap>
             <ItemCont>
               <BrdCont>
-                <p><Label>Height</Label> <Content>{stats.height}</Content></p>
+                <p><Label>Hash</Label> <Content>{stats.hash}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
-          {stats.nextBlockHash && <Column>
+          <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Next Block</Label> <Content title={stats.nextBlockHash}>{stats.nextBlockHash}</Content></p>
+                <p>
+                  <Label>Previous Block</Label>
+                  <Content title={stats.previousBlockHash}>
+                    <Link to={`/block/${stats.previousBlockHash}`}>
+                      {(()=> {
+                        if (isOrphan) {
+                          return stats.previousBlockHash
+                        }
+                        // TODO(cjd): There is a possibility that we have an orphan which extends
+                        // from another orphan, in that case we would be lying
+                        return stats.height - 1
+                      })()}
+                    </Link>
+                  </Content>
+                </p>
               </BrdCont>
             </ItemCont>
-          </Column>}
+          </Column>
         </Row>
         <Row>
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Timestamp</Label> <Content>{new Date(stats.time).toDateString()}</Content></p>
+                <p>
+                  <Label>Timestamp</Label>
+                  {(() => {
+                    const d = new Date(stats.time);
+                    return <Content title={d.toUTCString()}>{formatDate(d)}</Content>
+                  })()}
+                </p>
               </BrdCont>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Confirmations</Label> <Content>{stats.confirmations}</Content></p>
+                <p>
+                  <Label>Confirmations</Label>
+                  <Content>
+                    {(()=> {
+                      if (!mainChain) {
+                        return <Loader tiny/>
+                      }
+                    })()}
+                  </Content>
+                  </p>
               </BrdCont>
             </ItemCont>
           </Column>
         </Row>
       </TableCont>
     </ListCont>
-    : <Loader text='Loading block statistics' />)
+    <ListCont>
+      <ListLabelCont>
+        <ListLabel>PacketCrypt</ListLabel>
+      </ListLabelCont>
+      <TableCont>
+        <Row>
+          <Column>
+            <ItemCont>
+                <p><Label>Announcements</Label> <Content>{commafy(stats.pcAnnCount)}</Content></p>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+                <p><Label>Announcement Difficulty</Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>
+            </ItemCont>
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Estimated Bandwidth</Label> <Content>{bpsStr(blkPc.blockBits)}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+          <Column>
+            <ItemCont>
+              <BrdCont>
+                <p><Label>Estimated Encryptions</Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
+              </BrdCont>
+            </ItemCont>
+          </Column>
+        </Row>
+      </TableCont>
+    </ListCont>
+    </>);
 }
 
 BlockStats.propTypes = {

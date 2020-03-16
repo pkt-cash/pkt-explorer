@@ -30,16 +30,25 @@ const BlockListLabel = styled(ListLabel)`
   }
 `
 
-export const AgeCell = ({ time }) => {
-  const dt = (new Date(time)).getTime()
-  const cDate = (new Date()).getTime()
-  const diff = cDate - dt
-
-  const humanInterval = timeAgo.format(cDate - diff, agoOpts)
-
-  return (<span title={(new Date(time)).toString()}>
-    {humanInterval.toString()}
-  </span>)
+class AgeCell extends React.Component {
+  render() {
+    const { time } = this.props
+    const dt = (new Date(time)).getTime()
+    const cDate = (new Date()).getTime()
+    const diff = cDate - dt
+  
+    const humanInterval = timeAgo.format(cDate - diff, agoOpts)
+  
+    return (<span title={(new Date(time)).toString()}>
+      {humanInterval.toString()}
+    </span>)
+  }
+  componentDidMount() {
+    this.interval = setInterval(() => this.setState({ time: Date.now() }), 30000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 }
 
 export const BlockListLabels = ({ cells }) => <ListLabelCont>{
@@ -92,7 +101,7 @@ const BlockList = ({ listData, home }) => {
   return (
     listData
       ? <ListCont>
-        {home && <ListLabelCont>Last Blocs</ListLabelCont>}
+        {home && <ListLabelCont>Last Blocks</ListLabelCont>}
         <BlockTable>
           <thead>
             <tr>

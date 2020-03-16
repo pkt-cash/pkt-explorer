@@ -1,16 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ListLabelCont, ListCont, Pkt, LeftCont, RightCont } from '../CommonComps/CommonComps'
+import {
+  ListLabelCont,
+  ListCont,
+  Pkt,
+  LeftCont,
+  RightCont,
+  TitleHeader,
+  TitleCont,
+  ListLabel,
+  HashCont,
+  Hash,
+} from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
-import { IoIosCopy } from 'react-icons/io'
+
 // import TxChart from '../TxChart/TxChart'
 // import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
+import Copy from '../Copy/Copy'
+ 
 import { commafy } from '../../utils'
 
-import { motion } from 'framer-motion'
 import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
@@ -68,42 +79,7 @@ const ChartCont = styled.div`
 //   font-style: italic;
 // `
 
-const CopyBt = styled(motion.button)`
-  width: 20px;
-  height: 20px;
-  border-radius: 3px;
-  margin-left: 10px;
-  background-color: ${({ theme }) => theme.colors.pktGrey};
-  display: inline-block;
-  position: relative;
-  top: -3px;
-  border-width: 0;
-  svg{
-    width: 15px;
-    height: 15px;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    /* bottom: 1px; */
-  }
-`
 
-const HashCont = styled.div`
-  white-space: nowrap;
-  min-width:0;
-  display: flex; 
-`
-const Hash = styled.div`
-overflow: hidden;
-text-overflow: ellipsis;
-margin-right: 10px;
-`
-
-const AddrLabel = styled.div`
-  margin-right: 10px;
-  font-size: 1.8em;
-  margin-bottom: -2px; /* TODO(cjd): This is a mess */
-`
 
 const BalanceLabel = styled.div`
   margin-right: 10px;
@@ -111,30 +87,26 @@ const BalanceLabel = styled.div`
 `
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
-  return (
+  return (<>
+    <TitleCont>
+      <LeftCont>
+        <TitleHeader>
+          Address
+        </TitleHeader>
+        <BalanceLabel>
+          <Pkt amt={meta.balance}/>
+        </BalanceLabel>
+      </LeftCont>
+      <RightCont>
+        <HashCont>
+            <Hash>{addr}</Hash>
+            <Copy value={addr}/>
+          </HashCont>
+      </RightCont>
+    </TitleCont>
     <ListCont>
       <ListLabelCont>
-        <LeftCont>
-          <AddrLabel>
-            Address
-          </AddrLabel>
-          <BalanceLabel>
-            <Pkt amt={meta.balance}/>
-          </BalanceLabel>
-        </LeftCont>
-        <RightCont>
-          <HashCont>
-              <Hash>{addr}</Hash>
-              <CopyToClipboard text={addr}
-                onCopy={() => console.log('copy !!!', addr)}>
-                {/* <GenBt icn='copy' /> */}
-                <CopyBt
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
-                ><IoIosCopy /></CopyBt>
-              </CopyToClipboard>
-            </HashCont>
-        </RightCont>
+        <ListLabel>Summary</ListLabel>
       </ListLabelCont>
       <ListDataCont>
         <MetaCont>
@@ -200,7 +172,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
         </ChartCont>
       </ListDataCont>
     </ListCont>
-  )
+  </>)
 }
 
 AddrStats.propTypes = {

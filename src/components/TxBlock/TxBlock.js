@@ -10,16 +10,17 @@ import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
 
 const TxBlockCont = styled.div`
-  border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};
+  /*border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};*/
+  background: ${({ theme }) => theme.colors.pktTxBackground};
 `
 
 const TxLabel = styled.div`
   justify-content: items;
+  margin: 1rem;
 `
 
 const TxlistCont = styled.div`
   overflow: hidden;
-  padding: 0  0.5rem;
 `
 
 const TxCol = styled.div`
@@ -115,7 +116,7 @@ const ConfIcn = ({ isConf }) => {
 }
 
 // import styled from 'styled-components'
-const TxBlock = ({ txData }) => {
+const TxBlock = ({ txData, view }) => {
   const { txid, input, output, blockTime } = txData
   const dt = DateTime.fromISO(blockTime)
   console.log(txData)
@@ -124,17 +125,16 @@ const TxBlock = ({ txData }) => {
       <ListCont>
         <ListLabelCont>
           <TxLabel>
-            <TxInteractive>
-              <LeftLabel>Transaction:</LeftLabel>
-            </TxInteractive>
             <RespHash hash={txid} />
           </TxLabel>
-          <MinedAtLabel>
-            {blockTime
-              ? <><RightLabel>Mined: {dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
-              : <><RightLabel>Unconfirmed transaction </RightLabel><ConfIcn /></>
-            }
-          </MinedAtLabel>
+          {view !== 'block' &&
+            <MinedAtLabel>
+              {blockTime
+                ? <><RightLabel>Mined: {dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
+                : <><RightLabel>Unconfirmed transaction </RightLabel><ConfIcn /></>
+              }
+            </MinedAtLabel>
+          }
         </ListLabelCont>
         <TxlistCont>
           <TxColsCont>

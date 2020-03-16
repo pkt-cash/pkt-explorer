@@ -1,10 +1,11 @@
 {
 	"unconfirmedReceived": "0",
-	"confirmedReceived": "239445678045102365",
-	"balance": "105738808685426525",
+	"confirmedReceived": "263706423259343392",
+	"balance": "104260733511088228",
 	"spent": "53915438955692001",
-	"burned": "79791430403983839",
-	"recvCount": 284228,
+	"burned": "105530250792563163",
+	"recvCount": 549,
+	"mineCount": "315813",
 	"spentCount": 61468,
-	"mined24": "1518247133104221"
+	"mined24": "1104398469246510"
 }

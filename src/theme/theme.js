@@ -10,6 +10,9 @@ const theme = {
 
     pktLinkDark: '#2fa4d7',
     pktUnimportantText: '#888',
+    pktTableBorder: '#e1e1e1',
+    pktTxBackground: '#f1f1f1',
+    pktPageBackground: '#fff',
   }
 }
 
