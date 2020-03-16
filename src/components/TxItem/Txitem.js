@@ -9,7 +9,7 @@ const ItemCont = styled.div`
   display: flex;
   flex: 1;
   padding: 10px;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   background: ${({ theme }) => theme.colors.pktPageBackground};
   border-radius: 4px;

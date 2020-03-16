@@ -10,7 +10,7 @@ padding: 1rem;
 
 const Row = styled.div`
   display: flex;
-  flex-flow: row no-wreap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   padding: 0.5rem;
   ${({ head }) => head && css`font-weight: 700;`}
@@ -35,7 +35,6 @@ function DailyList ({ dData }) {
       <div>Day</div>
       <div>Amount</div>
     </Row>
-
     {dData.map((data, i) => <DailyItem data={data} key={`dataRow-${i}`}/>)}
   </ListCont>
 }
