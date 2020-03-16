@@ -35,7 +35,7 @@ function DailyList ({ dData }) {
       <div>Day</div>
       <div>Amount</div>
     </Row>
-    
+
     {dData.map((data, i) => <DailyItem data={data} key={`dataRow-${i}`}/>)}
   </ListCont>
 }

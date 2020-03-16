@@ -6,14 +6,15 @@ import { ListLabelCont, ListCont, ListLabel } from '../components/CommonComps/Co
 
 import endpoints from '../utils/endpoints'
 import Loader from '../components/Loader/Loader'
-import { fetchJson } from '../utils'
-const { blockApi, pcBlockApi, blkUpApi } = endpoints
+import { fetchJson, useInterval } from '../utils'
+const { blockApi, pcBlockApi, blkUpApi, blkDownApi } = endpoints
 
 export default (props) => {
   const [nextBlk, setNextBlk] = useState(false)
   const [blkPc, setBlkPc] = useState(false)
   const [blkCoins, setBlkCoins] = useState(false)
   const [blkData, setBlkData] = useState(false)
+  const [topBlk, setTopBlk] = useState(false)
   const [blkErr, setBlkErr] = useState(false)
   // const [txList, setTxList] = useState(false)
   const [metaLoad, setMetaLoad] = useState(true)
@@ -23,6 +24,19 @@ export default (props) => {
   // if (error) return <div>ARRRRR errror fetching address {id}</div>
   // if (loading) return <div>fetching id data</div>
   // console.log(blkData)
+
+  // Top of the chain
+  const getTop = () => {
+    fetchJson(`${blkDownApi}/1/1`)
+      .then((json) => {
+        if (json.error) {
+          console.log(json.error)
+        }
+        setTopBlk(json.results[0])
+      })
+  }
+  useInterval(getTop, 30000)
+
   useEffect(() => {
     // fetch block data
     fetchJson(`${blockApi}/${id}`)
@@ -64,7 +78,11 @@ export default (props) => {
         }
         setBlkPc(json)
       })
+
+    // Get the top for the number of confirmations
+    getTop()
   }, [id])
+
   if (blkErr) return <div>Error fetching block {id}</div>
   // console.log(blkData)
   return <>
@@ -72,7 +90,7 @@ export default (props) => {
       if (metaLoad) {
         return <Loader text='Loading Block' />
       } else {
-        const out = [<BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} />]
+        const out = [<BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} topBlk={topBlk} />]
         if (coinLoad || !blkCoins.results) {
           out.push(<Loader text='Loading Transactions' />)
         } else {

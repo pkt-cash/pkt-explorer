@@ -88,7 +88,7 @@ const TableCont = styled.div`
   /*padding-top: 1rem;*/
 `
 
-const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
+const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
   if (!stats) {
     return (<Loader text='Loading block statistics' />)
   }
@@ -96,7 +96,6 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
   let isOrphan = false
   if (nextBlk && nextBlk.results && nextBlk.results.length) {
     const nb = nextBlk.results[0]
-    console.log(nb.previousBlockHash, stats.hash)
     if (nb.previousBlockHash !== stats.hash) {
       isOrphan = true
     } else {
@@ -217,8 +216,10 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk }) => {
                   <Label>Confirmations</Label>
                   <Content>
                     {(() => {
-                      if (!mainChain) {
-                        return <Loader tiny/>
+                      if (isOrphan) {
+                        return 'Unconfirmed - Orphan Block'
+                      } else if (topBlk) {
+                        return topBlk.height - stats.height
                       }
                     })()}
                   </Content>
@@ -279,9 +280,7 @@ BlockStats.propTypes = {
     difficulty: PropTypes.number.isRequired,
     size: PropTypes.number.isRequired,
     nonce: PropTypes.number.isRequired,
-    previousBlockHash: PropTypes.string.isRequired,
-    nextBlockHash: PropTypes.string.isRequired,
-    confirmations: PropTypes.number.isRequired
+    previousBlockHash: PropTypes.string.isRequired
   })
 }
 

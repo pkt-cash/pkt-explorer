@@ -21,10 +21,6 @@ const tabs = [
   { name: 'daily inc', action: () => { console.log('yi') } }
 ]
 
-
-
-
-
 const tabContent = (cTab, txList, dailyTr, addr) => {
   switch (cTab) {
     case 0:
