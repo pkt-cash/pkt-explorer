@@ -7,7 +7,7 @@ import { ListLabelCont, ListCont, ListLabel } from '../components/CommonComps/Co
 import endpoints from '../utils/endpoints'
 import Loader from '../components/Loader/Loader'
 import { fetchJson } from '../utils'
-const { blockApi, pcBlockApi, blkUp } = endpoints
+const { blockApi, pcBlockApi, blkUpApi } = endpoints
 
 export default (props) => {
   const [nextBlk, setNextBlk] = useState(false)
@@ -35,7 +35,7 @@ export default (props) => {
 
         // Next block data (to verify the block is in the main chain)
         setNextBlk(false)
-        fetchJson(`${blkUp}/1/${json.height+2}}`)
+        fetchJson(`${blkUpApi}/1/${json.height+2}}`)
           .then((json) => {
             if (json.error) {
               console.log(json.error);
@@ -54,6 +54,7 @@ export default (props) => {
         setBlkCoins(json)
         setCoinLoad(false)
       })
+
     // PacketCrypt data
     fetchJson(`${pcBlockApi}/${id}`)
       .then((json) => {

@@ -3,7 +3,7 @@ import { fetchJson, treatStats, useInterval } from '../utils'
 import HomeStats from '../components/HomeStats/HomeStats'
 import endpoints from '../utils/endpoints'
 import BlockList from '../components/BlockList/BlockList.js'
-const { pkApi, blkLApi } = endpoints
+const { pkApi, blkDownApi } = endpoints
 
 const HomeScreen = (props) => {
   const [pkData, setPkData] = useState(false)
@@ -14,7 +14,7 @@ const HomeScreen = (props) => {
 
   const loadBlocks = () => {
     // fetch blockList (first 20)
-    fetchJson(`${blkLApi}/20`)
+    fetchJson(`${blkDownApi}/20`)
       .then((json) => {
         if (json.error) setErr(json.error)
         setBlockList(json.results)
