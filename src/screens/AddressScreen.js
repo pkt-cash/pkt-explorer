@@ -17,8 +17,8 @@ const ScreenCont = styled.div`
 `
 
 const tabs = [
-  { name: 'Transaction', action: () => { console.log('yo') } },
-  { name: 'daily inc', action: () => { console.log('yi') } }
+  { name: 'Transactions', action: () => { console.log('yo') } },
+  { name: 'Mining Income', action: () => { console.log('yi') } }
 ]
 
 const tabContent = (cTab, txList, dailyTr, addr) => {
@@ -39,6 +39,7 @@ const tabContent = (cTab, txList, dailyTr, addr) => {
 const AddressScreen = (props) => {
   const [currTab, changeTab] = useState(0)
   const [meta, setMeta] = useState(false)
+  const [dailyTrChart, setDailyTrChart] = useState(false)
   const [dailyTr, setDailyTr] = useState(false)
   const [metaErr, setMetaErr] = useState(false)
   const [txList, setTxList] = useState(false)
@@ -61,7 +62,8 @@ const AddressScreen = (props) => {
     // fetch last 30 day incomes
     fetchJson(`${addrMetaApi}/${addr}/income/90?mining=only`)
       .then((json) => {
-        setDailyTr(treatIncome(json.result))
+        setDailyTrChart(treatIncome(json.result))
+        setDailyTr(json.result)
       })
     // fetch txList
     fetchJson(`${addrMetaApi}/${addr}/coins?mining=excluded`)
@@ -73,7 +75,7 @@ const AddressScreen = (props) => {
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading loading metadata' small/>
-      : <AddrStats meta={meta} addr={addr} dailyTr={dailyTr}/>
+      : <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}/>
     }
     <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>
     {tabContent(currTab, txList, dailyTr, addr)}
