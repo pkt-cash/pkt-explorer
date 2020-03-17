@@ -5,7 +5,9 @@ import metrics from '../../theme/metrics'
 import { MdSearch } from 'react-icons/md'
 import useBox from '../../hooks/useBox'
 import { useHistory } from 'react-router-dom'
-
+import { fetchJson } from '../../utils'
+import endpoints from '../../utils/endpoints'
+const { addrMetaApi } = endpoints
 const OmniboxCont = styled.div`
   display: flex;
   justify-content: center;
@@ -37,7 +39,13 @@ const Omnibox = ({ placeholder }) => {
   const hist = useHistory()
   const omniNavigate = (input) => {
     if (isNaN(parseInt(input))) {
-      hist.push(`/address/${input}`)
+      fetchJson(`${addrMetaApi}/${input}`)
+        .then((json) => {
+          if (json.error) {
+            console.log(('this is not an adress'))
+            console.log(json)
+          } else hist.push(`/address/${input}`)
+        })
     } else {
       console.log('this is a number', input)
     }
