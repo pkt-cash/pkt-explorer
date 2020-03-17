@@ -143,11 +143,12 @@ export const HashCont = styled.div`
   white-space: nowrap;
   min-width:0;
   display: flex; 
+  @media ${mqs.small} {
+    margin-top: 0.5rem;
+  }
 `
 export const Hash = styled.div`
-overflow: hidden;
-text-overflow: ellipsis;
-margin-right: 10px;
+  
 `
 
 const Unit = styled.span`
@@ -165,9 +166,13 @@ const UNITS = [
   [ 'nPKT', 1000000000 ]
 ];
 
+const PktCont = styled.span`
+  white-space: nowrap;
+`
+
 export const Pkt = ({ amt }) => {
   if (Number(amt) < 1) {
-    return <>0<Decimal>.00</Decimal> <Unit>PKT</Unit></>
+    return <PktCont>0<Decimal>.00</Decimal> <Unit>PKT</Unit></PktCont>
   }
   const fAmt = displayPKT(amt);
   let fa;
@@ -180,7 +185,7 @@ export const Pkt = ({ amt }) => {
   } while (fa < 1 && u !== 'nPKT')
   const str = commafy(parseFloat(fa).toFixed(2))
   const intDec = str.split('.')
-  return <>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>{u}</Unit></>
+  return <PktCont>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>{u}</Unit></PktCont>
 }
 
 Pkt.propTypes = {

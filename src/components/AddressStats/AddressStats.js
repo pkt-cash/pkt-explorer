@@ -81,7 +81,8 @@ const ChartCont = styled.div`
 
 const BalanceLabel = styled.div`
   margin-right: 10px;
-  font-size: 1.3em;
+  font-size: 1.3rem;
+  white-space: nowrap;
 `
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
@@ -95,12 +96,12 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           <Pkt amt={meta.balance}/>
         </BalanceLabel>
       </LeftCont>
-      <RightCont>
+      <LeftCont>
         <HashCont>
           <Hash>{addr}</Hash>
           <Copy value={addr}/>
         </HashCont>
-      </RightCont>
+      </LeftCont>
     </TitleCont>
     <ListCont>
       <ListLabelCont>

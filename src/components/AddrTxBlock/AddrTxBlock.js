@@ -45,7 +45,6 @@ const PktCont = styled.div`
   padding: 0.5rem;
   display: flex;
   flex-flow: row nowrap;
-  justify-content: right;
   *{
     white-space: nowrap;
   }
@@ -185,7 +184,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   return (
     <AddrTxBlockCont>
 
-      <BlockHeaderCont>
+      <BlockHeaderCont onClick={() => setOpen(!isOpen)}>
         <RightCont>
           <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
             {blockTime
