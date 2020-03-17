@@ -160,11 +160,11 @@ const Decimal = styled.span`
 `
 
 const UNITS = [
-  [ 'PKT', 1 ],
-  [ 'mPKT', 1000 ],
-  [ 'uPKT', 1000000 ],
-  [ 'nPKT', 1000000000 ]
-];
+  ['PKT', 1],
+  ['mPKT', 1000],
+  ['uPKT', 1000000],
+  ['nPKT', 1000000000]
+]
 
 const PktCont = styled.span`
   white-space: nowrap;
@@ -174,10 +174,10 @@ export const Pkt = ({ amt }) => {
   if (Number(amt) < 1) {
     return <PktCont>0<Decimal>.00</Decimal> <Unit>PKT</Unit></PktCont>
   }
-  const fAmt = displayPKT(amt);
-  let fa;
-  let u;
-  let i = 0;
+  const fAmt = displayPKT(amt)
+  let fa
+  let u
+  let i = 0
   do {
     fa = fAmt * UNITS[i][1]
     u = UNITS[i][0]
