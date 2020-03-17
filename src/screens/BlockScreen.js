@@ -9,7 +9,7 @@ import Loader from '../components/Loader/Loader'
 import { fetchJson, useInterval } from '../utils'
 const { blockApi, pcBlockApi, blkUpApi, blkDownApi } = endpoints
 
-export default (props) => {
+const BlockScreen = (props) => {
   const [nextBlk, setNextBlk] = useState(false)
   const [blkPc, setBlkPc] = useState(false)
   const [blkCoins, setBlkCoins] = useState(false)
@@ -86,23 +86,22 @@ export default (props) => {
   if (blkErr) return <div>Error fetching block {id}</div>
   // console.log(blkData)
   return <>
-    {(() => {
-      if (metaLoad) {
-        return <Loader text='Loading Block' />
-      } else {
-        const out = [<BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} topBlk={topBlk} />]
-        if (coinLoad || !blkCoins.results) {
-          out.push(<Loader text='Loading Transactions' />)
-        } else {
-          out.push(<ListCont>
+    {metaLoad
+      ? <Loader text='Loading Block' />
+      : <>
+        <BlockStats stats={blkData} blkPc={blkPc} nextBlk={nextBlk} topBlk={topBlk} />
+        {(coinLoad || !blkCoins.results)
+          ? <Loader text='Loading Transactions' />
+          : <ListCont>
             <ListLabelCont>
               <ListLabel>Transactions</ListLabel>
             </ListLabelCont>
             {blkCoins.results.map((coinD, i) => <TxBlock txData={coinD} key={`coin-${i}`} view="block"/>)}
-          </ListCont>)
+          </ListCont>
         }
-        return out
-      }
-    })()}
+      </>
+    }
   </>
 }
+
+export default BlockScreen

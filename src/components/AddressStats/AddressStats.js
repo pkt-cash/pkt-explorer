@@ -6,7 +6,6 @@ import {
   ListCont,
   Pkt,
   LeftCont,
-  RightCont,
   TitleHeader,
   TitleCont,
   ListLabel,

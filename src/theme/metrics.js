@@ -16,7 +16,11 @@ const metrics = {
   headerFontSize: 1.5, // rem
   fontWeight: 600,
   rowHeight: 3, // rem,
-  sep: 0.5 // rem
+  sep: 0.5, // rem
+  omniboxPadding: 0.4, // rem
+  ommiboxFontSize: 1.20, // rem
+  omniboxHeight: 2.5, // rem
+  omniboxBoxShadow: 1
 }
 
 export const mqs = {

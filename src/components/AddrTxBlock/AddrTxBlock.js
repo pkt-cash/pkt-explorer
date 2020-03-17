@@ -198,7 +198,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
         </RightCont>
         <PktCont>
           <AmountLabel direction={direction}>
-            {direction}<Pkt amt={value}/> 
+            {direction}<Pkt amt={value}/>
           </AmountLabel>
           <TxTogBt isOpen={isOpen} action={() => setOpen(!isOpen)}/>
         </PktCont>
