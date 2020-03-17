@@ -5,6 +5,7 @@ import { MenuCont } from '../CommonComps/CommonComps'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import metrics from '../../theme/metrics'
 import { NavLink } from 'react-router-dom'
+import Omnibox from '../Omnibox/Omnibox'
 
 const { mq } = metrics
 // import PropTypes from 'prop-types'
@@ -13,7 +14,7 @@ export const TopBarWrapper = styled.div`
   max-width: ${metrics.fullW}px;
   margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
 `
@@ -33,6 +34,7 @@ const TopLink = styled(NavLink)`
   display: flex;
   height: 100%;
   align-items: center;
+  white-space: nowrap;
   &:visited {
     color: #283649;
   }
@@ -46,25 +48,41 @@ const TopLink = styled(NavLink)`
 const MenuBar = (props) => {
   return (
     <MenuCont>
+      <Media queries={{ small: { maxWidth: mq.small } }}>
+        {matches =>
+          matches.small ? (
+            <>
+              <MobileMenu />
+              <div>
+                <TopLink exact to='/'>
+                  PKT Explorer (beta)
+                </TopLink>
+
+              </div>
+              <Omnibox />
+            </>
+          ) : (
+            <TopBarWrapper>
+              <TopMenu>
+                <TopLink exact to='/'>
+                    PKT Explorer (beta)
+                </TopLink>
+                <TopLink to='/blocks'>Blocks</TopLink>
+                <TopLink to='/txd'>Txs per day</TopLink>
+                <TopLink to='/rich'>Rich list</TopLink>
+              </TopMenu>
+
+              <Omnibox />
+            </TopBarWrapper>
+
+          )
+        }
+      </Media>
       <Media query={`(max-width: ${mq.small}px)`} render={() =>
         (
           <MobileMenu />
         )}
       />
-      <TopBarWrapper>
-        <TopLink exact to='/'>
-          PKT Explorer (beta)
-        </TopLink>
-        <Media query={`(min-width: ${mq.small}px)`} render={() =>
-          (
-            <TopMenu>
-              <TopLink to='/blocks'>Blocks</TopLink>
-              <TopLink to='/txd'>Txs per day</TopLink>
-              <TopLink to='/rich'>Rich list</TopLink>
-            </TopMenu>
-          )}
-        />
-      </TopBarWrapper>
     </MenuCont>
   )
 }

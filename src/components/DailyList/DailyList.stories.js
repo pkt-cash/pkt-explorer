@@ -2,7 +2,7 @@ import React from 'react'
 import DailyList from './DailyList'
 import { treatDTx } from '../../utils'
 import dummyD from '../../fixtures/daily.json'
-console.log(dummyD)
+
 const tabsData = treatDTx(dummyD.results)
 
 export default {

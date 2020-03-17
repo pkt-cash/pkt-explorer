@@ -3,6 +3,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { IoIosCopy } from 'react-icons/io'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
+import PropTypes from 'prop-types'
 
 const CopyBt = styled(motion.button)`
   width: 20px;
@@ -24,9 +25,9 @@ const CopyBt = styled(motion.button)`
   }
 `
 
-export default ({ value }) => (
+const Copy = ({ value, action = console.info }) => (
   <CopyToClipboard text={value}
-    onCopy={() => console.log('copy !!!', value)}>
+    onCopy={() => action(value)}>
     {/* <GenBt icn='copy' /> */}
     <CopyBt
       whileHover={{ scale: 1.2 }}
@@ -34,3 +35,10 @@ export default ({ value }) => (
     ><IoIosCopy /></CopyBt>
   </CopyToClipboard>
 )
+
+Copy.propTypes = {
+  value: PropTypes.string,
+  action: PropTypes.func
+}
+
+export default Copy

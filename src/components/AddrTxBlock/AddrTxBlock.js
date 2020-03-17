@@ -21,7 +21,7 @@ const listVars = {
 }
 
 const RightCont = styled.div`
-  align-items: initial;
+  align-items: flex-start;
   display: flex;
   @media ${mqs.small} {
     flex-direction: column;

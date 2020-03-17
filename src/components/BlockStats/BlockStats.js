@@ -102,7 +102,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
       nextHash = nb.hash
     }
   }
-  // console.log(blkPc);
+
   return (<>
     <TitleCont>
       <LeftCont>
