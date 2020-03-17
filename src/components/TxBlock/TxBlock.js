@@ -135,12 +135,12 @@ const TxBlock = ({ txData, view }) => {
             <TxCol>
               {input && input.length
                 ? input.map((data, i) => <TxItem
-                    key={`inputItem-${i}}`}
-                    address={data.address}
-                    value={data.value}
-                    size={120}
-                    inputs={data.spentcount}
-                  />)
+                  key={`inputItem-${i}}`}
+                  address={data.address}
+                  value={data.value}
+                  size={120}
+                  inputs={data.spentcount}
+                />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>

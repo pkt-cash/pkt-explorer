@@ -53,17 +53,17 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
         <Amount>
           <Pkt amt={value} />
         </Amount>
-        {typeof(spent) === 'boolean' &&
-          (spent ?
-            <Spent title="This output has been spent">🔸</Spent> :
-            <Spent title="This output has not yet been spent">🔹</Spent>
+        {typeof (spent) === 'boolean' &&
+          (spent
+            ? <Spent title="This output has been spent">🔸</Spent>
+            : <Spent title="This output has not yet been spent">🔹</Spent>
           )
         }
         {inputs > 0 && <Inputs
-            title={`Transaction was funded by spending ${inputs} separate payments to this address`}
-          >
+          title={`Transaction was funded by spending ${inputs} separate payments to this address`}
+        >
             ({inputs})
-          </Inputs>
+        </Inputs>
         }
       </>
       }

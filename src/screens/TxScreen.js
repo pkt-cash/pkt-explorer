@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+
 import TxBlock from '../components/TxBlock/TxBlock'
 import { Row, Column, ItemCont, Label, BrdCont, Content } from '../components/BlockStats/BlockStats'
 import {
@@ -18,7 +18,6 @@ import {
 } from '../components/CommonComps/CommonComps'
 import Copy from '../components/Copy/Copy'
 
-
 import endpoints from '../utils/endpoints'
 import Loader from '../components/Loader/Loader'
 import { fetchJson, useInterval, commafy, formatDate } from '../utils'
@@ -30,13 +29,13 @@ const TableCont = styled.div`
 
 const renderCoinbase = (cb) => (
   cb.replace(/[a-f0-9]{2}/g, (x) => {
-    const cc = Number('0x' + x);
+    const cc = Number('0x' + x)
     if (cc >= 32 && cc < 127) {
-      return String.fromCharCode(cc);
+      return String.fromCharCode(cc)
     }
-    return '\\x' + x;
+    return '\\x' + x
   })
-);
+)
 
 const row = (isFirst, left, right) => (
   <Row>
@@ -53,23 +52,23 @@ const row = (isFirst, left, right) => (
   </Row>
 )
 
-const inBlock = ({txData, isUnconfirmed}) => <p>
+const inBlock = ({ txData, isUnconfirmed }) => <p>
   <Label>In Block</Label>
-  {txData.blockHash ?
-    <Content title={txData.blockHash}>
+  {txData.blockHash
+    ? <Content title={txData.blockHash}>
       <Link to={`/block/${txData.blockHash}`}>
-        {isUnconfirmed ?
-          txData.blockHash :
-          txData.blockHeight
+        {isUnconfirmed
+          ? txData.blockHash
+          : txData.blockHeight
         }
       </Link>
-    </Content> :
-    <Content>Unconfirmed</Content>
+    </Content>
+    : <Content>Unconfirmed</Content>
   }
 </p>
 
 const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
-  let confirmations = 'Unconfirmed';
+  let confirmations = 'Unconfirmed'
   let isUnconfirmed = false
   if (!txData.blockHash || !txData.blockHeight) {
     isUnconfirmed = true
@@ -80,28 +79,30 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
     } else if (topBlk) {
       confirmations = topBlk.height - txData.blockHeight
     }
+  } else if (topBlk.hash === txData.blockHash) {
+    confirmations = 0
   }
-  let fee = 0;
+  let fee = 0
   if (txData) {
-    for (const x of txData.input) { fee += Number(x.value); }
-    for (const x of txData.output) { fee -= Number(x.value); }
+    for (const x of txData.input) { fee += Number(x.value) }
+    for (const x of txData.output) { fee -= Number(x.value) }
   }
-  let totalFees = 0;
+  let totalFees = 0
   if (statsCoins) {
     // In a coinbase, the "fee" will end up negative because no inputs
-    totalFees = -(Number(statsCoins.reward) + fee);
+    totalFees = -(Number(statsCoins.reward) + fee)
   }
   return (<>
     <TitleCont>
       <LeftCont>
         <TitleHeader>
-          {txData.coinbase ?
-            isUnconfirmed ?
-              `Orphaned coinbase transaction` :
-              `Coinbase transaction` :
-            isUnconfirmed ?
-              `Unconfirmed transaction` :
-              `Transaction`
+          {txData.coinbase
+            ? isUnconfirmed
+              ? 'Orphaned coinbase transaction'
+              : 'Coinbase transaction'
+            : isUnconfirmed
+              ? 'Unconfirmed transaction'
+              : 'Transaction'
           }
         </TitleHeader>
       </LeftCont>
@@ -122,12 +123,12 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             <Label>Size (Bytes)</Label>
             <Content>{commafy(txData.size)}</Content>
           </p>,
-          (txData.coinbase ?
-            <p>
+          (txData.coinbase
+            ? <p>
               <Label>Coinbase</Label>
               <Content>{renderCoinbase(txData.coinbase)}</Content>
-            </p> :
-            <p>
+            </p>
+            : <p>
               <Label>Fees Per Byte</Label>
               <Content>
                 <Pkt amt={fee / txData.size}/>
@@ -146,12 +147,12 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
           </p>
         )}
         {row(false,
-          (!txData.coinbase ?
-            <p>
+          (!txData.coinbase
+            ? <p>
               <Label>Inputs</Label>
               <Content>{commafy(txData.inputCount)}</Content>
-            </p> :
-            inBlock({txData, isUnconfirmed})
+            </p>
+            : inBlock({ txData, isUnconfirmed })
           ),
           <p>
             <Label>Outputs</Label>
@@ -163,7 +164,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             <Label>Lock Time</Label>
             <Content>{txData.locktime}</Content>
           </p>,
-          inBlock({txData, isUnconfirmed})
+          inBlock({ txData, isUnconfirmed })
         ))}
         {row(false,
           <p>
@@ -178,7 +179,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
       </TableCont>
     </ListCont>
   </>)
-};
+}
 
 const TxScreen = (props) => {
   const [txData, setTxData] = useState(false)
@@ -220,13 +221,11 @@ const TxScreen = (props) => {
 
         if (json.coinbase) {
           // If it's a coinbase then calculate the total fees
-          console.log(`${statsCoinsApi}/${json.blockHeight}`);
           fetchJson(`${statsCoinsApi}/${json.blockHeight}`)
             .then((json) => {
               if (json.error) {
                 console.log(json.error)
               }
-              console.log('setStatsCoins', json);
               setStatsCoins(json)
             })
         }
@@ -268,7 +267,7 @@ const TxScreen = (props) => {
           <ListLabelCont>
             <ListLabel>Details</ListLabel>
           </ListLabelCont>
-          <TxBlock txData={txData} key={`coin-0`} view="tx"/>
+          <TxBlock txData={txData} key={'coin-0'} view="tx"/>
         </ListCont>
       </>
     }
