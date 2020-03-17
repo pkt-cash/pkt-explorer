@@ -30,7 +30,7 @@ const BlockScreen = (props) => {
     fetchJson(`${blkDownApi}/1/1`)
       .then((json) => {
         if (json.error) {
-          console.log(json.error)
+          console.error(json.error)
         }
         setTopBlk(json.results[0])
       })
@@ -52,9 +52,8 @@ const BlockScreen = (props) => {
         fetchJson(`${blkUpApi}/1/${json.height + 2}}`)
           .then((json) => {
             if (json.error) {
-              console.log(json.error)
+              console.error(json.error)
             }
-            // console.log('xxx', json);
             setNextBlk(json)
           })
       })
@@ -73,7 +72,7 @@ const BlockScreen = (props) => {
     fetchJson(`${pcBlockApi}/${id}`)
       .then((json) => {
         if (json.error) {
-          console.log(json.error)
+          console.info(json.error)
           return setBlkErr(true)
         }
         setBlkPc(json)

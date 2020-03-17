@@ -21,7 +21,7 @@ const listVars = {
 }
 
 const RightCont = styled.div`
-  align-items: initial;
+  align-items: flex-start;
   display: flex;
   @media ${mqs.small} {
     flex-direction: column;
@@ -150,7 +150,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   let counterparty = ''
   let others = 0
   for (const inp of input) {
-    console.log(Number(inp.value), inp.address)
+    // console.log(Number(inp.value), inp.address)
     if (inp.address === myAddr) {
       value = inp.value
       direction = '-'
@@ -162,7 +162,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   }
   if (direction === '') {
     for (const out of output) {
-      console.log(Number(out.value), out.address)
+      // console.log(Number(out.value), out.address)
       if (out.address === myAddr) {
         value = out.value
         direction = '+'

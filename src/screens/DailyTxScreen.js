@@ -7,7 +7,7 @@ const { txStats } = endpoints
 const DailyTxScreen = (props) => {
   const [txData, setTxData] = useState(false)
   const [hasErr, setErr] = useState(false)
-  if (hasErr) console.log(hasErr)
+  if (hasErr) console.error(hasErr)
   useEffect(() => {
     // fetch daily transactions
     fetchJson(`${txStats}`)

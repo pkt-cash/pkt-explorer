@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import metrics from '../../theme/metrics'
 import { MdSearch } from 'react-icons/md'
 import useBox from '../../hooks/useBox'
+import { useHistory } from 'react-router-dom'
 
 const OmniboxCont = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const SearchIcon = styled(MdSearch)`
   color: ${({ theme }) => theme.colors.pktBlueDark};
   cursor: pointer;
   font-size: ${metrics.ommiboxFontSize}rem;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0 5px 5px 0;
   box-shadow: 0 ${metrics.omniboxBoxShadow}px ${metrics.omniboxBoxShadow}px ${({ theme }) => theme.colors.pktBlueDarker};
   height: ${metrics.omniboxHeight}rem;
   width: ${metrics.omniboxHeight}rem;
@@ -28,14 +29,28 @@ const InputHavingPlacholder = styled.input`
   box-shadow: 0 ${metrics.omniboxBoxShadow}px ${metrics.omniboxBoxShadow}px ${({ theme }) => theme.colors.pktBlueDarker};
   color: ${({ theme }) => theme.colors.pktBlueDarker};
   padding: ${metrics.omniboxPadding}rem;
-  width: 80vw;
+  width: 300px;
+  max-width: 100%;
 `
 
 const Omnibox = ({ placeholder }) => {
-  const { inputs, handleInputChange, handleSubmit } = useBox(() => console.log(inputs))
+  const hist = useHistory()
+  const omniNavigate = (input) => {
+    if (isNaN(parseInt(input))) {
+      hist.push(`/address/${input}`)
+    } else {
+      console.log('this is a number', input)
+    }
+  }
+  const { inputs, handleInputChange, handleSubmit } = useBox(() => omniNavigate(inputs.omni))
+  function onEnterPressed (evt) {
+    if (evt.key === 'Enter') {
+      return handleSubmit()
+    }
+  }
   return (<OmniboxCont>
+    <InputHavingPlacholder placeholder={placeholder} onChange={ handleInputChange } value={inputs.omni} onKeyDown={onEnterPressed}/>
     <SearchIcon onClick={handleSubmit}/>
-    <InputHavingPlacholder placeholder={placeholder} onChange={ handleInputChange } value={inputs.omni}/>
   </OmniboxCont>)
 }
 

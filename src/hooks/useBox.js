@@ -5,11 +5,13 @@ const useBox = (callback) => {
 
   const handleInputChange = (event) => {
     event.persist()
+    console.log(event)
     setInputs(inputs => ({ omni: event.target.value }))
   }
 
   const handleSubmit = (event) => {
     if (event) {
+      console.log('rururu')
       event.preventDefault()
     }
     callback()

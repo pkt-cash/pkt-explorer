@@ -59,17 +59,6 @@ const TxColSep = styled.div`
   }
 `
 
-const LeftLabel = styled.span`
-  display: flex;
-  width: calc(100% - 30px);
-  font-weight: ${metrics.fontWeight};
-`
-
-const TxInteractive = styled.span`
-  display: block;
-  margin-bottom: ${metrics.sep}rem;
-`
-
 const TxLastCont = styled.div`
   margin-right: 10px
 `
@@ -118,7 +107,7 @@ const ConfIcn = ({ isConf }) => {
 const TxBlock = ({ txData, view }) => {
   const { txid, input, output, blockTime } = txData
   const dt = DateTime.fromISO(blockTime)
-  console.log(txData)
+
   return (
     <TxBlockCont>
       <ListCont>

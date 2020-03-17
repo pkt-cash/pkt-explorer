@@ -20,17 +20,13 @@ const BlockScreen = (props) => {
   const [metaLoad, setMetaLoad] = useState(true)
   const [coinLoad, setCoinLoad] = useState(true)
   const { id } = useParams()
-  // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
-  // if (error) return <div>ARRRRR errror fetching address {id}</div>
-  // if (loading) return <div>fetching id data</div>
-  // console.log(blkData)
 
   // Top of the chain
   const getTop = () => {
     fetchJson(`${blkDownApi}/1/1`)
       .then((json) => {
         if (json.error) {
-          console.log(json.error)
+          console.error(json.error)
         }
         setTopBlk(json.results[0])
       })
@@ -52,9 +48,9 @@ const BlockScreen = (props) => {
         fetchJson(`${blkUpApi}/1/${json.height + 2}}`)
           .then((json) => {
             if (json.error) {
-              console.log(json.error)
+              console.error(json.error)
             }
-            // console.log('xxx', json);
+
             setNextBlk(json)
           })
       })
@@ -73,7 +69,7 @@ const BlockScreen = (props) => {
     fetchJson(`${pcBlockApi}/${id}`)
       .then((json) => {
         if (json.error) {
-          console.log(json.error)
+          console.error(json.error)
           return setBlkErr(true)
         }
         setBlkPc(json)

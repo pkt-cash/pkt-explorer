@@ -29,19 +29,13 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
-const RichList = ({ listData }) => {
-  console.log('lista')
-  console.log(listData)
-  return (
-    listData
-      ? <ListCont rich>
-        <RichListLabels cells={cells} />
-        {/* Mapping over rich list addresses */}
-        {listData.map((row) => <RichRow row={row} key={row.address}/>)}
-      </ListCont>
-      : <LoaderWrapper><Loader text='Rich list, loading'/></LoaderWrapper>
-  )
-}
+const RichList = ({ listData }) => listData
+  ? <ListCont rich>
+    <RichListLabels cells={cells} />
+    {/* Mapping over rich list addresses */}
+    {listData.map((row) => <RichRow row={row} key={row.address}/>)}
+  </ListCont>
+  : <LoaderWrapper><Loader text='Rich list, loading'/></LoaderWrapper>
 
 const RowCont = styled.div`
   display: flex;
