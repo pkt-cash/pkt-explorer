@@ -8,6 +8,7 @@ import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
 import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
+import { Link } from 'react-router-dom'
 
 const TxBlockCont = styled.div`
   /*border-bottom: solid 2px ${({ theme }) => theme.colors.pktGrey};*/
@@ -123,10 +124,14 @@ const TxBlock = ({ txData, view }) => {
     <TxBlockCont>
       <ListCont>
         <ListLabelCont>
-          <TxLabel>
-            <RespHash hash={txid} />
-          </TxLabel>
-          {view !== 'block' &&
+          {view !== 'tx' &&
+            <TxLabel>
+              <Link to={`/tx/${txid}`}>
+                <RespHash hash={txid} />
+              </Link>
+            </TxLabel>
+          }
+          {view !== 'block' && view !== 'tx' &&
             <MinedAtLabel>
               {blockTime
                 ? <><RightLabel>Mined: {dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel><ConfIcn isConf /></>
@@ -140,18 +145,30 @@ const TxBlock = ({ txData, view }) => {
             <TxSmallLabel>input</TxSmallLabel>
             <TxCol>
               {input && input.length
-                ? input.map((data, i) => <TxItem key={`inputItem-${i}}`} address={data.address} value={data.value} size={120} />)
+                ? input.map((data, i) => <TxItem
+                    key={`inputItem-${i}}`}
+                    address={data.address}
+                    value={data.value}
+                    size={120}
+                    inputs={data.spentcount}
+                  />)
                 : <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
             <TxSmallLabel>output</TxSmallLabel>
             <TxCol>
-              {output && output.map((data, i) => <TxItem unconfirmed={blockTime === undefined} key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
+              {output && output.map((data, i) => <TxItem
+                spent={data.spentcount > 0}
+                key={`outputItem-${i}}`}
+                address={data.address}
+                value={data.value}
+                size={120}
+              />)}
             </TxCol>
           </TxColsCont>
         </TxlistCont>
-        {(input.length > 2 || output.length > 2) && <InfoCont>
+        {view !== 'tx' && (input.length > 2 || output.length > 2) && <InfoCont>
           <TxLastCont>
             <TotalLabel>Total Inputs: {input.length}</TotalLabel>
           </TxLastCont>

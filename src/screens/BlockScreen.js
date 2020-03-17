@@ -49,7 +49,7 @@ const BlockScreen = (props) => {
 
         // Next block data (to verify the block is in the main chain)
         setNextBlk(false)
-        fetchJson(`${blkUpApi}/1/${json.height + 2}}`)
+        fetchJson(`${blkUpApi}/1/${json.height + 2}`)
           .then((json) => {
             if (json.error) {
               console.log(json.error)

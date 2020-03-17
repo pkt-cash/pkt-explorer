@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 
 export function formatDate (d) {
-  return d.toString().replace(/ GMT[+-][0-9]+ .*$/, '')
+  return new Date(d).toString().replace(/ GMT[+-][0-9]+ .*$/, '')
 }
 
 export function commafy (number) {

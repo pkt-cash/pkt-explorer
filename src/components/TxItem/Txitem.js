@@ -36,14 +36,16 @@ const HashCont = styled(Link)`
   /* width: 100%; */
 `
 
-export const TxItem = ({ address, value, txt, size, unconfirmed }) => {
+const Spent = styled.div``
+
+const Inputs = styled.div`
+  font-size: 0.8rem;
+`
+
+// spent !== undefined and inputs > 0 are mutually exclusive
+export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
   return (
-    <ItemCont
-      unconfirmed={unconfirmed}
-      // variants={variants}
-      // initial='closed'
-      // animate='open'
-    >
+    <ItemCont>
       {txt || <>
         <HashCont to={`/address/${address}`}>
           {address}
@@ -51,6 +53,18 @@ export const TxItem = ({ address, value, txt, size, unconfirmed }) => {
         <Amount>
           <Pkt amt={value} />
         </Amount>
+        {typeof(spent) === 'boolean' &&
+          (spent ?
+            <Spent title="This output has been spent">🔸</Spent> :
+            <Spent title="This output has not yet been spent">🔹</Spent>
+          )
+        }
+        {inputs > 0 && <Inputs
+            title={`Transaction was funded by spending ${inputs} separate payments to this address`}
+          >
+            ({inputs})
+          </Inputs>
+        }
       </>
       }
     </ItemCont>

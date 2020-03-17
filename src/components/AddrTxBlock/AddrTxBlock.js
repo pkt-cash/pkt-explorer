@@ -91,8 +91,8 @@ const TxColSep = styled.div`
     display: none;
   }
 `
-/* TODO(cjd): (Link) */
-const MinedAtLabel = styled.a`
+
+const MinedAtLabel = styled(Link)`
   /* display: flex; */
   /* align-items: flex-start; */
   padding: 0.5rem;
@@ -150,7 +150,6 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   let counterparty = ''
   let others = 0
   for (const inp of input) {
-    console.log(Number(inp.value), inp.address)
     if (inp.address === myAddr) {
       value = inp.value
       direction = '-'
@@ -162,7 +161,6 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   }
   if (direction === '') {
     for (const out of output) {
-      console.log(Number(out.value), out.address)
       if (out.address === myAddr) {
         value = out.value
         direction = '+'
@@ -186,7 +184,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
 
       <BlockHeaderCont onClick={() => setOpen(!isOpen)}>
         <RightCont>
-          <MinedAtLabel href={`https://pkt-insight.cjdns.fr/#/PKT/pkt/tx/${txid}`}>
+          <MinedAtLabel to={`/tx/${txid}`}>
             {blockTime
               ? <><ConfIcn isConf /><RightLabel>{dt.toLocaleString(DateTime.DATETIME_MED)}</RightLabel></>
               : <><ConfIcn /><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel></>
@@ -220,6 +218,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                     address={data.address}
                     value={data.value}
                     size={120}
+                    inputs={data.spentcount}
                   />
                 ))
               } else if (!blockTime) {
@@ -232,7 +231,16 @@ const AddrTxBlock = ({ txData, myAddr }) => {
           <TxColSep><IoMdArrowForward size={30} /></TxColSep>
           <TxSmallLabel>output</TxSmallLabel>
           <TxCol>
-            {output && output.map((data, i) => <TxItem unconfirmed={blockTime === undefined} key={`outputItem-${i}}`} address={data.address} value={data.value} size={120} />)}
+            {output &&
+              output.map((data, i) => (
+                <TxItem
+                  spent={data.spentcount > 0}
+                  key={`outputItem-${i}}`}
+                  address={data.address}
+                  value={data.value}
+                  size={120} />
+              ))
+            }
           </TxCol>
         </TxColsCont>
       </TxlistCont>

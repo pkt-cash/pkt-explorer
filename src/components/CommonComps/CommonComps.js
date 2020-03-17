@@ -160,10 +160,10 @@ const Decimal = styled.span`
 `
 
 const UNITS = [
-  ['PKT', 1],
-  ['mPKT', 1000],
-  ['uPKT', 1000000],
-  ['nPKT', 1000000000]
+  ['PKT', 1, 'PKT'],
+  ['mPKT', 1000, 'milli-PKT (thousandths)'],
+  ['μPKT', 1000000, 'micro-PKT (millionths)'],
+  ['nPKT', 1000000000, 'nano-PKT (billionths)']
 ]
 
 const PktCont = styled.span`
@@ -176,16 +176,16 @@ export const Pkt = ({ amt }) => {
   }
   const fAmt = displayPKT(amt)
   let fa
-  let u
+  let u = UNITS[0]
   let i = 0
   do {
     fa = fAmt * UNITS[i][1]
-    u = UNITS[i][0]
+    u = UNITS[i]
     i++
-  } while (fa < 1 && u !== 'nPKT')
+  } while (fa < 1 && u[0] !== 'nPKT')
   const str = commafy(parseFloat(fa).toFixed(2))
   const intDec = str.split('.')
-  return <PktCont>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit>{u}</Unit></PktCont>
+  return <PktCont>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit title={u[2]}>{u[0]}</Unit></PktCont>
 }
 
 Pkt.propTypes = {
