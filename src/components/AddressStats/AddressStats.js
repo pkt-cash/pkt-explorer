@@ -97,7 +97,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
       </LeftCont>
       <LeftCont>
         <HashCont>
-          <Hash>{addr}</Hash>
+          {addr}
           <Copy value={addr}/>
         </HashCont>
       </LeftCont>
