@@ -8,10 +8,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { MainWrapper } from './components/CommonComps/CommonComps'
 import BlockListScreen from './screens/BlockListScreen'
 import BlockScreen from './screens/BlockScreen'
+import TxScreen from './screens/TxScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeScreen from './screens/HomeScreen'
 import AddressScreen from './screens/AddressScreen'
-import TxScreen from './screens/TxScreen'
+import DailyTxScreen from './screens/DailyTxScreen'
 
 function App () {
   return (
@@ -40,7 +41,7 @@ function App () {
               <Route
                 exact
                 path='/txd'
-                component={TxScreen}
+                component={DailyTxScreen}
                 key='resume' />
               <Route
                 exact
@@ -51,7 +52,12 @@ function App () {
                 exact
                 path='/block/:id'
                 component={BlockScreen}
-                key='address' />
+                key='block' />
+              <Route
+                exact
+                path='/tx/:id'
+                component={TxScreen}
+                key='transaction' />
             </Switch>
           </MainWrapper>
         </ThemeProvider>

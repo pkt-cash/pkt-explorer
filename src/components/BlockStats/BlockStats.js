@@ -112,7 +112,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
             : `Block #${stats.height}`}
         </TitleHeader>
       </LeftCont>
-      {(!isOrphan) &&
+      {!isOrphan &&
         <RightCont>
           <HashCont>
             <Hash>{stats.hash}</Hash>
