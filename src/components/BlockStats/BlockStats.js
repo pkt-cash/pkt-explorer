@@ -16,6 +16,8 @@ import {
 import Loader from '../Loader/Loader'
 import { Link } from 'react-router-dom'
 import Copy from '../Copy/Copy'
+import Tooltip from '../Tooltip/Tooltip'
+import Help from '../Help/Help'
 
 import { commafy, bpsStr, formatDate } from '../../utils'
 
@@ -129,12 +131,22 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
         <Row>
           <Column>
             <ItemCont>
-              <p><Label>Size (bytes)</Label> <Content>{commafy(stats.size)}</Content></p>
+              <p><Label>
+                Size (bytes)
+                <Tooltip>
+                  The total number of bytes of transactions in the block.
+                </Tooltip>
+              </Label> <Content>{commafy(stats.size)}</Content></p>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
-              <p><Label>Difficulty</Label> <Content>{commafy(parseFloat(stats.difficulty).toFixed())}</Content></p>
+              <p><Label>
+                Difficulty
+                <Tooltip>
+                  How hard it was for the miners to mine this block.
+                </Tooltip>
+              </Label> <Content>{commafy(parseFloat(stats.difficulty).toFixed())}</Content></p>
             </ItemCont>
           </Column>
         </Row>
@@ -142,7 +154,12 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Transactions</Label> <Content>{stats.transactionCount}</Content></p>
+                <p><Label>
+                  Transactions
+                  <Tooltip>
+                    The number of transactions which are included in this block.
+                  </Tooltip>
+                </Label> <Content>{stats.transactionCount}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
@@ -150,7 +167,17 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
             <ItemCont>
               <BrdCont>
                 <p>
-                  <Label>Next Block</Label>
+                  <Label>
+                    Next Block
+                    <Tooltip>
+                      {isOrphan ?
+                        <>This block is an <Help.Orphan>orphan</Help.Orphan> which
+                        means there are no blocks which build on top of it.
+                        </> :
+                        <>The next block which builds on top of this block in the chain.</>
+                      }
+                    </Tooltip>
+                  </Label>
                   {(() => {
                     if (isOrphan) {
                       return <Content>Not in main chain</Content>
@@ -169,7 +196,13 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
           <Column swap>
             <ItemCont>
               <BrdCont>
-                <p><Label>Hash</Label> <Content>{stats.hash}</Content></p>
+                <p><Label>
+                  Hash
+                  <Tooltip>
+                    The SHA-256 hash of the block header, this serves as the block's
+                    universally unique identifier.
+                  </Tooltip>
+                </Label> <Content>{stats.hash}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
@@ -177,7 +210,12 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
             <ItemCont>
               <BrdCont>
                 <p>
-                  <Label>Previous Block</Label>
+                  <Label>
+                    Previous Block
+                    <Tooltip>
+                      The block which this block builds on top of.
+                    </Tooltip>
+                  </Label>
                   <Content title={stats.previousBlockHash}>
                     <Link to={`/block/${stats.previousBlockHash}`}>
                       {(() => {
@@ -200,7 +238,12 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
             <ItemCont>
               <BrdCont>
                 <p>
-                  <Label>Timestamp</Label>
+                  <Label>
+                    Timestamp
+                    <Tooltip>
+                      The time, as it was declared by the miner who mined this block.
+                    </Tooltip>
+                  </Label>
                   {(() => {
                     const d = new Date(stats.time)
                     return <Content title={d.toUTCString()}>{formatDate(d)}</Content>
@@ -213,7 +256,19 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
             <ItemCont>
               <BrdCont>
                 <p>
-                  <Label>Confirmations</Label>
+                  <Label>
+                    Confirmations
+                    <Tooltip>
+                      {isOrphan ?
+                        <>This block is an <Help.Orphan>orphan</Help.Orphan> so it has no
+                        confirmations because no other blocks build on top of it.
+                        </> :
+                        <>There are {topBlk.height - stats.height} blocks which build on top
+                        of this block</>
+                      }
+                      The time, as it was declared by the miner who mined this block.
+                    </Tooltip>
+                  </Label>
                   <Content>
                     {(() => {
                       if (isOrphan) {
@@ -238,12 +293,31 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
         <Row>
           <Column>
             <ItemCont>
-              <p><Label>Announcements</Label> <Content>{commafy(stats.pcAnnCount)}</Content></p>
+              <p><Label>
+                Announcements
+                <Tooltip>
+                  The number of 1KB messages which were sent from announcement miners
+                  and block miners and then eventually used to mine this block.
+                </Tooltip>
+              </Label> <Content>{commafy(stats.pcAnnCount)}</Content></p>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
-              <p><Label>Announcement Difficulty</Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>
+              <p>
+                <Label>
+                  Announcement Difficulty
+                  <Tooltip>
+                    The "quality" of the announcements which were used to mine this block.
+                    Announcement difficulty is made up of both the amount of work done on the
+                    announcements and the age of the announcements. Block miners are allowed
+                    to re-use announcements but each block their effective difficulty is cut
+                    in half.
+                    This number will tend to oscaillate from one block to the next as block
+                    miners must choose between throwing away "low quality" announcements or
+                    keeping them to bulk up on quantity.
+                  </Tooltip>
+                </Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>
             </ItemCont>
           </Column>
         </Row>
@@ -251,14 +325,30 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Estimated Bandwidth</Label> <Content>{bpsStr(blkPc.blockBits)}</Content></p>
+                <p><Label>
+                  Estimated Bandwidth
+                  <Tooltip>
+                    This is an estimate of how much bandwidth the whole network was using at
+                    the time when this block was found. Because announcements can be re-used
+                    with lower value, this estimate is not exact.
+                  </Tooltip>
+                </Label> <Content>{bpsStr(blkPc.blockBits)}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Estimated Encryptions Per Second</Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
+                <p><Label>
+                  Estimated Encryptions Per Second
+                  <Tooltip>
+                    This estimate is based on the amount of hash-power needed to mine all of
+                    the announcements which were included in this block as well as the hash
+                    power which was used by the block miner to mine the block. Because hashing
+                    is based on a packet encryption algorithm, this is roughly equal to
+                    encryption of this number of packets per second of VPN network traffic.
+                  </Tooltip>
+                  </Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
