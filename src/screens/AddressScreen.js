@@ -68,7 +68,7 @@ const AddressScreen = (props) => {
               console.error(json.error)
               return void setErr(json.error)
             }
-            const newResults = uniqBy([...txList, ...json.results])
+            const newResults = uniqBy([...txList, ...json.results], 'txid')
             console.log('tx new next', json.next)
             setNextTx(json.next)
             setTxList(newResults)
@@ -80,15 +80,14 @@ const AddressScreen = (props) => {
         fetchJson(`${base}${nextMine}`)
           .then((json) => {
             if (json.error) {
-              console.log('nextMine:', nextMine)
               console.log('caramba err', `${base}${nextMine}`)
               console.error(json.error)
               return void setErr(json.error)
             }
-            const newResults = uniqBy([...txList, ...json.result])
-            console.log('new / old', newResults.length, txList.length)
-            if (newResults.length === dailyTr.length) console.log('this is the end')
-            console.log('mining new next', json.next)
+
+            const newResults = uniqBy([...dailyTr, ...json.result], 'date')
+
+            if (newResults.length === dailyTr.length) return console.log('this is the end')
             if (json.next) setNextTx(json.next)
             setDailyTr(newResults)
           })
