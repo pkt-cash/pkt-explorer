@@ -29,6 +29,7 @@ const InputHavingPlacholder = styled.input`
   box-shadow: 0 ${metrics.omniboxBoxShadow}px ${metrics.omniboxBoxShadow}px ${({ theme }) => theme.colors.pktBlueDarker};
   color: ${({ theme }) => theme.colors.pktBlueDarker};
   padding: ${metrics.omniboxPadding}rem;
+  font-size: 1rem;
   width: 300px;
   max-width: 100%;
   border-radius: 5px 0 0 5px;
@@ -54,7 +55,7 @@ Omnibox.propTypes = {
 }
 
 Omnibox.defaultProps = {
-  placeholder: 'Search for block, transaction or address.'
+  placeholder: 'Block hash, txid or address'
 }
 
 export default Omnibox

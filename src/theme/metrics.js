@@ -18,7 +18,7 @@ const metrics = {
   rowHeight: 3, // rem,
   sep: 0.5, // rem
   omniboxPadding: 0.4, // rem
-  ommiboxFontSize: 1.20, // rem
+  ommiboxFontSize: 1.5, // rem
   omniboxHeight: 2, // rem
   omniboxBoxShadow: 1
 }

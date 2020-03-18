@@ -6,7 +6,6 @@ import { MdSearch } from 'react-icons/md'
 import useBox from '../../hooks/useBox'
 import { useHistory } from 'react-router-dom'
 import { motion } from 'framer-motion'
-
 const OmniboxMobileCont = styled(motion.div)`
   display: flex;
   justify-content: center;
@@ -86,6 +85,7 @@ const InputHavingPlacholder = styled.input`
   box-shadow: 0 ${metrics.omniboxBoxShadow}px ${metrics.omniboxBoxShadow}px ${({ theme }) => theme.colors.pktBlueDarker};
   color: ${({ theme }) => theme.colors.pktBlueDarker};
   padding: ${metrics.omniboxPadding}rem;
+  font-size: 1rem;
   width: 100%;
   height: ${metrics.omniboxHeight}rem;
   max-width: 100%;
