@@ -258,7 +258,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
           <Column>
             <ItemCont>
               <BrdCont>
-                <p><Label>Estimated Encryptions</Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
+                <p><Label>Estimated Encryptions Per Second</Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>
