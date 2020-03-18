@@ -69,7 +69,7 @@ const MenuBar = (props) => {
                     <TopLink exact to='/'>
                       PKT Explorer (beta)
                     </TopLink>
-                    <TopLink to='/blocks'>Blocks</TopLink>
+                    {/* <TopLink to='/blocks'>Blocks</TopLink> */}
                     <TopLink to='/txd'>Txs per day</TopLink>
                     <TopLink to='/rich'>Rich list</TopLink>
                   </TopMenu>
