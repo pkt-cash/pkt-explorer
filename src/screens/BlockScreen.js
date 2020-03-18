@@ -38,6 +38,10 @@ const BlockScreen = (props) => {
   useInterval(getTop, 30000)
 
   useEffect(() => {
+    document.title = `Pkt - Block: ${id}`
+  }, [id])
+
+  useEffect(() => {
     // fetch block data
     fetchJson(`${blockApi}/${id}`)
       .then((json) => {

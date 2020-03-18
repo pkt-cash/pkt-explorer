@@ -16,6 +16,10 @@ const HomeScreen = (props) => {
 
   if (hasErr) console.error(hasErr)
 
+  useEffect(() => {
+    document.title = 'Pkt - Home'
+  }, [blockList])
+
   const topBlock = -1
   const loadBlocks = (then) => {
     // fetch blockList (first 20)

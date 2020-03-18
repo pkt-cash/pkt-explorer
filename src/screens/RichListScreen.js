@@ -14,7 +14,8 @@ const RichListScreen = (props) => {
   const [hasErr, setErr] = useState(false)
 
   useEffect(() => {
-    fetchJson(`${richLApi}/40/${currPage}`)
+    document.title = 'Pkt - Rich list'
+    fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
         if (json.error) { return void setErr(json.error) }
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
@@ -23,7 +24,7 @@ const RichListScreen = (props) => {
   }, [])
 
   const loadMoreRiches = () => {
-    fetchJson(`${richLApi}/40/${currPage + 1}`)
+    fetchJson(`${richLApi}/100/${currPage + 1}`)
       .then((json) => {
         if (json.error) setErr(json.error)
         const newList = uniqBy([...richList, ...json.results], 'address')

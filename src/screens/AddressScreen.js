@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import endpoints from '../utils/endpoints'
 import { useParams } from 'react-router-dom'
 import AddrStats from '../components/AddressStats/AddressStats'
+import { uniqBy } from 'lodash-es'
 import { treatIncome, fetchJson } from '../utils'
 import AddrTxBlock from '../components/AddrTxBlock/AddrTxBlock'
 import Loader from '../components/Loader/Loader'
@@ -45,10 +46,12 @@ const AddressScreen = (props) => {
   const [txList, setTxList] = useState(false)
   const [metaLoad, setMetaLoad] = useState(true)
   const { addr } = useParams()
-
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {addr}</div>
   // if (loading) return <div>fetching addr data</div>
+  useEffect(() => {
+    document.title = `Pkt - Address: ${addr}`
+  }, [addr])
   useEffect(() => {
     // fetchAddrMeta
     fetchJson(`${addrMetaApi}/${addr}`)
@@ -71,7 +74,10 @@ const AddressScreen = (props) => {
         setTxList(json)
       })
   }, [addr])
-  if (metaErr) return <div>ARRRRR errror fetching address {addr}</div>
+
+
+  
+  if (metaErr) return <div>ARRRRR errror fetching address {addr}</div> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading loading metadata' small/>

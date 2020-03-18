@@ -10,6 +10,7 @@ const DailyTxScreen = (props) => {
   if (hasErr) console.error(hasErr)
   useEffect(() => {
     // fetch daily transactions
+    document.title = 'Pkt - Transaction per day'
     fetchJson(`${txStats}`)
       .then((json) => {
         if (json.error) {
