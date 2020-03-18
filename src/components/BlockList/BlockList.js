@@ -92,7 +92,11 @@ const BlockList = ({ listData, home }) => {
   return (
     listData
       ? <ListCont>
-        {home && <ListLabelCont>Last Blocks</ListLabelCont>}
+        {home &&
+          <ListLabelCont>
+            <ListLabel>Most Recent Blocks</ListLabel>
+          </ListLabelCont>
+        }
         <BlockTable>
           <thead>
             <tr>

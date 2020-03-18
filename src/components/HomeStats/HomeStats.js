@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { ListLabelCont, ListCont, TitleCont, LeftCont, TitleHeader, ListLabel, Pkt } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import DiffChart from '../DiffChart/DiffChart'
 import Loader from '../Loader/Loader'
@@ -47,32 +47,47 @@ const LabelCont = styled.div`
   margin: 1rem 0.5rem;
 `
 
-const HomeStats = ({ txData, labelY }) => {
-  const dailyD = useMemo(() => txData
-    ? [
+const HomeStats = ({ blockList, txData, statsCoins }) => {
+  const dailyD = useMemo(() => {
+    if (!txData) { return false }
+    const out = [
       { label: 'Network Bandwidth', value: bpsStr(txData[0].data[0][1]) },
-      { label: 'Encryptions per second', value: commafy(txData[1].data[0][1]) }
-    ]
-    : false
-  )
-  return (
+      { label: 'Encryptions Per Second', value: commafy(txData[1].data[0][1]) }
+    ];
+    if (statsCoins) {
+      out.push(
+        { label: 'Difficulty', value: blockList ? commafy(Math.floor(blockList[0].difficulty)) : '' },
+        { label: 'Mined To Date', value: <Pkt amt={statsCoins.alreadyMined}/> },
+        { label: 'Current Block Reward', value: <Pkt amt={statsCoins.reward}/> },
+        { label: 'Coins Remaining', value: <Pkt amt={statsCoins.remaining}/> }
+      )
+    }
+    return out;
+  })
+  return (<>
+    <TitleCont>
+      <LeftCont>
+        <TitleHeader>
+          PKT Blockchain
+        </TitleHeader>
+      </LeftCont>
+    </TitleCont>
     <ListCont>
       <ListLabelCont>
-      PacketCrypt stats
+        <ListLabel>Stats</ListLabel>
       </ListLabelCont>
       {txData && txData.length
         ? <ListDataCont>
           <ChartCont>
             <DiffChart txData={txData} />
           </ChartCont>
-          <LabelCont>Daily stats</LabelCont>
           <DataBlock data={dailyD} />
         </ListDataCont>
         : <Loader text='Loading...' small />}
       <StatsCont>
       </StatsCont>
     </ListCont>
-  )
+  </>)
 }
 
 HomeStats.propTypes = {

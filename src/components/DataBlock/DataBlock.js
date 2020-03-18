@@ -26,7 +26,7 @@ const LabelCont = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  border-top: 1px solid ${({ theme }) => theme.colors.pktTableBorder};
+  ${ ({first, theme}) => first ? '' : `border-top: 1px solid ${theme.colors.pktTableBorder};` }
   padding: 1rem 0;
 `
 
@@ -59,7 +59,7 @@ const DataBlock = ({ data }) =>
     {data
       ? data.map((d, i) => <ItemCont key={`dat-${i}`}>
         <Item>
-          <LabelCont>
+          <LabelCont first={i < 2}>
             <Label>
               {d.label}
             </Label>
