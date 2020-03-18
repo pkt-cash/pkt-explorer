@@ -113,7 +113,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <p><Label>
-                  Confirmed Balance
+                  Balance
                   <Tooltip>
                     The number of coins which this address has, confirmed in the blockchain
                   </Tooltip>
