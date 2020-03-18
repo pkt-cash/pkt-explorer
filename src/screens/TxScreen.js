@@ -181,12 +181,14 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                   </Tooltip>
               </Label>
               <Content>
-                {(fee / txData.size) < 1 &&
-                  <Tooltip type="caution">
-                    A transaction with less than 0.94 nano-PKT per byte
-                    is considered non-standard by the pktd instances and risks
-                    not being included in the chain.
-                  </Tooltip>
+                {isUnconfirmed ?
+                  "Unconfirmed - Inputs Unavailable" :  
+                  (fee / txData.size) < 1 &&
+                    <Tooltip type="caution">
+                      A transaction with less than 0.94 nano-PKT per byte
+                      is considered non-standard by the pktd instances and risks
+                      not being included in the chain.
+                    </Tooltip>
                 }
                 <Pkt amt={fee / txData.size}/>
               </Content>
