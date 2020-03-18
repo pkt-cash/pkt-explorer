@@ -141,7 +141,9 @@ const TxBlock = ({ txData, view }) => {
                   size={120}
                   inputs={data.spentcount}
                 />)
-                : <TxItem txt='No Inputs (Newly Generated Coins) ' />
+                : blockTime ?
+                  <TxItem txt='No Inputs (Newly Generated Coins) ' /> :
+                  <TxItem txt='Unconfirmed - Inputs Unavailable' />
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
