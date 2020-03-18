@@ -190,7 +190,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
               <ItemCont>
                 <BrdCont>
                   <p><Label>
-                    Mined in the last 24h
+                    Mined last 24h
                     <Tooltip>
                       The amount of coins which this address has mined in the last 24 hours.
                     </Tooltip>
