@@ -142,7 +142,7 @@ const AddressScreen = (props) => {
       </BtRow>
     }
     {(currTab === 0 && noTx === true && txList) && <BtRow>
-      No transaction
+      This address has not made any transactions yet
     </BtRow>
     }
     
