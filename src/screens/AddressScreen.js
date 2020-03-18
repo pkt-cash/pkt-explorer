@@ -138,7 +138,7 @@ const AddressScreen = (props) => {
 
     {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
       <BtRow>
-        <Button onClick={loadMore}>Load more {currTab === 0 ? 'transaction': 'mining incomes'}</Button>
+        <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions': ''}</Button>
       </BtRow>
     }
     {(currTab === 0 && noTx === true && txList) && <BtRow>
