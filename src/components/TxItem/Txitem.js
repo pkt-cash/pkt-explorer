@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 // import RespHash from '../RespHash/RespHash'
 import { Pkt } from '../CommonComps/CommonComps'
 import { Link } from 'react-router-dom'
+import Tooltip from '../Tooltip/Tooltip'
+
 const ItemCont = styled.div`
   min-height: 45px;
   display: flex;
@@ -55,15 +57,13 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
         </Amount>
         {typeof (spent) === 'boolean' &&
           (spent
-            ? <Spent title="This output has been spent">🔸</Spent>
-            : <Spent title="This output has not yet been spent">🔹</Spent>
+            ? <Tooltip type="orangeDiamond">This output has been spent by the recipient</Tooltip>
+            : <Tooltip type="blueDiamond">This output has not yet been spent by the recipient</Tooltip>
           )
         }
-        {inputs > 0 && <Inputs
-          title={`Transaction was funded by spending ${inputs} separate payments to this address`}
-        >
-            ({inputs})
-        </Inputs>
+        {inputs > 0 && <Tooltip tooltip={<Inputs>({inputs})</Inputs>}>
+          Transaction was funded by spending {inputs} separate payments to this address
+          </Tooltip>
         }
       </>
       }
