@@ -37,7 +37,7 @@ const EaringChart = ({ txData }) => {
 
   const axes = React.useMemo(
     () => [
-      { primary: true, type: 'time', position: 'bottom' },
+      { primary: true, type: 'utc', position: 'bottom' },
       { type: 'linear', position: 'left' }
     ],
     []
