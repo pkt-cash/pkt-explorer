@@ -36,6 +36,10 @@ export const OmniBt = ({ act }) => <BtCont onClick={act}>
   <MdSearch/>
 </BtCont>
 
+OmniBt.propTypes = {
+  act: PropTypes.func.isRequired
+}
+
 const BtCont = styled.button`
   width: 30px;
   height: 30px;
@@ -90,7 +94,6 @@ const InputHavingPlacholder = styled.input`
 
 const OmniboxMobile = ({ placeholder, isOpen }) => {
   const hist = useHistory()
-  console.log('isOpen', isOpen)
   const { inputs, handleInputChange, handleSubmit } = useBox(hist)
   function onEnterPressed (evt) {
     if (evt.key === 'Enter') {

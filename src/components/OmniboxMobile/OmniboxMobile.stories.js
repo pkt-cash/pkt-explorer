@@ -1,6 +1,6 @@
 import React from 'react'
 import OmniboxMobile from './OmniboxMobile'
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs'
+import { withKnobs, boolean } from '@storybook/addon-knobs'
 
 export default {
   title: 'OmniboxMobile',

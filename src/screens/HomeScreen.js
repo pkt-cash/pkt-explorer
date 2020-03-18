@@ -4,14 +4,8 @@ import HomeStats from '../components/HomeStats/HomeStats'
 import endpoints from '../utils/endpoints'
 import BlockList from '../components/BlockList/BlockList.js'
 import { uniqBy } from 'lodash-es'
-import { Button } from '../components/CommonComps/CommonComps'
-import styled from 'styled-components'
+import { Button, BtRow } from '../components/CommonComps/CommonComps'
 const { pkApi, blkDownApi, statsCoinsApi } = endpoints
-
-const BtRow = styled.div`
-  margin-top: 1rem;
-  text-align: center;
-`
 
 const HomeScreen = (props) => {
   const [pkData, setPkData] = useState(false)
@@ -41,15 +35,13 @@ const HomeScreen = (props) => {
   }, 30000)
 
   const loadMoreBlock = () => {
-    console.log('moarrr clicked')
     fetchJson(`${blkDownApi}/20/${currPage + 1}`)
       .then((json) => {
         if (json.error) setErr(json.error)
         const newList = uniqBy([...blockList, ...json.results], 'hash')
-        console.log(newList)
-        setTimeout(() => {
-          window.scrollTo(0, document.body.scrollHeight)
-        }, 200) // TODO: (jerome) smooth scroll, no scroll ?
+        // setTimeout(() => {
+        //   window.scrollTo(0, document.body.scrollHeight)
+        // }, 200) // TODO: (jerome) smooth scroll, no scroll ?
         setBlockList(newList)
         setCurrPage(currPage + 1)
       })

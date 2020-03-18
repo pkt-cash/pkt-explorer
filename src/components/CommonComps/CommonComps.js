@@ -11,6 +11,11 @@ export const MainWrapper = styled.div`
   text-align: left;
 `
 
+export const BtRow = styled.div`
+  margin: 3rem 0;
+  text-align: center;
+`
+
 export const Button = styled.div`
     display: inline-block;
     border: none;
@@ -27,6 +32,7 @@ export const Button = styled.div`
     -webkit-appearance: none;
     -moz-appearance: none;
     background-color: ${({ theme }) => theme.colors.pktBlue};
+    border-radius: 3px;
 
   &:hover,
   &:focus {
