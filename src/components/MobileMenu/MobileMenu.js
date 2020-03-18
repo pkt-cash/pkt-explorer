@@ -9,13 +9,8 @@ export const MenuBt = styled.div`
   width: 50px;
   height: 50px;
   padding: 5px;
-  color: ${({ isOpen, theme }) => isOpen ? '#000' : '#fff'};
-  background: ${({ isOpen, theme }) => isOpen ? theme.colors.pktBlueLighter : theme.colors.pktBlueDarker};
-  ${({ isOpen, theme }) => {
-    isOpen
-      ? css`color: #fff; background: ${theme.colors.pktBlueDarker}`
-      : css`color: #000; background: ${theme.colors.pktBlueLighter}`
-  }}
+  color: ${({ isOpen, theme }) => isOpen ? '#fff' : '#000'};
+  background: ${({ isOpen, theme }) => isOpen ? theme.colors.headerBackground : '#fff'};
   svg {
     width: 100%;
     height: 100%;

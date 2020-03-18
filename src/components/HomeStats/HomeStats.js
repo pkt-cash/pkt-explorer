@@ -48,6 +48,9 @@ const LabelCont = styled.div`
 `
 
 const BallEmoji = styled.span`
+  display: inline-block;
+  width: 16px;
+  height: 16px;
   padding-right: 1em;
   margin-right: 0.3em;
   &::before { content:""; }

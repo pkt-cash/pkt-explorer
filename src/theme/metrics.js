@@ -19,7 +19,7 @@ const metrics = {
   sep: 0.5, // rem
   omniboxPadding: 0.4, // rem
   ommiboxFontSize: 1.20, // rem
-  omniboxHeight: 2.5, // rem
+  omniboxHeight: 2, // rem
   omniboxBoxShadow: 1
 }
 

@@ -31,6 +31,7 @@ const InputHavingPlacholder = styled.input`
   padding: ${metrics.omniboxPadding}rem;
   width: 300px;
   max-width: 100%;
+  border-radius: 5px 0 0 5px;
 `
 
 const Omnibox = ({ placeholder }) => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Media from 'react-media'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { MenuCont } from '../CommonComps/CommonComps'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import metrics from '../../theme/metrics'
@@ -28,7 +28,7 @@ const TopMenu = styled.div`
 const TopLink = styled(NavLink)`
   margin-left: 10px;
   height: 100%;
-  color: #283649;
+  color: #fff;
   transition: color 0.5s ease,
               background-color 0.5s ease;
   padding: 0 1rem ;
@@ -38,13 +38,14 @@ const TopLink = styled(NavLink)`
   align-items: center;
   white-space: nowrap;
   &:visited {
-    color: #283649;
+    color: #fff;
   }
   &:hover,
   &.active{
-    background: #a4e9ff;
+    background: #fff;
     color: black;
   }
+  ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
 `
 
 const MenuBar = (props) => {
@@ -58,7 +59,7 @@ const MenuBar = (props) => {
               matches.small ? (
                 <>
                   <MobileMenu />
-                  <TopLink exact to='/'>
+                  <TopLink exact to='/' >
                   PKT Explorer (beta)
                   </TopLink>
                   <OmniBt act={() => setOpen(!isOpen)} />
@@ -66,7 +67,7 @@ const MenuBar = (props) => {
               ) : (
                 <>
                   <TopMenu>
-                    <TopLink exact to='/'>
+                    <TopLink exact to='/' main>
                       PKT Explorer (beta)
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}

@@ -43,14 +43,13 @@ OmniBt.propTypes = {
 const BtCont = styled.button`
   width: 30px;
   height: 30px;
-  background-color: red;
   display: inline-block;
   border: none;
   /* padding: 1rem 2rem; */
   margin: 0;
   text-decoration: none;
-  background: #006485;
-  color: #ffffff;
+  background: #fff;
+  color: #000;
   /* font-family: sans-serif; */
   /* font-size: 1rem; */
   cursor: pointer;

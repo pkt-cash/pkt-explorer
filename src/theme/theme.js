@@ -12,7 +12,8 @@ const theme = {
     pktUnimportantText: '#888',
     pktTableBorder: '#e1e1e1',
     pktTxBackground: '#f1f1f1',
-    pktPageBackground: '#fff'
+    pktPageBackground: '#fff',
+    headerBackground: '#1d326a'
   }
 }
 

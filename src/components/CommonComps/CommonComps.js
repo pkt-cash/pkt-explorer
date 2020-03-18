@@ -31,7 +31,7 @@ export const Button = styled.div`
                 transform 150ms ease;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-color: ${({ theme }) => theme.colors.pktBlue};
+    background-color: ${({ theme }) => theme.colors.headerBackground};
     border-radius: 3px;
 
   &:hover,
@@ -56,7 +56,7 @@ export const MenuCont = styled.div`
   justify-content: center; */
   padding-left: 60px;
   height: ${metrics.menuHeight}px;
-  background-color: ${({ theme }) => theme.colors.pktBlue};
+  background-color: ${({ theme }) => theme.colors.headerBackground};
   color: #fff;
 `
 
