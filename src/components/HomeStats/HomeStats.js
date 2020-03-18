@@ -47,12 +47,24 @@ const LabelCont = styled.div`
   margin: 1rem 0.5rem;
 `
 
+const BallEmoji = styled.span`
+  padding-right: 1em;
+  margin-right: 0.3em;
+  &::before { content:""; }
+`
+const BandwidthEmoji = styled(BallEmoji)`
+  background-color: #4ab5eb;
+`
+const EPSEmoji = styled(BallEmoji)`
+  background-color: #fc6868;
+`
+
 const HomeStats = ({ blockList, txData, statsCoins }) => {
   const dailyD = useMemo(() => {
     if (!txData) { return false }
     const out = [
-      { label: 'Network Bandwidth', value: bpsStr(txData[0].data[0][1]) },
-      { label: 'Encryptions Per Second', value: commafy(txData[1].data[0][1]) }
+      { label: <><BandwidthEmoji/>Network Bandwidth</>, value: bpsStr(txData[0].data[0][1]) },
+      { label: <><EPSEmoji/>Encryptions Per Second</>, value: commafy(txData[1].data[0][1]) }
     ];
     if (statsCoins) {
       out.push(
