@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "framer-motion": "^1.7.2",
     "javascript-time-ago": "^2.0.6",
+    "lodash-es": "^4.17.15",
     "luxon": "^1.22.0",
     "nthen": "^0.1.10",
     "react": "^16.12.0",
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.7",
     "@storybook/addon-viewport": "^5.3.13",
     "@storybook/addons": "^5.3.7",

@@ -11,6 +11,44 @@ export const MainWrapper = styled.div`
   text-align: left;
 `
 
+export const BtRow = styled.div`
+  margin: 3rem 0;
+  text-align: center;
+`
+
+export const Button = styled.div`
+    display: inline-block;
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: ${({ theme }) => theme.colors.pktBlue};
+    border-radius: 3px;
+
+  &:hover,
+  &:focus {
+      background: #0053ba;
+  }
+
+  &:focus {
+      outline: 1px solid #fff;
+      outline-offset: -4px;
+  }
+
+  &:active {
+      transform: scale(0.99);
+  }
+`
+
 export const MenuCont = styled.div`
   /* text-align: center; */
   /* display: flex;

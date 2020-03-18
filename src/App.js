@@ -6,7 +6,7 @@ import theme from './theme/theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { MainWrapper } from './components/CommonComps/CommonComps'
-import BlockListScreen from './screens/BlockListScreen'
+// import BlockListScreen from './screens/BlockListScreen'
 import BlockScreen from './screens/BlockScreen'
 import TxScreen from './screens/TxScreen'
 import RichListScreen from './screens/RichListScreen'
@@ -28,11 +28,11 @@ function App () {
                 path='/'
                 component={HomeScreen}
                 key='home' />
-              <Route
+              {/* <Route
                 exact
                 path='/blocks'
                 component={BlockListScreen}
-                key='blocks' />
+                key='blocks' /> */}
               <Route
                 exact
                 path='/rich'

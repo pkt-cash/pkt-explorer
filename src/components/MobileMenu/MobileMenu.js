@@ -70,7 +70,7 @@ const MobileMenu = (props) => {
         animate={isOpen ? 'open' : 'closed'}
         transition={{ duration: 0.2, ease: 'easeOut' }}
       >
-        <MenuItem><Link to='/blocks' onClick={() => toggle(false)}>Blocks</Link></MenuItem>
+        {/* <MenuItem><Link to='/blocks' onClick={() => toggle(false)}>Blocks</Link></MenuItem> */}
         <MenuItem><Link to='/txd' onClick={() => toggle(false)}>Txs per day</Link></MenuItem>
         <MenuItem><Link to='/rich' onClick={() => toggle(false)}>Rich list</Link></MenuItem>
       </MenuContainer>
