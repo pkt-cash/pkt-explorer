@@ -9,5 +9,6 @@ export default {
   txApi: `${backendURL}/api/v1/PKT/pkt/tx`,
   pcBlockApi: `${backendURL}/api/v1/PKT/pkt/packetcrypt`,
   pkApi: `${backendURL}/api/v1/PKT/pkt/packetcrypt/stats`,
-  txStats: `${backendURL}/api/v1/PKT/pkt/stats/daily-transactions`
+  txStats: `${backendURL}/api/v1/PKT/pkt/stats/daily-transactions`,
+  base: `${backendURL}/api/v1/PKT/pkt`
 }

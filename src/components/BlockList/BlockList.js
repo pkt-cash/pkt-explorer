@@ -139,7 +139,10 @@ const NewRow = ({ blk }) => <Row>
 </Row>
 
 BlockList.propTypes = {
-  listData: PropTypes.array,
+  listData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
   home: PropTypes.bool
 }
 

@@ -33,7 +33,9 @@ const CurrTab = styled.div`
   padding: 1rem 2rem;
   margin: 0;
   text-decoration: none;
-  background: ${({ theme }) => theme.colors.pktBlue};
+  background: ${({ theme }) => theme.colors.headerBackground};
+  font-style: italic;
+  font-weight: 700;
   color: #ffffff;
   font-family: sans-serif;
   font-size: 1rem;

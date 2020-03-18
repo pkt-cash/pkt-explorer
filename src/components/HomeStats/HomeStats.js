@@ -106,7 +106,10 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
 }
 
 HomeStats.propTypes = {
-  txData: PropTypes.array.isRequired,
+  txData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
   labelY: PropTypes.string
   // lastBlock: PropTypes.number.isRequired
 }

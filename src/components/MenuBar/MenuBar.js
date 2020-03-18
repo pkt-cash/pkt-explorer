@@ -3,7 +3,7 @@ import Media from 'react-media'
 import styled, { css } from 'styled-components'
 import { MenuCont } from '../CommonComps/CommonComps'
 import MobileMenu from '../MobileMenu/MobileMenu'
-import metrics from '../../theme/metrics'
+import metrics, { mqs } from '../../theme/metrics'
 import { NavLink } from 'react-router-dom'
 import Omnibox from '../Omnibox/Omnibox'
 import OmniboxMobile, { OmniBt } from '../OmniboxMobile/OmniboxMobile'
@@ -44,6 +44,11 @@ const TopLink = styled(NavLink)`
   &.active{
     background: #fff;
     color: black;
+    @media ${mqs.small} {
+      color: #fff;  
+      background-color: ${({ theme }) => theme.colors.headerBackground};
+    }
+
   }
   ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
 `
@@ -59,7 +64,7 @@ const MenuBar = (props) => {
               matches.small ? (
                 <>
                   <MobileMenu />
-                  <TopLink exact to='/' >
+                  <TopLink exact to='/' main={1}>
                   PKT Explorer (beta)
                   </TopLink>
                   <OmniBt act={() => setOpen(!isOpen)} />
@@ -67,7 +72,7 @@ const MenuBar = (props) => {
               ) : (
                 <>
                   <TopMenu>
-                    <TopLink exact to='/' main>
+                    <TopLink exact to='/' main={1}>
                       PKT Explorer (beta)
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
