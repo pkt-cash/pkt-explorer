@@ -6,5 +6,7 @@ export default {
     Coinbase: ({children}) =>
         <a href="https://en.bitcoin.it/wiki/Coinbase">{children}</a>,
     NLockTime: ({children}) =>
-        <a href="https://en.bitcoin.it/wiki/NLockTime">{children}</a>
+        <a href="https://en.bitcoin.it/wiki/NLockTime">{children}</a>,
+    NetworkSteward: ({children}) =>
+        <a href="https://pkt-cash.github.io/www.pkt.cash/steward/">{children}</a>,
 }

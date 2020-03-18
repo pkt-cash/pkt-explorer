@@ -9,10 +9,11 @@ import {
   TitleHeader,
   TitleCont,
   ListLabel,
-  HashCont,
-  Hash
+  HashCont
 } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
+import Tooltip from '../Tooltip/Tooltip'
+import Help from '../Help/Help'
 
 // import TxChart from '../TxChart/TxChart'
 // import RespHash from '../RespHash/RespHash'
@@ -111,7 +112,12 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           <Row>
             <Column full>
               <ItemCont>
-                <p><Label>Confirmed Balance</Label> <Content><Pkt amt={meta.balance}/></Content></p>
+                <p><Label>
+                  Confirmed Balance
+                  <Tooltip>
+                    The number of coins which this address has, confirmed in the blockchain
+                  </Tooltip>
+                </Label> <Content><Pkt amt={meta.balance}/></Content></p>
               </ItemCont>
             </Column>
           </Row>
@@ -120,7 +126,13 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Unconfirmed</Label> <Content><Pkt amt={meta.unconfirmedReceived}/></Content></p>
+                  <p><Label>
+                    Unconfirmed
+                    <Tooltip>
+                      The number of coins which are paid to this address in as-yet
+                      unconfirmed transactions.
+                    </Tooltip>
+                  </Label> <Content><Pkt amt={meta.unconfirmedReceived}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -131,7 +143,14 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Burned</Label> <Content><Pkt amt={meta.burned}/></Content></p>
+                  <p><Label>
+                    Burned
+                    <Tooltip>
+                      The number of coins which are inaccessible per consensus rules.
+                      If you see this field, it means this is a
+                      <Help.NetworkSteward>Network Steward</Help.NetworkSteward> address.
+                    </Tooltip>
+                  </Label> <Content><Pkt amt={meta.burned}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -141,7 +160,13 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Transactions</Label> <Content>{commafy(meta.recvCount + meta.spentCount)}</Content></p>
+                  <p><Label>
+                    Transactions
+                    <Tooltip>
+                      The total number of transactions which this address has sent or received,
+                      excluding mining payouts.
+                    </Tooltip>
+                  </Label> <Content>{commafy(meta.recvCount + meta.spentCount)}</Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -150,7 +175,12 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Mining payouts</Label> <Content>{commafy(meta.mineCount)}</Content></p>
+                  <p><Label>
+                    Mining payouts
+                    <Tooltip>
+                      The total number of mining payouts which this address has received.
+                    </Tooltip>
+                  </Label> <Content>{commafy(meta.mineCount)}</Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -159,7 +189,12 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             <Column full>
               <ItemCont>
                 <BrdCont>
-                  <p><Label>Mined in the last 24h</Label> <Content><Pkt amt={meta.mined24}/></Content></p>
+                  <p><Label>
+                    Mined in the last 24h
+                    <Tooltip>
+                      The amount of coins which this address has mined in the last 24 hours.
+                    </Tooltip>
+                  </Label> <Content><Pkt amt={meta.mined24}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>

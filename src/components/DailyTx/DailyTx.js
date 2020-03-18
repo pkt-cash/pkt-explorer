@@ -6,7 +6,6 @@ import { treatDTx } from '../../utils'
 import TxChart from '../TxChart/TxChart'
 import { ListCont } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
-// import DataBlock from '../DataBlock/DataBlock'
 
 const Header = styled.div`
   padding: ${metrics.padding}rem;
@@ -42,7 +41,6 @@ const DailyTx = ({ txData }) => {
         </p>}
         <TxChart txData={modData} />
       </ChartCont>
-      {/* {lastData && <DataBlock data={lastData}/>} */}
     </ListCont>
     : <Loader text='Loading daily transaction data' />
 }
