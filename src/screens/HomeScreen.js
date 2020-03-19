@@ -67,7 +67,8 @@ const HomeScreen = (props) => {
       })
 
     fetchJson(`${pkApi}`)
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return <>
     <HomeStats txData={pkData} blockList={blockList} statsCoins={statsCoins} lastBlockData={{}} labelY='diffculty' />
