@@ -25,7 +25,7 @@ const HomeScreen = (props) => {
     // fetch blockList (first 20)
     fetchJson(`${blkDownApi}/20`)
       .then((json) => {
-        if (json.error) { return void setErr(json.error) }
+        if (json.error) { return setErr(json.error) }
         if (blockList) setBlockList(uniqBy([...json.results, ...blockList], 'hash'))
         else setBlockList(json.results)
       })

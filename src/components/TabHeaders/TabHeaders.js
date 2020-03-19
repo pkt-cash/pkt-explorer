@@ -9,7 +9,8 @@ const TabsCont = styled.div`
 const TabsItem = styled.button`
   display: inline-block;
   border: none;
-  border-bottom: 1px solid #e1e1e1;
+  border: 1px solid #e1e1e1;
+  border-bottom: 0px solid;
   padding: 1rem 2rem;
   margin: 0;
   text-decoration: none;
@@ -23,9 +24,18 @@ const TabsItem = styled.button`
               transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none;
-  flex: 1;
+  /* flex: 1; */
+  width: 100%;
+  border-radius: 5px 5px 0 0 ;
   
 `
+
+const ItemCont = styled.div`
+  border-bottom: 1px solid #e1e1e1;
+  padding: 0 5px;
+  flex: 1
+`
+
 const CurrTab = styled.div`
   display: inline-block;
   border: none;
@@ -61,11 +71,13 @@ const TabHeaders = ({ tabsData, cTab, action }) => {
         tabsData.map((tab, i) => {
           return parseInt(i) === parseInt(currTab)
             ? <CurrTab key={`tab-${i}`}>{tab.name}</CurrTab>
-            : <TabsItem key={`tab-${i}`}
-              onClick={() => changeTab(i, tab.action)}
-            >
-              {tab.name}
-            </TabsItem>
+            : <ItemCont>
+              <TabsItem key={`tab-${i}`}
+                onClick={() => changeTab(i, tab.action)}
+              >
+                {tab.name}
+              </TabsItem>
+            </ItemCont>
         })
       }
     </TabsCont>

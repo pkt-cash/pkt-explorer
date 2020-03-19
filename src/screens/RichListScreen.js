@@ -16,7 +16,7 @@ const RichListScreen = (props) => {
     document.title = 'Pkt - Rich list'
     fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
-        if (json.error) { return void console.error(json.error) }
+        if (json.error) { return console.error(json.error) }
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
         else setRichList(json.results)
       })
@@ -25,7 +25,7 @@ const RichListScreen = (props) => {
   const loadMoreRiches = () => {
     fetchJson(`${richLApi}/100/${currPage + 1}`)
       .then((json) => {
-        if (json.error) { return void console.error(json.error) }
+        if (json.error) { return console.error(json.error) }
         const newList = uniqBy([...richList, ...json.results], 'address')
         setRichList(newList)
         setNextRich(json.next)
@@ -36,9 +36,9 @@ const RichListScreen = (props) => {
   return <>
     <RichList listData={richList} />
     <BtRow>
-      {nextRich !== "" ?
-        <Button onClick={loadMoreRiches}>More Riches !!!</Button> :
-        <>You, brave valient clicker, have clicked all the way to the end of
+      {nextRich !== ''
+        ? <Button onClick={loadMoreRiches}>More Riches !!!</Button>
+        : <>You, brave valient clicker, have clicked all the way to the end of
         the list. The power of your thumb is beyond even the expectation of
         the authors of this explorer and to you, I have only one thing to say:
         Never gonna give you up, never gonna let you down, never gonna run

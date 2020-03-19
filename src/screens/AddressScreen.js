@@ -62,7 +62,7 @@ const AddressScreen = (props) => {
         // tx
         nextTx !== '' && fetchJson(`${base}${nextTx}`)
           .then((json) => {
-            if (json.error) { 
+            if (json.error) {
               console.log('caramba err', `${base}${nextTx}`)
               console.error(json.error)
               return
@@ -137,9 +137,9 @@ const AddressScreen = (props) => {
 
     {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
       <BtRow>
-        {nextTx !== "" ?
-          <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions': ''}</Button> :
-          <>𝓣𝓱𝓪𝓽'𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+        {nextTx !== ''
+          ? <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions' : ''}</Button>
+          : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
         }
       </BtRow>
     }
@@ -147,7 +147,7 @@ const AddressScreen = (props) => {
       This address has not made any transactions yet
     </BtRow>
     }
-    
+
   </ScreenCont>
 }
 

@@ -102,7 +102,7 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           <Pkt amt={meta.balance}/>
         </BalanceLabel>
       </div>
-      
+
       <AddrCont>
         <HashCont>
           {addr}

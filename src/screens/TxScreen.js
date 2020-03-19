@@ -57,24 +57,24 @@ const row = (isFirst, left, right) => (
 const inBlock = ({ txData, isUnconfirmed }) => <p>
   <Label>In Block
     <Tooltip>
-      {txData.blockHash ?
-        isUnconfirmed ?
-          txData.coinbase ?
-            <>This coinbase transaction belongs to block <Link
-              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,8)}</Link>,
+      {txData.blockHash
+        ? isUnconfirmed
+          ? txData.coinbase
+            ? <>This coinbase transaction belongs to block <Link
+              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0, 8)}</Link>,
               but that block is an <Help.Orphan>orphan</Help.Orphan>.
               Unless the chain re-organizes so this block is nolonger orphaned,
               these mining payouts will not be usable.
-            </> :
-            <>This transaction has been included in block <Link
-              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,8)}</Link>,
+            </>
+            : <>This transaction has been included in block <Link
+              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0, 8)}</Link>,
               but that block is an <Help.Orphan>orphan</Help.Orphan>.
               It should be picked up by a miner and included in another block soon.
-            </> :
-          <>This transaction has been included in block #<Link
+            </>
+          : <>This transaction has been included in block #<Link
             to={`/block/${txData.blockHash}`}>{txData.blockHeight}</Link>.
-          </> :
-        <>This transaction has not yet been included in a block.</>
+          </>
+        : <>This transaction has not yet been included in a block.</>
       }
     </Tooltip>
   </Label>
@@ -126,7 +126,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                   This coinbase transaction is part of
                   an <Help.Orphan>orphaned block</Help.Orphan> which means it will not be
                   spendable unless the chain re-organizes and the block ceases to be an orphan.
-                </Tooltip>Orphaned coinbase transaction</>
+              </Tooltip>Orphaned coinbase transaction</>
               : 'Coinbase transaction'
             : isUnconfirmed
               ? 'Unconfirmed transaction'
@@ -153,7 +153,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               <Tooltip>
                 The number of bytes of data in the transaction.
                 {!txData.coinbase &&
-                  ` Miners require more fees for larger transactions.`
+                  ' Miners require more fees for larger transactions.'
                 }
               </Tooltip>
             </Label>
@@ -164,7 +164,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               <Label>
                 Coinbase
                 <Tooltip>
-                  Coinbase transactions don't need any inputs to fund them,
+                  Coinbase transactions don&apos;t need any inputs to fund them,
                   but the software requires all transactions to have at least
                   one input. This field is known as the
                   <Help.Coinbase>coinbase</Help.Coinbase> and is by miners to
@@ -182,12 +182,12 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                     than 0.94 nano-PKT per byte is considered non-standard by the
                     pktd instances and risks not being included in the chain at
                     all.
-                  </Tooltip>
+                </Tooltip>
               </Label>
               <Content>
-                {isUnconfirmed ?
-                  "Unconfirmed - Inputs Unavailable" :  
-                  (fee / txData.size) < 1 &&
+                {isUnconfirmed
+                  ? 'Unconfirmed - Inputs Unavailable'
+                  : (fee / txData.size) < 1 &&
                     <Tooltip type="caution">
                       A transaction with less than 0.94 nano-PKT per byte
                       is considered non-standard by the pktd instances and risks
@@ -252,7 +252,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               Lock Time
               <Tooltip>
                 If non-zero, this specifies the time when the transaction is
-                legal to accept into a block. This is known as 
+                legal to accept into a block. This is known as
                 the <Help.NLockTime>nLocktime</Help.NLockTime> field and is used for
                 smart contracts.
               </Tooltip>
@@ -275,13 +275,13 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             <Label>
               Confirmations
               <Tooltip>
-                {isUnconfirmed ?
-                  txData.coinbase ?
-                    <>This transaction is part of an <Help.Orphan>orphan block</Help.Orphan> so
+                {isUnconfirmed
+                  ? txData.coinbase
+                    ? <>This transaction is part of an <Help.Orphan>orphan block</Help.Orphan> so
                     it is unspendable.
-                    </> :
-                    <>This transaction has not yet been logged in the blockchain.</> :
-                  <>The number of blocks which have built on top of the block containing
+                    </>
+                    : <>This transaction has not yet been logged in the blockchain.</>
+                  : <>The number of blocks which have built on top of the block containing
                     this transaction.
                   </>
                 }

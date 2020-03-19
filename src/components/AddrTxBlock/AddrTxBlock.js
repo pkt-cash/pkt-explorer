@@ -131,7 +131,6 @@ const AddrLink = styled(Link)`
   font-weight: normal;
 `
 
-
 const ConfIcn = ({ isConf }) => {
   return <IcnCont>{isConf
     ? <FaCheckCircle title="Confirmed" style={{ color: 'green' }} />
@@ -176,7 +175,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
         // This is when we receive change back, we need to deduct from the
         // amount that we're spending to get the right sum.
         value = '' + (Number(value) - out.value)
-        continue;
+        continue
       }
       maxValue = Math.max(Number(out.value), maxValue)
       others += (counterparty !== '')
@@ -196,12 +195,12 @@ const AddrTxBlock = ({ txData, myAddr }) => {
             }
           </MinedAtLabel>
           <span>
-          <AddrLink to={`/address/${counterparty}`}>
-            {counterparty}
-          </AddrLink>
-          <NoWrap>
-            {(others > 0) ? ` +${others} others...` : ''}
-          </NoWrap>
+            <AddrLink to={`/address/${counterparty}`}>
+              {counterparty}
+            </AddrLink>
+            <NoWrap>
+              {(others > 0) ? ` +${others} others...` : ''}
+            </NoWrap>
           </span>
         </RightCont>
         <PktCont>

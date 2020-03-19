@@ -11,7 +11,7 @@ const TxChart = ({ txData, labelY }) => {
         data: txData
       }
     ],
-    [txData]
+    [txData, labelY]
   )
 
   const axes = React.useMemo(

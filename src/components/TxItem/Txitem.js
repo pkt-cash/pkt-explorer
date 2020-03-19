@@ -50,7 +50,8 @@ const ScriptHashCont = styled.span`
   /* width: 100%; */
 `
 
-const Spent = styled.span``
+const Spent = ({ title, x }) =>
+  <span title={title} role="img" aria-label={title}>{x}</span>
 
 const Inputs = styled.div`
   font-size: 0.8rem;
@@ -61,11 +62,11 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
   let addr = <HashCont to={`/address/${address}`}>
     {address}
   </HashCont>
-  if (/^script:ajAJ\+REC/.test(address) && value === "0") {
+  if (/^script:ajAJ\+REC/.test(address) && value === '0') {
     return <ItemCont>
       <span><Help.PacketCryptCommitment>PacketCrypt</Help.PacketCryptCommitment> Commitment</span>
     </ItemCont>
-  } else if (/^script:aiSqI/.test(address) && value === "0") {
+  } else if (/^script:aiSqI/.test(address) && value === '0') {
     return <ItemCont>
       <span><Help.SegwitCommitment>Segwit</Help.SegwitCommitment> Commitment</span>
     </ItemCont>
@@ -83,8 +84,8 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
         </Amount>
         {typeof (spent) === 'boolean' &&
           (spent
-            ? <Spent title="This output has been spent" aria-label="This output has been spent">🔸</Spent>
-            : <Spent title="This output has not yet been spent" aria-label="This output has not yet been spent">🔹</Spent>
+            ? <Spent title="This output has been spent" x="🔸"/>
+            : <Spent title="This output has not yet been spent" x="🔹"/>
           )
         }
         {inputs > 0 && <Inputs
