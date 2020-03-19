@@ -1,5 +1,4 @@
 import React from 'react'
-// import styled from 'styled-components'
 import { Chart } from 'react-charts'
 import PropTypes from 'prop-types'
 import { Chartcont } from '../EarningChart/EarningChart'

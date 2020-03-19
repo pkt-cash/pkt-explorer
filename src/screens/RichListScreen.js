@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import RichList from '../components/RichList/RichList'
 import endpoints from '../utils/endpoints'
 import { uniqBy } from 'lodash-es'
-import useFetch from '../hooks/useFetch'
 import { Button, BtRow } from '../components/CommonComps/CommonComps'
 import { fetchJson } from '../utils'
 
@@ -12,13 +11,12 @@ const RichListScreen = (props) => {
   const [currPage, setCurrPage] = useState(1)
   const [richList, setRichList] = useState(false)
   const [nextRich, setNextRich] = useState(false)
-  const [hasErr, setErr] = useState(false)
 
   useEffect(() => {
     document.title = 'Pkt - Rich list'
     fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
-        if (json.error) { return void setErr(json.error) }
+        if (json.error) { return void console.error(json.error) }
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
         else setRichList(json.results)
       })
@@ -27,7 +25,7 @@ const RichListScreen = (props) => {
   const loadMoreRiches = () => {
     fetchJson(`${richLApi}/100/${currPage + 1}`)
       .then((json) => {
-        if (json.error) setErr(json.error)
+        if (json.error) { return void console.error(json.error) }
         const newList = uniqBy([...richList, ...json.results], 'address')
         setRichList(newList)
         setNextRich(json.next)

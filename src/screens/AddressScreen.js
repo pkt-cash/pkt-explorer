@@ -51,7 +51,6 @@ const AddressScreen = (props) => {
   const [metaLoad, setMetaLoad] = useState(true)
   const [noTx, setNoTx] = useState(false)
   const { addr } = useParams()
-  const [hasErr, setErr] = useState(false)
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {addr}</div>
   // if (loading) return <div>fetching addr data</div>
@@ -66,7 +65,7 @@ const AddressScreen = (props) => {
             if (json.error) {
               console.log('caramba err', `${base}${nextTx}`)
               console.error(json.error)
-              return void setErr(json.error)
+              return
             }
             const newResults = uniqBy([...txList, ...json.results], 'txid')
             console.log('tx new next', json.next)
@@ -82,7 +81,7 @@ const AddressScreen = (props) => {
             if (json.error) {
               console.log('caramba err', `${base}${nextMine}`)
               console.error(json.error)
-              return void setErr(json.error)
+              return
             }
 
             const newResults = uniqBy([...dailyTr, ...json.result], 'date')

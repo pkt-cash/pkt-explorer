@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {
@@ -10,7 +10,7 @@ import {
   ListLabel,
   Pkt
 } from '../CommonComps/CommonComps'
-import { TableCont, Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
+import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
 import metrics, { mqs } from '../../theme/metrics'
 import DiffChart from '../DiffChart/DiffChart'
 import Loader from '../Loader/Loader'
@@ -39,7 +39,6 @@ const StatsCont = styled.div`
     margin-right: 0;
     padding-right: 0;
   }
-
 `
 
 const ChartCont = styled.div`
@@ -50,10 +49,6 @@ const ChartCont = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
   }
-`
-
-const LabelCont = styled.div`
-  margin: 1rem 0.5rem;
 `
 
 const BallEmoji = styled.span`
@@ -72,22 +67,6 @@ const EPSEmoji = styled(BallEmoji)`
 `
 
 const HomeStats = ({ blockList, txData, statsCoins }) => {
-  const dailyD = useMemo(() => {
-    if (!txData) { return false }
-    const out = [
-      { label: <><BandwidthEmoji/>Network Bandwidth</>, value: bpsStr(txData[0].data[0][1]) },
-      { label: <><EPSEmoji/>Encryptions Per Second</>, value: commafy(txData[1].data[0][1]) }
-    ]
-    if (statsCoins) {
-      out.push(
-        { label: 'Difficulty', value: blockList ? commafy(Math.floor(blockList[0].difficulty)) : '' },
-        { label: 'Mined To Date', value: <Pkt amt={statsCoins.alreadyMined}/> },
-        { label: 'Current Block Reward', value: <Pkt amt={statsCoins.reward}/> },
-        { label: 'Coins Remaining', value: <Pkt amt={statsCoins.remaining}/> }
-      )
-    }
-    return out
-  })
   return (<>
     <TitleCont>
       <LeftCont>
@@ -110,7 +89,7 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <p><Label>
-                    Network Bandwidth
+                    <BandwidthEmoji/>Network Bandwidth
                     <Tooltip>
                       An estimate of the amount of bandwidth currently being consumed
                       for mining. This estimate is based on the number of announcements
@@ -124,7 +103,7 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <p><Label>
-                    Encryptions Per Second
+                    <EPSEmoji/>Encryptions Per Second
                     <Tooltip>
                       This is the sum of the estimated encryptions per second expended
                       by the announcement miners to mine the blocks plus the encryptions
@@ -138,40 +117,40 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
             <Row>
               <Column>
                 <ItemCont>
-                  <BrdCont>
-                    <p><Label>
+                <BrdCont>
+                  <p><Label>
                     Difficulty
-                      <Tooltip>
+                    <Tooltip>
                       This is the global difficulty of the blockchain, it is a unitless
                       number but every time it doubles, it means there is twice as much
                       announcement mining power, twice as much block mining power, twice
                       as much bandwidth between announcement miners and block miners, or
                       some combination of the three.
-                      </Tooltip>
-                    </Label> <Content>
-                      {blockList
-                        ? commafy(Math.floor(blockList[0].difficulty))
-                        : ''
-                      }
+                    </Tooltip>
+                  </Label> <Content>
+                    {blockList ?
+                      commafy(Math.floor(blockList[0].difficulty)) :
+                      ''
+                    }
                     </Content></p>
-                  </BrdCont>
+                    </BrdCont>
                 </ItemCont>
               </Column>
               <Column>
                 <ItemCont>
                   <BrdCont>
-                    <p><Label>
+                  <p><Label>
                     Mined To Date
-                      <Tooltip>
+                    <Tooltip>
                       How many coins have already been mined.
-                      </Tooltip>
-                    </Label> <Content>
-                      {statsCoins
-                        ? <Pkt amt={statsCoins.alreadyMined}/>
-                        : ''
-                      }
+                    </Tooltip>
+                  </Label> <Content>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.alreadyMined}/> :
+                      ''
+                    }
                     </Content></p>
-                  </BrdCont>
+                    </BrdCont>
                 </ItemCont>
               </Column>
             </Row>
@@ -179,16 +158,16 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <BrdCont>
-                    <p><Label>
+                  <p><Label>
                     Current Block Reward
-                      <Tooltip>
+                    <Tooltip>
                       How many new coins are paid out in each block.
-                      </Tooltip>
-                    </Label> <Content>
-                      {statsCoins
-                        ? <Pkt amt={statsCoins.reward}/>
-                        : ''
-                      }</Content></p>
+                    </Tooltip>
+                  </Label> <Content>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.reward}/> :
+                      ''
+                    }</Content></p>
                   </BrdCont>
                 </ItemCont>
               </Column>
@@ -201,11 +180,11 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
                         How many coins remain to be mined.
                       </Tooltip>
                     </Label> <Content>
-                      {statsCoins
-                        ? <Pkt amt={statsCoins.remaining}/>
-                        : ''
-                      }
-                    </Content></p>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.remaining}/> :
+                      ''
+                    }
+                      </Content></p>
                   </BrdCont>
                 </ItemCont>
               </Column>

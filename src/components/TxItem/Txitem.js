@@ -50,7 +50,8 @@ const ScriptHashCont = styled.span`
   /* width: 100%; */
 `
 
-const Spent = styled.div``
+const Spent = ({title,x}) =>
+  <span title={title} role="img" aria-label={title}>{x}</span>
 
 const Inputs = styled.div`
   font-size: 0.8rem;
@@ -83,8 +84,8 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
         </Amount>
         {typeof (spent) === 'boolean' &&
           (spent
-            ? <Spent title="This output has been spent">🔸</Spent>
-            : <Spent title="This output has not yet been spent">🔹</Spent>
+            ? <Spent title="This output has been spent" x="🔸"/>
+            : <Spent title="This output has not yet been spent" x="🔹"/>
           )
         }
         {inputs > 0 && <Inputs
