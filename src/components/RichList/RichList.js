@@ -8,7 +8,6 @@ import {
   // ListCell,
   // ListRow,
   ListLabel,
-  ListLabelCont,
   ListCont,
   Pkt
 } from '../CommonComps/CommonComps'
@@ -23,6 +22,14 @@ const cells = {
 const AddrLink = styled(Link)`
   display: inline-block;
   word-break: break-all;
+`
+
+const ListLabelCont = styled.div`
+  display: flex;
+  font-weight: 700;
+  justify-content: space-between;
+  padding: 0 1rem;
+  width: 100%;
 `
 
 export const RichListLabels = ({ cells }) => <ListLabelCont>{
