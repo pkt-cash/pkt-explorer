@@ -117,40 +117,40 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
             <Row>
               <Column>
                 <ItemCont>
-                <BrdCont>
-                  <p><Label>
+                  <BrdCont>
+                    <p><Label>
                     Difficulty
-                    <Tooltip>
+                      <Tooltip>
                       This is the global difficulty of the blockchain, it is a unitless
                       number but every time it doubles, it means there is twice as much
                       announcement mining power, twice as much block mining power, twice
                       as much bandwidth between announcement miners and block miners, or
                       some combination of the three.
-                    </Tooltip>
-                  </Label> <Content>
-                    {blockList ?
-                      commafy(Math.floor(blockList[0].difficulty)) :
-                      ''
-                    }
+                      </Tooltip>
+                    </Label> <Content>
+                      {blockList
+                        ? commafy(Math.floor(blockList[0].difficulty))
+                        : ''
+                      }
                     </Content></p>
-                    </BrdCont>
+                  </BrdCont>
                 </ItemCont>
               </Column>
               <Column>
                 <ItemCont>
                   <BrdCont>
-                  <p><Label>
+                    <p><Label>
                     Mined To Date
-                    <Tooltip>
+                      <Tooltip>
                       How many coins have already been mined.
-                    </Tooltip>
-                  </Label> <Content>
-                    {statsCoins ?
-                      <Pkt amt={statsCoins.alreadyMined}/> :
-                      ''
-                    }
+                      </Tooltip>
+                    </Label> <Content>
+                      {statsCoins
+                        ? <Pkt amt={statsCoins.alreadyMined}/>
+                        : ''
+                      }
                     </Content></p>
-                    </BrdCont>
+                  </BrdCont>
                 </ItemCont>
               </Column>
             </Row>
@@ -158,16 +158,16 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <BrdCont>
-                  <p><Label>
+                    <p><Label>
                     Current Block Reward
-                    <Tooltip>
+                      <Tooltip>
                       How many new coins are paid out in each block.
-                    </Tooltip>
-                  </Label> <Content>
-                    {statsCoins ?
-                      <Pkt amt={statsCoins.reward}/> :
-                      ''
-                    }</Content></p>
+                      </Tooltip>
+                    </Label> <Content>
+                      {statsCoins
+                        ? <Pkt amt={statsCoins.reward}/>
+                        : ''
+                      }</Content></p>
                   </BrdCont>
                 </ItemCont>
               </Column>
@@ -180,11 +180,11 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
                         How many coins remain to be mined.
                       </Tooltip>
                     </Label> <Content>
-                    {statsCoins ?
-                      <Pkt amt={statsCoins.remaining}/> :
-                      ''
-                    }
-                      </Content></p>
+                      {statsCoins
+                        ? <Pkt amt={statsCoins.remaining}/>
+                        : ''
+                      }
+                    </Content></p>
                   </BrdCont>
                 </ItemCont>
               </Column>

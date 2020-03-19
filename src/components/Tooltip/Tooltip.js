@@ -25,11 +25,15 @@ const TTip = ({ children, type, tooltip }) => {
   } else if (type === 'blueDiamond') {
     tooltip = <span>{'\uD83D\uDD39'}</span>
   }
-  return <TTCont>
-    <ToolTip tooltip={tooltip}>
+  return type === 'caution'
+    ? <ToolTip tooltip={tooltip}>
       <Ttc>{children}</Ttc>
     </ToolTip>
-  </TTCont>
+    : <TTCont>
+      <ToolTip tooltip={tooltip}>
+        <Ttc>{children}</Ttc>
+      </ToolTip>
+    </TTCont>
 }
 
 export default TTip

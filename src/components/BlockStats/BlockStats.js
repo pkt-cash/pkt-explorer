@@ -206,7 +206,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                 <p><Label>
                   Hash
                   <Tooltip>
-                    The SHA-256 hash of the block header, this serves as the block's
+                    The SHA-256 hash of the block header, this serves as the block&apos;s
                     universally unique identifier.
                   </Tooltip>
                 </Label> <Content>{stats.hash}</Content></p>
@@ -261,7 +261,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                     <Tooltip>
                       {isOrphan
                         ? <>This block is an <Help.Orphan>orphan</Help.Orphan> so it is not
-                        part of the official chain. This block's sibling has {topBlk
+                        part of the official chain. This block&apos;s sibling has {topBlk
                           ? topBlk.height - stats.height
                           : <>(loading...)</>} confirmations, meaning the chain which does
                           not build on this block is that many blocks longer.
@@ -313,13 +313,13 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                 <Label>
                   Announcement Difficulty
                   <Tooltip>
-                    The "quality" of the announcements which were used to mine this block.
+                    The &quot;quality&quot; of the announcements which were used to mine this block.
                     Announcement difficulty is made up of both the amount of work done on the
                     announcements and the age of the announcements. Block miners are allowed
                     to re-use announcements but each block their effective difficulty is cut
                     in half.
                     This number will tend to oscaillate from one block to the next as block
-                    miners must choose between throwing away "low quality" announcements or
+                    miners must choose between throwing away &quot;low quality&quot; announcements or
                     keeping them to bulk up on quantity.
                   </Tooltip>
                 </Label> <Content>{commafy(parseFloat(stats.pcAnnDifficulty).toFixed(2))}</Content></p>

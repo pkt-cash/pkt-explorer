@@ -50,7 +50,7 @@ const ScriptHashCont = styled.span`
   /* width: 100%; */
 `
 
-const Spent = ({title,x}) =>
+const Spent = ({ title, x }) =>
   <span title={title} role="img" aria-label={title}>{x}</span>
 
 const Inputs = styled.div`
