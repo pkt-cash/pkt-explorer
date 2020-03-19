@@ -10,10 +10,10 @@ const CopyBt = styled(motion.button)`
   height: 20px;
   border-radius: 3px;
   margin-left: 10px;
+  margin-top: 0.8rem;
   background-color: ${({ theme }) => theme.colors.pktGrey};
   display: inline-block;
   position: relative;
-  top: -3px;
   border-width: 0;
   svg{
     width: 15px;

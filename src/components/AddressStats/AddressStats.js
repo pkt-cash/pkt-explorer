@@ -79,30 +79,44 @@ const ChartCont = styled.div`
 //   font-style: italic;
 // `
 
-const BalanceLabel = styled.div`
+const BalanceLabel = styled.span`
   margin-right: 10px;
   font-size: 1.3rem;
   white-space: nowrap;
 `
 
+const AddrCont = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: end;
+`
+const CpCont = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const AddrStats = ({ meta, addr, dailyTr }) => {
   return (<>
     <TitleCont>
-      <LeftCont>
+      <div>
         <TitleHeader>
           Address
         </TitleHeader>
         <BalanceLabel>
           <Pkt amt={meta.balance}/>
         </BalanceLabel>
-      </LeftCont>
-      <LeftCont>
+      </div>
+      
+      <AddrCont>
         <HashCont>
           {addr}
-          <Copy value={addr}/>
         </HashCont>
-      </LeftCont>
+        <CpCont>
+          <Copy value={addr}/>
+        </CpCont>
+      </AddrCont>
     </TitleCont>
+
     <ListCont>
       <ListLabelCont>
         <ListLabel>Summary</ListLabel>

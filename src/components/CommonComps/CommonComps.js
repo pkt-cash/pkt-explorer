@@ -99,12 +99,6 @@ export const ListLabel = styled.div`
   } */
 `
 
-export const TitleHeader = styled.div`
-  margin-right: 10px;
-  font-size: 1.8em;
-  margin-bottom: -2px; /* TODO(cjd): This is a mess */
-`
-
 export const ListLabelCont = styled.div`
   display: flex;
   font-weight: 700;
@@ -129,6 +123,12 @@ export const TitleCont = styled.div`
   @media ${mqs.small} {
     flex-direction: column;
   }
+`
+
+export const TitleHeader = styled.span`
+  margin-right: 10px;
+  font-size: 1.8em;
+  
 `
 
 export const LeftCont = styled.div`
@@ -178,12 +178,9 @@ svg{
 `
 
 export const HashCont = styled.div`
-  white-space: nowrap;
-  min-width:0;
-  display: flex; 
-  @media ${mqs.small} {
-    margin-top: 0.5rem;
-  }
+  word-break: break-all;
+  margin-top: 0.8rem;
+  flex: 1;
 `
 export const Hash = styled.div`
   
