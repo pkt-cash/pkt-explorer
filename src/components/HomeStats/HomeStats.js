@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {
@@ -10,7 +10,7 @@ import {
   ListLabel,
   Pkt
 } from '../CommonComps/CommonComps'
-import { TableCont, Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
+import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
 import metrics, { mqs } from '../../theme/metrics'
 import DiffChart from '../DiffChart/DiffChart'
 import Loader from '../Loader/Loader'
@@ -39,7 +39,6 @@ const StatsCont = styled.div`
     margin-right: 0;
     padding-right: 0;
   }
-
 `
 
 const ChartCont = styled.div`
@@ -50,10 +49,6 @@ const ChartCont = styled.div`
     flex-flow: column nowrap;
     justify-content: center;
   }
-`
-
-const LabelCont = styled.div`
-  margin: 1rem 0.5rem;
 `
 
 const BallEmoji = styled.span`
@@ -72,22 +67,6 @@ const EPSEmoji = styled(BallEmoji)`
 `
 
 const HomeStats = ({ blockList, txData, statsCoins }) => {
-  const dailyD = useMemo(() => {
-    if (!txData) { return false }
-    const out = [
-      { label: <><BandwidthEmoji/>Network Bandwidth</>, value: bpsStr(txData[0].data[0][1]) },
-      { label: <><EPSEmoji/>Encryptions Per Second</>, value: commafy(txData[1].data[0][1]) }
-    ];
-    if (statsCoins) {
-      out.push(
-        { label: 'Difficulty', value: blockList ? commafy(Math.floor(blockList[0].difficulty)) : '' },
-        { label: 'Mined To Date', value: <Pkt amt={statsCoins.alreadyMined}/> },
-        { label: 'Current Block Reward', value: <Pkt amt={statsCoins.reward}/> },
-        { label: 'Coins Remaining', value: <Pkt amt={statsCoins.remaining}/> }
-      )
-    }
-    return out;
-  })
   return (<>
     <TitleCont>
       <LeftCont>

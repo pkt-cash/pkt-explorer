@@ -5,7 +5,6 @@ import {
   ListLabelCont,
   ListCont,
   Pkt,
-  LeftCont,
   TitleHeader,
   TitleCont,
   ListLabel,
@@ -14,9 +13,6 @@ import {
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
 import Help from '../Help/Help'
-
-// import TxChart from '../TxChart/TxChart'
-// import RespHash from '../RespHash/RespHash'
 import EaringChart from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
 

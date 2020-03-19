@@ -8,7 +8,6 @@ import {
   ListLabel,
   TitleHeader,
   AddrCont,
-  RightCont,
   TitleCont,
   HashCont,
   Hash,

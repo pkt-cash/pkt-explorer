@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { MdMenu } from 'react-icons/md'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-// import PropTypes from 'prop-types'
 
 export const MenuBt = styled.div`
   width: 50px;
