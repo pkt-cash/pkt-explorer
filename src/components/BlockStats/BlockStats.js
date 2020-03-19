@@ -7,11 +7,12 @@ import {
   ListLabelCont,
   ListLabel,
   TitleHeader,
-  LeftCont,
+  AddrCont,
   RightCont,
   TitleCont,
   HashCont,
-  Hash
+  Hash,
+  NoWrap
 } from '../CommonComps/CommonComps'
 import Loader from '../Loader/Loader'
 import { Link } from 'react-router-dom'
@@ -90,6 +91,11 @@ const TableCont = styled.div`
   /*padding-top: 1rem;*/
 `
 
+const OrphanTTL = styled.span`
+  display: inline-block;
+  margin-left: 5px;
+`
+
 const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
   if (!stats) {
     return (<Loader text='Loading block statistics' />)
@@ -107,23 +113,23 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
 
   return (<>
     <TitleCont>
-      <LeftCont>
+      <div>
         <TitleHeader>
           {(isOrphan)
-            ? <><Tooltip type="caution">
+            ? <NoWrap><Tooltip type="caution">
                 When two miners find a block at the same time, only one of them can be valid.
                 The miners decide which one they will continue building on top of and the one
                 which is ignored is called an <Help.Orphan>orphan block</Help.Orphan>.
-              </Tooltip>Orphan block #{stats.height}</>
+              </Tooltip><OrphanTTL>Orphan block #{stats.height}</OrphanTTL></NoWrap>
             : `Block #${stats.height}`}
         </TitleHeader>
-      </LeftCont>
-      <RightCont>
+      </div>
+      <AddrCont>
         <HashCont>
           <Hash>{stats.hash}</Hash>
-          <Copy value={stats.hash}/>
         </HashCont>
-      </RightCont>
+        <Copy value={stats.hash}/>
+      </AddrCont>
     </TitleCont>
     <ListCont>
       <ListLabelCont>

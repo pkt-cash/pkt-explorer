@@ -229,3 +229,13 @@ Pkt.propTypes = {
     PropTypes.number
   ]).isRequired
 }
+
+export const NoWrap = styled.span`
+  white-space: nowrap;
+`
+
+export const AddrCont = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: end;
+`

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { FaClock, FaCheckCircle } from 'react-icons/fa'
 import { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
-import { ListLabelCont, Pkt } from '../CommonComps/CommonComps'
+import { ListLabelCont, Pkt, NoWrap } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
 import { DateTime } from 'luxon'
 import TxTogBt from '../TxTogBt/TxTogBt'
@@ -131,6 +131,7 @@ const AddrLink = styled(Link)`
   font-weight: normal;
 `
 
+
 const ConfIcn = ({ isConf }) => {
   return <IcnCont>{isConf
     ? <FaCheckCircle title="Confirmed" style={{ color: 'green' }} />
@@ -198,7 +199,9 @@ const AddrTxBlock = ({ txData, myAddr }) => {
           <AddrLink to={`/address/${counterparty}`}>
             {counterparty}
           </AddrLink>
-          {(others > 0) ? ` +${others} others...` : ''}
+          <NoWrap>
+            {(others > 0) ? ` +${others} others...` : ''}
+          </NoWrap>
           </span>
         </RightCont>
         <PktCont>
