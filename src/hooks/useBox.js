@@ -28,7 +28,7 @@ const useBox = (histHook) => {
     if (input === Number(input).toString()) {
       const nIn = Number(input)
       if (nIn < 0 || nIn !== Math.floor(nIn)) {
-        return void error('Block number must be a positive integer or zero')
+        return console.error('Block number must be a positive integer or zero')
       } else {
         // It's a block number
         fetchJson(`${blkUpApi}/1/${Number(input) + 1}`).then((json) => {

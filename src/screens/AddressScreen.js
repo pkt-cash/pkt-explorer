@@ -139,7 +139,7 @@ const AddressScreen = (props) => {
       <BtRow>
         {nextTx !== ''
           ? <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions' : ''}</Button>
-          : <>𝓣𝓱𝓪𝓽'𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+          : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
         }
       </BtRow>
     }

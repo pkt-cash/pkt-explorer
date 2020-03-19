@@ -164,7 +164,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               <Label>
                 Coinbase
                 <Tooltip>
-                  Coinbase transactions don't need any inputs to fund them,
+                  Coinbase transactions don&apos;t need any inputs to fund them,
                   but the software requires all transactions to have at least
                   one input. This field is known as the
                   <Help.Coinbase>coinbase</Help.Coinbase> and is by miners to

@@ -16,7 +16,7 @@ const RichListScreen = (props) => {
     document.title = 'Pkt - Rich list'
     fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
-        if (json.error) { return void console.error(json.error) }
+        if (json.error) { return console.error(json.error) }
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
         else setRichList(json.results)
       })
@@ -25,7 +25,7 @@ const RichListScreen = (props) => {
   const loadMoreRiches = () => {
     fetchJson(`${richLApi}/100/${currPage + 1}`)
       .then((json) => {
-        if (json.error) { return void console.error(json.error) }
+        if (json.error) { return console.error(json.error) }
         const newList = uniqBy([...richList, ...json.results], 'address')
         setRichList(newList)
         setNextRich(json.next)
