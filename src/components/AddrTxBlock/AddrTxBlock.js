@@ -153,11 +153,11 @@ const AddrTxBlock = ({ txData, myAddr }) => {
     if (inp.address === myAddr) {
       value = inp.value
       direction = '-'
-    } else if (Number(inp.value) > maxValue) {
-      others += (counterparty !== '')
-      counterparty = inp.address
-      maxValue = Number(inp.value)
+      continue
     }
+    maxValue = Math.max(Number(inp.value), maxValue)
+    others += (counterparty !== '')
+    counterparty = inp.address
   }
   if (direction === '') {
     for (const out of output) {
@@ -171,11 +171,15 @@ const AddrTxBlock = ({ txData, myAddr }) => {
     counterparty = ''
     others = 0
     for (const out of output) {
-      if (Number(out.value) > maxValue) {
-        others += (counterparty !== '')
-        counterparty = out.address
-        maxValue = Number(out.value)
+      if (out.address === myAddr) {
+        // This is when we receive change back, we need to deduct from the
+        // amount that we're spending to get the right sum.
+        value = '' + (Number(value) - out.value)
+        continue;
       }
+      maxValue = Math.max(Number(out.value), maxValue)
+      others += (counterparty !== '')
+      counterparty = out.address
     }
   }
 
@@ -190,9 +194,12 @@ const AddrTxBlock = ({ txData, myAddr }) => {
               : <><ConfIcn /><RightLabel>{fs.toLocaleString(DateTime.DATETIME_MED)}</RightLabel></>
             }
           </MinedAtLabel>
+          <span>
           <AddrLink to={`/address/${counterparty}`}>
             {counterparty}
           </AddrLink>
+          {(others > 0) ? ` +${others} others...` : ''}
+          </span>
         </RightCont>
         <PktCont>
           <AmountLabel direction={direction}>

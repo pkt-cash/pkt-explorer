@@ -127,7 +127,7 @@ const AddressScreen = (props) => {
       })
   }, [addr])
 
-  if (metaErr) return <div>ARRRRR errror fetching address {addr}</div> // TODO: make a proper error component
+  if (metaErr) return <div>Error fetching address {addr}</div> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading loading metadata' small/>
