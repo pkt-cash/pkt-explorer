@@ -61,13 +61,13 @@ const inBlock = ({ txData, isUnconfirmed }) => <p>
         isUnconfirmed ?
           txData.coinbase ?
             <>This coinbase transaction belongs to block <Link
-              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,5)}</Link>,
+              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,8)}</Link>,
               but that block is an <Help.Orphan>orphan</Help.Orphan>.
               Unless the chain re-organizes so this block is nolonger orphaned,
               these mining payouts will not be usable.
             </> :
             <>This transaction has been included in block <Link
-              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,5)}</Link>,
+              to={`/block/${txData.blockHash}`}>{txData.blockHash.slice(0,8)}</Link>,
               but that block is an <Help.Orphan>orphan</Help.Orphan>.
               It should be picked up by a miner and included in another block soon.
             </> :
@@ -122,7 +122,11 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
         <TitleHeader>
           {txData.coinbase
             ? isUnconfirmed
-              ? 'Orphaned coinbase transaction'
+              ? <><Tooltip type="caution">
+                  This coinbase transaction is part of
+                  an <Help.Orphan>orphaned block</Help.Orphan> which means it will not be
+                  spendable unless the chain re-organizes and the block ceases to be an orphan.
+                </Tooltip>Orphaned coinbase transaction</>
               : 'Coinbase transaction'
             : isUnconfirmed
               ? 'Unconfirmed transaction'
@@ -273,8 +277,8 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               <Tooltip>
                 {isUnconfirmed ?
                   txData.coinbase ?
-                    <>This transaction is part of an <Help.Orphan>orphan block</Help.Orphan>
-                      so it is unspendable.
+                    <>This transaction is part of an <Help.Orphan>orphan block</Help.Orphan> so
+                    it is unspendable.
                     </> :
                     <>This transaction has not yet been logged in the blockchain.</> :
                   <>The number of blocks which have built on top of the block containing

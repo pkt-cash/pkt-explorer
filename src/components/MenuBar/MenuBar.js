@@ -65,7 +65,7 @@ const MenuBar = (props) => {
                 <>
                   <MobileMenu />
                   <TopLink exact to='/' main={1}>
-                  PKT Explorer (beta)
+                  PKT Explorer
                   </TopLink>
                   <OmniBt act={() => setOpen(!isOpen)} />
                 </>
@@ -73,7 +73,7 @@ const MenuBar = (props) => {
                 <>
                   <TopMenu>
                     <TopLink exact to='/' main={1}>
-                      PKT Explorer (beta)
+                      PKT Explorer
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
                     <TopLink to='/txd'>Txs per day</TopLink>

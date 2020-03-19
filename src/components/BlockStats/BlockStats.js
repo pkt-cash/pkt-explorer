@@ -110,18 +110,20 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
       <LeftCont>
         <TitleHeader>
           {(isOrphan)
-            ? `Orphan block ${stats.hash} #${stats.height}`
+            ? <><Tooltip type="caution">
+                When two miners find a block at the same time, only one of them can be valid.
+                The miners decide which one they will continue building on top of and the one
+                which is ignored is called an <Help.Orphan>orphan block</Help.Orphan>.
+              </Tooltip>Orphan block #{stats.height}</>
             : `Block #${stats.height}`}
         </TitleHeader>
       </LeftCont>
-      {!isOrphan &&
-        <RightCont>
-          <HashCont>
-            <Hash>{stats.hash}</Hash>
-            <Copy value={stats.hash}/>
-          </HashCont>
-        </RightCont>
-      }
+      <RightCont>
+        <HashCont>
+          <Hash>{stats.hash}</Hash>
+          <Copy value={stats.hash}/>
+        </HashCont>
+      </RightCont>
     </TitleCont>
     <ListCont>
       <ListLabelCont>
@@ -218,14 +220,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                   </Label>
                   <Content title={stats.previousBlockHash}>
                     <Link to={`/block/${stats.previousBlockHash}`}>
-                      {(() => {
-                        if (isOrphan) {
-                          return stats.previousBlockHash
-                        }
-                        // TODO(cjd): There is a possibility that we have an orphan which extends
-                        // from another orphan, in that case we would be lying
-                        return stats.height - 1
-                      })()}
+                      {stats.height - 1}
                     </Link>
                   </Content>
                 </p>
@@ -260,19 +255,24 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                     Confirmations
                     <Tooltip>
                       {isOrphan ?
-                        <>This block is an <Help.Orphan>orphan</Help.Orphan> so it has no
-                        confirmations because no other blocks build on top of it.
+                        <>This block is an <Help.Orphan>orphan</Help.Orphan> so it is not
+                        part of the official chain. This block's sibling has {topBlk ?
+                          topBlk.height - stats.height :
+                          <>(loading...)</>} confirmations, meaning the chain which does
+                          not build on this block is that many blocks longer.
                         </> :
-                        <>There are {topBlk.height - stats.height} blocks which build on top
+                        <>There are {topBlk ?
+                          topBlk.height - stats.height :
+                          <>(loading...)</>
+                        } blocks which build on top
                         of this block</>
                       }
-                      The time, as it was declared by the miner who mined this block.
                     </Tooltip>
                   </Label>
                   <Content>
                     {(() => {
-                      if (isOrphan) {
-                        return 'Unconfirmed - Orphan Block'
+                      if (topBlk && isOrphan) {
+                        return stats.height - topBlk.height;
                       } else if (topBlk) {
                         return topBlk.height - stats.height
                       }
