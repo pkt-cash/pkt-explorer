@@ -20,7 +20,7 @@ const RichListScreen = (props) => {
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
         else setRichList(json.results)
       })
-  }, [])
+  }, [currPage,richList])
 
   const loadMoreRiches = () => {
     fetchJson(`${richLApi}/100/${currPage + 1}`)

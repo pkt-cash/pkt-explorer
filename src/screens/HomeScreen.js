@@ -67,7 +67,7 @@ const HomeScreen = (props) => {
       })
 
     fetchJson(`${pkApi}`)
-  }, [])
+  })
 
   return <>
     <HomeStats txData={pkData} blockList={blockList} statsCoins={statsCoins} lastBlockData={{}} labelY='diffculty' />
