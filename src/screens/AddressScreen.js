@@ -138,7 +138,10 @@ const AddressScreen = (props) => {
 
     {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
       <BtRow>
-        <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions': ''}</Button>
+        {nextTx !== "" ?
+          <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions': ''}</Button> :
+          <>𝓣𝓱𝓪𝓽'𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+        }
       </BtRow>
     }
     {(currTab === 0 && noTx === true && txList) && <BtRow>
