@@ -89,7 +89,7 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <p><Label>
-                    Network Bandwidth
+                    <BandwidthEmoji/>Network Bandwidth
                     <Tooltip>
                       An estimate of the amount of bandwidth currently being consumed
                       for mining. This estimate is based on the number of announcements
@@ -103,7 +103,7 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
               <Column>
                 <ItemCont>
                   <p><Label>
-                    Encryptions Per Second
+                    <EPSEmoji/>Encryptions Per Second
                     <Tooltip>
                       This is the sum of the estimated encryptions per second expended
                       by the announcement miners to mine the blocks plus the encryptions
