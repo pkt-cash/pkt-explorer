@@ -6,9 +6,13 @@ import theme from './theme/theme'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import { MainWrapper } from './components/CommonComps/CommonComps'
-import BlocksScreen from './screens/BlockListScreen'
+// import BlockListScreen from './screens/BlockListScreen'
+import BlockScreen from './screens/BlockScreen'
+import TxScreen from './screens/TxScreen'
 import RichListScreen from './screens/RichListScreen'
 import HomeScreen from './screens/HomeScreen'
+import AddressScreen from './screens/AddressScreen'
+import DailyTxScreen from './screens/DailyTxScreen'
 
 function App () {
   return (
@@ -24,11 +28,11 @@ function App () {
                 path='/'
                 component={HomeScreen}
                 key='home' />
-              <Route
+              {/* <Route
                 exact
                 path='/blocks'
-                component={BlocksScreen}
-                key='blocks' />
+                component={BlockListScreen}
+                key='blocks' /> */}
               <Route
                 exact
                 path='/rich'
@@ -37,8 +41,23 @@ function App () {
               <Route
                 exact
                 path='/txd'
-                component={TxResume}
+                component={DailyTxScreen}
                 key='resume' />
+              <Route
+                exact
+                path='/address/:addr'
+                component={AddressScreen}
+                key='address' />
+              <Route
+                exact
+                path='/block/:id'
+                component={BlockScreen}
+                key='block' />
+              <Route
+                exact
+                path='/tx/:id'
+                component={TxScreen}
+                key='transaction' />
             </Switch>
           </MainWrapper>
         </ThemeProvider>
@@ -46,7 +65,5 @@ function App () {
     </>
   )
 }
-
-const TxResume = () => <div>TxResume</div>
 
 export default App

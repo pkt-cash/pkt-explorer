@@ -1,6 +1,6 @@
 {
   "name": "pkt-front",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -9,13 +9,19 @@
     "axios": "^0.19.2",
     "framer-motion": "^1.7.2",
     "javascript-time-ago": "^2.0.6",
+    "lodash-es": "^4.17.15",
+    "luxon": "^1.22.0",
+    "nthen": "^0.1.10",
     "react": "^16.12.0",
     "react-charts": "^2.0.0-beta.6",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
     "react-media": "^1.10.0",
+    "react-png-tooltip": "^1.2.0",
+    "react-resize-aware": "^3.0.0-beta.3",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "styled-components": "^5.0.0"
   },
   "scripts": {
@@ -43,8 +49,10 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.7",
+    "@storybook/addon-actions": "^5.3.13",
+    "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.7",
+    "@storybook/addon-viewport": "^5.3.13",
     "@storybook/addons": "^5.3.7",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.7",

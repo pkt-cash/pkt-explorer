@@ -1,0 +1,306 @@
+{
+	"results": [
+		{
+			"date": "2020-03-15T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 55538110,
+			"encryptionsPerSecond": 6457698
+		},
+		{
+			"date": "2020-03-14T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 68632679,
+			"encryptionsPerSecond": 7132195
+		},
+		{
+			"date": "2020-03-13T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 80606684,
+			"encryptionsPerSecond": 8281527
+		},
+		{
+			"date": "2020-03-12T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 86376711,
+			"encryptionsPerSecond": 8299128
+		},
+		{
+			"date": "2020-03-11T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 76386305,
+			"encryptionsPerSecond": 7630962
+		},
+		{
+			"date": "2020-03-10T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 63955731,
+			"encryptionsPerSecond": 6406352
+		},
+		{
+			"date": "2020-03-09T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 71740980,
+			"encryptionsPerSecond": 7810204
+		},
+		{
+			"date": "2020-03-08T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 52519114,
+			"encryptionsPerSecond": 5854670
+		},
+		{
+			"date": "2020-03-07T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 44402718,
+			"encryptionsPerSecond": 4498680
+		},
+		{
+			"date": "2020-03-06T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 69313178,
+			"encryptionsPerSecond": 3115685
+		},
+		{
+			"date": "2020-03-05T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 74978464,
+			"encryptionsPerSecond": 4683329
+		},
+		{
+			"date": "2020-03-04T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 63540774,
+			"encryptionsPerSecond": 5015410
+		},
+		{
+			"date": "2020-03-03T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 60226940,
+			"encryptionsPerSecond": 4843213
+		},
+		{
+			"date": "2020-03-02T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 45401019,
+			"encryptionsPerSecond": 5626016
+		},
+		{
+			"date": "2020-03-01T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 45208285,
+			"encryptionsPerSecond": 5969621
+		},
+		{
+			"date": "2020-02-29T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 39773175,
+			"encryptionsPerSecond": 6185404
+		},
+		{
+			"date": "2020-02-28T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 41198733,
+			"encryptionsPerSecond": 7000664
+		},
+		{
+			"date": "2020-02-27T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 27992170,
+			"encryptionsPerSecond": 8112501
+		},
+		{
+			"date": "2020-02-26T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 18016483,
+			"encryptionsPerSecond": 9463879
+		},
+		{
+			"date": "2020-02-25T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 15380041,
+			"encryptionsPerSecond": 9225853
+		},
+		{
+			"date": "2020-02-24T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 9304073,
+			"encryptionsPerSecond": 9589715
+		},
+		{
+			"date": "2020-02-23T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 6681341,
+			"encryptionsPerSecond": 8567792
+		},
+		{
+			"date": "2020-02-22T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 5692256,
+			"encryptionsPerSecond": 6863357
+		},
+		{
+			"date": "2020-02-21T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 4288975,
+			"encryptionsPerSecond": 4790086
+		},
+		{
+			"date": "2020-02-20T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 2097912,
+			"encryptionsPerSecond": 7784989
+		},
+		{
+			"date": "2020-02-19T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1237399,
+			"encryptionsPerSecond": 9158656
+		},
+		{
+			"date": "2020-02-18T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1300315,
+			"encryptionsPerSecond": 10103703
+		},
+		{
+			"date": "2020-02-17T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1336251,
+			"encryptionsPerSecond": 10272437
+		},
+		{
+			"date": "2020-02-16T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1372605,
+			"encryptionsPerSecond": 10285573
+		},
+		{
+			"date": "2020-02-15T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1369817,
+			"encryptionsPerSecond": 10648606
+		},
+		{
+			"date": "2020-02-14T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1694475,
+			"encryptionsPerSecond": 11131236
+		},
+		{
+			"date": "2020-02-13T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1549369,
+			"encryptionsPerSecond": 11702464
+		},
+		{
+			"date": "2020-02-12T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1675490,
+			"encryptionsPerSecond": 11843225
+		},
+		{
+			"date": "2020-02-11T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1445553,
+			"encryptionsPerSecond": 11515047
+		},
+		{
+			"date": "2020-02-10T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1348549,
+			"encryptionsPerSecond": 10435107
+		},
+		{
+			"date": "2020-02-09T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1269269,
+			"encryptionsPerSecond": 10010681
+		},
+		{
+			"date": "2020-02-08T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1178104,
+			"encryptionsPerSecond": 10153643
+		},
+		{
+			"date": "2020-02-07T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1192673,
+			"encryptionsPerSecond": 9747562
+		},
+		{
+			"date": "2020-02-06T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1143184,
+			"encryptionsPerSecond": 9504432
+		},
+		{
+			"date": "2020-02-05T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1252650,
+			"encryptionsPerSecond": 9312005
+		},
+		{
+			"date": "2020-02-04T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1169091,
+			"encryptionsPerSecond": 8892544
+		},
+		{
+			"date": "2020-02-03T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1102941,
+			"encryptionsPerSecond": 8944280
+		},
+		{
+			"date": "2020-02-02T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1115481,
+			"encryptionsPerSecond": 8553030
+		},
+		{
+			"date": "2020-02-01T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1093200,
+			"encryptionsPerSecond": 8338542
+		},
+		{
+			"date": "2020-01-31T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1042006,
+			"encryptionsPerSecond": 7876245
+		},
+		{
+			"date": "2020-01-30T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1037372,
+			"encryptionsPerSecond": 8056205
+		},
+		{
+			"date": "2020-01-29T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1049553,
+			"encryptionsPerSecond": 7907380
+		},
+		{
+			"date": "2020-01-28T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 1009272,
+			"encryptionsPerSecond": 7351448
+		},
+		{
+			"date": "2020-01-27T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 935826,
+			"encryptionsPerSecond": 6877500
+		},
+		{
+			"date": "2020-01-26T00:00:00.000Z",
+			"pcVersion": 2,
+			"bitsPerSecond": 942732,
+			"encryptionsPerSecond": 7012505
+		}
+	],
+	"prev": "",
+	"next": "/packetcrypt/stats/50/2"
+}

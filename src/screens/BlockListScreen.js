@@ -4,10 +4,10 @@ import endpoints from '../utils/endpoints'
 
 import useFetch from '../hooks/useFetch'
 
-const { blkLApi } = endpoints
+const { blkDownApi } = endpoints
 
 const BlockListScreen = (props) => {
-  const { error, loading, data } = useFetch(blkLApi)
+  const { error, loading, data } = useFetch(blkDownApi)
   if (error) return <div>ARRRRR errror</div>
   if (loading) return <BlockList />
   return <BlockList listData={data.results} />

@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import {
+  ListLabelCont,
+  ListCont,
+  TitleCont,
+  LeftCont,
+  TitleHeader,
+  ListLabel,
+  Pkt
+} from '../CommonComps/CommonComps'
+import { TableCont, Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
 import metrics, { mqs } from '../../theme/metrics'
-import TxChart from '../TxChart/TxChart'
-
-console.log(mqs)
+import DiffChart from '../DiffChart/DiffChart'
+import Loader from '../Loader/Loader'
+import Tooltip from '../Tooltip/Tooltip'
+import { bpsStr, commafy } from '../../utils'
 
 const ListDataCont = styled.div`
   padding: ${metrics.padding}rem;
-  display: flex;
+  /* display: flex;
   @media ${mqs.small} {
     flex-direction: column;
-  }
+  } */
   /* @media all and (max-width: 500px) {
     flex-direction: column;
   } */
 `
 const StatsCont = styled.div`
   flex:2;
-  border-right: 1px solid ${({ theme }) => theme.colors.pktGreyLight};
+  /* border-right: 1px solid ${({ theme }) => theme.colors.pktGreyLight}; */
   padding-right: ${metrics.padding}rem;
   margin-right: ${metrics.padding}rem;
   display: flex;
@@ -33,73 +43,188 @@ const StatsCont = styled.div`
 `
 
 const ChartCont = styled.div`
-  width: 400px;
   @media ${mqs.small} {
     text-align: center;
     width: 100%;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
   }
 `
 
-const StatRow = styled.div`
-  display: flex;
-  flex:1;
-  align-items: center;
-`
-const StatCell = styled.div`
-  display: flex;
-  padding: 1rem;
-  flex:1;
+const LabelCont = styled.div`
+  margin: 1rem 0.5rem;
 `
 
-const StatCellLabel = styled.div`
-  font-weight: 700;
-  padding-right: 1rem;
+const BallEmoji = styled.span`
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  padding-right: 1em;
+  margin-right: 0.3em;
+  &::before { content:""; }
 `
-const StatCellValue = styled.div`
-  font-style: italic;
+const BandwidthEmoji = styled(BallEmoji)`
+  background-color: #4ab5eb;
+`
+const EPSEmoji = styled(BallEmoji)`
+  background-color: #fc6868;
 `
 
-const HomeStats = ({ txData }) => {
-  return (
+const HomeStats = ({ blockList, txData, statsCoins }) => {
+  const dailyD = useMemo(() => {
+    if (!txData) { return false }
+    const out = [
+      { label: <><BandwidthEmoji/>Network Bandwidth</>, value: bpsStr(txData[0].data[0][1]) },
+      { label: <><EPSEmoji/>Encryptions Per Second</>, value: commafy(txData[1].data[0][1]) }
+    ];
+    if (statsCoins) {
+      out.push(
+        { label: 'Difficulty', value: blockList ? commafy(Math.floor(blockList[0].difficulty)) : '' },
+        { label: 'Mined To Date', value: <Pkt amt={statsCoins.alreadyMined}/> },
+        { label: 'Current Block Reward', value: <Pkt amt={statsCoins.reward}/> },
+        { label: 'Coins Remaining', value: <Pkt amt={statsCoins.remaining}/> }
+      )
+    }
+    return out;
+  })
+  return (<>
+    <TitleCont>
+      <LeftCont>
+        <TitleHeader>
+          PKT Blockchain
+        </TitleHeader>
+      </LeftCont>
+    </TitleCont>
     <ListCont>
       <ListLabelCont>
-        HomeStats
+        <ListLabel>Stats</ListLabel>
       </ListLabelCont>
-      <ListDataCont>
-        <StatsCont>
-          <StatRow>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-            <StatCell>
-              <StatCellLabel>Last block height</StatCellLabel>
-              <StatCellValue>123123</StatCellValue>
-            </StatCell>
-          </StatRow>
-          <StatRow>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-            <StatCell>
-              <StatCellLabel>Last block</StatCellLabel>
-              <StatCellValue>6589</StatCellValue>
-            </StatCell>
-          </StatRow>
-        </StatsCont>
-        <ChartCont>
-          {txData ? <TxChart txData={txData} /> : 'Loading'}
-        </ChartCont>
-      </ListDataCont>
+      {txData && txData.length
+        ? <ListDataCont>
+          <ChartCont>
+            <DiffChart txData={txData} />
+          </ChartCont>
+          <ListCont>
+            <Row>
+              <Column>
+                <ItemCont>
+                  <p><Label>
+                    Network Bandwidth
+                    <Tooltip>
+                      An estimate of the amount of bandwidth currently being consumed
+                      for mining. This estimate is based on the number of announcements
+                      per block and the difference between the most valuable (newest)
+                      announcements and the least valuable (oldest). Since announcements
+                      can be re-used in multiple blocks, this estimate is not exact.
+                    </Tooltip>
+                  </Label> <Content>{bpsStr(txData[0].data[0][1])}</Content></p>
+                </ItemCont>
+              </Column>
+              <Column>
+                <ItemCont>
+                  <p><Label>
+                    Encryptions Per Second
+                    <Tooltip>
+                      This is the sum of the estimated encryptions per second expended
+                      by the announcement miners to mine the blocks plus the encryptions
+                      per second expended by the block miners. Since announcements can
+                      be re-used in multiple blocks, this estimate is not exact.
+                    </Tooltip>
+                  </Label> <Content>{commafy(txData[1].data[0][1])}</Content></p>
+                </ItemCont>
+              </Column>
+            </Row>
+            <Row>
+              <Column>
+                <ItemCont>
+                <BrdCont>
+                  <p><Label>
+                    Difficulty
+                    <Tooltip>
+                      This is the global difficulty of the blockchain, it is a unitless
+                      number but every time it doubles, it means there is twice as much
+                      announcement mining power, twice as much block mining power, twice
+                      as much bandwidth between announcement miners and block miners, or
+                      some combination of the three.
+                    </Tooltip>
+                  </Label> <Content>
+                    {blockList ?
+                      commafy(Math.floor(blockList[0].difficulty)) :
+                      ''
+                    }
+                    </Content></p>
+                    </BrdCont>
+                </ItemCont>
+              </Column>
+              <Column>
+                <ItemCont>
+                  <BrdCont>
+                  <p><Label>
+                    Mined To Date
+                    <Tooltip>
+                      How many coins have already been mined.
+                    </Tooltip>
+                  </Label> <Content>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.alreadyMined}/> :
+                      ''
+                    }
+                    </Content></p>
+                    </BrdCont>
+                </ItemCont>
+              </Column>
+            </Row>
+            <Row>
+              <Column>
+                <ItemCont>
+                  <BrdCont>
+                  <p><Label>
+                    Current Block Reward
+                    <Tooltip>
+                      How many new coins are paid out in each block.
+                    </Tooltip>
+                  </Label> <Content>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.reward}/> :
+                      ''
+                    }</Content></p>
+                  </BrdCont>
+                </ItemCont>
+              </Column>
+              <Column>
+                <ItemCont>
+                  <BrdCont>
+                    <p><Label>
+                      Coins Remaining
+                      <Tooltip>
+                        How many coins remain to be mined.
+                      </Tooltip>
+                    </Label> <Content>
+                    {statsCoins ?
+                      <Pkt amt={statsCoins.remaining}/> :
+                      ''
+                    }
+                      </Content></p>
+                  </BrdCont>
+                </ItemCont>
+              </Column>
+            </Row>
+          </ListCont>
+        </ListDataCont>
+        : <Loader text='Loading...' small />}
+      <StatsCont>
+      </StatsCont>
     </ListCont>
-  )
+  </>)
 }
 
 HomeStats.propTypes = {
-  txData: PropTypes.array.isRequired
+  txData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array
+  ]),
+  labelY: PropTypes.string
   // lastBlock: PropTypes.number.isRequired
 }
 

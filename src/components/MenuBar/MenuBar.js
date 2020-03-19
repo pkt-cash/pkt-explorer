@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Media from 'react-media'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { MenuCont } from '../CommonComps/CommonComps'
 import MobileMenu from '../MobileMenu/MobileMenu'
-import metrics from '../../theme/metrics'
-import { Link } from 'react-router-dom'
+import metrics, { mqs } from '../../theme/metrics'
+import { NavLink } from 'react-router-dom'
+import Omnibox from '../Omnibox/Omnibox'
+import OmniboxMobile, { OmniBt } from '../OmniboxMobile/OmniboxMobile'
 
 const { mq } = metrics
 // import PropTypes from 'prop-types'
@@ -13,41 +15,84 @@ export const TopBarWrapper = styled.div`
   max-width: ${metrics.fullW}px;
   margin: 0 auto;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   height: 100%;
 `
 const TopMenu = styled.div`
   display: flex;
+  height: 100%;
+  z-index: 5;
 `
-const MenuItem = styled.div`
-  margin-left: 10px
 
+const TopLink = styled(NavLink)`
+  margin-left: 10px;
+  height: 100%;
+  color: #fff;
+  transition: color 0.5s ease,
+              background-color 0.5s ease;
+  padding: 0 1rem ;
+  text-decoration: none;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  white-space: nowrap;
+  &:visited {
+    color: #fff;
+  }
+  &:hover,
+  &.active{
+    background: #fff;
+    color: black;
+    @media ${mqs.small} {
+      color: #fff;  
+      background-color: ${({ theme }) => theme.colors.headerBackground};
+    }
+
+  }
+  ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
 `
 
 const MenuBar = (props) => {
+  const [isOpen, setOpen] = useState(false)
   return (
-    <MenuCont>
+    <>
+      <MenuCont>
+        <TopBarWrapper>
+          <Media queries={{ small: { maxWidth: mq.small } }}>
+            {matches =>
+              matches.small ? (
+                <>
+                  <MobileMenu />
+                  <TopLink exact to='/' main={1}>
+                  PKT Explorer
+                  </TopLink>
+                  <OmniBt act={() => setOpen(!isOpen)} />
+                </>
+              ) : (
+                <>
+                  <TopMenu>
+                    <TopLink exact to='/' main={1}>
+                      PKT Explorer
+                    </TopLink>
+                    {/* <TopLink to='/blocks'>Blocks</TopLink> */}
+                    <TopLink to='/txd'>Txs per day</TopLink>
+                    <TopLink to='/rich'>Rich list</TopLink>
+                  </TopMenu>
+                  <Omnibox />
+                </>
+              )
+            }
+          </Media>
+        </TopBarWrapper>
+      </MenuCont>
       <Media query={`(max-width: ${mq.small}px)`} render={() =>
+
         (
-          <MobileMenu />
+          <OmniboxMobile isOpen={isOpen} />
         )}
       />
-      <TopBarWrapper>
-        <Link to='/'>
-          PKT Explorer (beta)
-        </Link>
-        <Media query={`(min-width: ${mq.small}px)`} render={() =>
-          (
-            <TopMenu>
-              <MenuItem><Link to='/blocks'>Blocks</Link></MenuItem>
-              <MenuItem><Link to='/txd'>Txs per day</Link></MenuItem>
-              <MenuItem><Link to='/rich'>Rich list</Link></MenuItem>
-            </TopMenu>
-          )}
-        />
-      </TopBarWrapper>
-    </MenuCont>
+    </>
   )
 }
 
