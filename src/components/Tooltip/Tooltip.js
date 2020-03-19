@@ -6,13 +6,30 @@ const Ttc = styled.span`
     white-space: normal;
 `
 
-export default ({children, type, tooltip}) => {
-    if (type === 'caution') {
-        tooltip = <span>{"\u26A0\uFE0F"}</span>;
-    } else if (type === 'blueDiamond') {
-        tooltip = <span>{"\uD83D\uDD39"}</span>;
-    }
-    return <ToolTip tooltip={tooltip}>
-        <Ttc>{children}</Ttc>
+const TTCont = styled.span`
+  position: relative;
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 5px;
+  > span{
+    position: absolute;
+    top: -16 px;
+    /* z-index: 20; */
+  }
+`
+
+const TTip = ({ children, type, tooltip }) => {
+  if (type === 'caution') {
+    tooltip = <span>{'\u26A0\uFE0F'}</span>
+  } else if (type === 'blueDiamond') {
+    tooltip = <span>{'\uD83D\uDD39'}</span>
+  }
+  return <TTCont>
+    <ToolTip tooltip={tooltip}>
+      <Ttc>{children}</Ttc>
     </ToolTip>
+  </TTCont>
 }
+
+export default TTip
