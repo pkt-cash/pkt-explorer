@@ -61,11 +61,11 @@ export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
   let addr = <HashCont to={`/address/${address}`}>
     {address}
   </HashCont>
-  if (/^script:ajAJ\+REC/.test(address) && value === "0") {
+  if (/^script:ajAJ\+REC/.test(address) && value === '0') {
     return <ItemCont>
       <span><Help.PacketCryptCommitment>PacketCrypt</Help.PacketCryptCommitment> Commitment</span>
     </ItemCont>
-  } else if (/^script:aiSqI/.test(address) && value === "0") {
+  } else if (/^script:aiSqI/.test(address) && value === '0') {
     return <ItemCont>
       <span><Help.SegwitCommitment>Segwit</Help.SegwitCommitment> Commitment</span>
     </ItemCont>

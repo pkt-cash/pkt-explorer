@@ -120,7 +120,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                 When two miners find a block at the same time, only one of them can be valid.
                 The miners decide which one they will continue building on top of and the one
                 which is ignored is called an <Help.Orphan>orphan block</Help.Orphan>.
-              </Tooltip><OrphanTTL>Orphan block #{stats.height}</OrphanTTL></NoWrap>
+            </Tooltip><OrphanTTL>Orphan block #{stats.height}</OrphanTTL></NoWrap>
             : `Block #${stats.height}`}
         </TitleHeader>
       </div>
@@ -178,11 +178,11 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                   <Label>
                     Next Block
                     <Tooltip>
-                      {isOrphan ?
-                        <>This block is an <Help.Orphan>orphan</Help.Orphan> which
+                      {isOrphan
+                        ? <>This block is an <Help.Orphan>orphan</Help.Orphan> which
                         means there are no blocks which build on top of it.
-                        </> :
-                        <>The next block which builds on top of this block in the chain.</>
+                        </>
+                        : <>The next block which builds on top of this block in the chain.</>
                       }
                     </Tooltip>
                   </Label>
@@ -260,16 +260,16 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                   <Label>
                     Confirmations
                     <Tooltip>
-                      {isOrphan ?
-                        <>This block is an <Help.Orphan>orphan</Help.Orphan> so it is not
-                        part of the official chain. This block's sibling has {topBlk ?
-                          topBlk.height - stats.height :
-                          <>(loading...)</>} confirmations, meaning the chain which does
+                      {isOrphan
+                        ? <>This block is an <Help.Orphan>orphan</Help.Orphan> so it is not
+                        part of the official chain. This block's sibling has {topBlk
+                          ? topBlk.height - stats.height
+                          : <>(loading...)</>} confirmations, meaning the chain which does
                           not build on this block is that many blocks longer.
-                        </> :
-                        <>There are {topBlk ?
-                          topBlk.height - stats.height :
-                          <>(loading...)</>
+                        </>
+                        : <>There are {topBlk
+                          ? topBlk.height - stats.height
+                          : <>(loading...)</>
                         } blocks which build on top
                         of this block</>
                       }
@@ -278,7 +278,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                   <Content>
                     {(() => {
                       if (topBlk && isOrphan) {
-                        return stats.height - topBlk.height;
+                        return stats.height - topBlk.height
                       } else if (topBlk) {
                         return topBlk.height - stats.height
                       }
@@ -354,7 +354,7 @@ const BlockStats = ({ stats, blkPc, mainChain, nextBlk, topBlk }) => {
                     is based on a packet encryption algorithm, this is roughly equal to
                     encryption of this number of packets per second of VPN network traffic.
                   </Tooltip>
-                  </Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
+                </Label> <Content>{commafy(parseFloat(blkPc.blockEncryptions).toFixed())}</Content></p>
               </BrdCont>
             </ItemCont>
           </Column>

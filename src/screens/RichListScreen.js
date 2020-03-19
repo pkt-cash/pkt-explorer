@@ -38,9 +38,9 @@ const RichListScreen = (props) => {
   return <>
     <RichList listData={richList} />
     <BtRow>
-      {nextRich !== "" ?
-        <Button onClick={loadMoreRiches}>More Riches !!!</Button> :
-        <>You, brave valient clicker, have clicked all the way to the end of
+      {nextRich !== ''
+        ? <Button onClick={loadMoreRiches}>More Riches !!!</Button>
+        : <>You, brave valient clicker, have clicked all the way to the end of
         the list. The power of your thumb is beyond even the expectation of
         the authors of this explorer and to you, I have only one thing to say:
         Never gonna give you up, never gonna let you down, never gonna run
