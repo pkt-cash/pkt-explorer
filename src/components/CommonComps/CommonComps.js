@@ -205,8 +205,8 @@ const PktCont = styled.span`
   white-space: nowrap;
 `
 
-export const Pkt = ({ amt }) => {
-  if (Number(amt) < 1) {
+export const Pkt = ({ amt, showDecimal }) => {
+  if (!showDecimal && Number(amt) < 1) {
     return <PktCont>0<Decimal>.00</Decimal> <Unit>PKT</Unit></PktCont>
   }
   const fAmt = displayPKT(amt)
@@ -227,7 +227,8 @@ Pkt.propTypes = {
   amt: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ]).isRequired,
+  showDecimal: PropTypes.bool,
 }
 
 export const NoWrap = styled.span`

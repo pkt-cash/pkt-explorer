@@ -175,7 +175,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             </p>
             : <p>
               <Label>
-                Fees Per Byte
+                Fee Per Byte
                 <Tooltip>
                     The amount of fees which this transaction pays to the miner
                     for including it in the chain. Note: A transaction with less
@@ -194,7 +194,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                       not being included in the chain.
                     </Tooltip>
                 }
-                <Pkt amt={fee / txData.size}/>
+                <Pkt amt={fee / txData.size} showDecimal/>
               </Content>
             </p>
           )
