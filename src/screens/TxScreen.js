@@ -11,11 +11,12 @@ import {
   ListCont,
   ListLabel,
   TitleCont,
-  LeftCont,
+  AddrCont,
   RightCont,
   TitleHeader,
   HashCont,
   Hash,
+  CpCont,
   Pkt
 } from '../components/CommonComps/CommonComps'
 import Copy from '../components/Copy/Copy'
@@ -118,7 +119,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
   }
   return (<>
     <TitleCont>
-      <LeftCont>
+      <div>
         <TitleHeader>
           {txData.coinbase
             ? isUnconfirmed
@@ -133,13 +134,15 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               : 'Transaction'
           }
         </TitleHeader>
-      </LeftCont>
-      <RightCont>
+      </div>
+      <AddrCont>
         <HashCont>
           <Hash>{txData.txid}</Hash>
-          <Copy value={txData.txid}/>
         </HashCont>
-      </RightCont>
+        <CpCont>
+          <Copy value={txData.txid}/>
+        </CpCont>
+      </AddrCont>
     </TitleCont>
     <ListCont>
       <ListLabelCont>

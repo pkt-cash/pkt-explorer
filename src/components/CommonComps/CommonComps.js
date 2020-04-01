@@ -240,3 +240,14 @@ export const AddrCont = styled.div`
   flex-flow: row nowrap;
   align-items: end;
 `
+
+export const BalanceLabel = styled.span`
+margin-right: 10px;
+font-size: 1.3rem;
+white-space: nowrap;
+`
+
+export const CpCont = styled.div`
+display: flex;
+align-items: center;
+`

@@ -8,7 +8,8 @@ import {
   TitleHeader,
   TitleCont,
   ListLabel,
-  HashCont
+  HashCont,
+  AddrCont
 } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
@@ -81,11 +82,6 @@ const BalanceLabel = styled.span`
   white-space: nowrap;
 `
 
-const AddrCont = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: end;
-`
 const CpCont = styled.div`
   display: flex;
   align-items: center;
