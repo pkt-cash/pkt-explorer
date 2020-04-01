@@ -7,8 +7,6 @@ import { fetchJson } from '../utils'
 
 const { richLApi } = endpoints
 
-
-
 const RichListScreen = (props) => {
   const [currPage, setCurrPage] = useState(1)
   const [richList, setRichList] = useState(false)

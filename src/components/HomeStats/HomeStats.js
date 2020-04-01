@@ -17,16 +17,6 @@ import Loader from '../Loader/Loader'
 import Tooltip from '../Tooltip/Tooltip'
 import { bpsStr, commafy } from '../../utils'
 
-const ListDataCont = styled.div`
-  padding: ${metrics.padding}rem;
-  /* display: flex;
-  @media ${mqs.small} {
-    flex-direction: column;
-  } */
-  /* @media all and (max-width: 500px) {
-    flex-direction: column;
-  } */
-`
 const StatsCont = styled.div`
   flex:2;
   /* border-right: 1px solid ${({ theme }) => theme.colors.pktGreyLight}; */
@@ -66,6 +56,10 @@ const EPSEmoji = styled(BallEmoji)`
   background-color: #fc6868;
 `
 
+const MetaCont = styled.div`
+  margin: ${metrics.margin}rem 0;
+`
+
 const HomeStats = ({ blockList, txData, statsCoins }) => {
   return (<>
     <TitleCont>
@@ -80,11 +74,11 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
         <ListLabel>Stats</ListLabel>
       </ListLabelCont>
       {txData && txData.length
-        ? <ListDataCont>
+        ? <MetaCont>
           <ChartCont>
             <DiffChart txData={txData} />
           </ChartCont>
-          <ListCont>
+          <MetaCont>
             <Row>
               <Column>
                 <ItemCont>
@@ -189,8 +183,8 @@ const HomeStats = ({ blockList, txData, statsCoins }) => {
                 </ItemCont>
               </Column>
             </Row>
-          </ListCont>
-        </ListDataCont>
+          </MetaCont>
+        </MetaCont>
         : <Loader text='Loading...' small />}
       <StatsCont>
       </StatsCont>
