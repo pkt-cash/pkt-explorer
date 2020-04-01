@@ -20,8 +20,8 @@ const ScreenCont = styled.div`
 `
 
 const tabs = [
-  { name: 'Transactions', action: () => { console.log('yo') } },
-  { name: 'Mining Income', action: () => { console.log('yi') } }
+  { name: 'Transactions' },
+  { name: 'Mining Income'}
 ]
 
 const tabContent = (cTab, txList, dailyTr, addr) => {

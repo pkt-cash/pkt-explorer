@@ -56,7 +56,7 @@ export const MenuCont = styled.div`
   justify-content: center; */
   padding-left: 60px;
   height: ${metrics.menuHeight}px;
-  background-color: ${({ theme }) => theme.colors.headerBackground};
+  background-color: ${({ theme, hasAlert }) => hasAlert ? '#c52c2c' : theme.colors.headerBackground};
   color: #fff;
 `
 
