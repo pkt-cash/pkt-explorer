@@ -27,7 +27,7 @@ const TabsItem = styled.button`
   /* flex: 1; */
   width: 100%;
   border-radius: 5px 5px 0 0 ;
-  
+  white-space: nowrap;
 `
 
 const ItemCont = styled.div`
@@ -57,6 +57,7 @@ const CurrTab = styled.div`
   -moz-appearance: none;
   flex: 1;
   border-radius: 5px 5px 0 0 ;
+  white-space: nowrap;
 `
 
 const TabHeaders = ({ tabsData, cTab, action }) => {
