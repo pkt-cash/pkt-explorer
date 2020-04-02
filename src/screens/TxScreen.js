@@ -12,7 +12,6 @@ import {
   ListLabel,
   TitleCont,
   AddrCont,
-  RightCont,
   TitleHeader,
   HashCont,
   Hash,

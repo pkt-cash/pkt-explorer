@@ -15,8 +15,7 @@ import AddressScreen from './screens/AddressScreen'
 import DailyTxScreen from './screens/DailyTxScreen'
 import { fetchJson } from './utils'
 import endpoints from './utils/endpoints'
-const { pkApi, blkDownApi, statsCoinsApi } = endpoints
-
+const { blkDownApi } = endpoints
 
 function App () {
   const [hasIssue, setIssue] = useState(false)
@@ -33,7 +32,7 @@ function App () {
         const secDiff = (cTime.getTime() - lastBTime.getTime()) / 1000
 
         if (secDiff > 20 * 60) setIssue(true)
-        
+
         // setPkData(res)
       })
   }, [])

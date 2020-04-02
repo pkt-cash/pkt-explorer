@@ -228,7 +228,7 @@ Pkt.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]).isRequired,
-  showDecimal: PropTypes.bool,
+  showDecimal: PropTypes.bool
 }
 
 export const NoWrap = styled.span`

@@ -205,13 +205,13 @@ const AddrTxBlock = ({ txData, myAddr }) => {
             }
           </MinedAtLabel>
           <span>
-            {noLink 
-            ? <NoLink>{counterparty}</NoLink>
-            : <AddrLink to={`/address/${counterparty}`}>
-              {counterparty}
-            </AddrLink>
+            {noLink
+              ? <NoLink>{counterparty}</NoLink>
+              : <AddrLink to={`/address/${counterparty}`}>
+                {counterparty}
+              </AddrLink>
             }
-            
+
             <NoWrap>
               {(others > 0) ? ` +${others} others...` : ''}
             </NoWrap>
