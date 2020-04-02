@@ -131,6 +131,12 @@ const AddrLink = styled(Link)`
   font-weight: normal;
 `
 
+const NoLink = styled.div`
+  padding: 0.5rem;
+  display: inline-block;
+  font-weight: normal;
+`
+
 const ConfIcn = ({ isConf }) => {
   return <IcnCont>{isConf
     ? <FaCheckCircle title="Confirmed" style={{ color: 'green' }} />
@@ -149,6 +155,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
   let maxValue = 0
   let counterparty = ''
   let others = 0
+  let noLink = false
   for (const inp of input) {
     if (inp.address === myAddr) {
       value = inp.value
@@ -174,7 +181,10 @@ const AddrTxBlock = ({ txData, myAddr }) => {
       if (out.address === myAddr) {
         // This is when we receive change back, we need to deduct from the
         // amount that we're spending to get the right sum.
+        console.log('this is where i do stufff')
         value = '' + (Number(value) - out.value)
+        counterparty = 'folding coins'
+        noLink = true
         continue
       }
       maxValue = Math.max(Number(out.value), maxValue)
@@ -195,9 +205,13 @@ const AddrTxBlock = ({ txData, myAddr }) => {
             }
           </MinedAtLabel>
           <span>
-            <AddrLink to={`/address/${counterparty}`}>
+            {noLink 
+            ? <NoLink>{counterparty}</NoLink>
+            : <AddrLink to={`/address/${counterparty}`}>
               {counterparty}
             </AddrLink>
+            }
+            
             <NoWrap>
               {(others > 0) ? ` +${others} others...` : ''}
             </NoWrap>
