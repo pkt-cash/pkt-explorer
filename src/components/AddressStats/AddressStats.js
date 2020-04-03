@@ -21,7 +21,7 @@ import { commafy } from '../../utils'
 
 import { Row, Column, ItemCont, Label, BrdCont, Content } from '../BlockStats/BlockStats'
 const ListDataCont = styled.div`
-  padding: ${metrics.padding}rem;
+  padding: ${metrics.padding}rem 0;
   display: flex;
   @media ${mqs.small} {
     flex-direction: column;
@@ -88,6 +88,7 @@ const CpCont = styled.div`
 `
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
+  console.log(dailyTr)
   return (<>
     <TitleCont>
       <div>
@@ -127,6 +128,19 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
               </ItemCont>
             </Column>
           </Row>
+          <Row>
+            <Column full>
+              <ItemCont>
+                <p><Label>
+                  UTXO Count
+                  <Tooltip>
+                    There will be a proper explanation here
+                  </Tooltip>
+                </Label> <Content>{meta.balanceCount}</Content></p>
+              </ItemCont>
+            </Column>
+          </Row>
+
           {meta.unconfirmedReceived && parseFloat(meta.unconfirmedReceived) > 0 &&
           <Row>
             <Column full>
