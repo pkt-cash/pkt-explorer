@@ -159,7 +159,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                 }
               </Tooltip>
             </Label>
-            <Content>{commafy(txData.size)}</Content>
+            <Content>{commafy(txData.vsize)}</Content>
           </p>,
           (txData.coinbase
             ? <p>
@@ -196,7 +196,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                       not being included in the chain.
                     </Tooltip>
                 }
-                <Pkt amt={fee / txData.size} showDecimal/>
+                <Pkt amt={fee / txData.vsize} showDecimal/>
               </Content>
             </p>
           )
