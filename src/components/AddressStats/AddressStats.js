@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import {
@@ -14,7 +14,7 @@ import {
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
 import Help from '../Help/Help'
-import EaringChart from '../EarningChart/EarningChart'
+import EaringChart, { Chartcont } from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
 
 import { commafy } from '../../utils'
@@ -46,7 +46,7 @@ const MetaCont = styled.div`
 
 `
 
-const ChartCont = styled.div`
+const ChartArea = styled.div`
   /* flex: 1; */
   @media ${mqs.small} {
     text-align: center;
@@ -88,7 +88,18 @@ const CpCont = styled.div`
 `
 
 const AddrStats = ({ meta, addr, dailyTr }) => {
-  console.log(dailyTr)
+  const [chartEmpty, setEmpty] = useState(false)
+  useEffect(() => {
+    if (!dailyTr) return
+    console.log('dailyTr', dailyTr)
+    const isEmpty = dailyTr
+      .map((tr) => tr[1] === 0)
+      .reduce((prev, curr) => {
+        if (prev === false) return prev
+        else return curr
+      })
+    setEmpty(isEmpty)
+  }, [dailyTr])
   return (<>
     <TitleCont>
       <div>
@@ -220,9 +231,13 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             </Column>
           </Row>
         </MetaCont>
-        <ChartCont>
-          {dailyTr ? <EaringChart txData={dailyTr} /> : 'Loading'}
-        </ChartCont>
+        <ChartArea>
+          { chartEmpty
+            ? <Chartcont>this address did not mine any coin</Chartcont>
+            : dailyTr
+              ? <EaringChart txData={dailyTr} />
+              : 'Loading'}
+        </ChartArea>
       </ListDataCont>
     </ListCont>
   </>)
