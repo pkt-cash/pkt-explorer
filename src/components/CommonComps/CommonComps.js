@@ -56,7 +56,7 @@ export const MenuCont = styled.div`
   justify-content: center; */
   padding-left: 60px;
   height: ${metrics.menuHeight}px;
-  background-color: ${({ theme }) => theme.colors.headerBackground};
+  background-color: ${({ theme, hasAlert }) => hasAlert ? '#c52c2c' : theme.colors.headerBackground};
   color: #fff;
 `
 
@@ -205,8 +205,8 @@ const PktCont = styled.span`
   white-space: nowrap;
 `
 
-export const Pkt = ({ amt }) => {
-  if (Number(amt) < 1) {
+export const Pkt = ({ amt, showDecimal }) => {
+  if (!showDecimal && Number(amt) < 1) {
     return <PktCont>0<Decimal>.00</Decimal> <Unit>PKT</Unit></PktCont>
   }
   const fAmt = displayPKT(amt)
@@ -227,7 +227,8 @@ Pkt.propTypes = {
   amt: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ]).isRequired,
+  showDecimal: PropTypes.bool
 }
 
 export const NoWrap = styled.span`
@@ -238,4 +239,15 @@ export const AddrCont = styled.div`
   display: flex;
   flex-flow: row nowrap;
   align-items: end;
+`
+
+export const BalanceLabel = styled.span`
+margin-right: 10px;
+font-size: 1.3rem;
+white-space: nowrap;
+`
+
+export const CpCont = styled.div`
+display: flex;
+align-items: center;
 `

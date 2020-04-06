@@ -15,8 +15,8 @@ import metrics from '../../theme/metrics'
 // import RespHash from '../RespHash/RespHash'
 
 const cells = {
-  address: 'address',
-  balance: 'balance'
+  address: 'Address',
+  balance: 'Balance'
 }
 
 const AddrLink = styled(Link)`
@@ -33,7 +33,7 @@ const ListLabelCont = styled.div`
 `
 
 export const RichListLabels = ({ cells }) => <ListLabelCont>{
-  Object.keys(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
+  Object.values(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
 const RichList = ({ listData }) => listData

@@ -1,12 +1,8 @@
 {
   "name": "pkt-front",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.2",
     "framer-motion": "^1.7.2",
     "javascript-time-ago": "^2.0.6",
     "lodash-es": "^4.17.15",
@@ -49,6 +45,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@storybook/addon-actions": "^5.3.13",
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-links": "^5.3.7",
@@ -62,6 +61,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "eslint-plugin-standard": "^4.0.1"
   }
 }

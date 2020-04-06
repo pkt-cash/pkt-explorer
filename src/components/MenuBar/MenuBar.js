@@ -53,11 +53,11 @@ const TopLink = styled(NavLink)`
   ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
 `
 
-const MenuBar = (props) => {
+const MenuBar = ({ hasAlert }) => {
   const [isOpen, setOpen] = useState(false)
   return (
     <>
-      <MenuCont>
+      <MenuCont hasAlert={hasAlert}>
         <TopBarWrapper>
           <Media queries={{ small: { maxWidth: mq.small } }}>
             {matches =>

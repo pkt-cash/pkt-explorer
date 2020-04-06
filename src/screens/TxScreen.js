@@ -11,11 +11,11 @@ import {
   ListCont,
   ListLabel,
   TitleCont,
-  LeftCont,
-  RightCont,
+  AddrCont,
   TitleHeader,
   HashCont,
   Hash,
+  CpCont,
   Pkt
 } from '../components/CommonComps/CommonComps'
 import Copy from '../components/Copy/Copy'
@@ -118,7 +118,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
   }
   return (<>
     <TitleCont>
-      <LeftCont>
+      <div>
         <TitleHeader>
           {txData.coinbase
             ? isUnconfirmed
@@ -133,13 +133,15 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
               : 'Transaction'
           }
         </TitleHeader>
-      </LeftCont>
-      <RightCont>
+      </div>
+      <AddrCont>
         <HashCont>
           <Hash>{txData.txid}</Hash>
-          <Copy value={txData.txid}/>
         </HashCont>
-      </RightCont>
+        <CpCont>
+          <Copy value={txData.txid}/>
+        </CpCont>
+      </AddrCont>
     </TitleCont>
     <ListCont>
       <ListLabelCont>
@@ -157,7 +159,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                 }
               </Tooltip>
             </Label>
-            <Content>{commafy(txData.size)}</Content>
+            <Content>{commafy(txData.vsize)}</Content>
           </p>,
           (txData.coinbase
             ? <p>
@@ -175,7 +177,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             </p>
             : <p>
               <Label>
-                Fees Per Byte
+                Fee Per Byte
                 <Tooltip>
                     The amount of fees which this transaction pays to the miner
                     for including it in the chain. Note: A transaction with less
@@ -194,7 +196,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
                       not being included in the chain.
                     </Tooltip>
                 }
-                <Pkt amt={fee / txData.size}/>
+                <Pkt amt={fee / txData.vsize} showDecimal/>
               </Content>
             </p>
           )

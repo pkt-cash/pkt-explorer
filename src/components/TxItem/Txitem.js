@@ -18,7 +18,7 @@ const ItemCont = styled.div`
 `
 
 const Amount = styled.div`
-  min-width: 130px;
+  min-width: 145px;
   margin-left: 10px;
   white-space: nowrap;
   text-align: right;

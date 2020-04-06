@@ -7,7 +7,7 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'standard',
-    'react-hooks'
+    'plugin:react-hooks/recommended'
   ],
   globals: {
     Atomics: 'readonly',

@@ -20,8 +20,8 @@ const ScreenCont = styled.div`
 `
 
 const tabs = [
-  { name: 'Transactions', action: () => { console.log('yo') } },
-  { name: 'Mining Income', action: () => { console.log('yi') } }
+  { name: 'Transactions' },
+  { name: 'Mining Income' }
 ]
 
 const tabContent = (cTab, txList, dailyTr, addr) => {
@@ -29,7 +29,7 @@ const tabContent = (cTab, txList, dailyTr, addr) => {
     case 0:
       return txList
         ? txList.map((item, k) => <AddrTxBlock txData={item} myAddr={addr} key={`tx-${k}`} />)
-        : <Loader text='Loading loading metadata' small/>
+        : <Loader text='Loading metadata' small/>
     case 1:
       return dailyTr
         ? <DailyList dData={dailyTr}/>
@@ -129,7 +129,7 @@ const AddressScreen = (props) => {
   if (metaErr) return <div>Error fetching address {addr}</div> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
-      ? <Loader text='Loading loading metadata' small/>
+      ? <Loader text='Loading metadata' small/>
       : <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}/>
     }
     <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>

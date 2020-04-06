@@ -61,10 +61,13 @@ export const Column = styled.div`
     flex-basis: 100%;
     order: ${({ swap }) => swap ? 2 : 1}
   }
-  p{
+  p {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    @media ${mqs.small} {
+      flex-flow: column nowrap;
+    }
   }
 `
 export const ItemCont = styled.div`

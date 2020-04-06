@@ -11,7 +11,7 @@ const RichListScreen = (props) => {
   const [currPage, setCurrPage] = useState(1)
   const [richList, setRichList] = useState(false)
   const [nextRich, setNextRich] = useState(false)
-
+  // run once per page load + on change rich page
   useEffect(() => {
     document.title = 'Pkt - Rich list'
     fetchJson(`${richLApi}/100/${currPage}`)
@@ -20,7 +20,7 @@ const RichListScreen = (props) => {
         if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
         else setRichList(json.results)
       })
-  }, [currPage,richList])
+  }, [currPage]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadMoreRiches = () => {
     fetchJson(`${richLApi}/100/${currPage + 1}`)

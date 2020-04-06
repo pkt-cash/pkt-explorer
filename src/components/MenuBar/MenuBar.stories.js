@@ -9,7 +9,11 @@ export default {
 }
 
 export const MenuBarSt = () => <MenuBar showApp={linkTo('Button')} />
+export const MenuBarRedSt = () => <MenuBar showApp={linkTo('Button')} hasAlert />
 
 MenuBarSt.story = {
   name: 'full MenuBar'
+}
+MenuBarRedSt.story = {
+  name: 'full MenuBar - alert'
 }

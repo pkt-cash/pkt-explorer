@@ -18,7 +18,7 @@ const HomeScreen = (props) => {
 
   useEffect(() => {
     document.title = 'Pkt - Home'
-  }, [blockList])
+  }, [])
 
   const topBlock = -1
   const loadBlocks = (then) => {
@@ -65,8 +65,6 @@ const HomeScreen = (props) => {
 
         setPkData(res)
       })
-
-    fetchJson(`${pkApi}`)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
