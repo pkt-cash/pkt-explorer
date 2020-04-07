@@ -181,9 +181,8 @@ const AddrTxBlock = ({ txData, myAddr }) => {
       if (out.address === myAddr) {
         // This is when we receive change back, we need to deduct from the
         // amount that we're spending to get the right sum.
-        console.log('this is where i do stufff')
         value = '' + (Number(value) - out.value)
-        counterparty = 'folding coins'
+        if (output.length === 1) counterparty = 'folding coins'
         noLink = true
         continue
       }
@@ -211,7 +210,6 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                 {counterparty}
               </AddrLink>
             }
-
             <NoWrap>
               {(others > 0) ? ` +${others} others...` : ''}
             </NoWrap>
@@ -241,6 +239,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                     address={data.address}
                     value={data.value}
                     size={120}
+                    myAddr={myAddr}
                     inputs={data.spentcount}
                   />
                 ))
@@ -260,6 +259,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                   spent={data.spentcount > 0}
                   key={`outputItem-${i}}`}
                   address={data.address}
+                  myAddr={myAddr}
                   value={data.value}
                   size={120} />
               ))

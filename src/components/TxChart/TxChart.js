@@ -31,7 +31,11 @@ const TxChart = ({ txData, labelY }) => {
 
   return (
     <Chartcont>
-      <Chart data={data} axes={axes} series={series} tooltip/>
+      <Chart
+        data={data}
+        axes={axes}
+        series={series}
+        tooltip />
     </Chartcont>
   )
 }

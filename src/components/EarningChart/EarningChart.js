@@ -52,7 +52,11 @@ const EaringChart = ({ txData }) => {
 
   return (
     <Chartcont>
-      <Chart data={data} axes={axes} series={series} tooltip={tooltip}/>
+      <Chart
+        data={data}
+        axes={axes}
+        series={series}
+        tooltip={tooltip} />
     </Chartcont>
   )
 }

@@ -58,10 +58,12 @@ const Inputs = styled.div`
 `
 
 // spent !== undefined and inputs > 0 are mutually exclusive
-export const TxItem = ({ address, value, txt, size, spent, inputs }) => {
-  let addr = <HashCont to={`/address/${address}`}>
-    {address}
-  </HashCont>
+export const TxItem = ({ address, value, txt, size, spent, inputs, myAddr }) => {
+  let addr = myAddr === address
+    ? <ScriptHashCont>{myAddr}</ScriptHashCont>
+    : <HashCont to={`/address/${address}`}>
+      {address}
+    </HashCont>
   if (/^script:ajAJ\+REC/.test(address) && value === '0') {
     return <ItemCont>
       <span><Help.PacketCryptCommitment>PacketCrypt</Help.PacketCryptCommitment> Commitment</span>
@@ -105,5 +107,6 @@ TxItem.propTypes = {
   value: PropTypes.string,
   txt: PropTypes.string,
   size: PropTypes.number,
-  unspent: PropTypes.bool
+  unspent: PropTypes.bool,
+  myAddr: PropTypes.string.isRequired
 }
