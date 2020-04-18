@@ -16,6 +16,7 @@ import Tooltip from '../Tooltip/Tooltip'
 import Help from '../Help/Help'
 import EaringChart, { Chartcont } from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
+import { Link } from 'react-router-dom'
 
 import { commafy } from '../../utils'
 
@@ -87,7 +88,117 @@ const CpCont = styled.div`
   align-items: center;
 `
 
-const AddrStats = ({ meta, addr, dailyTr }) => {
+// TODO(cjd): copy-pasta
+// In this particular case, lets ... the address because it will make everything look nicer
+const AddrLink = styled(Link)`
+  word-break: break-all;
+  padding: 0.5rem;
+  display: inline-block;
+  font-weight: normal;
+`
+
+const nsLoadError = (nsError, x, f) => 
+  (x) ? f(x) : (nsError) ? "Error loading data" : "Loading"
+
+const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) =>
+  <>
+  <MetaCont>
+    {meta.burned && parseFloat(meta.burned) > 0 &&
+    <Row>
+      <Column full>
+        <ItemCont>
+          <p><Label>
+            Burned
+            <Tooltip>
+              The number of Network Steward coins which are nolonger accessible
+              because they were not spent within 3 months of bring created.
+            </Tooltip>
+          </Label> <Content><Pkt amt={meta.burned}/></Content></p>
+        </ItemCont>
+      </Column>
+    </Row>
+    }
+
+    <Row>
+      <Column full>
+        <ItemCont>
+          <BrdCont>
+            <p><Label>
+              Votes for re-election
+              <Tooltip>
+                The amount of coins which are casting a vote against the Network Steward.
+                If that amount is greater than 50% of all coins, then the Network Steward
+                will be replaced.
+              </Tooltip>
+            </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
+              <Pkt amt={ns.votesAgainst}/>
+            ))}</Content></p>
+          </BrdCont>
+        </ItemCont>
+      </Column>
+    </Row>
+
+    <Row>
+      <Column full>
+        <ItemCont>
+          <BrdCont>
+            <p><Label>
+              Votes needed
+              <Tooltip>
+                50% of the total coins in existance, what is needed to trigger a re-election.
+              </Tooltip>
+            </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
+              <Pkt amt={ns.votesNeeded}/>
+            ))}</Content></p>
+          </BrdCont>
+        </ItemCont>
+      </Column>
+    </Row>
+
+    <Row>
+      <Column full>
+        <ItemCont>
+          <BrdCont>
+            <p><Label>
+              Current frontrunner
+              <Tooltip>
+                If more votes for election emerge but the candidates do not change, this is
+                the candidate who would win. It is possible for the sitting Network Steward to
+                win a re-election if it is unpopular yet more popular than any alternative.
+              </Tooltip>
+            </Label> <Content>{nsLoadError(nsError, nsFrontrunner, (nsFrontrunner) => (
+              (nsFrontrunner.candidate === addr)
+              ? "Same address (re-election)"
+              : <AddrLink to={`/address/${nsFrontrunner.candidate}`}>{nsFrontrunner.candidate}</AddrLink>
+            ))}</Content></p>
+          </BrdCont>
+        </ItemCont>
+      </Column>
+    </Row>
+
+    <Row>
+      <Column full>
+        <ItemCont>
+          <BrdCont>
+            <p><Label>
+              Network Steward charter
+              <Tooltip>
+                This is a page which explains the Network Steward, the timelines for grant
+                applications and guidelines for applying.
+              </Tooltip>
+            </Label> <Content>{
+              (addr === 'pkt1q6hqsqhqdgqfd8t3xwgceulu7k9d9w5t2amath0qxyfjlvl3s3u4sjza2g2') ?
+              <a href="https://pkt.cash/steward">https://pkt.cash/steward</a> : "Unknown"
+            }</Content></p>
+          </BrdCont>  
+        </ItemCont>
+      </Column>
+    </Row>
+
+  </MetaCont>
+</>
+
+const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) => {
   const [chartEmpty, setEmpty] = useState(false)
   useEffect(() => {
     if (!dailyTr) return
@@ -104,7 +215,10 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
     <TitleCont>
       <div>
         <TitleHeader>
-          Address
+          {isNs ?
+            'Network Steward' :
+            'Address'
+          }
         </TitleHeader>
         <BalanceLabel>
           <Pkt amt={meta.balance}/>
@@ -142,12 +256,19 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
           <Row>
             <Column full>
               <ItemCont>
-                <p><Label>
-                  UTXO Count
-                  <Tooltip>
-                    There will be a proper explanation here
-                  </Tooltip>
-                </Label> <Content>{meta.balanceCount}</Content></p>
+                <BrdCont>
+                  <p><Label>
+                    Unspent count
+                    <Tooltip>
+                      The number of transactions which have been received and have not been spent.
+                      Spending money involves grouping together a collection of transactions which were paid to you,
+                      signing them to prove you are the rightful owner, then paying the result along to someone else.
+                      If this number is over 1000 then you won't be able to send all of your money in one transaction
+                      because otherwise it would become too large for the blockchain rules. Consider "folding coins"
+                      (aka sending money to yourself) in order to reduce it.
+                    </Tooltip>
+                  </Label> <Content>{meta.balanceCount}</Content></p>
+                </BrdCont>
               </ItemCont>
             </Column>
           </Row>
@@ -164,24 +285,6 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
                       unconfirmed transactions.
                     </Tooltip>
                   </Label> <Content><Pkt amt={meta.unconfirmedReceived}/></Content></p>
-                </BrdCont>
-              </ItemCont>
-            </Column>
-          </Row>
-          }
-          {meta.burned && parseFloat(meta.burned) > 0 &&
-          <Row>
-            <Column full>
-              <ItemCont>
-                <BrdCont>
-                  <p><Label>
-                    Burned
-                    <Tooltip>
-                      The number of coins which are inaccessible per consensus rules.
-                      If you see this field, it means this is a
-                      <Help.NetworkSteward>Network Steward</Help.NetworkSteward> address.
-                    </Tooltip>
-                  </Label> <Content><Pkt amt={meta.burned}/></Content></p>
                 </BrdCont>
               </ItemCont>
             </Column>
@@ -231,13 +334,16 @@ const AddrStats = ({ meta, addr, dailyTr }) => {
             </Column>
           </Row>
         </MetaCont>
-        <ChartArea>
-          { chartEmpty
-            ? <Chartcont>this address did not mine any coin</Chartcont>
-            : dailyTr
-              ? <EaringChart txData={dailyTr} />
-              : 'Loading'}
-        </ChartArea>
+        {isNs ?
+          nsBlock({ addr, meta, nsError, ns, nsFrontrunner }) :
+          <ChartArea>
+            { chartEmpty
+              ? <Chartcont>No mining income in the last 3 months</Chartcont>
+              : dailyTr
+                ? <EaringChart txData={dailyTr} />
+                : 'Loading'}
+          </ChartArea>
+        }
       </ListDataCont>
     </ListCont>
   </>)

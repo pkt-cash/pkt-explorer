@@ -70,11 +70,11 @@ const TabHeaders = ({ tabsData, cTab, action }) => {
     <TabsCont>
       {
         tabsData.map((tab, i) => {
-          return parseInt(i) === parseInt(currTab)
+          return tab.name === currTab
             ? <CurrTab key={`tab-${i}`}>{tab.name}</CurrTab>
             : <ItemCont>
               <TabsItem key={`tab-${i}`}
-                onClick={() => changeTab(i, tab.action)}
+                onClick={() => changeTab(tab.name)}
               >
                 {tab.name}
               </TabsItem>

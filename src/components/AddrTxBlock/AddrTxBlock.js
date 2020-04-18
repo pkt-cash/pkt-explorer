@@ -182,8 +182,10 @@ const AddrTxBlock = ({ txData, myAddr }) => {
         // This is when we receive change back, we need to deduct from the
         // amount that we're spending to get the right sum.
         value = '' + (Number(value) - out.value)
-        if (output.length === 1) counterparty = 'folding coins'
-        noLink = true
+        if (output.length === 1) {
+          counterparty = 'Coin-folding transaction'
+          noLink = true
+        }
         continue
       }
       maxValue = Math.max(Number(out.value), maxValue)
@@ -191,6 +193,12 @@ const AddrTxBlock = ({ txData, myAddr }) => {
       counterparty = out.address
     }
   }
+
+  output.sort((a,b) => {
+    if (a.address === myAddr) { return (direction === '+') ? -1 : 1 }
+    if (b.address === myAddr) { return (direction === '+') ? 1 : -1 }
+    return Number(a.value) - Number(b.value)
+  })
 
   return (
     <AddrTxBlockCont>
@@ -243,8 +251,6 @@ const AddrTxBlock = ({ txData, myAddr }) => {
                     inputs={data.spentcount}
                   />
                 ))
-              } else if (!blockTime) {
-                return <TxItem txt='Unconfirmed - Inputs Unavailable' />
               } else {
                 return <TxItem txt='No Inputs (Newly Generated Coins) ' />
               }

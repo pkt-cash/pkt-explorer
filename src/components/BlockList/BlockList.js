@@ -88,6 +88,24 @@ const TrTh = styled.th`
     }
   }
 `
+
+const MS_MINUTE = 60*1000;
+const GRADULATION_NODAY = [
+  {
+    unit: 'second',
+  },
+  {
+    unit: 'minute',
+    factor: 60,
+    threshold: 59.5
+  },
+  {
+    unit: 'hour',
+    factor: 60 * 60,
+    threshold: 59.5 * 60
+  }
+];
+
 const BlockList = ({ listData, home }) => {
   return (
     listData
@@ -103,14 +121,24 @@ const BlockList = ({ listData, home }) => {
               <th scope="col">height</th>
               <th scope="col">age</th>
               <TrTh scope="col"/>
+              <th scope="col">difficulty</th>
+              <th scope="col">next diff (est.)</th>
+              <th scope="col">next diff change</th>
               <th scope="col">size</th>
             </tr>
           </thead>
           <tbody>
-            {listData.map((blk) => <tr key={`tr-${blk.height}`}>
+            {listData.map((blk) => <tr
+                style={{ background: blk.blocksUntilRetarget === 0 ? '#ffb0b0' : "" }}
+                key={`tr-${blk.height}`}>
               <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
               <td><AgeCell time={blk.time} /></td>
               <td>{blk.transactionCount}</td>
+              <td>{Math.floor(blk.difficulty)}</td>
+              <td>{Math.floor(blk.retargetEstimate * blk.difficulty)}</td>
+              <td>{timeAgo.format(+new Date() + (blk.blocksUntilRetarget * MS_MINUTE), {
+                units: ['second', 'minute', 'hour'],
+              })}</td>
               <td>{blk.size}</td>
             </tr>)}
           </tbody>

@@ -10,5 +10,6 @@ export default {
   pcBlockApi: `${backendURL}/api/v1/PKT/pkt/packetcrypt`,
   pkApi: `${backendURL}/api/v1/PKT/pkt/packetcrypt/stats`,
   txStats: `${backendURL}/api/v1/PKT/pkt/stats/daily-transactions`,
-  base: `${backendURL}/api/v1/PKT/pkt`
+  base: `${backendURL}/api/v1/PKT/pkt`,
+  nsApi: `${backendURL}/api/v1/PKT/pkt/ns`,
 }

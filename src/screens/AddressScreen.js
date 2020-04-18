@@ -9,9 +9,10 @@ import Loader from '../components/Loader/Loader'
 import styled from 'styled-components'
 import TabHeaders from '../components/TabHeaders/TabHeaders'
 import DailyList from '../components/DailyList/DailyList'
+import CandidateList from '../components/CandidateList/CandidateList'
 import { BtRow, Button } from '../components/CommonComps/CommonComps'
 
-const { addrMetaApi, base } = endpoints
+const { addrMetaApi, base, blkDownApi, nsApi } = endpoints
 
 const ScreenCont = styled.div`
  min-height: 90vh;
@@ -23,24 +24,32 @@ const tabs = [
   { name: 'Transactions' },
   { name: 'Mining Income' }
 ]
+const tabsNs = [
+  { name: 'Transactions' },
+  { name: 'Election candidates' }
+]
 
-const tabContent = (cTab, txList, dailyTr, addr) => {
-  switch (cTab) {
-    case 0:
+const tabContent = ({currTab, txList, dailyTr, addr, nsCandidates}) => {
+  switch (currTab) {
+    case 'Transactions':
       return txList
         ? txList.map((item, k) => <AddrTxBlock txData={item} myAddr={addr} key={`tx-${k}`} />)
         : <Loader text='Loading metadata' small/>
-    case 1:
+    case 'Mining Income':
       return dailyTr
         ? <DailyList dData={dailyTr}/>
         : <Loader text='Daily income' small/>
+    case 'Election candidates':
+      return nsCandidates
+        ? <CandidateList dData={nsCandidates} addr={addr}></CandidateList>
+        : <Loader text='Election candidates' small/>
     default:
       return <div>this is not the tab you are looking for</div>
   }
 }
 
 const AddressScreen = (props) => {
-  const [currTab, changeTab] = useState(0)
+  const [currTab, changeTab] = useState('Transactions')
   const [meta, setMeta] = useState(false)
   const [nextTx, setNextTx] = useState(false)
   const [nextMine, setNextMine] = useState(false)
@@ -50,6 +59,14 @@ const AddressScreen = (props) => {
   const [txList, setTxList] = useState(false)
   const [metaLoad, setMetaLoad] = useState(true)
   const [noTx, setNoTx] = useState(false)
+
+  const [isNs, setIsNs] = useState(false)
+  const [nsError, setNsError] = useState(false)
+  const [ns, setNs] = useState(false)
+  const [nsFrontrunner, setNsFrontrunner] = useState(false)
+  const [nsCandidates, setNsCandidates] = useState(false)
+  const [nsCandidatesNext, setNsCandidatesNext] = useState(false)
+
   const { addr } = useParams()
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
   // if (error) return <div>ARRRRR errror fetching address {addr}</div>
@@ -124,16 +141,47 @@ const AddressScreen = (props) => {
         setNextTx(json.next)
         setTxList(json.results)
       })
+    fetchJson(`${blkDownApi}/1/1`)
+      .then((json) => {
+        if (json.error) {
+          return
+        }
+        // check if this address is the NS
+        if (json.results[0].networkSteward !== addr) { return }
+        setIsNs(true)
+        fetchJson(nsApi)
+          .then((json) => {
+            if (json.error) {
+              setNsError(json.error)
+              return
+            }
+            setNs(json)
+          })
+        fetchJson(`${nsApi}/candidates`)
+          .then((json) => {
+            if (json.error) {
+              setNsError(json.error)
+              return
+            }
+            setNsFrontrunner(json.result[0])
+            setNsCandidates(json.result)
+            setNsCandidatesNext(json.next)
+          })
+      })
   }, [addr])
 
   if (metaErr) return <div>Error fetching address {addr}</div> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading metadata' small/>
-      : <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}/>
+      : <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}
+        isNs={isNs} nsError={nsError} ns={ns} nsFrontrunner={nsFrontrunner}/>
     }
-    <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>
-    {tabContent(currTab, txList, dailyTr, addr)}
+    {isNs ?
+      <TabHeaders tabsData={tabsNs} action={changeTab} cTab={currTab}/> :
+      <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>
+    }
+    {tabContent({currTab, txList, dailyTr, addr, nsCandidates})}
 
     {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
       <BtRow>
