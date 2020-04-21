@@ -9,7 +9,7 @@ const { pkApi, blkDownApi, statsCoinsApi } = endpoints
 
 const HomeScreen = (props) => {
   const [pkData, setPkData] = useState(false)
-  const [currPage, setCurrPage] = useState(1)
+  const [currPage, setCurrPage] = useState(0)
   const [blockList, setBlockList] = useState(false)
   const [statsCoins, setStatsCoins] = useState(false)
   const [hasErr, setErr] = useState(false)
