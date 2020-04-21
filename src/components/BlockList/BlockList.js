@@ -129,8 +129,8 @@ const BlockList = ({ listData, home }) => {
           </thead>
           <tbody>
             {listData.map((blk) => <tr
-                style={{ background: blk.blocksUntilRetarget === 0 ? '#ffb0b0' : "" }}
-                key={`tr-${blk.height}`}>
+              style={{ background: blk.blocksUntilRetarget === 0 ? '#ffb0b0' : "" }}
+              key={`tr-${blk.height}`}>
               <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
               <td><AgeCell time={blk.time} /></td>
               <td>{blk.transactionCount}</td>

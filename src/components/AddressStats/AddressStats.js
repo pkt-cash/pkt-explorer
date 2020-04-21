@@ -97,6 +97,26 @@ const AddrLink = styled(Link)`
   font-weight: normal;
 `
 
+const NoMiningCont = styled.div`
+  /* background-color: #f00; */
+  display: flex;
+  width: 100%;
+  min-width: 400px;
+  min-height: 200px;
+  font-weight: 600;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  opacity: 0.5;
+  @media ${mqs.small} {
+    min-width: auto;
+    min-height: auto;
+    width: 100%;
+    height: auto;
+  }
+`
+
 const nsLoadError = (nsError, x, f) =>
   (x) ? f(x) : (nsError) ? 'Error loading data' : 'Loading'
 
@@ -338,7 +358,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
           ? nsBlock({ addr, meta, nsError, ns, nsFrontrunner })
           : <ChartArea>
             { chartEmpty
-              ? <Chartcont>No mining income in the last 3 months</Chartcont>
+              ? <NoMiningCont>No mining income in the last 3 months</NoMiningCont>
               : dailyTr
                 ? <EaringChart txData={dailyTr} />
                 : 'Loading'}

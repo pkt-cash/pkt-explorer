@@ -8,6 +8,7 @@ export const Chartcont = styled.div`
 width: 100%;
 min-width: 400px;
 min-height: 200px;
+position: relative;
 /* height: 100%; */
 @media ${mqs.small} {
   min-width: auto;
