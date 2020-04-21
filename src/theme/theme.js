@@ -13,7 +13,7 @@ const theme = {
     pktTableBorder: '#e1e1e1',
     pktTxBackground: '#f1f1f1',
     pktPageBackground: '#fff',
-    headerBackground: '#1d326a'
+    headerBackground: '#18183A'
   }
 }
 
