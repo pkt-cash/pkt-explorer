@@ -29,7 +29,7 @@ const tabsNs = [
   { name: 'Election candidates' }
 ]
 
-const tabContent = ({currTab, txList, dailyTr, addr, nsCandidates}) => {
+const tabContent = ({ currTab, txList, dailyTr, addr, nsCandidates }) => {
   switch (currTab) {
     case 'Transactions':
       return txList
@@ -117,6 +117,7 @@ const AddressScreen = (props) => {
   }, [addr])
   useEffect(() => {
     // fetchAddrMeta
+    setMetaLoad(true)
     fetchJson(`${addrMetaApi}/${addr}`)
       .then((json) => {
         if (json.error) {
@@ -173,27 +174,29 @@ const AddressScreen = (props) => {
   if (metaErr) return <div>Error fetching address {addr}</div> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
-      ? <Loader text='Loading metadata' small/>
-      : <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}
-        isNs={isNs} nsError={nsError} ns={ns} nsFrontrunner={nsFrontrunner}/>
-    }
-    {isNs ?
-      <TabHeaders tabsData={tabsNs} action={changeTab} cTab={currTab}/> :
-      <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>
-    }
-    {tabContent({currTab, txList, dailyTr, addr, nsCandidates})}
-
-    {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
-      <BtRow>
-        {nextTx !== ''
-          ? <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions' : ''}</Button>
-          : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+      ? <Loader text='Loading address data' small/>
+      : <>
+        <AddrStats meta={meta} addr={addr} dailyTr={dailyTrChart}
+          isNs={isNs} nsError={nsError} ns={ns} nsFrontrunner={nsFrontrunner}/>
+        {isNs
+          ? <TabHeaders tabsData={tabsNs} action={changeTab} cTab={currTab}/>
+          : <TabHeaders tabsData={tabs} action={changeTab} cTab={currTab}/>
         }
-      </BtRow>
-    }
-    {(currTab === 0 && noTx === true && txList) && <BtRow>
-      This address has not made any transactions yet
-    </BtRow>
+        {tabContent({ currTab, txList, dailyTr, addr, nsCandidates })}
+
+        {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
+          <BtRow>
+            {nextTx !== ''
+              ? <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions' : ''}</Button>
+              : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+            }
+          </BtRow>
+        }
+        {(currTab === 0 && noTx === true && txList) && <BtRow>
+          This address has not made any transactions yet
+        </BtRow>
+        }
+      </>
     }
 
   </ScreenCont>

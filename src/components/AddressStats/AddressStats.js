@@ -13,7 +13,7 @@ import {
 } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
-import Help from '../Help/Help'
+// import Help from '../Help/Help'
 import EaringChart, { Chartcont } from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
 import { Link } from 'react-router-dom'
@@ -97,13 +97,13 @@ const AddrLink = styled(Link)`
   font-weight: normal;
 `
 
-const nsLoadError = (nsError, x, f) => 
-  (x) ? f(x) : (nsError) ? "Error loading data" : "Loading"
+const nsLoadError = (nsError, x, f) =>
+  (x) ? f(x) : (nsError) ? 'Error loading data' : 'Loading'
 
 const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) =>
   <>
-  <MetaCont>
-    {meta.burned && parseFloat(meta.burned) > 0 &&
+    <MetaCont>
+      {meta.burned && parseFloat(meta.burned) > 0 &&
     <Row>
       <Column full>
         <ItemCont>
@@ -117,86 +117,86 @@ const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) =>
         </ItemCont>
       </Column>
     </Row>
-    }
+      }
 
-    <Row>
-      <Column full>
-        <ItemCont>
-          <BrdCont>
-            <p><Label>
+      <Row>
+        <Column full>
+          <ItemCont>
+            <BrdCont>
+              <p><Label>
               Votes for re-election
-              <Tooltip>
+                <Tooltip>
                 The amount of coins which are casting a vote against the Network Steward.
                 If that amount is greater than 50% of all coins, then the Network Steward
                 will be replaced.
-              </Tooltip>
-            </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
-              <Pkt amt={ns.votesAgainst}/>
-            ))}</Content></p>
-          </BrdCont>
-        </ItemCont>
-      </Column>
-    </Row>
+                </Tooltip>
+              </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
+                <Pkt amt={ns.votesAgainst}/>
+              ))}</Content></p>
+            </BrdCont>
+          </ItemCont>
+        </Column>
+      </Row>
 
-    <Row>
-      <Column full>
-        <ItemCont>
-          <BrdCont>
-            <p><Label>
+      <Row>
+        <Column full>
+          <ItemCont>
+            <BrdCont>
+              <p><Label>
               Votes needed
-              <Tooltip>
+                <Tooltip>
                 50% of the total coins in existance, what is needed to trigger a re-election.
-              </Tooltip>
-            </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
-              <Pkt amt={ns.votesNeeded}/>
-            ))}</Content></p>
-          </BrdCont>
-        </ItemCont>
-      </Column>
-    </Row>
+                </Tooltip>
+              </Label> <Content>{nsLoadError(nsError, ns, (ns) => (
+                <Pkt amt={ns.votesNeeded}/>
+              ))}</Content></p>
+            </BrdCont>
+          </ItemCont>
+        </Column>
+      </Row>
 
-    <Row>
-      <Column full>
-        <ItemCont>
-          <BrdCont>
-            <p><Label>
+      <Row>
+        <Column full>
+          <ItemCont>
+            <BrdCont>
+              <p><Label>
               Current frontrunner
-              <Tooltip>
+                <Tooltip>
                 If more votes for election emerge but the candidates do not change, this is
                 the candidate who would win. It is possible for the sitting Network Steward to
                 win a re-election if it is unpopular yet more popular than any alternative.
-              </Tooltip>
-            </Label> <Content>{nsLoadError(nsError, nsFrontrunner, (nsFrontrunner) => (
-              (nsFrontrunner.candidate === addr)
-              ? "Same address (re-election)"
-              : <AddrLink to={`/address/${nsFrontrunner.candidate}`}>{nsFrontrunner.candidate}</AddrLink>
-            ))}</Content></p>
-          </BrdCont>
-        </ItemCont>
-      </Column>
-    </Row>
+                </Tooltip>
+              </Label> <Content>{nsLoadError(nsError, nsFrontrunner, (nsFrontrunner) => (
+                (nsFrontrunner.candidate === addr)
+                  ? 'Same address (re-election)'
+                  : <AddrLink to={`/address/${nsFrontrunner.candidate}`}>{nsFrontrunner.candidate}</AddrLink>
+              ))}</Content></p>
+            </BrdCont>
+          </ItemCont>
+        </Column>
+      </Row>
 
-    <Row>
-      <Column full>
-        <ItemCont>
-          <BrdCont>
-            <p><Label>
+      <Row>
+        <Column full>
+          <ItemCont>
+            <BrdCont>
+              <p><Label>
               Network Steward charter
-              <Tooltip>
+                <Tooltip>
                 This is a page which explains the Network Steward, the timelines for grant
                 applications and guidelines for applying.
-              </Tooltip>
-            </Label> <Content>{
-              (addr === 'pkt1q6hqsqhqdgqfd8t3xwgceulu7k9d9w5t2amath0qxyfjlvl3s3u4sjza2g2') ?
-              <a href="https://pkt.cash/steward">https://pkt.cash/steward</a> : "Unknown"
-            }</Content></p>
-          </BrdCont>  
-        </ItemCont>
-      </Column>
-    </Row>
+                </Tooltip>
+              </Label> <Content>{
+                (addr === 'pkt1q6hqsqhqdgqfd8t3xwgceulu7k9d9w5t2amath0qxyfjlvl3s3u4sjza2g2')
+                  ? <a href="https://pkt.cash/steward">https://pkt.cash/steward</a> : 'Unknown'
+              }</Content></p>
+            </BrdCont>
+          </ItemCont>
+        </Column>
+      </Row>
 
-  </MetaCont>
-</>
+    </MetaCont>
+  </>
 
 const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) => {
   const [chartEmpty, setEmpty] = useState(false)
@@ -215,9 +215,9 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
     <TitleCont>
       <div>
         <TitleHeader>
-          {isNs ?
-            'Network Steward' :
-            'Address'
+          {isNs
+            ? 'Network Steward'
+            : 'Address'
           }
         </TitleHeader>
         <BalanceLabel>
@@ -263,8 +263,8 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
                       The number of transactions which have been received and have not been spent.
                       Spending money involves grouping together a collection of transactions which were paid to you,
                       signing them to prove you are the rightful owner, then paying the result along to someone else.
-                      If this number is over 1000 then you won't be able to send all of your money in one transaction
-                      because otherwise it would become too large for the blockchain rules. Consider "folding coins"
+                      If this number is over 1000 then you won&apos;t be able to send all of your money in one transaction
+                      because otherwise it would become too large for the blockchain rules. Consider &quote;folding coins&quote;
                       (aka sending money to yourself) in order to reduce it.
                     </Tooltip>
                   </Label> <Content>{meta.balanceCount}</Content></p>
@@ -334,9 +334,9 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
             </Column>
           </Row>
         </MetaCont>
-        {isNs ?
-          nsBlock({ addr, meta, nsError, ns, nsFrontrunner }) :
-          <ChartArea>
+        {isNs
+          ? nsBlock({ addr, meta, nsError, ns, nsFrontrunner })
+          : <ChartArea>
             { chartEmpty
               ? <Chartcont>No mining income in the last 3 months</Chartcont>
               : dailyTr
