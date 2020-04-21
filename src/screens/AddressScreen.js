@@ -66,7 +66,7 @@ const AddressScreen = (props) => {
   const [ns, setNs] = useState(false)
   const [nsFrontrunner, setNsFrontrunner] = useState(false)
   const [nsCandidates, setNsCandidates] = useState(false)
-  const [nsCandidatesNext, setNsCandidatesNext] = useState(false)
+  // const [nsCandidatesNext, setNsCandidatesNext] = useState(false)
 
   const { addr } = useParams()
   // const { error, loading, data } = useFetch(`${addrMetaApi}/`)
@@ -167,7 +167,7 @@ const AddressScreen = (props) => {
             }
             setNsFrontrunner(json.result[0])
             setNsCandidates(json.result)
-            setNsCandidatesNext(json.next)
+            // setNsCandidatesNext(json.next)
           })
       })
   }, [addr])
