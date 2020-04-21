@@ -15,17 +15,19 @@ import AddressScreen from './screens/AddressScreen'
 import DailyTxScreen from './screens/DailyTxScreen'
 import { fetchJson } from './utils'
 import endpoints from './utils/endpoints'
+import Error from './components/Error/Error'
 const { blkDownApi } = endpoints
 
 function App () {
   const [hasIssue, setIssue] = useState(false)
+  const [hasError, setError] = useState(false)
   useEffect(() => {
     // effect to check if last block is older than 20mn
     fetchJson(`${blkDownApi}/5`)
       .then((json) => {
         if (json.error) {
-          console.error('error while fetching pkData')
-          // return setErr(json.error)
+          console.error('error connecting to the main api')
+          return setError(json.error)
         }
         const cTime = new Date()
         const lastBTime = new Date(json.results[0].time)
@@ -43,43 +45,47 @@ function App () {
         <ThemeProvider theme={theme}>
           <MenuBar hasAlert={hasIssue}/>
           <MainWrapper>
-            <Switch>
-              <Route
-                exact
-                path='/'
-                component={HomeScreen}
-                key='home' />
-              {/* <Route
+            {hasError
+              ? <Error apiMissing />
+              : <Switch>
+                <Route
+                  exact
+                  path='/'
+                  component={HomeScreen}
+                  key='home' />
+                {/* <Route
                 exact
                 path='/blocks'
                 component={BlockListScreen}
                 key='blocks' /> */}
-              <Route
-                exact
-                path='/rich'
-                component={RichListScreen}
-                key='rich' />
-              <Route
-                exact
-                path='/txd'
-                component={DailyTxScreen}
-                key='resume' />
-              <Route
-                exact
-                path='/address/:addr'
-                component={AddressScreen}
-                key='address' />
-              <Route
-                exact
-                path='/block/:id'
-                component={BlockScreen}
-                key='block' />
-              <Route
-                exact
-                path='/tx/:id'
-                component={TxScreen}
-                key='transaction' />
-            </Switch>
+                <Route
+                  exact
+                  path='/rich'
+                  component={RichListScreen}
+                  key='rich' />
+                <Route
+                  exact
+                  path='/txd'
+                  component={DailyTxScreen}
+                  key='resume' />
+                <Route
+                  exact
+                  path='/address/:addr'
+                  component={AddressScreen}
+                  key='address' />
+                <Route
+                  exact
+                  path='/block/:id'
+                  component={BlockScreen}
+                  key='block' />
+                <Route
+                  exact
+                  path='/tx/:id'
+                  component={TxScreen}
+                  key='transaction' />
+              </Switch>
+            }
+
           </MainWrapper>
         </ThemeProvider>
       </BrowserRouter>
