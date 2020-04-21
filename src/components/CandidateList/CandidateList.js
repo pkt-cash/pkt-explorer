@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
-import { DateTime } from 'luxon'
+// import { DateTime } from 'luxon'
 import { Pkt } from '../CommonComps/CommonComps'
 import { Link } from 'react-router-dom'
 
@@ -52,7 +52,7 @@ CandidateList.propTypes = {
     PropTypes.bool,
     PropTypes.array
   ]),
-  addr: PropTypes.string,
+  addr: PropTypes.string
 }
 
 CandidateList.defaultProps = {

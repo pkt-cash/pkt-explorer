@@ -89,22 +89,23 @@ const TrTh = styled.th`
   }
 `
 
-const MS_MINUTE = 60*1000;
-const GRADULATION_NODAY = [
-  {
-    unit: 'second',
-  },
-  {
-    unit: 'minute',
-    factor: 60,
-    threshold: 59.5
-  },
-  {
-    unit: 'hour',
-    factor: 60 * 60,
-    threshold: 59.5 * 60
-  }
-];
+const MS_MINUTE = 60 * 1000
+// TODO: ask Caleb is this is usefull
+// const GRADULATION_NODAY = [
+//   {
+//     unit: 'second'
+//   },
+//   {
+//     unit: 'minute',
+//     factor: 60,
+//     threshold: 59.5
+//   },
+//   {
+//     unit: 'hour',
+//     factor: 60 * 60,
+//     threshold: 59.5 * 60
+//   }
+// ]
 
 const BlockList = ({ listData, home }) => {
   return (
@@ -129,7 +130,7 @@ const BlockList = ({ listData, home }) => {
           </thead>
           <tbody>
             {listData.map((blk) => <tr
-              style={{ background: blk.blocksUntilRetarget === 0 ? '#ffb0b0' : "" }}
+              style={{ background: blk.blocksUntilRetarget === 0 ? '#ffb0b0' : '' }}
               key={`tr-${blk.height}`}>
               <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
               <td><AgeCell time={blk.time} /></td>
@@ -137,7 +138,7 @@ const BlockList = ({ listData, home }) => {
               <td>{Math.floor(blk.difficulty)}</td>
               <td>{Math.floor(blk.retargetEstimate * blk.difficulty)}</td>
               <td>{timeAgo.format(+new Date() + (blk.blocksUntilRetarget * MS_MINUTE), {
-                units: ['second', 'minute', 'hour'],
+                units: ['second', 'minute', 'hour']
               })}</td>
               <td>{blk.size}</td>
             </tr>)}

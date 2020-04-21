@@ -194,7 +194,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
     }
   }
 
-  output.sort((a,b) => {
+  output.sort((a, b) => {
     if (a.address === myAddr) { return (direction === '+') ? -1 : 1 }
     if (b.address === myAddr) { return (direction === '+') ? 1 : -1 }
     return Number(a.value) - Number(b.value)
