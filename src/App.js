@@ -21,6 +21,7 @@ const { blkDownApi } = endpoints
 function App () {
   const [hasIssue, setIssue] = useState(false)
   const [hasError, setError] = useState(false)
+  const [nsAddr, setNsAddr] = useState(false)
   useEffect(() => {
     // effect to check if last block is older than 20mn
     fetchJson(`${blkDownApi}/5`)
@@ -34,7 +35,7 @@ function App () {
         const secDiff = (cTime.getTime() - lastBTime.getTime()) / 1000
 
         if (secDiff > 20 * 60) setIssue(secDiff)
-
+        setNsAddr(json.results[0].networkSteward)
         // setPkData(res)
       })
   }, [])
@@ -43,7 +44,7 @@ function App () {
       <GlobalStyles />
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <MenuBar hasAlert={hasIssue}/>
+          <MenuBar hasAlert={hasIssue} nsAddr={nsAddr} />
           <MainWrapper>
             {hasError
               ? <Error apiMissing />

@@ -59,7 +59,7 @@ const AlertCont = styled.div`
   text-align: center;
 `
 
-const MenuBar = ({ hasAlert }) => {
+const MenuBar = ({ hasAlert, nsAddr }) => {
   const [isOpen, setOpen] = useState(false)
   return (
     <>
@@ -69,7 +69,7 @@ const MenuBar = ({ hasAlert }) => {
             {matches =>
               matches.small ? (
                 <>
-                  <MobileMenu />
+                  <MobileMenu nsAddr={nsAddr}/>
                   <TopLink exact to='/' main={1}>
                   PKT Explorer
                   </TopLink>
@@ -84,6 +84,7 @@ const MenuBar = ({ hasAlert }) => {
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
                     <TopLink to='/txd'>Txs per day</TopLink>
                     <TopLink to='/rich'>Rich list</TopLink>
+                    {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Stewart</TopLink>}
                   </TopMenu>
                   <Omnibox />
                 </>
