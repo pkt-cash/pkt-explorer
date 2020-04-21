@@ -75,7 +75,7 @@ const AddressScreen = (props) => {
   const loadMore = () => {
     console.log('load more called, cTab', currTab)
     switch (currTab) {
-      case 0:
+      case 'Transactions':
         console.log('load tx', nextTx)
         // tx
         nextTx !== '' && fetchJson(`${base}${nextTx}`)
@@ -91,7 +91,7 @@ const AddressScreen = (props) => {
             setTxList(newResults)
           })
         break
-      case 1:
+      case 'Mining Income':
         console.log('load mining', nextMine)
         // mining
         fetchJson(`${base}${nextMine}`)
@@ -185,10 +185,10 @@ const AddressScreen = (props) => {
         }
         {tabContent({ currTab, txList, dailyTr, addr, nsCandidates })}
 
-        {((currTab === 0 && noTx === false && txList) || (currTab === 1 && dailyTr)) &&
+        {((currTab === 'Transactions' && noTx === false && txList) || (currTab === 'Mining Income' && dailyTr)) &&
           <BtRow>
             {nextTx !== ''
-              ? <Button onClick={loadMore}>Load more {currTab === 0 ? 'transactions' : ''}</Button>
+              ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
               : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
             }
           </BtRow>
