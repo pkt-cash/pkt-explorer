@@ -39,7 +39,7 @@ const HomeScreen = (props) => {
   }, 30000)
 
   const loadMoreBlock = () => {
-    fetchJson(`${blkDownApi}/20/${currPage + 1}`)
+    fetchJson(`${blkDownApi}/100/${currPage + 1}`)
       .then((json) => {
         if (json.error) setErr(json.error)
         const newList = uniqBy([...blockList, ...json.results], 'hash')
