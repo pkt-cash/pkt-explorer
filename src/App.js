@@ -33,7 +33,7 @@ function App () {
         const lastBTime = new Date(json.results[0].time)
         const secDiff = (cTime.getTime() - lastBTime.getTime()) / 1000
 
-        if (secDiff > 20 * 60) setIssue(true)
+        if (secDiff > 20 * 60) setIssue(secDiff)
 
         // setPkData(res)
       })

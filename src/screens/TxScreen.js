@@ -23,6 +23,7 @@ import Copy from '../components/Copy/Copy'
 import endpoints from '../utils/endpoints'
 import Loader from '../components/Loader/Loader'
 import { fetchJson, useInterval, commafy, formatDate } from '../utils'
+import Error from '../components/Error/Error'
 const { blkUpApi, blkDownApi, txApi, statsCoinsApi } = endpoints
 
 const TableCont = styled.div`
@@ -370,7 +371,7 @@ const TxScreen = (props) => {
     getTop()
   }, [id])
 
-  if (txError) return <div>Error fetching tx {id}</div>
+  if (txError) return <Error />
   // console.log(blkData)
   return <>
     {metaLoad

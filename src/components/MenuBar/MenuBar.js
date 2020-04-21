@@ -53,6 +53,12 @@ const TopLink = styled(NavLink)`
   ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
 `
 
+const AlertCont = styled.div`
+  background: #fff;
+  padding: 0.5rem;
+  text-align: center;
+`
+
 const MenuBar = ({ hasAlert }) => {
   const [isOpen, setOpen] = useState(false)
   return (
@@ -86,6 +92,7 @@ const MenuBar = ({ hasAlert }) => {
           </Media>
         </TopBarWrapper>
       </MenuCont>
+      {hasAlert && <AlertCont>Out of date The most recent block appears to be {Math.floor(hasAlert / 60)} minutes old, this explorer is probably out of sync with the chain.</AlertCont>}
       <Media query={`(max-width: ${mq.small}px)`} render={() =>
 
         (

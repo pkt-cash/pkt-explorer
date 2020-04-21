@@ -7,6 +7,7 @@ import { ListLabelCont, ListCont, ListLabel } from '../components/CommonComps/Co
 import endpoints from '../utils/endpoints'
 import Loader from '../components/Loader/Loader'
 import { fetchJson, useInterval } from '../utils'
+import Error from '../components/Error/Error'
 const { blockApi, pcBlockApi, blkUpApi, blkDownApi } = endpoints
 
 const BlockScreen = (props) => {
@@ -86,7 +87,7 @@ const BlockScreen = (props) => {
     getTop()
   }, [id])
 
-  if (blkErr) return <div>Error fetching block {id}</div>
+  if (blkErr) return <Error />
   // console.log(blkData)
   return <>
     {metaLoad

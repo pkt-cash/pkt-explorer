@@ -11,6 +11,7 @@ import TabHeaders from '../components/TabHeaders/TabHeaders'
 import DailyList from '../components/DailyList/DailyList'
 import CandidateList from '../components/CandidateList/CandidateList'
 import { BtRow, Button } from '../components/CommonComps/CommonComps'
+import Error from '../components/Error/Error'
 
 const { addrMetaApi, base, blkDownApi, nsApi } = endpoints
 
@@ -171,7 +172,7 @@ const AddressScreen = (props) => {
       })
   }, [addr])
 
-  if (metaErr) return <div>Error fetching address {addr}</div> // TODO: make a proper error component
+  if (metaErr) return <Error addrErr /> // TODO: make a proper error component
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading address data' small/>
