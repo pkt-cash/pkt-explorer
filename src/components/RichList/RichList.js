@@ -19,7 +19,7 @@ const cells = {
   balance: 'Balance'
 }
 
-const AddrLink = styled(Link)`
+const RichLink = styled(Link)`
   display: inline-block;
   word-break: break-all;
 `
@@ -64,9 +64,9 @@ const BalanceCont = styled.div`
 
 const RichRow = ({ row }) => {
   return <RowCont>
-    <AddrLink to={`/address/${row.address}`} title={row.address}>
+    <RichLink to={`/address/${row.address}`} title={row.address}>
       {row.address}
-    </AddrLink>
+    </RichLink>
     <BalanceCont>
       <Pkt amt={row.balance}/>
     </BalanceCont>

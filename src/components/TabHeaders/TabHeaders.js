@@ -37,10 +37,12 @@ const ItemCont = styled.div`
 `
 
 const CurrTab = styled.div`
-  display: inline-block;
+  display: flex;
   border: none;
   border-bottom: 1px solid #FFF;
-  padding: 1rem 2rem;
+  /* padding: 1rem 2rem; */
+  align-items: center;
+  justify-content: center;
   margin: 0;
   text-decoration: none;
   background: ${({ theme }) => theme.colors.headerBackground};

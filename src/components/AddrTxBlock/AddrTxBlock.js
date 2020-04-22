@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { FaClock, FaCheckCircle } from 'react-icons/fa'
 import { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
-import { ListLabelCont, Pkt, NoWrap } from '../CommonComps/CommonComps'
+import { ListLabelCont, Pkt, NoWrap, AddrLink } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
 import { DateTime } from 'luxon'
 import TxTogBt from '../TxTogBt/TxTogBt'
@@ -122,13 +122,6 @@ const IcnCont = styled.span`
   padding-top:2px;
   position: relative;
   top:2px;
-`
-
-const AddrLink = styled(Link)`
-  word-break: break-all;
-  padding: 0.5rem;
-  display: inline-block;
-  font-weight: normal;
 `
 
 const NoLink = styled.div`

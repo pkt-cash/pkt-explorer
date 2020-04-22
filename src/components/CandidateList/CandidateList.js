@@ -2,8 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import PropTypes from 'prop-types'
 // import { DateTime } from 'luxon'
-import { Pkt } from '../CommonComps/CommonComps'
-import { Link } from 'react-router-dom'
+import { Pkt, AddrLink } from '../CommonComps/CommonComps'
 
 const ListCont = styled.div`
 padding: 1rem;
@@ -19,18 +18,15 @@ const Row = styled.div`
     background-color: ${({ theme }) => theme.colors.pktGreyLight};
   }
 `
-
-const AddrLink = styled(Link)`
-  word-break: break-all;
-  padding: 0.5rem;
+const CandCont = styled.span`
   display: inline-block;
-  font-weight: normal;
+  padding: 0.5rem;
 `
 
 const Candidate = ({ data, addr }) => {
   return <Row>
     <div>{data.candidate === addr
-      ? addr
+      ? <CandCont>{addr}</CandCont>
       : <AddrLink to={`/address/${data.candidate}`}>{data.candidate}</AddrLink>}</div>
     <div><Pkt amt={data.votesFor}/></div>
   </Row>

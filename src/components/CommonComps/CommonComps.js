@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { displayPKT, commafy } from '../../utils'
+import { Link } from 'react-router-dom'
 
 export const MainWrapper = styled.div`
   max-width: ${metrics.fullW}px;
@@ -14,6 +15,23 @@ export const MainWrapper = styled.div`
 export const BtRow = styled.div`
   margin: 3rem 0;
   text-align: center;
+`
+
+export const AddrLink = styled(Link)`
+
+  padding: 0.5rem;
+  display: inline-block;
+  font-weight: normal;
+  ${({ nsLink }) => nsLink
+    ? css`
+      white-space: nowrap; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      padding: 0
+    `
+    : css`word-break: break-all;`
+  }
 `
 
 export const Button = styled.div`

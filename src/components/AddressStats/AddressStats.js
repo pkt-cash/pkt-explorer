@@ -9,14 +9,14 @@ import {
   TitleCont,
   ListLabel,
   HashCont,
-  AddrCont
+  AddrCont,
+  AddrLink
 } from '../CommonComps/CommonComps'
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
 // import Help from '../Help/Help'
 import EaringChart from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
-import { Link } from 'react-router-dom'
 
 import { commafy } from '../../utils'
 
@@ -86,15 +86,6 @@ const BalanceLabel = styled.span`
 const CpCont = styled.div`
   display: flex;
   align-items: center;
-`
-
-// TODO(cjd): copy-pasta
-// In this particular case, lets ... the address because it will make everything look nicer
-const AddrLink = styled(Link)`
-  word-break: break-all;
-  padding: 0.5rem;
-  display: inline-block;
-  font-weight: normal;
 `
 
 const NoMiningCont = styled.div`
@@ -189,7 +180,7 @@ const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) =>
               </Label> <Content>{nsLoadError(nsError, nsFrontrunner, (nsFrontrunner) => (
                 (nsFrontrunner.candidate === addr)
                   ? 'Same address (re-election)'
-                  : <AddrLink to={`/address/${nsFrontrunner.candidate}`}>{nsFrontrunner.candidate}</AddrLink>
+                  : <AddrLink to={`/address/${nsFrontrunner.candidate}`} nsLink>{nsFrontrunner.candidate}</AddrLink>
               ))}</Content></p>
             </BrdCont>
           </ItemCont>
