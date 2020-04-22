@@ -91,7 +91,7 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
                     <TopLink to='/txd'>Txs per day</TopLink>
                     <TopLink to='/rich'>Rich list</TopLink>
-                    {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Stewart</TopLink>}
+                    {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Steward</TopLink>}
                   </TopMenu>
                   <Omnibox />
                 </>
