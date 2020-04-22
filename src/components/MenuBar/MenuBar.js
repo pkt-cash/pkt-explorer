@@ -7,6 +7,7 @@ import metrics, { mqs } from '../../theme/metrics'
 import { NavLink } from 'react-router-dom'
 import Omnibox from '../Omnibox/Omnibox'
 import OmniboxMobile, { OmniBt } from '../OmniboxMobile/OmniboxMobile'
+import { ReactComponent as DrkLogo } from '../../assets/logoDrk.svg'
 
 const { mq } = metrics
 // import PropTypes from 'prop-types'
@@ -37,20 +38,26 @@ const TopLink = styled(NavLink)`
   height: 100%;
   align-items: center;
   white-space: nowrap;
-  &:visited {
-    color: #fff;
-  }
-  &:hover,
-  &.active{
-    background: #fff;
-    color: black;
-    @media ${mqs.small} {
-      color: #fff;  
-      background-color: ${({ theme }) => theme.colors.headerBackground};
+  ${({ logo }) => !logo && css`
+    &:visited {
+      color: #fff;
     }
+    &:hover,
+    &.active{
+      background: #fff;
+      color: black;
+      @media ${mqs.small} {
+        color: #fff;  
+        background-color: ${({ theme }) => theme.colors.headerBackground};
+      }
 
-  }
+    }
+  `}
   ${({ main }) => main && css`font-weight: 700;font-style: italic;`}
+`
+
+const Logo = styled(DrkLogo)`
+ height: 40px;
 `
 
 const AlertCont = styled.div`
@@ -70,16 +77,16 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
               matches.small ? (
                 <>
                   <MobileMenu nsAddr={nsAddr}/>
-                  <TopLink exact to='/' main={1}>
-                  PKT Explorer
+                  <TopLink exact to='/' main={1} logo>
+                    <Logo />
                   </TopLink>
                   <OmniBt act={() => setOpen(!isOpen)} />
                 </>
               ) : (
                 <>
                   <TopMenu>
-                    <TopLink exact to='/' main={1}>
-                      PKT Explorer
+                    <TopLink exact to='/' main={1} logo>
+                      <Logo />
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
                     <TopLink to='/txd'>Txs per day</TopLink>
