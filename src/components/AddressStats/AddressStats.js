@@ -14,7 +14,7 @@ import {
 import metrics, { mqs } from '../../theme/metrics'
 import Tooltip from '../Tooltip/Tooltip'
 // import Help from '../Help/Help'
-import EaringChart, { Chartcont } from '../EarningChart/EarningChart'
+import EaringChart from '../EarningChart/EarningChart'
 import Copy from '../Copy/Copy'
 import { Link } from 'react-router-dom'
 
