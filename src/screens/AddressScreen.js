@@ -12,6 +12,7 @@ import DailyList from '../components/DailyList/DailyList'
 import CandidateList from '../components/CandidateList/CandidateList'
 import { BtRow, Button } from '../components/CommonComps/CommonComps'
 import Error from '../components/Error/Error'
+import CsvDl from '../components/CsvDl/CsvDl'
 
 const { addrMetaApi, base, blkDownApi, nsApi } = endpoints
 
@@ -191,9 +192,10 @@ const AddressScreen = (props) => {
               ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
               : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
             }
+            {(currTab === 'Mining Income') && <CsvDl />}
           </BtRow>
         }
-        {(currTab === 0 && noTx === true && txList) && <BtRow>
+        {(currTab === 'Transactions' && noTx === true && txList) && <BtRow>
           This address has not made any transactions yet
         </BtRow>
         }

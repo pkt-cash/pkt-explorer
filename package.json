@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/preset-env": "^7.9.5",
+    "@wojtekmaj/react-daterange-picker": "^2.5.0",
     "framer-motion": "^1.7.2",
     "javascript-time-ago": "^2.0.6",
     "lodash-es": "^4.17.15",
