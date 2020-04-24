@@ -103,7 +103,7 @@ const AddressScreen = (props) => {
               return
             }
 
-            const newResults = uniqBy([...dailyTr, ...json.result], 'date')
+            const newResults = uniqBy([...dailyTr, ...json.results], 'date')
 
             if (newResults.length === dailyTr.length) return console.log('this is the end')
             if (json.next) setNextTx(json.next)
@@ -131,9 +131,9 @@ const AddressScreen = (props) => {
     // fetch last 90 day incomes
     fetchJson(`${addrMetaApi}/${addr}/income/90?mining=only`)
       .then((json) => {
-        setDailyTrChart(treatIncome(json.result))
+        setDailyTrChart(treatIncome(json.results))
         setNextMine(json.next)
-        setDailyTr(json.result)
+        setDailyTr(json.results)
       })
     // fetch txList
     fetchJson(`${addrMetaApi}/${addr}/coins?mining=excluded`)
@@ -166,8 +166,8 @@ const AddressScreen = (props) => {
               setNsError(json.error)
               return
             }
-            setNsFrontrunner(json.result[0])
-            setNsCandidates(json.result)
+            setNsFrontrunner(json.results[0])
+            setNsCandidates(json.results)
             // setNsCandidatesNext(json.next)
           })
       })

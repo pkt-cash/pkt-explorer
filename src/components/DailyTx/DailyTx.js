@@ -28,7 +28,7 @@ const DailyTx = ({ txData }) => {
 
   const lastData = useMemo(() => {
     if (!txData) return false
-    return txData[txData.length - 1].transactionCount
+    return txData[0].transactionCount
   }, [txData])
   return modData
     ? <ListCont>
