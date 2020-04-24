@@ -66,7 +66,7 @@ function App () {
                   key='rich' />
                 <Route
                   exact
-                  path='/txd'
+                  path='/transactions'
                   component={DailyTxScreen}
                   key='resume' />
                 <Route

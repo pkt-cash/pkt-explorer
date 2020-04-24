@@ -89,7 +89,7 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
                       <Logo />
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}
-                    <TopLink to='/txd'>Txs per day</TopLink>
+                    <TopLink to='/transactions'>Transactions</TopLink>
                     <TopLink to='/rich'>Rich list</TopLink>
                     {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Steward</TopLink>}
                   </TopMenu>
