@@ -22,6 +22,10 @@ const ScreenCont = styled.div`
  flex-flow: column nowrap;
 `
 
+const CsvCont = styled.div`
+  text-align: right;
+`
+
 const tabs = [
   { name: 'Transactions' },
   { name: 'Mining Income' }
@@ -187,13 +191,15 @@ const AddressScreen = (props) => {
         {tabContent({ currTab, txList, dailyTr, addr, nsCandidates })}
 
         {((currTab === 'Transactions' && noTx === false && txList) || (currTab === 'Mining Income' && dailyTr)) &&
-          <BtRow>
-            {nextTx !== ''
-              ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
-              : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
-            }
+          <>
             {(currTab === 'Mining Income') && <CsvDl />}
-          </BtRow>
+            <BtRow>
+              {nextTx !== ''
+                ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
+                : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
+              }
+            </BtRow>
+          </>
         }
         {(currTab === 'Transactions' && noTx === true && txList) && <BtRow>
           This address has not made any transactions yet

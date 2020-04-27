@@ -38,8 +38,16 @@ a {
   min-height: 100vh;
   min-width: 400px;
 }
-`
 
+.react-daterange-picker__range-divider{
+  opacity: 0
+}
+
+.react-daterange-picker__wrapper {
+  border-radius: 4px
+}
+
+`
 export const MainWrapper = styled.div`
 width: 100vw;
 height: 100vh;
