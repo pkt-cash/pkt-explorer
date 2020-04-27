@@ -146,7 +146,7 @@ export const TitleCont = styled.div`
 export const TitleHeader = styled.span`
   margin-right: 10px;
   font-size: 1.8em;
-  
+  ${({ ns }) => ns && css`white-space: nowrap;`}
 `
 
 export const LeftCont = styled.div`
@@ -199,6 +199,7 @@ export const HashCont = styled.div`
   word-break: break-all;
   margin-top: 0.8rem;
   flex: 1;
+  ${({ ns }) => ns ? css`max-width: 400px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;` : css`word-break: break-all;`}
 `
 export const Hash = styled.div`
   

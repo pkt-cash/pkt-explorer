@@ -213,6 +213,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
   const [chartEmpty, setEmpty] = useState(false)
   useEffect(() => {
     if (!dailyTr) return
+    console.log('dailyTr', dailyTr)
     const isEmpty = dailyTr
       .map((tr) => tr[1] === 0)
       .reduce((prev, curr) => {
@@ -224,7 +225,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
   return (<>
     <TitleCont>
       <div>
-        <TitleHeader>
+        <TitleHeader ns={isNs}>
           {isNs
             ? 'Network Steward'
             : 'Address'
@@ -236,7 +237,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
       </div>
 
       <AddrCont>
-        <HashCont>
+        <HashCont ns={isNs}>
           {addr}
         </HashCont>
         <CpCont>
