@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import TabHeaders from '../components/TabHeaders/TabHeaders'
 import DailyList from '../components/DailyList/DailyList'
 import CandidateList from '../components/CandidateList/CandidateList'
-import { BtRow, Button } from '../components/CommonComps/CommonComps'
+import { Button } from '../components/CommonComps/CommonComps'
 import Error from '../components/Error/Error'
 import CsvDl from '../components/CsvDl/CsvDl'
 
@@ -22,8 +22,9 @@ const ScreenCont = styled.div`
  flex-flow: column nowrap;
 `
 
-const CsvCont = styled.div`
-  text-align: right;
+export const LoadRow = styled.div`
+  text-align: center;
+  margin: 3rem 0
 `
 
 const tabs = [
@@ -78,38 +79,35 @@ const AddressScreen = (props) => {
   // if (error) return <div>ARRRRR errror fetching address {addr}</div>
   // if (loading) return <div>fetching addr data</div>
   const loadMore = () => {
-    console.log('load more called, cTab', currTab)
+    // console.log('load more called, cTab', currTab)
     switch (currTab) {
       case 'Transactions':
-        console.log('load tx', nextTx)
         // tx
         nextTx !== '' && fetchJson(`${base}${nextTx}`)
           .then((json) => {
             if (json.error) {
-              console.log('caramba err', `${base}${nextTx}`)
+              console.error('caramba err', `${base}${nextTx}`)
               console.error(json.error)
               return
             }
             const newResults = uniqBy([...txList, ...json.results], 'txid')
-            console.log('tx new next', json.next)
             setNextTx(json.next)
             setTxList(newResults)
           })
         break
       case 'Mining Income':
-        console.log('load mining', nextMine)
         // mining
         fetchJson(`${base}${nextMine}`)
           .then((json) => {
             if (json.error) {
-              console.log('caramba err', `${base}${nextMine}`)
+              console.error('caramba err', `${base}${nextMine}`)
               console.error(json.error)
               return
             }
 
             const newResults = uniqBy([...dailyTr, ...json.results], 'date')
 
-            if (newResults.length === dailyTr.length) return console.log('this is the end')
+            if (newResults.length === dailyTr.length) return
             if (json.next) setNextTx(json.next)
             setDailyTr(newResults)
           })
@@ -142,8 +140,6 @@ const AddressScreen = (props) => {
     // fetch txList
     fetchJson(`${addrMetaApi}/${addr}/coins?mining=excluded`)
       .then((json) => {
-        console.log('got tx')
-        console.log(json)
         if (json.results.length === 0) setNoTx(true)
         setNextTx(json.next)
         setTxList(json.results)
@@ -193,17 +189,17 @@ const AddressScreen = (props) => {
         {((currTab === 'Transactions' && noTx === false && txList) || (currTab === 'Mining Income' && dailyTr)) &&
           <>
             {(currTab === 'Mining Income') && <CsvDl />}
-            <BtRow>
+            <LoadRow>
               {nextTx !== ''
                 ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
                 : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
               }
-            </BtRow>
+            </LoadRow>
           </>
         }
-        {(currTab === 'Transactions' && noTx === true && txList) && <BtRow>
+        {(currTab === 'Transactions' && noTx === true && txList) && <LoadRow>
           This address has not made any transactions yet
-        </BtRow>
+        </LoadRow>
         }
       </>
     }

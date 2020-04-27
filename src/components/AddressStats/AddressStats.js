@@ -213,7 +213,6 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
   const [chartEmpty, setEmpty] = useState(false)
   useEffect(() => {
     if (!dailyTr) return
-    console.log('dailyTr', dailyTr)
     const isEmpty = dailyTr
       .map((tr) => tr[1] === 0)
       .reduce((prev, curr) => {

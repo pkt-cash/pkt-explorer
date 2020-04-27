@@ -57,7 +57,7 @@ const TopLink = styled(NavLink)`
 `
 
 const Logo = styled(DrkLogo)`
- height: 40px;
+ height: 30px;
 `
 
 const AlertCont = styled.div`

@@ -74,7 +74,7 @@ const TabHeaders = ({ tabsData, cTab, action }) => {
         tabsData.map((tab, i) => {
           return tab.name === currTab
             ? <CurrTab key={`tab-${i}`}>{tab.name}</CurrTab>
-            : <ItemCont>
+            : <ItemCont key={`tabCont-${i}`}>
               <TabsItem key={`tab-${i}`}
                 onClick={() => changeTab(tab.name)}
               >
@@ -89,7 +89,7 @@ const TabHeaders = ({ tabsData, cTab, action }) => {
 
 TabHeaders.propTypes = {
   tabsData: PropTypes.array.isRequired,
-  cTab: PropTypes.number.isRequired,
+  cTab: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired
 }
 

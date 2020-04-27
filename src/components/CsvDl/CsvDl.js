@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 // import PropTypes from 'prop-types'
 import { MdFileDownload } from 'react-icons/md'
@@ -7,16 +7,17 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
 const Row = styled.div`
   /* margin-top: 1rem; */
-  margin: 1rem;
+  margin: 0 1rem 0 0;
   text-align: right;
+  padding-right:9px;
 `
 
 const Label = styled.label`
   margin-left: 1rem;
 `
-const Sel = styled.select`
-  font-size: 16px;
-`
+// const Sel = styled.select`
+//   font-size: 16px;
+// `
 
 const DlBt = styled(motion.a)`
   width: 20px;
@@ -38,18 +39,54 @@ const DlBt = styled(motion.a)`
     left: 2px;
     /* bottom: 1px; */
   }
+  ${({ isDisabled }) => isDisabled && css`
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+  `}
 `
 
 const CheckCont = styled.span`
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
 `
+
+function getMiningFlag (mineCheck, nonMineCheck) {
+  // console.log('mineCheck', mineCheck)
+  // console.log('nonMineCheck', nonMineCheck)
+  let miningFlag
+  if (mineCheck && nonMineCheck) {
+    miningFlag = 'included'
+  } else if (mineCheck) miningFlag = 'only'
+  else miningFlag = 'excluded'
+  // console.log('miningFlag', miningFlag)
+  return miningFlag
+}
 
 const CsvDl = ({ addr }) => {
   const curDate = new Date()
   const maxDate = new Date(new Date().setDate(curDate.getDate() - 1))
-  const [mining, setMining] = useState('included')
+  const [mining, setMining] = useState(true)
+  const [nonMining, setNonMining] = useState(false)
+  const [miningFlag, setMiningFlag] = useState('only')
+  function setMiningState (e) {
+    const tar = e.target.value
+    switch (tar) {
+      case 'miningInc':
+        setMiningFlag(getMiningFlag(!mining, nonMining))
+        setMining(!mining)
+        break
+      case 'nonMiningInc':
+        getMiningFlag(mining, !nonMining)
+        setNonMining(!nonMining)
+        break
+      default:
+        break
+    }
+  }
+
   const [startDate, setStart] = useState([curDate, new Date()])
-  const csvUrl = useMemo(() => `https://pkt.cash/api/v1/PKT/pkt/address/${addr}/income/${startDate[0].toISOString().replace(/T.*$/, '')}/${startDate[1].toISOString().replace(/T.*$/, '')}?mining=${mining}&csv=1`, [startDate, mining, addr])
+  const csvUrl = useMemo(() => `https://pkt.cash/api/v1/PKT/pkt/address/${addr}/income/${startDate[0].toISOString().replace(/T.*$/, '')}/${startDate[1].toISOString().replace(/T.*$/, '')}?mining=${miningFlag}&csv=1`, [startDate, miningFlag, addr])
+  // console.log('csvUrl', csvUrl)
   return (
     <Row>
       <DateRangePicker
@@ -59,8 +96,8 @@ const CsvDl = ({ addr }) => {
         clearIcon={null}
       />
       <CheckCont>
-        <Label>mining income <input type="checkbox" id="miningInc" name="miningInc" value="miningInc" /></Label>
-        <Label>non-mining income <input type="checkbox" id="nonMiningInc" name="nonMiningInc" value="nonMiningInc" /></Label>
+        <Label><input type="checkbox" id="miningInc" name="miningInc" value="miningInc" onChange={setMiningState} checked={mining}/> Mining Income</Label>
+        <Label><input type="checkbox" id="nonMiningInc" name="nonMiningInc" value="nonMiningInc" onChange={setMiningState} checked={nonMining}/> Non-mining Income</Label>
       </CheckCont>
       {/* <Label> Mining <Sel name="mining" id="hall" value={mining} onChange={(e) => setMining(e.target.value)}>
         <option>included</option>
@@ -68,15 +105,24 @@ const CsvDl = ({ addr }) => {
         <option>only</option>
       </Sel>
       </Label> */}
-      <DlBt
-        whileHover={{ scale: 1.2 }}
-        whileTap={{ scale: 0.8 }}
-        href={csvUrl}
-        target='_blank'
-        rel='noreferrer noopener'
-      >
-        <MdFileDownload />
-      </DlBt>
+      {(mining === false && nonMining === false)
+        ? <DlBt isDisabled
+          alt='one of the checkboxes should be clicked'
+        >
+          <MdFileDownload />
+        </DlBt>
+        : <DlBt
+          whileHover={{ scale: 1.2 }}
+          whileTap={{ scale: 0.8 }}
+          href={(mining === false && nonMining === false) ? '' : csvUrl}
+          target='_blank'
+          rel='noreferrer noopener'
+          disabled={(mining === false && nonMining === false)}
+          isDisabled={(mining === false && nonMining === false)}
+        >
+          <MdFileDownload />
+        </DlBt>
+      }
       {/* <Row>
         <a href={csvUrl} target='_blank' rel='noreferrer noopener'><Button>Download Csv</Button></a>
       </Row> */}
