@@ -21,6 +21,7 @@ const Row = styled.div`
 const CandCont = styled.span`
   display: inline-block;
   padding: 0.5rem;
+  word-break: break-all;
 `
 
 const Candidate = ({ data, addr }) => {

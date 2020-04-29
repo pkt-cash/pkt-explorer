@@ -227,7 +227,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
       <div>
         <TitleHeader ns={isNs}>
           {isNs
-            ? 'Network Steward'
+            ? 'Net Steward'
             : 'Address'
           }
         </TitleHeader>

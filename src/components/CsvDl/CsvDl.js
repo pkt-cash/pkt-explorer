@@ -48,6 +48,7 @@ const DlBt = styled(motion.a)`
 
 const CheckCont = styled.span`
   /* margin-left: 1rem; */
+  white-space: nowrap;
 `
 
 const LabelCont = styled.span`

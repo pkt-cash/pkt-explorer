@@ -89,6 +89,18 @@ const TrTh = styled.th`
   }
 `
 
+const HideMobileTh = styled.th`
+  @media ${mqs.small} {
+    display: none;
+  }
+`
+
+const HideMobileTd = styled.td`
+  @media ${mqs.small} {
+    display: none;
+  }
+`
+
 const MS_MINUTE = 60 * 1000
 // TODO: ask Caleb is this is usefull
 // const GRADULATION_NODAY = [
@@ -122,9 +134,9 @@ const BlockList = ({ listData, home }) => {
               <th scope="col">height</th>
               <th scope="col">age</th>
               <TrTh scope="col"/>
-              <th scope="col">difficulty</th>
-              <th scope="col">next diff (est.)</th>
-              <th scope="col">next diff change</th>
+              <HideMobileTh scope="col">difficulty</HideMobileTh>
+              <HideMobileTh scope="col">next diff (est.)</HideMobileTh>
+              <HideMobileTh scope="col">next diff change</HideMobileTh>
               <th scope="col">size</th>
             </tr>
           </thead>
@@ -135,11 +147,11 @@ const BlockList = ({ listData, home }) => {
               <td><Link to={`/block/${blk.hash}`}>{blk.height}</Link></td>
               <td><AgeCell time={blk.time} /></td>
               <td>{blk.transactionCount}</td>
-              <td>{Math.floor(blk.difficulty)}</td>
-              <td>{Math.floor(blk.retargetEstimate * blk.difficulty)}</td>
-              <td>{timeAgo.format(+new Date() + (blk.blocksUntilRetarget * MS_MINUTE), {
+              <HideMobileTd>{Math.floor(blk.difficulty)}</HideMobileTd>
+              <HideMobileTd>{Math.floor(blk.retargetEstimate * blk.difficulty)}</HideMobileTd>
+              <HideMobileTd>{timeAgo.format(+new Date() + (blk.blocksUntilRetarget * MS_MINUTE), {
                 units: ['second', 'minute', 'hour']
-              })}</td>
+              })}</HideMobileTd>
               <td>{blk.size}</td>
             </tr>)}
           </tbody>
