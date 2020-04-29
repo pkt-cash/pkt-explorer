@@ -50,6 +50,10 @@ const CheckCont = styled.span`
   /* margin-left: 1rem; */
 `
 
+const LabelCont = styled.span`
+  margin-right: 1rem;
+`
+
 function getMiningFlag (mineCheck, nonMineCheck) {
   // console.log('mineCheck', mineCheck)
   // console.log('nonMineCheck', nonMineCheck)
@@ -62,9 +66,8 @@ function getMiningFlag (mineCheck, nonMineCheck) {
   return miningFlag
 }
 
-const CsvDl = ({ addr }) => {
-  const curDate = new Date()
-  const maxDate = new Date(new Date().setDate(curDate.getDate() - 1))
+const CsvDl = ({ addr, dateRange, setDateRange }) => {
+  const maxDate = new Date(new Date().setDate((new Date()).getDate() - 1))
   const [mining, setMining] = useState(true)
   const [nonMining, setNonMining] = useState(false)
   const [miningFlag, setMiningFlag] = useState('only')
@@ -76,7 +79,7 @@ const CsvDl = ({ addr }) => {
         setMining(!mining)
         break
       case 'nonMiningInc':
-        getMiningFlag(mining, !nonMining)
+        setMiningFlag(getMiningFlag(mining, !nonMining))
         setNonMining(!nonMining)
         break
       default:
@@ -84,14 +87,14 @@ const CsvDl = ({ addr }) => {
     }
   }
 
-  const [startDate, setStart] = useState([curDate, new Date()])
-  const csvUrl = useMemo(() => `https://pkt.cash/api/v1/PKT/pkt/address/${addr}/income/${startDate[0].toISOString().replace(/T.*$/, '')}/${startDate[1].toISOString().replace(/T.*$/, '')}?mining=${miningFlag}&csv=1`, [startDate, miningFlag, addr])
+  const csvUrl = useMemo(() => `https://pkt.cash/api/v1/PKT/pkt/address/${addr}/income/${dateRange[0].toISOString().replace(/T.*$/, '')}/${dateRange[1].toISOString().replace(/T.*$/, '')}?mining=${miningFlag}&csv=1`, [dateRange, miningFlag, addr])
   // console.log('csvUrl', csvUrl)
   return (
     <Row>
+      <LabelCont>Export</LabelCont>
       <DateRangePicker
-        onChange={date => setStart(date)}
-        value={startDate}
+        onChange={date => setDateRange(date)}
+        value={dateRange}
         maxDate={maxDate}
         clearIcon={null}
       />

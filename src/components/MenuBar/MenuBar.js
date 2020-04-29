@@ -77,7 +77,7 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
               matches.small ? (
                 <>
                   <MobileMenu nsAddr={nsAddr}/>
-                  <TopLink exact to='/' main={1} logo>
+                  <TopLink exact to='/' main={1} logo="true">
                     <Logo />
                   </TopLink>
                   <OmniBt act={() => setOpen(!isOpen)} />
@@ -85,7 +85,7 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
               ) : (
                 <>
                   <TopMenu>
-                    <TopLink exact to='/' main={1} logo>
+                    <TopLink exact to='/' main={1} logo="true">
                       <Logo />
                     </TopLink>
                     {/* <TopLink to='/blocks'>Blocks</TopLink> */}

@@ -67,6 +67,10 @@ const AddressScreen = (props) => {
   const [metaLoad, setMetaLoad] = useState(true)
   const [noTx, setNoTx] = useState(false)
 
+  // mining data download date range
+  const [dateRange, setDateRange] = useState([new Date(), new Date()])
+  let initialDate = new Date();
+
   const [isNs, setIsNs] = useState(false)
   const [nsError, setNsError] = useState(false)
   const [ns, setNs] = useState(false)
@@ -108,8 +112,12 @@ const AddressScreen = (props) => {
             const newResults = uniqBy([...dailyTr, ...json.results], 'date')
 
             if (newResults.length === dailyTr.length) return
-            if (json.next) setNextTx(json.next)
+            if (json.next) setNextMine(json.next)
             setDailyTr(newResults)
+            setDateRange([
+              new Date(json.results[json.results.length - 1].date),
+              initialDate
+            ])
           })
         break
       default:
@@ -133,9 +141,17 @@ const AddressScreen = (props) => {
     // fetch last 90 day incomes
     fetchJson(`${addrMetaApi}/${addr}/income/90?mining=only`)
       .then((json) => {
-        setDailyTrChart(treatIncome(json.results))
-        setNextMine(json.next)
-        setDailyTr(json.results)
+        if (json.error) {
+          console.log(json.error);
+        } else if (!json.results) {
+          console.log("missing json.results");
+        } else {
+          setDailyTrChart(treatIncome(json.results))
+          setNextMine(json.next)
+          setDailyTr(json.results)
+          initialDate = new Date(json.results[0].date);
+          setDateRange([new Date(json.results[json.results.length - 1].date), initialDate]);
+        }
       })
     // fetch txList
     fetchJson(`${addrMetaApi}/${addr}/coins?mining=excluded`)
@@ -174,6 +190,7 @@ const AddressScreen = (props) => {
   }, [addr])
 
   if (metaErr) return <Error addrErr /> // TODO: make a proper error component
+  const hasNext = (currTab === 'Mining Income') ? nextMine : nextTx;
   return <ScreenCont>
     {metaLoad
       ? <Loader text='Loading address data' small/>
@@ -188,9 +205,9 @@ const AddressScreen = (props) => {
 
         {((currTab === 'Transactions' && noTx === false && txList) || (currTab === 'Mining Income' && dailyTr)) &&
           <>
-            {(currTab === 'Mining Income') && <CsvDl />}
+            {(currTab === 'Mining Income') && <CsvDl addr={addr} dateRange={dateRange} setDateRange={setDateRange} />}
             <LoadRow>
-              {nextTx !== ''
+              {hasNext !== ''
                 ? <Button onClick={loadMore}>Load more {currTab === 'Transactions' ? 'transactions' : ''}</Button>
                 : <>𝓣𝓱𝓪𝓽&apos;𝓼 𝓐𝓵𝓵 𝓕𝓸𝓵𝓴𝓼</>
               }

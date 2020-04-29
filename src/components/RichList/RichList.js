@@ -74,7 +74,7 @@ const RichRow = ({ row }) => {
 }
 
 RichList.propTypes = {
-  listData: PropTypes.array
+  listData: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
 }
 
 RichRow.propTypes = {
