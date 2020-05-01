@@ -59,6 +59,7 @@ const ChartArea = styled.div`
   /* flex: 1; */
   min-width: 400px;
   @media ${mqs.small} {
+    min-width: 100px;
     text-align: center;
     width: 100%;
     min-height: 200px;
