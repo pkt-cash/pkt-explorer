@@ -17,36 +17,35 @@ const RichListScreen = (props) => {
     fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
         if (json.error) { return console.error(json.error) }
-        if (richList) setRichList(uniqBy([...json.results, ...richList], 'address'))
-        else setRichList(json.results)
+        if (richList) {
+          setRichList(uniqBy([...richList, ...json.results], 'address'))
+        } else {
+          setRichList(json.results)
+        }
+        setNextRich(json.next);
       })
   }, [currPage]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadMoreRiches = () => {
-    fetchJson(`${richLApi}/100/${currPage + 1}`)
-      .then((json) => {
-        if (json.error) { return console.error(json.error) }
-        const newList = uniqBy([...richList, ...json.results], 'address')
-        setRichList(newList)
-        setNextRich(json.next)
-        setCurrPage(currPage + 1)
-      })
+    setCurrPage(currPage + 1)
   }
 
   return <>
     <RichList listData={richList} />
+    {richList &&
     <BtRow>
-      {nextRich !== ''
-        ? <Button onClick={loadMoreRiches}>More Riches !!!</Button>
-        : <>You, brave valient clicker, have clicked all the way to the end of
-        the list. The power of your thumb is beyond even the expectation of
-        the authors of this explorer and to you, I have only one thing to say:
-        Never gonna give you up, never gonna let you down, never gonna run
-        around and desert you. Never gonna make you cry, never gonna say goodbye.
-        Never gonna tell a lie and hurt you.
-        </>
-      }
-    </BtRow>
+        {nextRich !== ''
+          ? <Button onClick={loadMoreRiches}>More Riches !!!</Button>
+          : <>You, brave valient clicker, have clicked all the way to the end of
+          the list. The power of your thumb is beyond even the expectation of
+          the authors of this explorer and to you, I have only one thing to say:
+          Never gonna give you up, never gonna let you down, never gonna run
+          around and desert you. Never gonna make you cry, never gonna say goodbye.
+          Never gonna tell a lie and hurt you.
+          </>
+        }
+      </BtRow>
+    }
   </>
 }
 

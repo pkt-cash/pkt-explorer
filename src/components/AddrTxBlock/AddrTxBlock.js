@@ -68,14 +68,17 @@ const TxlistCont = styled(motion.div)`
 const TxCol = styled.div`
   width:47%;
   @media ${mqs.small} {
-    width:100%;
+    width:95%;
+    align-self: center;
   }
 `
 
 const TxColsCont = styled.div`
+  background: ${({ theme }) => theme.colors.pktGreyLight};
   display: flex;
   justify-content: space-around;
   @media ${mqs.small} {
+    padding-top: 0.5rem;
     flex-direction: column;
   }
 `
@@ -113,6 +116,7 @@ const RightLabel = styled.span`
 const TxSmallLabel = styled.div`
   display: none;
   @media ${mqs.small} {
+    margin-left: 1rem;
     display: block;
   }
 `
@@ -230,7 +234,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
         transition={{ duration: 0.1 }}
       >
         <TxColsCont>
-          <TxSmallLabel>input</TxSmallLabel>
+          <TxSmallLabel>Inputs</TxSmallLabel>
           <TxCol>
             {(() => {
               if (input && input.length) {
@@ -250,7 +254,7 @@ const AddrTxBlock = ({ txData, myAddr }) => {
             })()}
           </TxCol>
           <TxColSep><IoMdArrowForward size={30} /></TxColSep>
-          <TxSmallLabel>output</TxSmallLabel>
+          <TxSmallLabel>Outputs</TxSmallLabel>
           <TxCol>
             {output &&
               output.map((data, i) => (

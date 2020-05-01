@@ -7,6 +7,7 @@ html {
 }
 *, *:before, *:after {
   box-sizing: inherit;
+  max-width: 100%;
 }
 body {
   margin: 0;
@@ -36,7 +37,7 @@ a {
 #root {
   width: 100vw;
   min-height: 100vh;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 .react-daterange-picker__range-divider{

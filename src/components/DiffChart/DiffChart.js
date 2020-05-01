@@ -5,11 +5,8 @@ import PropTypes from 'prop-types'
 // import { Chartcont } from '../EarningChart/EarningChart'
 import styled from 'styled-components'
 export const Chartcont = styled.div`
-width: 100%;
-min-width: 400px;
-min-height: 200px;
-/* height: 100%; */
-  min-width: auto;
+  min-height: 200px;
+  min-width: 20px;
   width: 100%;
 `
 

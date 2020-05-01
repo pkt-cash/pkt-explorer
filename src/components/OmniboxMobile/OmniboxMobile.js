@@ -88,7 +88,6 @@ const InputHavingPlacholder = styled.input`
   font-size: 1rem;
   width: 100%;
   height: ${metrics.omniboxHeight}rem;
-  max-width: 100%;
 `
 
 const OmniboxMobile = ({ placeholder, isOpen }) => {

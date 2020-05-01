@@ -26,8 +26,8 @@ export function treatStats (data) {
 
   const makeEntry = (data) => {
     const dt = new Date(data.date)
-    datum[0].data.push([dt, data.bitsPerSecond])
-    datum[1].data.push([dt, data.encryptionsPerSecond])
+    datum[0].data.push([dt, data.bitsPerSecond / 1000000])
+    datum[1].data.push([dt, data.encryptionsPerSecond / 1000000])
   }
   data.forEach(makeEntry)
   return datum

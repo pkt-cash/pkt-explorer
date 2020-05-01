@@ -4,9 +4,8 @@ import PropTypes from 'prop-types'
 import { FaClock, FaCheckCircle } from 'react-icons/fa'
 import metrics, { mqs } from '../../theme/metrics'
 import { TxItem } from '../TxItem/Txitem'
-import { ListLabelCont, ListCont } from '../CommonComps/CommonComps'
+import { ListLabelCont, ListCont, HashCont } from '../CommonComps/CommonComps'
 import { IoMdArrowForward } from 'react-icons/io'
-import RespHash from '../RespHash/RespHash'
 import { DateTime } from 'luxon'
 import { Link } from 'react-router-dom'
 
@@ -17,7 +16,6 @@ const TxBlockCont = styled.div`
 
 const TxLabel = styled.div`
   justify-content: items;
-  margin: 1rem;
 `
 
 const TxlistCont = styled.div`
@@ -114,9 +112,9 @@ const TxBlock = ({ txData, view }) => {
       <ListCont>
         <ListLabelCont>
           {view !== 'tx' &&
-            <TxLabel>
+            <TxLabel style={{'padding-top': '10px'}}>
               <Link to={`/tx/${txid}`}>
-                <RespHash hash={txid} />
+                <HashCont title={txid}>{txid}</HashCont>
               </Link>
             </TxLabel>
           }
@@ -131,7 +129,8 @@ const TxBlock = ({ txData, view }) => {
         </ListLabelCont>
         <TxlistCont>
           <TxColsCont>
-            <TxSmallLabel>input</TxSmallLabel>
+            {/* This padding-top is needed because the TxCol has the margin so the top Inputs entry doesn't get it */}
+            <TxSmallLabel style={{'padding-top': '10px'}}>Inputs</TxSmallLabel>
             <TxCol>
               {input && input.length
                 ? input.map((data, i) => <TxItem
@@ -145,7 +144,7 @@ const TxBlock = ({ txData, view }) => {
               }
             </TxCol>
             <TxColSep><IoMdArrowForward size={30} /></TxColSep>
-            <TxSmallLabel>output</TxSmallLabel>
+            <TxSmallLabel>Outputs</TxSmallLabel>
             <TxCol>
               {output && output.map((data, i) => <TxItem
                 spent={data.spentcount > 0}

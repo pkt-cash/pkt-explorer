@@ -13,7 +13,6 @@ const { mq } = metrics
 // import PropTypes from 'prop-types'
 
 export const TopBarWrapper = styled.div`
-  max-width: ${metrics.fullW}px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -72,41 +71,38 @@ const MenuBar = ({ hasAlert, nsAddr }) => {
     <>
       <MenuCont hasAlert={hasAlert}>
         <TopBarWrapper>
-          <Media queries={{ small: { maxWidth: mq.small } }}>
-            {matches =>
-              matches.small ? (
-                <>
-                  <MobileMenu nsAddr={nsAddr}/>
-                  <TopLink exact to='/' main={1} logo="true">
-                    <Logo />
-                  </TopLink>
-                  <OmniBt act={() => setOpen(!isOpen)} />
-                </>
-              ) : (
-                <>
-                  <TopMenu>
+          <Media queries={{ small: { maxWidth: mq.small }, large: { maxWidth: mq.large } }}>
+            {matches => <>
+                {matches.small ? (
+                  <>
+                    <MobileMenu nsAddr={nsAddr}/>
                     <TopLink exact to='/' main={1} logo="true">
                       <Logo />
                     </TopLink>
-                    {/* <TopLink to='/blocks'>Blocks</TopLink> */}
-                    <TopLink to='/transactions'>Transactions</TopLink>
-                    <TopLink to='/rich'>Rich list</TopLink>
-                    {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Steward</TopLink>}
-                  </TopMenu>
+                  </>
+                ) : (
+                  <>
+                    <TopMenu>
+                      <TopLink exact to='/' main={1} logo="true">
+                        <Logo />
+                      </TopLink>
+                      {/* <TopLink to='/blocks'>Blocks</TopLink> */}
+                      <TopLink to='/transactions'>Transactions</TopLink>
+                      <TopLink to='/rich'>Rich list</TopLink>
+                      {nsAddr && <TopLink to={`/address/${nsAddr}`}>Network Steward</TopLink>}
+                    </TopMenu>
+                  </>
+                )}
+                { matches.large ?
+                  <OmniBt act={() => setOpen(!isOpen)} /> :
                   <Omnibox />
-                </>
-              )
-            }
+                }
+            </>}
           </Media>
         </TopBarWrapper>
       </MenuCont>
       {hasAlert && <AlertCont>Out of date The most recent block appears to be {Math.floor(hasAlert / 60)} minutes old, this explorer is probably out of sync with the chain.</AlertCont>}
-      <Media query={`(max-width: ${mq.small}px)`} render={() =>
-
-        (
-          <OmniboxMobile isOpen={isOpen} />
-        )}
-      />
+      <Media query={`(max-width: ${mq.large}px)`} render={() => <OmniboxMobile isOpen={isOpen} />} />
     </>
   )
 }

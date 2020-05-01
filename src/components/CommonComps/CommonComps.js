@@ -5,6 +5,7 @@ import metrics, { mqs } from '../../theme/metrics'
 import PropTypes from 'prop-types'
 import { displayPKT, commafy } from '../../utils'
 import { Link } from 'react-router-dom'
+import Copy from '../Copy/Copy'
 
 export const MainWrapper = styled.div`
   max-width: ${metrics.fullW}px;
@@ -130,7 +131,7 @@ export const ListLabelCont = styled.div`
   }
 `
 
-export const TitleCont = styled.div`
+const TitleCont = styled.div`
   display: flex;
   font-weight: 700;
   /*border-bottom: solid 1px ${({ theme }) => theme.colors.pktGreyLight};*/
@@ -138,15 +139,43 @@ export const TitleCont = styled.div`
   padding: ${metrics.padding}rem;
   /* text-transform: capitalize; */
   width: 100%;
-  @media ${mqs.small} {
+  @media ${mqs.large} {
     flex-direction: column;
+    align-items: start;
   }
+  align-items: flex-end;
 `
+
+export const mkTitle = ({ title, handle, copy }) => {
+  if (!handle) {
+    return (
+      <TitleCont>
+        <LeftCont>
+          {title}
+        </LeftCont>
+      </TitleCont>
+    );
+  } else {
+    return (
+      <TitleCont>
+        {title}
+        <AddrCont>
+          {handle}
+          <CpCont>
+            <Copy value={copy}/>
+          </CpCont>
+        </AddrCont>
+      </TitleCont>
+    );
+  }
+}
+
 
 export const TitleHeader = styled.span`
   margin-right: 10px;
   font-size: 1.8em;
-  ${({ ns }) => ns && css`white-space: nowrap;`}
+  margin-bottom: -0.05em;
+  white-space: nowrap;
 `
 
 export const LeftCont = styled.div`
@@ -196,13 +225,12 @@ svg{
 `
 
 export const HashCont = styled.div`
-  word-break: break-all;
-  margin-top: 0.8rem;
+  /*word-break: break-all;*/
   flex: 1;
-  ${({ ns }) => ns ? css`max-width: 400px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;` : css`word-break: break-all;`}
-`
-export const Hash = styled.div`
-  
+  -webkit-text-size-adjust: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 const Unit = styled.span`
@@ -254,10 +282,10 @@ export const NoWrap = styled.span`
   white-space: nowrap;
 `
 
-export const AddrCont = styled.div`
+const AddrCont = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  align-items: end;
+  align-items: flex-end;
 `
 
 export const BalanceLabel = styled.span`

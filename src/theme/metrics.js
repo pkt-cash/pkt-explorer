@@ -3,7 +3,7 @@ const metrics = {
   menuHeight: 50,
   mq: {
     vSmall: 320,
-    small: 590,
+    small: 640,
     medium: 768,
     large: 1024,
     xLarge: 1440

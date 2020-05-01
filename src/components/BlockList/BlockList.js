@@ -90,13 +90,13 @@ const TrTh = styled.th`
 `
 
 const HideMobileTh = styled.th`
-  @media ${mqs.small} {
+  @media ${mqs.medium} {
     display: none;
   }
 `
 
 const HideMobileTd = styled.td`
-  @media ${mqs.small} {
+  @media ${mqs.medium} {
     display: none;
   }
 `

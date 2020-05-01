@@ -12,7 +12,8 @@ const Row = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
   ${({ head }) => head && css`font-weight: 700;`}
   :nth-child(2n + 2) {
     background-color: ${({ theme }) => theme.colors.pktGreyLight};

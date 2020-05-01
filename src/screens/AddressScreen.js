@@ -41,19 +41,21 @@ const tabContent = ({ currTab, txList, dailyTr, addr, nsCandidates }) => {
     case 'Transactions':
       return txList
         ? txList.map((item, k) => <AddrTxBlock txData={item} myAddr={addr} key={`tx-${k}`} />)
-        : <Loader text='Loading metadata' small/>
+        : <Loader text='Loading transactions' small/>
     case 'Mining Income':
       return dailyTr
         ? <DailyList dData={dailyTr}/>
-        : <Loader text='Daily income' small/>
+        : <Loader text='Loading daily income' small/>
     case 'Election candidates':
       return nsCandidates
         ? <CandidateList dData={nsCandidates} addr={addr}></CandidateList>
-        : <Loader text='Election candidates' small/>
+        : <Loader text='Loading election candidates' small/>
     default:
       return <div>this is not the tab you are looking for</div>
   }
 }
+
+const yesterday = () => (+new Date() - (1000 * 60 * 60 * 24))
 
 const AddressScreen = (props) => {
   const [currTab, changeTab] = useState('Transactions')
@@ -69,7 +71,6 @@ const AddressScreen = (props) => {
 
   // mining data download date range
   const [dateRange, setDateRange] = useState([new Date(), new Date()])
-  let initialDate = new Date();
 
   const [isNs, setIsNs] = useState(false)
   const [nsError, setNsError] = useState(false)
@@ -116,7 +117,7 @@ const AddressScreen = (props) => {
             setDailyTr(newResults)
             setDateRange([
               new Date(json.results[json.results.length - 1].date),
-              initialDate
+              yesterday()
             ])
           })
         break
@@ -149,8 +150,7 @@ const AddressScreen = (props) => {
           setDailyTrChart(treatIncome(json.results))
           setNextMine(json.next)
           setDailyTr(json.results)
-          initialDate = new Date(json.results[0].date);
-          setDateRange([new Date(json.results[json.results.length - 1].date), initialDate]);
+          setDateRange([new Date(json.results[json.results.length - 1].date), yesterday()]);
         }
       })
     // fetch txList
@@ -166,7 +166,10 @@ const AddressScreen = (props) => {
           return
         }
         // check if this address is the NS
-        if (json.results[0].networkSteward !== addr) { return }
+        if (json.results[0].networkSteward !== addr) {
+          setIsNs(false)
+          return
+        }
         setIsNs(true)
         fetchJson(nsApi)
           .then((json) => {

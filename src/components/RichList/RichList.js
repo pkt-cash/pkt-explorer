@@ -4,15 +4,11 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Loader, { LoaderWrapper } from '../Loader/Loader'
 import {
-  // FirstListCell,
-  // ListCell,
-  // ListRow,
   ListLabel,
   ListCont,
   Pkt
 } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
-// import RespHash from '../RespHash/RespHash'
 
 const cells = {
   address: 'Address',
