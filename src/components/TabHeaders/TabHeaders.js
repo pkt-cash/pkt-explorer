@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
@@ -64,6 +64,7 @@ const CurrTab = styled.div`
 
 const TabHeaders = ({ tabsData, cTab, action }) => {
   const [currTab, updateTab] = useState(cTab)
+  useEffect(() => { updateTab(cTab) }, [cTab])
   function changeTab (newTab) {
     action(newTab)
     updateTab(newTab)

@@ -55,7 +55,7 @@ const tabContent = ({ currTab, txList, dailyTr, addr, nsCandidates }) => {
   }
 }
 
-const yesterday = () => (+new Date() - (1000 * 60 * 60 * 24))
+const yesterday = () => new Date(+new Date() - (1000 * 60 * 60 * 24))
 
 const AddressScreen = (props) => {
   const [currTab, changeTab] = useState('Transactions')
@@ -124,6 +124,11 @@ const AddressScreen = (props) => {
       default:
         break
     }
+  }
+  if (!isNs && currTab === 'Election candidates') {
+    changeTab('Transactions')
+  } else if (isNs && currTab === 'Mining Income') {
+    changeTab('Transactions')
   }
   useEffect(() => {
     document.title = `Pkt - Address: ${addr}`
