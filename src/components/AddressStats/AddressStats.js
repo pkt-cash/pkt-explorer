@@ -57,6 +57,7 @@ const MetaCont = styled.div`
 
 const ChartArea = styled.div`
   /* flex: 1; */
+  min-width: 400px;
   @media ${mqs.small} {
     text-align: center;
     width: 100%;
@@ -285,14 +286,10 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
         <ListDataCont>
           <MetaCont>{addrInfo({meta})}</MetaCont>
           { chartEmpty && <NoMiningCont>No mining income in the last 3 months</NoMiningCont> }
-          { !chartEmpty &&
-            <ChartArea>
-              { chartEmpty &&
-                dailyTr
-                  ? <EaringChart txData={dailyTr} />
-                  : 'Loading'}
-            </ChartArea>
-          }
+          { !chartEmpty && (dailyTr ?
+            <ChartArea><EaringChart txData={dailyTr} /></ChartArea> :
+            <NoMiningCont>Loading</NoMiningCont>
+          )}
         </ListDataCont>
       </ListCont>
     }

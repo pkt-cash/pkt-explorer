@@ -9,7 +9,7 @@ width: 100%;
 min-width: 400px;
 min-height: 200px;
 position: relative;
-/* height: 100%; */
+height: 100%;
 @media ${mqs.small} {
   min-width: auto;
   width: 100%;
