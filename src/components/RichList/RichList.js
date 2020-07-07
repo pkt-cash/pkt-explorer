@@ -10,7 +10,7 @@ import {
 } from '../CommonComps/CommonComps'
 import metrics from '../../theme/metrics'
 
-const cells = {
+const CELLS = {
   address: 'Address',
   balance: 'Balance'
 }
@@ -32,13 +32,13 @@ export const RichListLabels = ({ cells }) => <ListLabelCont>{
   Object.values(cells).map((header) => <ListLabel key={header}>{header}</ListLabel>)
 }</ListLabelCont>
 
-const RichList = ({ listData }) => listData
+const RichList = ({ listData, name, cells }) => listData
   ? <ListCont rich>
-    <RichListLabels cells={cells} />
+    <RichListLabels cells={cells || CELLS} />
     {/* Mapping over rich list addresses */}
     {listData.map((row) => <RichRow row={row} key={row.address}/>)}
   </ListCont>
-  : <LoaderWrapper><Loader text='Rich list, loading'/></LoaderWrapper>
+  : <LoaderWrapper><Loader text={`${name}, loading`}/></LoaderWrapper>
 
 const RowCont = styled.div`
   display: flex;

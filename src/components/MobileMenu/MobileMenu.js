@@ -67,6 +67,7 @@ const MobileMenu = ({ nsAddr }) => {
         {/* <MenuItem><Link to='/blocks' onClick={() => toggle(false)}>Blocks</Link></MenuItem> */}
         <MenuItem><Link to='/transactions' onClick={() => toggle(false)}>Transactions</Link></MenuItem>
         <MenuItem><Link to='/rich' onClick={() => toggle(false)}>Rich list</Link></MenuItem>
+        <MenuItem><Link to='/miners' onClick={() => toggle(false)}>Top miners</Link></MenuItem>
         {nsAddr && <MenuItem><Link to={`/address/${nsAddr}`} onClick={() => toggle(false)}>Network Steward</Link></MenuItem>}
       </MenuContainer>
     </MenuCont>

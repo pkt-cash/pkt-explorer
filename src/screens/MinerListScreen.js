@@ -5,18 +5,21 @@ import { uniqBy } from 'lodash-es'
 import { Button, BtRow } from '../components/CommonComps/CommonComps'
 import { fetchJson } from '../utils'
 
-const { richLApi } = endpoints
+const { minerLApi } = endpoints
 
-const RichListScreen = (props) => {
+const MinerListScreen = (props) => {
   const [currPage, setCurrPage] = useState(1)
   const [richList, setRichList] = useState(false)
   const [nextRich, setNextRich] = useState(false)
   // run once per page load + on change rich page
   useEffect(() => {
-    document.title = 'Pkt - Rich list'
-    fetchJson(`${richLApi}/100/${currPage}`)
+    document.title = 'Most profitable miners (1 day lag)'
+    fetchJson(`${minerLApi}/100/${currPage}`)
       .then((json) => {
         if (json.error) { return console.error(json.error) }
+        for (const r of json.results) {
+            r.balance = r.received;
+        }
         if (richList) {
           setRichList(uniqBy([...richList, ...json.results], 'address'))
         } else {
@@ -31,22 +34,16 @@ const RichListScreen = (props) => {
   }
 
   return <>
-    <RichList listData={richList} name="Rich list" />
+    <RichList listData={richList} name="top miners" cells={{ address: 'Address', balance: 'Mined yesterday' }} />
     {richList &&
     <BtRow>
         {nextRich !== ''
-          ? <Button onClick={loadMoreRiches}>More Riches !!!</Button>
-          : <>You, brave valient clicker, have clicked all the way to the end of
-          the list. The power of your thumb is beyond even the expectation of
-          the authors of this explorer and to you, I have only one thing to say:
-          Never gonna give you up, never gonna let you down, never gonna run
-          around and desert you. Never gonna make you cry, never gonna say goodbye.
-          Never gonna tell a lie and hurt you.
-          </>
+          ? <Button onClick={loadMoreRiches}>Load more</Button>
+          : <>No more miners</>
         }
       </BtRow>
     }
   </>
 }
 
-export default RichListScreen
+export default MinerListScreen

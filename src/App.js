@@ -10,6 +10,7 @@ import { MainWrapper } from './components/CommonComps/CommonComps'
 import BlockScreen from './screens/BlockScreen'
 import TxScreen from './screens/TxScreen'
 import RichListScreen from './screens/RichListScreen'
+import MinerListScreen from './screens/MinerListScreen'
 import HomeScreen from './screens/HomeScreen'
 import AddressScreen from './screens/AddressScreen'
 import DailyTxScreen from './screens/DailyTxScreen'
@@ -64,6 +65,12 @@ function App () {
                   path='/rich'
                   component={RichListScreen}
                   key='rich' />
+                <Route
+                  exact
+                  path="/miners"
+                  component={MinerListScreen}
+                  key='miners'
+                />
                 <Route
                   exact
                   path='/transactions'

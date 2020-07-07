@@ -164,7 +164,7 @@ const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) => [
   ),
 ]
 
-const addrInfo = ({ meta }) => [
+const addrInfo = ({ meta, addr }) => [
   mkRow(
     <>
       Balance
@@ -177,14 +177,13 @@ const addrInfo = ({ meta }) => [
 
   mkRow(
     <>
-      Unspent count
+      Unconsolidated Txns
       <Tooltip>
-        The number of transactions which have been received and have not been spent.
-        Spending money involves grouping together a collection of transactions which were paid to you,
-        signing them to prove you are the rightful owner, then paying the result along to someone else.
-        If this number is over 1000 then you won&apos;t be able to send all of your money in one transaction
-        because otherwise it would become too large for the blockchain rules. Consider &quote;folding coins&quote;
-        (aka sending money to yourself) in order to reduce it.
+        Whenever you receive coins it is like getting a check, when you're mining this
+        happens once per block. This addresses balance is comprised
+        of {meta.balanceCount} "checks" but they can only
+        spend {(addr.indexOf('pkt1') === 0) ? 1200 : 500} at a time. You can group your
+        coins together by <em>folding</em>, i.e. sending coins to yourself.
       </Tooltip>
     </>,
     meta.balanceCount
@@ -275,7 +274,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
 
     {isNs && mkTable(
         'Summary',
-        addrInfo({meta}),
+        addrInfo({meta, addr}),
         nsBlock({ addr, meta, nsError, ns, nsFrontrunner })
     )}
     
@@ -285,7 +284,7 @@ const AddrStats = ({ meta, addr, dailyTr, isNs, nsError, ns, nsFrontrunner }) =>
           <ListLabel>Summary</ListLabel>
         </ListLabelCont>
         <ListDataCont>
-          <MetaCont>{addrInfo({meta})}</MetaCont>
+          <MetaCont>{addrInfo({meta, addr})}</MetaCont>
           { chartEmpty && <NoMiningCont>No mining income in the last 3 months</NoMiningCont> }
           { !chartEmpty && (dailyTr ?
             <ChartArea><EaringChart txData={dailyTr} /></ChartArea> :

@@ -4,6 +4,7 @@ export default {
   blkUpApi: `${backendURL}/api/v1/PKT/pkt/chain/up`,
   blkDownApi: `${backendURL}/api/v1/PKT/pkt/chain/down`,
   richLApi: `${backendURL}/api/v1/PKT/pkt/stats/richlist`,
+  minerLApi: `${backendURL}/api/v1/PKT/pkt/stats/minerlist`,
   addrMetaApi: `${backendURL}/api/v1/PKT/pkt/address`,
   blockApi: `${backendURL}/api/v1/PKT/pkt/block`,
   txApi: `${backendURL}/api/v1/PKT/pkt/tx`,
