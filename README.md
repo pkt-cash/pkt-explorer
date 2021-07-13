@@ -11,7 +11,7 @@ which you will find at [cjdelisle/pkt-explorer-backend](https://github.com/cjdel
 Once the backend API server has been setup, you can compile this block explorer using
 the following:
 
-    REACT_APP_BACKEND_URL=https://path.to.your.server/ npm run build
+    REACT_APP_BACKEND_URL=https://path.to.your.server npm run build
 
 Afterword a production version of the app will be placed in the `build` folder.
 If you do not set the `REACT_APP_BACKEND_URL` environment variable, your explorer
@@ -24,7 +24,7 @@ This is a reactjs app so you can read about deployment on react's
 ## Development
 For development, you will want to run the app in development mode using:
 
-    REACT_APP_BACKEND_URL=https://path.to.your.server/ npm run start
+    REACT_APP_BACKEND_URL=https://path.to.your.server npm run start
 
 Once the server is running, you can open [http://localhost:3000](http://localhost:3000)
 to view it in the browser.

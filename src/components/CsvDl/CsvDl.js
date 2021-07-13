@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 // import PropTypes from 'prop-types'
 import { MdFileDownload } from 'react-icons/md'
 import DateRangePicker from '@wojtekmaj/react-daterange-picker'
+import endpoints from '../../utils/endpoints'
 
 const Row = styled.div`
   /* margin-top: 1rem; */
@@ -88,7 +89,7 @@ const CsvDl = ({ addr, dateRange, setDateRange }) => {
     }
   }
 
-  const csvUrl = useMemo(() => `https://pkt.cash/api/v1/PKT/pkt/address/${addr}/income/${dateRange[0].toISOString().replace(/T.*$/, '')}/${dateRange[1].toISOString().replace(/T.*$/, '')}?mining=${miningFlag}&csv=1`, [dateRange, miningFlag, addr])
+  const csvUrl = useMemo(() => `${endpoints.base}/address/${addr}/income/${dateRange[0].toISOString().replace(/T.*$/, '')}/${dateRange[1].toISOString().replace(/T.*$/, '')}?mining=${miningFlag}&csv=1`, [dateRange, miningFlag, addr])
   // console.log('csvUrl', csvUrl)
   return (
     <Row>
