@@ -39,7 +39,7 @@ const DateTimeComp = ({ time }) => <BlockStatCell title={new Date(time).toString
 </BlockStatCell>
 
 const BlockReward = ({ reward }) => <BlockStatCell>
-  {reward} PKT
+  {reward} PKTC
 </BlockStatCell>
 
 // Only use this with mkTable, exporting it will just get someone burned

@@ -160,7 +160,7 @@ const nsBlock = ({ addr, meta, nsError, ns, nsFrontrunner }) => [
       </Tooltip>
     </>,
     (addr === 'pkt1q6hqsqhqdgqfd8t3xwgceulu7k9d9w5t2amath0qxyfjlvl3s3u4sjza2g2')
-        ? <a href="https://pkt.cash/network-steward">https://pkt.cash/network-steward</a> : 'Unknown'
+        ? <a href="https://pkt.cash/classic/network-steward">https://pkt.cash/classic/network-steward</a> : 'Unknown'
   ),
 ]
 

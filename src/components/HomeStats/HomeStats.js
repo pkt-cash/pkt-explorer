@@ -114,7 +114,7 @@ const stats = ({ blockList, txData, statsCoins }) =>
   </>
 
 const HomeStats = ({ blockList, txData, statsCoins }) => [
-  mkTitle({ title: <TitleHeader>PKT Blockchain</TitleHeader> }),
+  mkTitle({ title: <TitleHeader>PKTC Blockchain</TitleHeader> }),
   ((!txData || !txData.length) ? 
     <Loader text='Loading...' small /> :
     stats({ blockList, txData, statsCoins })

@@ -71,7 +71,7 @@ const inBlock = ({ txData, isUnconfirmed }) => mkRow(
 
 const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
   useEffect(() => {
-    document.title = `Pkt - Tx: ${txData.txid}`
+    document.title = `Pktc - Tx: ${txData.txid}`
   }, [txData])
   let confirmations = 'Unconfirmed'
   let isUnconfirmed = false
@@ -186,7 +186,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
             <Tooltip>
                 The amount of fees which this transaction pays to the miner
                 for including it in the chain. Note: A transaction with less
-                than 0.94 nano-PKT per byte is considered non-standard by the
+                than 0.94 nano-PKTC per byte is considered non-standard by the
                 pktd instances and risks not being included in the chain at
                 all.
             </Tooltip>
@@ -194,7 +194,7 @@ const TxStats = ({ txData, nextBlk, topBlk, statsCoins }) => {
           <>
             {(fee / txData.vsize) < 1 &&
                 <Tooltip type="caution">
-                  A transaction with less than 0.94 nano-PKT per byte
+                  A transaction with less than 0.94 nano-PKTC per byte
                   is considered non-standard by the pktd instances and risks
                   not being included in the chain.
                 </Tooltip>

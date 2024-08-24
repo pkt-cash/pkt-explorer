@@ -13,7 +13,7 @@ const RichListScreen = (props) => {
   const [nextRich, setNextRich] = useState(false)
   // run once per page load + on change rich page
   useEffect(() => {
-    document.title = 'Pkt - Rich list'
+    document.title = 'Pktc - Rich list'
     fetchJson(`${richLApi}/100/${currPage}`)
       .then((json) => {
         if (json.error) { return console.error(json.error) }

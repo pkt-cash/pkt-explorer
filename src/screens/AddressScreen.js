@@ -131,7 +131,7 @@ const AddressScreen = (props) => {
     changeTab('Transactions')
   }
   useEffect(() => {
-    document.title = `Pkt - Address: ${addr}`
+    document.title = `Pktc - Address: ${addr}`
   }, [addr])
   useEffect(() => {
     // fetchAddrMeta

@@ -17,7 +17,7 @@ const HomeScreen = (props) => {
   if (hasErr) console.error(hasErr)
 
   useEffect(() => {
-    document.title = 'Pkt - Home'
+    document.title = 'Pktc - Home'
   }, [])
 
   const topBlock = -1

@@ -37,7 +37,7 @@ const DailyTx = ({ txData }) => {
       </Header>
       <ChartCont>
         {lastData && <p>
-          {lastData} pkt transactions confirmed over last 24 hours
+          {lastData} PKTC transactions confirmed over last 24 hours
         </p>}
         <TxChart txData={modData} />
       </ChartCont>

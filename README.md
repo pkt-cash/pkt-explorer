@@ -1,8 +1,10 @@
-# PKT explorer
+# PKTC explorer
 
-This is a block explorer designed for the [PKT](https://pkt.cash/) blockchain.
-PKT is based on bitcoin code so this explorer can be used with bitcoin but will need
-some minor development in order to disable PKT-specific information.
+This is a block explorer designed for the [PKTC](https://pkt.cash/classic) blockchain.
+PKTC is based on bitcoin code so this explorer can be used with bitcoin but will need
+some minor development in order to disable PKTC-specific information.
+
+NOTE: The PKT project has since moved to a smart contract on the BASE chain. PKTC is not the same as PKT.
 
 ## Installation
 In order to run this block explorer, you will need to first install the API server

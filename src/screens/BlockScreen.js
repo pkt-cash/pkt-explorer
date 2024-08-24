@@ -39,7 +39,7 @@ const BlockScreen = (props) => {
   useInterval(getTop, 30000)
 
   useEffect(() => {
-    document.title = `Pkt - Block: ${id}`
+    document.title = `Pktc - Block: ${id}`
   }, [id])
 
   useEffect(() => {

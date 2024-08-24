@@ -48,7 +48,7 @@ const Loader = ({ text, small }) => {
           ease: 'easeOut'
         }}
       >
-        PKT
+        PKTC
       </LoaderBox>
     </LoaderCont>
   )

@@ -242,10 +242,10 @@ const Decimal = styled.span`
 `
 
 const UNITS = [
-  ['PKT', 1, 'PKT'],
-  ['mPKT', 1000, 'milli-PKT (thousandths)'],
-  ['μPKT', 1000000, 'micro-PKT (millionths)'],
-  ['nPKT', 1000000000, 'nano-PKT (billionths)']
+  ['PKTC', 1, 'PKTC'],
+  ['mPKTC', 1000, 'milli-PKTC (thousandths)'],
+  ['μPKTC', 1000000, 'micro-PKTC (millionths)'],
+  ['nPKTC', 1000000000, 'nano-PKTC (billionths)']
 ]
 
 const PktCont = styled.span`
@@ -254,7 +254,7 @@ const PktCont = styled.span`
 
 export const Pkt = ({ amt, showDecimal }) => {
   if (!showDecimal && Number(amt) < 1) {
-    return <PktCont>0<Decimal>.00</Decimal> <Unit>PKT</Unit></PktCont>
+    return <PktCont>0<Decimal>.00</Decimal> <Unit>PKTC</Unit></PktCont>
   }
   const fAmt = displayPKT(amt)
   let fa
@@ -264,7 +264,7 @@ export const Pkt = ({ amt, showDecimal }) => {
     fa = fAmt * UNITS[i][1]
     u = UNITS[i]
     i++
-  } while (fa < 1 && u[0] !== 'nPKT')
+  } while (fa < 1 && u[0] !== 'nPKTC')
   const str = commafy(parseFloat(fa).toFixed(2))
   const intDec = str.split('.')
   return <PktCont>{intDec[0]}<Decimal>.{intDec[1]}</Decimal> <Unit title={u[2]}>{u[0]}</Unit></PktCont>
